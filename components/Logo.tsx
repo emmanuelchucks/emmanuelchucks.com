@@ -6,7 +6,7 @@ function Logo() {
       aria-hidden
       as="h6"
       bg="blackAlpha.900"
-      color="whiteAlpha.900"
+      color="white"
       px={2}
       fontSize="3xl"
     >
