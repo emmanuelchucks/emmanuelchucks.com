@@ -11,35 +11,29 @@ import {
 import siteData from "utils/site-data";
 
 function Footer() {
-  const { navigation } = siteData;
-  const socials = ["Twitter", "GitHub", "DEV", "Medium"];
+  const { navigation, socials } = siteData;
 
   return (
-    <VStack
-      as="footer"
-      spacing={8}
-      bg="blackAlpha.50"
-      color="blackAlpha.700"
-      py={8}
-    >
-      <HStack align="flex-start" spacing={24}>
+    <VStack as="footer" spacing={8} bg="blackAlpha.50" pt={16} pb={8}>
+      <HStack align="flex-start" color="blackAlpha.700">
         <List spacing={2}>
-          {navigation.map((navItem) => (
+          {navigation.map((navItem, idx) => (
             <ListItem key={navItem}>
-              <Link href={`#${navItem}`} textTransform="capitalize">
+              <Link href={`#${idx ? navItem : ""}`} textTransform="capitalize">
                 {navItem}
               </Link>
             </ListItem>
           ))}
         </List>
         <List spacing={2}>
-          {socials.map((socialSite) => (
-            <ListItem key={socialSite}>
+          {socials.map(({ name, url }) => (
+            <ListItem key={name}>
               <Link
-                href={`https://${socialSite}.com/emmanuelchucks`}
+                href={`https://${url}`}
+                target="_blank"
                 textTransform="capitalize"
               >
-                {socialSite}
+                {name}
               </Link>
             </ListItem>
           ))}

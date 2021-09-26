@@ -7,6 +7,12 @@ const siteData = {
     image: "https://www.emmanuelchucks.com/android-chrome-512x512.png",
   },
   navigation: ["home", "projects", "contact"],
+  socials: [
+    { name: "Twitter", url: "twitter.com/emmanuelchucks" },
+    { name: "GitHub", url: "github.com/emmanuelchucks" },
+    { name: "DEV", url: "dev.to/emmanuelchucks" },
+    { name: "Medium", url: "medium.com/@emmanuelchucks" },
+  ],
 };
 
 export default siteData;

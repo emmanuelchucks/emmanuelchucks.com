@@ -1,14 +1,16 @@
 import { Button, HStack, Link } from "@chakra-ui/react";
 
+import siteData from "utils/site-data";
+
 function Navigation() {
-  const navItems = ["projects", "contact"];
+  const { navigation } = siteData;
 
   return (
     <nav>
       <HStack as="ul" spacing="4">
-        {navItems.map((navItem) => (
+        {navigation.map((navItem, idx) => (
           <Button as="li" variant="link" key={navItem}>
-            <Link href={`#${navItem}`} textTransform="capitalize">
+            <Link href={`#${idx ? navItem : ""}`} textTransform="capitalize">
               {navItem}
             </Link>
           </Button>

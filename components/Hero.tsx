@@ -23,7 +23,13 @@ function Hero() {
   return (
     <Box as="section" id="home" mx={5} my={10}>
       <Box maxW="35ch">
-        <Heading as="h1" textTransform="uppercase" fontSize="sm">
+        <Heading
+          as="h1"
+          color="blackAlpha.700"
+          textTransform="uppercase"
+          fontSize="md"
+          fontWeight={600}
+        >
           {hero.intro}
         </Heading>
         <Heading my={5}>{hero.title}</Heading>
@@ -34,6 +40,7 @@ function Hero() {
               href="https://en.wikipedia.org/wiki/Accra"
               target="_blank"
               textDecor="underline"
+              color="blue.800"
             >
               {hero.body.a1}.
             </Link>

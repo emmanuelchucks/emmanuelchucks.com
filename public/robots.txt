@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /
-
-Sitemap: https://www.emmanuelchucks.com/sitemap.xml
