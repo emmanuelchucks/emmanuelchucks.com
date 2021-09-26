@@ -1,6 +1,7 @@
 import { Flex, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 
 import Head from "next/head";
+import Hero from "components/Hero";
 import Logo from "components/Logo";
 import Navigation from "components/Navigation";
 import type { NextPage } from "next";
@@ -25,7 +26,7 @@ const Home: NextPage = () => {
         </HStack>
 
         <VStack as="main" flex={1} justify="center">
-          <Heading>Hello from Chakra UI</Heading>
+          <Hero />
         </VStack>
 
         <VStack as="footer" spacing={0} bg="blackAlpha.100" py={8}>
