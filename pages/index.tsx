@@ -1,5 +1,6 @@
 import { Flex, HStack, Heading, Text, VStack } from "@chakra-ui/react";
 
+import Footer from "components/Footer";
 import Head from "next/head";
 import Hero from "components/Hero";
 import Logo from "components/Logo";
@@ -29,10 +30,7 @@ const Home: NextPage = () => {
           <Hero />
         </VStack>
 
-        <VStack as="footer" spacing={0} bg="blackAlpha.100" py={8}>
-          <Text>Made with ❤️ in Accra, Ghana</Text>
-          <Text as="small">Copyright 2021. MIT Licence</Text>
-        </VStack>
+        <Footer />
       </Flex>
     </>
   );
