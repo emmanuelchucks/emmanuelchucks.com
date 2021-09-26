@@ -6,6 +6,7 @@ const siteData = {
       "Personal portfolio website for Emmanuel Chucks. A passionate full-stack developer, UI/UX designer, pianist, loving husband, Christ follower",
     image: "https://www.emmanuelchucks.com/android-chrome-512x512.png",
   },
+  navigation: ["home", "projects", "contact"],
 };
 
 export default siteData;
