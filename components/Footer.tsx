@@ -1,49 +1,37 @@
-import {
-  Box,
-  HStack,
-  Link,
-  List,
-  ListItem,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, IconButton, Link, Stack, Text } from "@chakra-ui/react";
 
+import Navigation from "./Navigation";
 import siteData from "utils/site-data";
 
 function Footer() {
   const { navigation, socials } = siteData;
 
   return (
-    <VStack as="footer" spacing={8} bg="blackAlpha.50" pt={16} pb={8}>
-      <HStack align="flex-start" color="blackAlpha.700">
-        <List spacing={2}>
-          {navigation.map((navItem, idx) => (
-            <ListItem key={navItem}>
-              <Link href={`#${idx ? navItem : ""}`} textTransform="capitalize">
-                {navItem}
-              </Link>
-            </ListItem>
-          ))}
-        </List>
-        <List spacing={2}>
+    <Stack
+      as="footer"
+      align="center"
+      spacing={6}
+      bg="blackAlpha.50"
+      pt={16}
+      pb={8}
+    >
+      <Stack align="center" spacing={8} color="blackAlpha.700">
+        <Navigation />
+        <Stack as="ul" direction="row" spacing={2}>
           {socials.map(({ name, url }) => (
-            <ListItem key={name}>
-              <Link
-                href={`https://${url}`}
-                target="_blank"
-                textTransform="capitalize"
-              >
+            <IconButton as="li" variant="link" aria-label={name} key={name}>
+              <Link href={`https://${url}`} target="_blank">
                 {name}
               </Link>
-            </ListItem>
+            </IconButton>
           ))}
-        </List>
-      </HStack>
-      <Box textAlign="center" color="blackAlpha.800">
+        </Stack>
+      </Stack>
+      <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
         <Text>Made with ❤️ in Accra, Ghana</Text>
         <Text as="small">Copyright 2021. MIT Licence</Text>
       </Box>
-    </VStack>
+    </Stack>
   );
 }
 

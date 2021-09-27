@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, Text, VStack } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 
 import Footer from "components/Footer";
 import Head from "next/head";
@@ -15,7 +15,8 @@ const Home: NextPage = () => {
       </Head>
 
       <Flex minH="100vh" direction="column">
-        <HStack
+        <Stack
+          direction="row"
           as="header"
           justify={["space-between", "space-around"]}
           align="baseline"
@@ -24,11 +25,11 @@ const Home: NextPage = () => {
         >
           <Logo />
           <Navigation />
-        </HStack>
+        </Stack>
 
-        <VStack as="main" flex={1} justify="center">
+        <Stack as="main" flex={1} justify="center" align="center">
           <Hero />
-        </VStack>
+        </Stack>
 
         <Footer />
       </Flex>

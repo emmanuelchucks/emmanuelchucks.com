@@ -7,7 +7,7 @@ function Navigation() {
 
   return (
     <nav>
-      <HStack as="ul" spacing="4">
+      <HStack as="ul" spacing={6}>
         {navigation.map((navItem, idx) => (
           <Button as="li" variant="link" key={navItem}>
             <Link href={`#${idx ? navItem : ""}`} textTransform="capitalize">

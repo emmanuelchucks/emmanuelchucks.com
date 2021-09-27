@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 
 import Image from "next/image";
 
@@ -21,8 +21,16 @@ function Hero() {
   };
 
   return (
-    <Box as="section" id="home" mx={5} my={10}>
-      <Box maxW="35ch">
+    <Stack
+      as="section"
+      direction={["column", "row"]}
+      align={[null, "center"]}
+      spacing="5vw"
+      id="home"
+      mx={5}
+      my={10}
+    >
+      <Box maxW="30ch">
         <Heading
           as="h1"
           color="blackAlpha.700"
@@ -33,23 +41,32 @@ function Hero() {
           {hero.intro}
         </Heading>
         <Heading my={5}>{hero.title}</Heading>
-        <VStack align="flex-start">
+        <Stack align="flex-start">
           <Text>
             {hero.body.p1}{" "}
             <Link
               href="https://en.wikipedia.org/wiki/Accra"
               target="_blank"
               textDecor="underline"
-              color="blue.800"
+              color="teal.700"
             >
               {hero.body.a1}.
             </Link>
           </Text>
           <Text>{hero.body.p2}</Text>
           <Text>{hero.body.p3}</Text>
-        </VStack>
+        </Stack>
       </Box>
-    </Box>
+      <Box>
+        <Image
+          priority
+          src="/images/hero-image.jpg"
+          alt="Emmanuel and his wife"
+          width={425}
+          height={640}
+        />
+      </Box>
+    </Stack>
   );
 }
 
