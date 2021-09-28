@@ -9,8 +9,8 @@ const siteData = {
   navigation: ["Home", "Projects", "Contact"],
   socials: [
     { name: "Twitter", url: "twitter.com/emmanuelchucks" },
-    { name: "GitHub", url: "github.com/emmanuelchucks" },
-    { name: "DEV", url: "dev.to/emmanuelchucks" },
+    { name: "Github", url: "github.com/emmanuelchucks" },
+    { name: "Dev", url: "dev.to/emmanuelchucks" },
     { name: "Medium", url: "medium.com/@emmanuelchucks" },
   ],
 };

@@ -27,7 +27,7 @@ const Home: NextPage = () => {
           <Navigation />
         </Stack>
 
-        <Stack as="main" flex={1} justify="center" align="center">
+        <Stack as="main" flex={1} justify="center" align="center" py={[12, 20]}>
           <Hero />
         </Stack>
 

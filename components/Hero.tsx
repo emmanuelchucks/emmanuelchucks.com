@@ -25,10 +25,9 @@ function Hero() {
       as="section"
       direction={["column", "row"]}
       align={[null, "center"]}
-      spacing="5vw"
+      spacing={[10, "5vw"]}
       id="home"
       mx={5}
-      my={10}
     >
       <Box maxW="30ch">
         <Heading
@@ -40,8 +39,8 @@ function Hero() {
         >
           {hero.intro}
         </Heading>
-        <Heading my={5}>{hero.title}</Heading>
-        <Stack align="flex-start">
+        <Heading my={6}>{hero.title}</Heading>
+        <Stack align="flex-start" spacing={4}>
           <Text>
             {hero.body.p1}{" "}
             <Link
