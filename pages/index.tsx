@@ -20,8 +20,8 @@ const Home: NextPage = () => {
           as="header"
           justify={["space-between", "space-around"]}
           align="baseline"
-          px={8}
-          py={5}
+          px={5}
+          py={8}
         >
           <Logo />
           <Navigation />

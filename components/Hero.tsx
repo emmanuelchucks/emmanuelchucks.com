@@ -25,7 +25,7 @@ function Hero() {
       as="section"
       direction={["column", "row"]}
       align={[null, "center"]}
-      spacing={[10, "5vw"]}
+      spacing={[8, null, 6, "5vw"]}
       id="home"
       mx={5}
     >
@@ -57,13 +57,13 @@ function Hero() {
           <Text>{hero.body.p3}</Text>
         </Stack>
       </Box>
-      <Box>
+      <Box border="2px">
         <Image
           priority
           src="/images/hero-image.jpg"
           alt="Emmanuel and his wife"
-          width={425}
-          height={640}
+          width={375}
+          height={562}
         />
       </Box>
     </Stack>
