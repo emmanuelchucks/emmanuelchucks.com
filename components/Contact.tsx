@@ -1,14 +1,14 @@
 import {
-  Stack,
-  Heading,
-  Text,
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
-  FormErrorMessage,
-  Button,
   Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Text,
+  Textarea,
 } from "@chakra-ui/react";
 
 function Contact() {
@@ -16,7 +16,7 @@ function Contact() {
     <Stack maxW="40ch">
       <Box mb={10}>
         <Heading>Contact</Heading>
-        <Text>Let's get in touch</Text>
+        <Text>Let&apos;s get in touch</Text>
       </Box>
 
       <Stack spacing={6}>
@@ -28,7 +28,7 @@ function Contact() {
           label="Message"
           placeholder="Tell me what we need to work on"
         />
-        <Button colorScheme="teal" size="md">
+        <Button colorScheme="teal" size="md" w="50%">
           Send
         </Button>
       </Stack>
@@ -55,7 +55,7 @@ function InputField({
     <FormControl id={id} isRequired>
       <FormLabel>{label}:</FormLabel>
       {isTextarea ? (
-        <Textarea placeholder={placeholder} />
+        <Textarea placeholder={placeholder} h="20vh" />
       ) : (
         <Input placeholder={placeholder} />
       )}
