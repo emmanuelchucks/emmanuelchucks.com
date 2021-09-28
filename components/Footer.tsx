@@ -27,6 +27,7 @@ function Footer() {
                   color="black"
                   href={`https://${url}`}
                   target="_blank"
+                  rel="noreferrer"
                 ></IconButton>
               </Box>
             );

@@ -46,6 +46,7 @@ function Hero() {
             <Link
               href="https://en.wikipedia.org/wiki/Accra"
               target="_blank"
+              rel="noreferrer"
               textDecor="underline"
               color="teal.700"
             >
