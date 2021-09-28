@@ -10,7 +10,7 @@ function Hero() {
       p1: "A passionate developer living in the crazy city of",
       a1: "Accra, Ghana",
       p2: "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
-      p3: "I am available to collaborate and work on freelance and part-time projects.",
+      p3: "I am available to work or collaborate on freelance and part-time projects.",
     },
     skills: {
       code: ["React", "GraphQL", "TypeScript", "Flutter"],
@@ -45,7 +45,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               textDecor="underline"
-              color="teal.700"
+              color="green.700"
             >
               {hero.body.a1}.
             </Link>

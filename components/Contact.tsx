@@ -28,7 +28,7 @@ function Contact() {
           label="Message"
           placeholder="Tell me what we need to work on"
         />
-        <Button colorScheme="teal" size="md" w="50%">
+        <Button bg="green.600" color="white" size="md" w="50%">
           Send
         </Button>
       </Stack>
