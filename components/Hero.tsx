@@ -2,8 +2,6 @@ import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 
 import Image from "next/image";
 
-// import SkillsDisplay from "./SkillsDisplay";
-
 function Hero() {
   const hero = {
     intro: "Hello I'm Emmanuel Chucks",
@@ -11,8 +9,8 @@ function Hero() {
     body: {
       p1: "A passionate developer living in the crazy city of",
       a1: "Accra, Ghana",
-      p2: "I love to design things, write code, read tech blogs and take care of my family. I play the piano to help me relax and meditate.",
-      p3: "I am available to collaborate and work on fun projects with others.",
+      p2: "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
+      p3: "I am available to collaborate and work on freelance and part-time projects.",
     },
     skills: {
       code: ["React", "GraphQL", "TypeScript", "Flutter"],
@@ -25,11 +23,10 @@ function Hero() {
       as="section"
       direction={["column", "row"]}
       align={[null, "center"]}
-      spacing={[10, "5vw"]}
-      id="home"
-      mx={5}
+      spacing={[8, null, null, "5vw"]}
+      id="hero"
     >
-      <Box maxW="30ch">
+      <Box maxW={[null, "28ch"]}>
         <Heading
           as="h1"
           color="blackAlpha.700"
@@ -62,8 +59,8 @@ function Hero() {
           priority
           src="/images/hero-image.jpg"
           alt="Emmanuel and his wife"
-          width={425}
-          height={640}
+          width={375}
+          height={562}
         />
       </Box>
     </Stack>
