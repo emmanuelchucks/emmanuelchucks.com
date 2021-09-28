@@ -2,8 +2,6 @@ import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 
 import Image from "next/image";
 
-// import SkillsDisplay from "./SkillsDisplay";
-
 function Hero() {
   const hero = {
     intro: "Hello I'm Emmanuel Chucks",
@@ -25,11 +23,10 @@ function Hero() {
       as="section"
       direction={["column", "row"]}
       align={[null, "center"]}
-      spacing={[8, null, 6, "5vw"]}
-      id="home"
-      mx={5}
+      spacing={[8, null, null, "5vw"]}
+      id="hero"
     >
-      <Box maxW="30ch">
+      <Box maxW={[null, "28ch"]}>
         <Heading
           as="h1"
           color="blackAlpha.700"
@@ -57,7 +54,7 @@ function Hero() {
           <Text>{hero.body.p3}</Text>
         </Stack>
       </Box>
-      <Box border="2px">
+      <Box>
         <Image
           priority
           src="/images/hero-image.jpg"
