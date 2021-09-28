@@ -33,7 +33,7 @@ const Home: NextPage = () => {
           as="main"
           maxW={[null, null, "60ch", "70ch"]}
           px={5}
-          py={[12, 20]}
+          py={12}
           flex={1}
         >
           <Stack spacing={40}>
