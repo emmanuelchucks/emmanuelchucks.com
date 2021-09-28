@@ -1,5 +1,6 @@
-import { Flex, Stack, Container } from "@chakra-ui/react";
+import { Container, Flex, Stack } from "@chakra-ui/react";
 
+import Contact from "components/Contact";
 import Footer from "components/Footer";
 import Head from "next/head";
 import Hero from "components/Hero";
@@ -7,7 +8,6 @@ import Logo from "components/Logo";
 import Navigation from "components/Navigation";
 import type { NextPage } from "next";
 import Projects from "components/Projects";
-import Contact from "components/Contact";
 
 const Home: NextPage = () => {
   return (
@@ -16,15 +16,26 @@ const Home: NextPage = () => {
         <title>Emmanuel Chucks - Full-Stack Engineer and UI/UX Designer</title>
       </Head>
 
-      <Flex minH="100vh" direction="column" px={2}>
-        <Container as="header" py={8}>
+      <Flex minH="100vh" direction="column">
+        <Container
+          as="header"
+          maxW={[null, null, "60ch", "80ch"]}
+          px={5}
+          py={8}
+        >
           <Stack direction="row" justify="space-between" align="baseline">
             <Logo />
             <Navigation />
           </Stack>
         </Container>
 
-        <Container as="main" py={[12, 20]} flex={1}>
+        <Container
+          as="main"
+          maxW={[null, null, "60ch", "70ch"]}
+          px={5}
+          py={[12, 20]}
+          flex={1}
+        >
           <Stack spacing={40}>
             <Hero />
             <Projects />
