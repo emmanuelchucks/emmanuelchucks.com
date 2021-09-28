@@ -25,6 +25,7 @@ function Hero() {
       align={[null, "center"]}
       spacing={[8, "5vw"]}
       id="hero"
+      wrap="wrap"
     >
       <Box maxW={[null, "28ch"]}>
         <Heading
@@ -45,7 +46,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
               textDecor="underline"
-              color="green.700"
+              color="blackAlpha.800"
             >
               {hero.body.a1}.
             </Link>
@@ -63,6 +64,7 @@ function Hero() {
           height={562}
         />
       </Box>
+      <Box flex={1} border="2px" w="full" h="16" ml={0}></Box>
     </Stack>
   );
 }
