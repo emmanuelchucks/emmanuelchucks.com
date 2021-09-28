@@ -1,5 +1,3 @@
-![alt text](https://emmanuelchucks.com/logo-long.png)
-
 ![Website](https://img.shields.io/website?down_message=offline&style=for-the-badge&up_message=online&url=https%3A%2F%2Fwww.emmanuelchucks.com%2F)
 
 # emmanuelchucks.com
