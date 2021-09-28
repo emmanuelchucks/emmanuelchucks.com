@@ -11,8 +11,8 @@ function Hero() {
     body: {
       p1: "A passionate developer living in the crazy city of",
       a1: "Accra, Ghana",
-      p2: "I love to design things, write code, read tech blogs and take care of my family. I play the piano to help me relax and meditate.",
-      p3: "I am available to collaborate and work on fun projects with others.",
+      p2: "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
+      p3: "I am available to collaborate and work on freelance and part-time projects.",
     },
     skills: {
       code: ["React", "GraphQL", "TypeScript", "Flutter"],
