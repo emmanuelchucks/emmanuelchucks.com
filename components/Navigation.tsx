@@ -10,7 +10,10 @@ function Navigation() {
       <HStack as="ul" spacing={6}>
         {navigation.map((navItem, idx) => (
           <Button as="li" variant="link" key={navItem}>
-            <Link href={`#${idx ? navItem : ""}`} textTransform="capitalize">
+            <Link
+              href={`#${idx ? navItem.toLowerCase() : ""}`}
+              textTransform="capitalize"
+            >
               {navItem}
             </Link>
           </Button>
