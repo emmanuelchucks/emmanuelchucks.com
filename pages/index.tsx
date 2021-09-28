@@ -16,19 +16,26 @@ const Home: NextPage = () => {
         <title>Emmanuel Chucks - Full-Stack Engineer and UI/UX Designer</title>
       </Head>
 
-      <Flex minH="100vh" direction="column" px={2}>
-        <Stack
+      <Flex minH="100vh" direction="column">
+        <Container
           as="header"
+          maxW={[null, null, "60ch", "80ch"]}
+          px={5}
           py={8}
-          direction="row"
-          justify={["space-between", "space-evenly"]}
-          align="baseline"
         >
-          <Logo />
-          <Navigation />
-        </Stack>
+          <Stack direction="row" justify="space-between" align="baseline">
+            <Logo />
+            <Navigation />
+          </Stack>
+        </Container>
 
-        <Container as="main" py={[12, 20]} flex={1}>
+        <Container
+          as="main"
+          maxW={[null, null, "60ch", "70ch"]}
+          px={5}
+          py={[12, 20]}
+          flex={1}
+        >
           <Stack spacing={40}>
             <Hero />
             <Projects />

@@ -23,7 +23,7 @@ function Hero() {
       as="section"
       direction={["column", "row"]}
       align={[null, "center"]}
-      spacing={[8, null, null, "5vw"]}
+      spacing={[8, "5vw"]}
       id="hero"
     >
       <Box maxW={[null, "28ch"]}>
