@@ -8,6 +8,7 @@ import Logo from "components/Logo";
 import Navigation from "components/Navigation";
 import type { NextPage } from "next";
 import Projects from "components/Projects";
+import TechStack from "components/TechStack";
 
 const Home: NextPage = () => {
   return (
@@ -37,7 +38,10 @@ const Home: NextPage = () => {
           flex={1}
         >
           <Stack spacing={40}>
-            <Hero />
+            <Stack spacing={16}>
+              <Hero />
+              <TechStack />
+            </Stack>
             <Projects />
             <Contact />
           </Stack>

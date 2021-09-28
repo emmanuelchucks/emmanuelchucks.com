@@ -19,53 +19,50 @@ function Hero() {
   };
 
   return (
-    <Stack spacing={16}>
-      <Stack
-        as="section"
-        direction={["column", "row"]}
-        align={[null, "center"]}
-        spacing={[8, "5vw"]}
-        id="hero"
-      >
-        <Box maxW={[null, "28ch"]}>
-          <Heading
-            as="h1"
-            color="blackAlpha.700"
-            textTransform="uppercase"
-            fontSize="md"
-            fontWeight={600}
-          >
-            {hero.intro}
-          </Heading>
-          <Heading my={6}>{hero.title}</Heading>
-          <Stack align="flex-start" spacing={4}>
-            <Text>
-              {hero.body.p1}{" "}
-              <Link
-                href="https://en.wikipedia.org/wiki/Accra"
-                target="_blank"
-                rel="noreferrer"
-                textDecor="underline"
-                color="blackAlpha.800"
-              >
-                {hero.body.a1}.
-              </Link>
-            </Text>
-            <Text>{hero.body.p2}</Text>
-            <Text>{hero.body.p3}</Text>
-          </Stack>
-        </Box>
-        <Box>
-          <Image
-            priority
-            src="/images/hero-image.jpg"
-            alt="Emmanuel and his wife"
-            width={375}
-            height={562}
-          />
-        </Box>
-      </Stack>
-      <Box border="2px" w="full" h="16"></Box>
+    <Stack
+      as="section"
+      direction={["column", "row"]}
+      align={[null, "center"]}
+      spacing={[8, "5vw"]}
+      id="hero"
+    >
+      <Box maxW={[null, "28ch"]}>
+        <Heading
+          as="h1"
+          color="blackAlpha.700"
+          textTransform="uppercase"
+          fontSize="md"
+          fontWeight={600}
+        >
+          {hero.intro}
+        </Heading>
+        <Heading my={6}>{hero.title}</Heading>
+        <Stack align="flex-start" spacing={4}>
+          <Text>
+            {hero.body.p1}{" "}
+            <Link
+              href="https://en.wikipedia.org/wiki/Accra"
+              target="_blank"
+              rel="noreferrer"
+              textDecor="underline"
+              color="blackAlpha.800"
+            >
+              {hero.body.a1}.
+            </Link>
+          </Text>
+          <Text>{hero.body.p2}</Text>
+          <Text>{hero.body.p3}</Text>
+        </Stack>
+      </Box>
+      <Box>
+        <Image
+          priority
+          src="/images/hero-image.jpg"
+          alt="Emmanuel and his wife"
+          width={375}
+          height={562}
+        />
+      </Box>
     </Stack>
   );
 }
