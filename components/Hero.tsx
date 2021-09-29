@@ -1,22 +1,10 @@
 import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 
 import Image from "next/image";
+import heroData from "utils/hero-data";
 
 function Hero() {
-  const hero = {
-    intro: "Hello I'm Emmanuel Chucks",
-    title: "Full-Stack Engineer & UI/UX Designer",
-    body: {
-      p1: "A passionate developer living in the crazy city of",
-      a1: "Accra, Ghana",
-      p2: "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
-      p3: "I am available to work or collaborate on freelance and part-time projects.",
-    },
-    skills: {
-      code: ["React", "GraphQL", "TypeScript", "Flutter"],
-      design: ["Figma", "Canva"],
-    },
-  };
+  const { intro, title, body } = heroData;
 
   return (
     <Stack
@@ -34,12 +22,12 @@ function Hero() {
           fontSize="md"
           fontWeight={600}
         >
-          {hero.intro}
+          {intro}
         </Heading>
-        <Heading my={6}>{hero.title}</Heading>
+        <Heading my={6}>{title}</Heading>
         <Stack align="flex-start" spacing={4}>
           <Text>
-            {hero.body.p1}{" "}
+            {body.p1}{" "}
             <Link
               href="https://en.wikipedia.org/wiki/Accra"
               target="_blank"
@@ -47,11 +35,11 @@ function Hero() {
               textDecor="underline"
               color="blackAlpha.800"
             >
-              {hero.body.a1}.
+              {body.a1}.
             </Link>
           </Text>
-          <Text>{hero.body.p2}</Text>
-          <Text>{hero.body.p3}</Text>
+          <Text>{body.p2}</Text>
+          <Text>{body.p3}</Text>
         </Stack>
       </Box>
       <Box>

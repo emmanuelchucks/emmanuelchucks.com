@@ -26,7 +26,7 @@ const Home: NextPage = () => {
         >
           <Stack direction="row" justify="space-between" align="baseline">
             <Logo />
-            <Navigation />
+            <Navigation id="main-navigation" />
           </Stack>
         </Container>
 
@@ -34,11 +34,11 @@ const Home: NextPage = () => {
           as="main"
           maxW={[null, null, "60ch", "70ch"]}
           px={5}
-          py={12}
+          py={16}
           flex={1}
         >
-          <Stack spacing={40}>
-            <Stack spacing={16}>
+          <Stack spacing={32}>
+            <Stack spacing={12}>
               <Hero />
               <TechStack />
             </Stack>
