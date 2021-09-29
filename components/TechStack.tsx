@@ -23,8 +23,8 @@ function TechStack() {
 
   return (
     <HStack wrap="wrap" justify="center">
-      {skills.map(({ name, color }, idx) => (
-        <Tag size="lg" borderRadius="full" colorScheme="blackAlpha">
+      {skills.map(({ name }, idx) => (
+        <Tag key={name} size="lg" borderRadius="full" colorScheme="blackAlpha">
           <TagLeftIcon as={techIcons[idx]} />
           <TagLabel>{name}</TagLabel>
         </Tag>
