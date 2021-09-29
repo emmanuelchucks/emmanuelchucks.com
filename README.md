@@ -4,11 +4,6 @@
 
 My personal portfolio website to showcase my latest work.
 
-## Overview
-
-- `pages/*` - All statically generated pages.
-- `pages/api/*` - [API routes](https://nextjs.org/docs/api-routes/introduction) powering my contact form.
-
 ## Running Locally
 
 ```bash
