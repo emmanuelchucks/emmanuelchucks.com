@@ -13,13 +13,13 @@ import {
 
 function Contact() {
   return (
-    <Stack maxW="40ch" id="contact">
+    <Stack maxW="40ch" id="contact" as="section">
       <Box mb={10}>
         <Heading>Contact</Heading>
         <Text>Let&apos;s get in touch</Text>
       </Box>
 
-      <Stack spacing={6}>
+      <Stack as="form" spacing={6}>
         <InputField id="name" label="Name" placeholder="Leonardo DaVinci" />
         <InputField id="email" label="Email" placeholder="leonardo@email.com" />
         <InputField
@@ -28,7 +28,15 @@ function Contact() {
           label="Message"
           placeholder="Tell me what we need to work on"
         />
-        <Button bg="green.600" color="white" size="md" w="50%">
+        <Button
+          type="submit"
+          bg="blackAlpha.900"
+          _hover={{ bg: "blackAlpha.800" }}
+          _active={{ bg: "blackAlphe.800" }}
+          color="white"
+          size="md"
+          w="50%"
+        >
           Send
         </Button>
       </Stack>

@@ -8,6 +8,7 @@ import Logo from "components/Logo";
 import Navigation from "components/Navigation";
 import type { NextPage } from "next";
 import Projects from "components/Projects";
+import TechStack from "components/TechStack";
 
 const Home: NextPage = () => {
   return (
@@ -25,7 +26,7 @@ const Home: NextPage = () => {
         >
           <Stack direction="row" justify="space-between" align="baseline">
             <Logo />
-            <Navigation />
+            <Navigation id="main-navigation" />
           </Stack>
         </Container>
 
@@ -33,11 +34,14 @@ const Home: NextPage = () => {
           as="main"
           maxW={[null, null, "60ch", "70ch"]}
           px={5}
-          py={[12, 20]}
+          py={16}
           flex={1}
         >
-          <Stack spacing={40}>
-            <Hero />
+          <Stack spacing={32}>
+            <Stack spacing={12}>
+              <Hero />
+              <TechStack />
+            </Stack>
             <Projects />
             <Contact />
           </Stack>

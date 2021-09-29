@@ -11,7 +11,7 @@ function Footer() {
   return (
     <Stack as="footer" align="center" spacing={6} bg="gray.50" pt={16} pb={8}>
       <Stack align="center" spacing={8} color="blackAlpha.700">
-        <Navigation />
+        <Navigation id="footer-navigation" />
         <Stack as="ul" direction="row" spacing={2} listStyleType="none">
           {socials.map(({ name, url }, idx) => {
             const Icon = socialIcons[idx];
@@ -36,7 +36,7 @@ function Footer() {
       </Stack>
       <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
         <Text>Made with ❤️ in Accra, Ghana</Text>
-        <Text as="small">Copyright 2021. MIT Licence</Text>
+        <Text as="small">&copy; 2021. MIT Licence</Text>
       </Box>
     </Stack>
   );
