@@ -23,8 +23,9 @@ function TechStack() {
 
   return (
     <HStack as="section" id="tech-stack" wrap="wrap" justify="center">
-      {skills.map(({ name, color }, idx) => (
+      {skills.map(({ name }, idx) => (
         <Tag
+          key={name}
           size="lg"
           borderRadius="full"
           color="blackAlpha.700"
