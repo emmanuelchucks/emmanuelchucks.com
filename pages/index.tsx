@@ -38,7 +38,7 @@ const Home: NextPage = () => {
           flex={1}
         >
           <Stack spacing={32}>
-            <Stack spacing={12}>
+            <Stack spacing={16}>
               <Hero />
               <TechStack />
             </Stack>

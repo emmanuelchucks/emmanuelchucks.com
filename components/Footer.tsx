@@ -35,7 +35,7 @@ function Footer() {
         </Stack>
       </Stack>
       <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
-        <Text>Made with ❤️ in Accra, Ghana</Text>
+        <Text>Made in Accra, Ghana 🇬🇭</Text>
         <Text as="small">&copy; 2021. MIT Licence</Text>
       </Box>
     </Stack>
