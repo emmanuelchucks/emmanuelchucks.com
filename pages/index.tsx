@@ -37,8 +37,8 @@ const Home: NextPage = () => {
           py={16}
           flex={1}
         >
-          <Stack spacing={32}>
-            <Stack spacing={16}>
+          <Stack spacing={24}>
+            <Stack spacing={24}>
               <Hero />
               <TechStack />
             </Stack>
