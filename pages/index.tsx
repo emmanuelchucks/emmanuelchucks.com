@@ -1,4 +1,4 @@
-import { Container, Flex, Stack } from "@chakra-ui/react";
+import { Container, Flex, Stack, Divider } from "@chakra-ui/react";
 
 import Contact from "components/Contact";
 import Footer from "components/Footer";
@@ -38,9 +38,11 @@ const Home: NextPage = () => {
           flex={1}
         >
           <Stack spacing={24}>
-            <Stack spacing={24}>
+            <Stack spacing={12}>
               <Hero />
+              <Divider />
               <TechStack />
+              <Divider />
             </Stack>
             <Projects />
             <Contact />
