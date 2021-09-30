@@ -45,7 +45,6 @@ function Hero() {
       </Box>
       <ChakraNextImage
         shadow="2xl"
-        pb={0}
         src={heroImage}
         priority
         placeholder="blur"

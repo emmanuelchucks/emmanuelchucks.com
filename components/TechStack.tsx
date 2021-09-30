@@ -30,17 +30,15 @@ function TechStack() {
       wrap="wrap"
       justify="center"
     >
-      {skills.map(({ name }, idx) => (
+      {skills.map(({ name, color }, idx) => (
         <Tag
           key={name}
           size="lg"
           borderRadius="full"
-          color="blackAlpha.700"
           colorScheme="blackAlpha"
           shadow="base"
-          _groupHover={{
-            colorScheme: "linkedin",
-          }}
+          transition="all 0.25s ease"
+          _hover={{ bg: color }}
         >
           <TagLeftIcon as={techIcons[idx]} />
           <TagLabel>{name}</TagLabel>

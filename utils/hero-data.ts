@@ -10,27 +10,27 @@ const heroData = {
   skills: [
     {
       name: "React",
-      color: "cyan",
+      color: "#61dafb60",
     },
     {
       name: "GraphQL",
-      color: "pink",
+      color: "#d6429260",
     },
     {
       name: "TypeScript",
-      color: "linkedin",
+      color: "#178fce60",
     },
     {
       name: "Flutter",
-      color: "messenger",
+      color: "#5bc8f860",
     },
     {
       name: "Figma",
-      color: "orange",
+      color: "#FFA50060",
     },
     {
       name: "Canva",
-      color: "cyan",
+      color: "#00c4cc50",
     },
   ],
 };
