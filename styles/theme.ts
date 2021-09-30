@@ -5,7 +5,7 @@ const customTheme = extendTheme({
     global: () => ({
       html: {
         scrollBehavior: "smooth",
-        scrollPaddingTop: 30,
+        scrollPaddingTop: 32,
       },
       body: {
         fontSize: "lg",
