@@ -27,6 +27,7 @@ function ChakraNextImage(props: ImageProps & FlexProps) {
         height={height}
         src={src}
         alt={alt}
+        placeholder="blur"
       />
     </Flex>
   );

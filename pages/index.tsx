@@ -1,4 +1,4 @@
-import { Container, Divider, Flex, Stack } from "@chakra-ui/react";
+import { Container, Flex, Stack } from "@chakra-ui/react";
 
 import Contact from "components/Contact";
 import Footer from "components/Footer";

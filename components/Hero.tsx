@@ -47,7 +47,6 @@ function Hero() {
         shadow="2xl"
         src={heroImage}
         priority
-        placeholder="blur"
         alt="Emmanuel and his wife"
         width={375}
         height={562}

@@ -1,4 +1,4 @@
-import { Avatar, HStack, Tag, TagLabel, TagLeftIcon } from "@chakra-ui/react";
+import { HStack, Tag, TagLabel, TagLeftIcon } from "@chakra-ui/react";
 import {
   SiCanva,
   SiFigma,
