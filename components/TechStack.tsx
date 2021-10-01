@@ -1,4 +1,4 @@
-import { HStack, Tag, TagLabel, TagLeftIcon } from "@chakra-ui/react";
+import { Avatar, HStack, Tag, TagLabel, TagLeftIcon } from "@chakra-ui/react";
 import {
   SiCanva,
   SiFigma,
@@ -35,10 +35,9 @@ function TechStack() {
           key={name}
           size="lg"
           borderRadius="full"
-          colorScheme="blackAlpha"
-          shadow="base"
-          transition="all 0.25s ease"
-          _hover={{ bg: color }}
+          transition="all 0.2s ease"
+          bg="white"
+          _hover={{ color: color, shadow: "base" }}
         >
           <TagLeftIcon as={techIcons[idx]} />
           <TagLabel>{name}</TagLabel>
