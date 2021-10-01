@@ -18,7 +18,7 @@ const heroData = {
     },
     {
       name: "TypeScript",
-      color: "#3178c6",
+      color: "#2e70b8",
     },
     {
       name: "Flutter",
@@ -30,7 +30,7 @@ const heroData = {
     },
     {
       name: "Canva",
-      color: "#00c4cc",
+      color: "#00adb3",
     },
   ],
 };
