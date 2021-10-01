@@ -18,7 +18,7 @@ const ChakraNextUnwrappedImage = chakra(NextImage, {
 function ChakraNextImage(props: ImageProps & FlexProps) {
   const { src, alt, width, quality, height, ...rest } = props;
   return (
-    <Flex {...rest}>
+    <Flex pos="relative" {...rest}>
       <ChakraNextUnwrappedImage
         w="auto"
         h="auto"
@@ -27,6 +27,7 @@ function ChakraNextImage(props: ImageProps & FlexProps) {
         height={height}
         src={src}
         alt={alt}
+        placeholder="blur"
       />
     </Flex>
   );

@@ -1,7 +1,8 @@
 import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 
-import heroData from "utils/hero-data";
 import ChakraNextImage from "./ChakraNextImage";
+import heroData from "utils/hero-data";
+import heroImage from "public/images/hero-image.jpg";
 
 function Hero() {
   const { intro, title, body } = heroData;
@@ -44,9 +45,8 @@ function Hero() {
       </Box>
       <ChakraNextImage
         shadow="2xl"
-        pb={0}
+        src={heroImage}
         priority
-        src="/images/hero-image.jpg"
         alt="Emmanuel and his wife"
         width={375}
         height={562}
