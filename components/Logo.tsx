@@ -10,12 +10,11 @@ function Logo() {
       px={2}
       fontSize="3xl"
     >
-      <Text as="span" display={["inline", "none"]}>
-        e.
-      </Text>
+      e
       <Text as="span" display={["none", "inline"]}>
-        emmanuel.
+        mmanuel
       </Text>
+      .
     </Heading>
   );
 }

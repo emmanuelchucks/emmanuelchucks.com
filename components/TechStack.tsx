@@ -3,23 +3,16 @@ import {
   SiCanva,
   SiFigma,
   SiFlutter,
-  SiGraphql,
+  SiSwift,
+  SiKotlin,
   SiReact,
-  SiTypescript,
 } from "react-icons/si";
 
 import heroData from "utils/hero-data";
 
 function TechStack() {
   const { skills } = heroData;
-  const techIcons = [
-    SiReact,
-    SiGraphql,
-    SiTypescript,
-    SiFlutter,
-    SiFigma,
-    SiCanva,
-  ];
+  const techIcons = [SiReact, SiFlutter, SiSwift, SiKotlin, SiFigma, SiCanva];
 
   return (
     <HStack

@@ -1,6 +1,5 @@
 import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
-
-import ChakraNextImage from "./ChakraNextImage";
+import Image from "next/image";
 import heroData from "utils/hero-data";
 import heroImage from "public/images/hero-image.jpg";
 
@@ -10,12 +9,12 @@ function Hero() {
   return (
     <Stack
       as="section"
-      direction={["column", "row"]}
-      align={[null, "center"]}
-      spacing={[8, "5vw"]}
+      direction={["column", "column", "row"]}
+      align={[null, null, "center"]}
+      spacing={[8, null, "5vw"]}
       id="hero"
     >
-      <Box maxW={[null, "28ch"]}>
+      <Box maxW={[null, null, "28ch"]}>
         <Heading
           as="h1"
           color="blackAlpha.700"
@@ -43,14 +42,9 @@ function Hero() {
           <Text>{body.p3}</Text>
         </Stack>
       </Box>
-      <ChakraNextImage
-        shadow="2xl"
-        src={heroImage}
-        priority
-        alt="Emmanuel and his wife"
-        width={375}
-        height={562}
-      />
+      <Box pos="relative" maxW={[null, null, 325]}>
+        <Image alt="Emmanuel and his wife" src={heroImage} />
+      </Box>
     </Stack>
   );
 }

@@ -13,7 +13,7 @@ import {
 
 function Contact() {
   return (
-    <Stack maxW="40ch" id="contact" as="section">
+    <Stack maxW="36ch" id="contact" as="section">
       <Box mb={10}>
         <Heading>Contact</Heading>
         <Text>Let&apos;s get in touch</Text>

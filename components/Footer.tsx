@@ -36,7 +36,7 @@ function Footer() {
       </Stack>
       <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
         <Text>Made in Accra, Ghana 🇬🇭</Text>
-        <Text as="small">&copy; 2021. MIT Licence</Text>
+        <Text as="small">&copy; {new Date().getFullYear()}. MIT Licence</Text>
       </Box>
     </Stack>
   );

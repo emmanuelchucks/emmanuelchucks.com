@@ -11,7 +11,7 @@ function Navigation({ id }: NavigationProps) {
 
   return (
     <nav id={id}>
-      <HStack as="ul" spacing={6}>
+      <HStack as="ul" spacing={4}>
         {navigation.map((navItem, idx) => (
           <Button as="li" variant="link" key={navItem}>
             <Link
