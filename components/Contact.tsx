@@ -13,21 +13,16 @@ import {
 
 function Contact() {
   return (
-    <Stack maxW="40ch" id="contact" as="section">
+    <Stack maxW="36ch" id="contact" as="section">
       <Box mb={10}>
         <Heading>Contact</Heading>
         <Text>Let&apos;s get in touch</Text>
       </Box>
 
       <Stack as="form" spacing={6}>
-        <InputField id="name" label="Name" placeholder="Leonardo DaVinci" />
+        <InputField id="name" label="Name" placeholder="Leonardo" />
         <InputField id="email" label="Email" placeholder="leonardo@email.com" />
-        <InputField
-          isTextarea
-          id="message"
-          label="Message"
-          placeholder="Tell me what we need to work on"
-        />
+        <InputField isTextarea id="message" label="Message" placeholder="" />
         <Button
           type="submit"
           bg="blackAlpha.900"
@@ -43,14 +38,6 @@ function Contact() {
     </Stack>
   );
 }
-
-type InputFieldProps = {
-  id: string;
-  label: string;
-  placeholder: string;
-  isTextarea?: boolean;
-  error?: string;
-};
 
 function InputField({
   id,
@@ -71,5 +58,13 @@ function InputField({
     </FormControl>
   );
 }
+
+type InputFieldProps = {
+  id: string;
+  label: string;
+  placeholder: string;
+  isTextarea?: boolean;
+  error?: string;
+};
 
 export default Contact;

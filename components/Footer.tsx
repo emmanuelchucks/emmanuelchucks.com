@@ -1,13 +1,12 @@
 import { Box, IconButton, Stack, Text } from "@chakra-ui/react";
 import { FaDev, FaGithub, FaMediumM, FaTwitter } from "react-icons/fa";
-
-import Navigation from "./Navigation";
 import siteData from "utils/site-data";
+import Navigation from "./Navigation";
+
+const { socials } = siteData;
+const socialIcons = [FaTwitter, FaGithub, FaDev, FaMediumM];
 
 function Footer() {
-  const { socials } = siteData;
-  const socialIcons = [FaTwitter, FaGithub, FaDev, FaMediumM];
-
   return (
     <Stack as="footer" align="center" spacing={6} bg="gray.50" pt={16} pb={8}>
       <Stack align="center" spacing={8} color="blackAlpha.700">
@@ -36,7 +35,7 @@ function Footer() {
       </Stack>
       <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
         <Text>Made in Accra, Ghana 🇬🇭</Text>
-        <Text as="small">&copy; 2021. MIT Licence</Text>
+        <Text as="small">&copy; {new Date().getFullYear()}. MIT Licence</Text>
       </Box>
     </Stack>
   );
