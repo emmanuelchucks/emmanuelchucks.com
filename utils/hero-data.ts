@@ -7,32 +7,7 @@ const heroData = {
     p2: "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
     p3: "I am available to work or collaborate on freelance and part-time projects.",
   },
-  skills: [
-    {
-      name: "React",
-      color: "#06b1e0",
-    },
-    {
-      name: "GraphQL",
-      color: "#e10098",
-    },
-    {
-      name: "TypeScript",
-      color: "#2e70b8",
-    },
-    {
-      name: "Flutter",
-      color: "#02afe3",
-    },
-    {
-      name: "Figma",
-      color: "#5551ff",
-    },
-    {
-      name: "Canva",
-      color: "#00adb3",
-    },
-  ],
+  skills: ["React", "Flutter", "Swift", "Kotlin", "Figma", "Canva"],
 };
 
 export default heroData;

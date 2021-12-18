@@ -1,17 +1,18 @@
 import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import heroData from "utils/hero-data";
 import heroImage from "public/images/hero-image.jpg";
+import heroData from "utils/hero-data";
+
+const { intro, title, body } = heroData;
 
 function Hero() {
-  const { intro, title, body } = heroData;
-
   return (
     <Stack
       as="section"
       direction={["column", "column", "row"]}
       align={[null, null, "center"]}
-      spacing={[8, null, "5vw"]}
+      justify="space-between"
+      spacing={[8, null]}
       id="hero"
     >
       <Box maxW={[null, null, "28ch"]}>
@@ -42,9 +43,9 @@ function Hero() {
           <Text>{body.p3}</Text>
         </Stack>
       </Box>
-      <Box pos="relative" maxW={[null, null, 325]}>
+      <Stack pos="relative" maxW={[null, null, 360]}>
         <Image alt="Emmanuel and his wife" src={heroImage} />
-      </Box>
+      </Stack>
     </Stack>
   );
 }
