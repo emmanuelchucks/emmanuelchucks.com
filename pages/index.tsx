@@ -14,9 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex flex-col justify-between min-h-screen space-y-16">
-        <header className="container p-4 mx-auto lg:max-w-5xl">
-          <Header />
-        </header>
+        <Header />
 
         <main className="container p-4 mx-auto space-y-16 lg:max-w-4xl">
           <Hero />
@@ -24,9 +22,7 @@ const Home: NextPage = () => {
           <Contact />
         </main>
 
-        <footer className="py-16 text-center bg-slate-100">
-          <Footer />
-        </footer>
+        <Footer />
       </div>
     </>
   );

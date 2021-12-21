@@ -6,7 +6,7 @@ const { socials } = siteData;
 
 function Footer() {
   return (
-    <>
+    <footer className="pt-16 pb-8 text-center bg-slate-100">
       <Navigation id="footer navigation" />
       <ul className="inline-flex my-6 space-x-2">
         {socials.map(([name, url]) => (
@@ -26,7 +26,7 @@ function Footer() {
       </ul>
       <p>Made in Accra, Ghana 🇬🇭</p>
       <small>&copy; {new Date().getFullYear()}. MIT Licence</small>
-    </>
+    </footer>
   );
 }
 

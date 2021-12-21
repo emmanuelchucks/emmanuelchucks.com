@@ -15,7 +15,7 @@ function Hero() {
         </div>
         <div className="mb-8 md:max-w-sm md:mb-0">
           <div className="font-bold">
-            <h1 className="text-sm text-gray-500 uppercase">{intro}</h1>
+            <h1 className="text-sm uppercase opacity-50">{intro}</h1>
             <h2 className="my-4 text-3xl">{title}</h2>
           </div>
           <div className="space-y-3">
@@ -41,7 +41,7 @@ function Hero() {
         {skills.map((name) => (
           <span
             key={name}
-            className="px-6 py-1 text-gray-700 rounded-full bg-zinc-100"
+            className="px-6 py-1 rounded-full opacity-60 bg-zinc-100"
           >
             {name}
           </span>

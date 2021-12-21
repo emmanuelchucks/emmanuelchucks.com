@@ -18,7 +18,7 @@ function Navigation({ id }: NavigationProps) {
             <li key={navItem}>
               <Link href={href}>
                 <a
-                  className={`capitalize hover:text-gray-500 font-semibold py-1 px-2 ${
+                  className={`capitalize hover:opacity-60 transition-all font-semibold py-1 px-2 ${
                     showActive ? "underline" : ""
                   }`}
                 >
