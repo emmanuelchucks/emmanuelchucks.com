@@ -6,12 +6,12 @@ const siteData = {
       "Personal portfolio website for Emmanuel Chucks. A passionate full-stack developer, UI/UX designer, pianist, loving husband, Christ follower",
     image: "https://www.emmanuelchucks.com/android-chrome-512x512.png",
   },
-  navigation: ["Home", "Projects", "Contact"],
+  navigation: ["home", "projects", "contact"],
   socials: [
-    { name: "Twitter", url: "twitter.com/emmanuelchucks" },
-    { name: "Github", url: "github.com/emmanuelchucks" },
-    { name: "Dev", url: "dev.to/emmanuelchucks" },
-    { name: "Medium", url: "medium.com/@emmanuelchucks" },
+    ["Twitter", "twitter.com/emmanuelchucks"],
+    ["Github", "github.com/emmanuelchucks"],
+    ["Dev", "dev.to/emmanuelchucks"],
+    ["Medium", "medium.com/@emmanuelchucks"],
   ],
 };
 

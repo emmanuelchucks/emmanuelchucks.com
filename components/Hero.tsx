@@ -4,12 +4,13 @@ import heroData from "../data/heroData";
 import heroImage from "../public/images/hero-image.jpg";
 
 const { intro, title, body, skills } = heroData;
+const [paragraph1, anchor1, paragraph2, paragraph3] = body;
 
 function Hero() {
   return (
     <>
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="flex md:max-w-sm">
+        <div className="flex md:ml-6 md:max-w-sm">
           <Image src={heroImage} alt="Emmanuel and his wife" />
         </div>
         <div className="mb-8 md:max-w-sm md:mb-0">
@@ -19,16 +20,16 @@ function Hero() {
           </div>
           <div className="space-y-3">
             <p>
-              {body.paragraph1}{" "}
+              {paragraph1}{" "}
               <Link href="https://en.wikipedia.org/wiki/Accra">
                 <a target="_blank" rel="noreferrer">
-                  {body.anchor1}
+                  {anchor1}
                   <span className="sr-only">(open in new tab)</span>.
                 </a>
-              </Link>{" "}
+              </Link>
             </p>
-            <p>{body.paragraph2}</p>
-            <p>{body.paragraph3}</p>
+            <p>{paragraph2}</p>
+            <p>{paragraph3}</p>
           </div>
         </div>
       </article>
@@ -38,7 +39,10 @@ function Hero() {
         className="flex flex-wrap justify-center gap-4 font-semibold"
       >
         {skills.map((name) => (
-          <span key={name} className="px-6 py-1 rounded-full bg-zinc-100">
+          <span
+            key={name}
+            className="px-6 py-1 text-gray-700 rounded-full bg-zinc-100"
+          >
             {name}
           </span>
         ))}

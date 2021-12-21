@@ -9,10 +9,14 @@ function Footer() {
     <>
       <Navigation id="footer navigation" />
       <ul className="inline-flex my-6 space-x-2">
-        {socials.map(({ name, url }) => (
+        {socials.map(([name, url]) => (
           <li key={name}>
             <Link href={`https://${url}`}>
-              <a target="_blank" rel="noreferrer" className="px-2 py-1">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                className="px-2 py-1 transition-all hover:bg-slate-200"
+              >
                 {name}
                 <span className="sr-only">(open in new tab)</span>
               </a>

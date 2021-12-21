@@ -11,7 +11,7 @@ function Navigation({ id }: NavigationProps) {
     <nav id={id}>
       <ul className="inline-flex space-x-2">
         {navigation.map((navItem, idx) => {
-          const href = idx ? `/#${navItem.toLocaleLowerCase()}` : "/";
+          const href = idx ? `/#${navItem}` : "/";
           const showActive = id == "main navigation" && router.asPath === href;
 
           return (
