@@ -14,11 +14,11 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="flex flex-col justify-between min-h-screen space-y-16">
-        <header className="mx-4 md:container md:mx-auto">
+        <header className="container px-4 mx-auto lg:max-w-5xl">
           <Header />
         </header>
 
-        <main className="mx-4 space-y-16 md:container md:mx-auto">
+        <main className="container px-4 mx-auto space-y-16 lg:max-w-4xl">
           <Hero />
           <Projects />
           <Contact />
