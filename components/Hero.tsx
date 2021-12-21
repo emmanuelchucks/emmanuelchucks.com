@@ -9,7 +9,7 @@ function Hero() {
   return (
     <>
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="relative md:max-w-sm">
+        <div className="flex md:max-w-sm">
           <Image src={heroImage} alt="Emmanuel and his wife" />
         </div>
         <div className="mb-8 md:max-w-sm md:mb-0">

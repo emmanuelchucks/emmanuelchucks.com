@@ -9,7 +9,7 @@ function Navigation({ id }: NavigationProps) {
 
   return (
     <nav id={id}>
-      <ul className="inline-flex space-x-4">
+      <ul className="inline-flex space-x-2">
         {navigation.map((navItem, idx) => {
           const href = idx ? `/#${navItem.toLocaleLowerCase()}` : "/";
           const showActive = id == "main navigation" && router.asPath === href;
@@ -18,7 +18,7 @@ function Navigation({ id }: NavigationProps) {
             <li key={navItem}>
               <Link href={href}>
                 <a
-                  className={`capitalize hover:text-gray-500 font-semibold ${
+                  className={`capitalize hover:text-gray-500 font-semibold py-1 px-2 ${
                     showActive ? "underline" : ""
                   }`}
                 >

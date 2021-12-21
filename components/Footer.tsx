@@ -8,11 +8,11 @@ function Footer() {
   return (
     <>
       <Navigation id="footer navigation" />
-      <ul className="inline-flex my-6 space-x-4">
+      <ul className="inline-flex my-6 space-x-2">
         {socials.map(({ name, url }) => (
           <li key={name}>
             <Link href={`https://${url}`}>
-              <a target="_blank" rel="noreferrer">
+              <a target="_blank" rel="noreferrer" className="px-2 py-1">
                 {name}
                 <span className="sr-only">(open in new tab)</span>
               </a>
