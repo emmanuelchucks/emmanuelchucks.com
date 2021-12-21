@@ -16,7 +16,7 @@ const Home: NextPage = () => {
       <div className="flex flex-col justify-between min-h-screen space-y-16">
         <Header />
 
-        <main className="container p-4 mx-auto space-y-16 lg:max-w-4xl">
+        <main className="space-y-32">
           <Hero />
           <Projects />
           <Contact />

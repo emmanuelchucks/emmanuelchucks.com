@@ -15,7 +15,7 @@ function Footer() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                className="px-2 py-1 transition-all hover:bg-slate-200"
+                className="px-2 py-1 transition-colors hover:bg-slate-200"
               >
                 {name}
                 <span className="sr-only">(open in new tab)</span>

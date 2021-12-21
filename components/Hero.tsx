@@ -8,7 +8,7 @@ const [paragraph1, anchor1, paragraph2, paragraph3] = body;
 
 function Hero() {
   return (
-    <>
+    <div className="px-4 mx-auto space-y-16 lg:max-w-4xl">
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
         <div className="flex md:ml-6 md:max-w-sm">
           <Image src={heroImage} alt="Emmanuel and his wife" />
@@ -47,7 +47,7 @@ function Hero() {
           </span>
         ))}
       </section>
-    </>
+    </div>
   );
 }
 
