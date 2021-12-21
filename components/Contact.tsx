@@ -23,7 +23,6 @@ function Contact() {
           required
         />
         <InputField
-          type="email"
           label="email"
           placeholder="leonardo@email.com"
           register={register}
@@ -49,7 +48,6 @@ function Contact() {
 }
 
 function InputField({
-  type,
   label,
   register,
   required,
@@ -58,6 +56,7 @@ function InputField({
   error,
 }: InputFieldProps) {
   const Component = isTextarea ? "textarea" : "input";
+  const errorMessage = error?.type === "required" && "This field is required";
 
   return (
     <div className="block space-y-2">
@@ -70,21 +69,21 @@ function InputField({
 
       <Component
         {...register(label, { required })}
-        type={type}
         placeholder={placeholder}
-        className={`block w-full px-2 py-1 border-2 rounded-md md:w-1/2 peer invalid:border-red-600 required:text-red-600 ${
-          isTextarea ? "h-32" : ""
-        }`}
+        className={`block w-full px-2 py-1 border-2 rounded-md md:w-1/2 ${
+          errorMessage ? "outline-red-600 border-red-600" : ""
+        } ${isTextarea ? "h-32" : ""}`}
       />
 
-      <div className="text-sm peer-invalid:text-red-600">{error?.message}</div>
+      <p className={`text-sm ${errorMessage ? "text-red-600" : ""}`}>
+        {errorMessage}
+      </p>
     </div>
   );
 }
 
 type InputFieldProps = {
   register: UseFormRegister<FormData>;
-  type?: string;
   label: Path<FormData>;
   error?: FieldError;
   placeholder: string;

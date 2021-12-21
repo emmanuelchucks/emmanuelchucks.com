@@ -41,7 +41,7 @@ function Hero() {
         {skills.map((name) => (
           <span
             key={name}
-            className="px-6 py-1 rounded-full opacity-60 bg-zinc-100"
+            className="px-6 py-1 rounded-full opacity-70 bg-zinc-100"
           >
             {name}
           </span>
