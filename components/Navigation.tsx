@@ -10,7 +10,7 @@ function Navigation({ id }: NavigationProps) {
         {navigation.map((navItem, idx) => (
           <li key={navItem}>
             <Link href={idx ? `/#${navItem}` : "/"}>
-              <a className="px-2 py-1 font-semibold capitalize transition-opacity hover:opacity-60">
+              <a className="px-2 py-1 font-semibold capitalize transition-opacity hover:opacity-70">
                 {navItem}
               </a>
             </Link>
