@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { FiCheckCircle } from "react-icons/fi";
+import { FiCheckCircle, FiInfo } from "react-icons/fi";
 import InputField from "./InputField";
 
 function Contact() {
@@ -9,13 +10,40 @@ function Contact() {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(console.log(data));
-      }, 2000);
+  const [error, setError] = useState("");
+
+  const onSubmit = async (data: FormData) => {
+    const response = await fetch("/api/sendgrid", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
     });
+
+    const { error } = await response.json();
+    setError(error);
   };
+
+  const SubmitFailed = (
+    <div
+      role="alert"
+      className="flex items-center gap-2 px-4 py-2 md:max-w-[60%] text-rose-900 bg-rose-100"
+    >
+      <FiInfo />
+      Something went wrong. Please try again.
+    </div>
+  );
+
+  const SubmitSucceeded = (
+    <div
+      role="alert"
+      className="text-green-900 bg-green-100 flex items-center gap-2 px-4 py-2 md:max-w-[60%]"
+    >
+      <FiCheckCircle />
+      {"Email sent! I'll get back to you soon."}
+    </div>
+  );
 
   return (
     <div id="contact" className="px-4 mx-auto lg:max-w-4xl">
@@ -48,13 +76,11 @@ function Contact() {
         />
 
         {isSubmitSuccessful ? (
-          <div
-            role="alert"
-            className="flex items-center gap-2 px-4 py-2 text-green-800 bg-green-100 md:max-w-[60%]"
-          >
-            <FiCheckCircle />
-            {"Email sent! I'll get back to you soon."}
-          </div>
+          error ? (
+            SubmitFailed
+          ) : (
+            SubmitSucceeded
+          )
         ) : (
           <button
             type="submit"

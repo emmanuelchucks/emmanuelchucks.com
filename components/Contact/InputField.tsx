@@ -25,7 +25,7 @@ function InputField({
     <div className="block space-y-2">
       <label htmlFor={label} className="capitalize">
         {label}:{" "}
-        <span className="text-red-600" aria-hidden>
+        <span className="text-rose-600" aria-hidden>
           {required ? "*" : ""}
         </span>
       </label>
@@ -37,12 +37,12 @@ function InputField({
         placeholder={placeholder}
         aria-invalid={error ? "true" : "false"}
         className={`block w-full px-2 py-1 border-2 rounded-md md:w-[60%] ${
-          errorMessage ? "outline-red-600 border-red-600" : ""
+          errorMessage ? "outline-rose-600 border-rose-600" : ""
         } ${isTextarea ? "h-32" : ""}`}
       />
 
       {errorMessage && (
-        <span role="alert" className="text-sm text-red-600">
+        <span role="alert" className="text-sm text-rose-600">
           {errorMessage}
         </span>
       )}
