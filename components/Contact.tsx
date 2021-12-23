@@ -65,7 +65,7 @@ function Contact() {
             type="submit"
             aria-disabled={isSubmitting}
             disabled={isSubmitting}
-            className="px-12 py-2 font-semibold transition-colors bg-gray-900 rounded-md text-gray-50 hover:opacity-80 disabled:opacity-40"
+            className="px-12 py-2 font-semibold transition-opacity bg-gray-900 rounded-md text-gray-50 hover:opacity-90 disabled:opacity-40"
           >
             {isSubmitting ? "Sending..." : "Send"}
           </button>

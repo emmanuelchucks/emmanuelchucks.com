@@ -32,11 +32,16 @@ function Hero() {
             <p>
               {paragraph1}{" "}
               <Link href="https://en.wikipedia.org/wiki/Accra">
-                <a target="_blank" rel="noreferrer">
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline transition-opacity underline-offset-2 text-slate-900 hover:opacity-80"
+                >
                   {anchor1}
-                  <span className="sr-only">(open in new tab)</span>.
+                  <span className="sr-only">(open in new tab)</span>
                 </a>
               </Link>
+              .
             </p>
             <p>{paragraph2}</p>
             <p>{paragraph3}</p>
