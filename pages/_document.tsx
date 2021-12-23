@@ -49,7 +49,6 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/site.webmanifest" />
         </Head>
-
         <body>
           <Main />
           <NextScript />
