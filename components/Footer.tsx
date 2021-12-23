@@ -1,43 +1,32 @@
-import { Box, IconButton, Stack, Text } from "@chakra-ui/react";
-import { FaDev, FaGithub, FaMediumM, FaTwitter } from "react-icons/fa";
-import siteData from "utils/site-data";
+import Link from "next/link";
+import siteData from "../data/siteData";
 import Navigation from "./Navigation";
 
 const { socials } = siteData;
-const socialIcons = [FaTwitter, FaGithub, FaDev, FaMediumM];
 
 function Footer() {
   return (
-    <Stack as="footer" align="center" spacing={6} bg="gray.50" pt={16} pb={8}>
-      <Stack align="center" spacing={8} color="blackAlpha.700">
-        <Navigation id="footer-navigation" />
-        <Stack as="ul" direction="row" spacing={2} listStyleType="none">
-          {socials.map(({ name, url }, idx) => {
-            const Icon = socialIcons[idx];
-            return (
-              <Box as="li" key={name}>
-                <IconButton
-                  as="a"
-                  icon={<Icon />}
-                  aria-label={name}
-                  variant="ghost"
-                  colorScheme="blackAlpha"
-                  size="lg"
-                  color="black"
-                  href={`https://${url}`}
-                  target="_blank"
-                  rel="noreferrer"
-                ></IconButton>
-              </Box>
-            );
-          })}
-        </Stack>
-      </Stack>
-      <Box textAlign="center" color="blackAlpha.800" fontSize="sm">
-        <Text>Made in Accra, Ghana 🇬🇭</Text>
-        <Text as="small">&copy; {new Date().getFullYear()}. MIT Licence</Text>
-      </Box>
-    </Stack>
+    <footer className="pt-24 pb-12 text-center bg-slate-100">
+      <Navigation id="footer navigation" />
+      <ul className="inline-flex my-6 space-x-2">
+        {socials.map(([name, url]) => (
+          <li key={name}>
+            <Link href={`https://${url}`}>
+              <a
+                target="_blank"
+                rel="noreferrer"
+                className="px-2 py-1 transition-colors hover:bg-slate-200"
+              >
+                {name}
+                <span className="sr-only">(open in new tab)</span>
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <p>Made in Accra, Ghana 🇬🇭</p>
+      <small>&copy; {new Date().getFullYear()}. MIT Licence</small>
+    </footer>
   );
 }
 

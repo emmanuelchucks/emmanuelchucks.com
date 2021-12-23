@@ -24,5 +24,5 @@ npm run dev
 ## Built Using
 
 - [Next.js](https://nextjs.org/)
-- [Chakra Ui](https://chakra-ui.com/)
-- [Vercel](https://vercel.com)
+- [Tailwind](https://tailwindcss.com/)
+- [Vercel](https://vercel.com) (Deployment)

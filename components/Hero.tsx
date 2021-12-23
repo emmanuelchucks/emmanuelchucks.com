@@ -1,52 +1,73 @@
-import { Box, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import heroImage from "public/images/hero-image.jpg";
-import heroData from "utils/hero-data";
+import Link from "next/link";
+import {
+  SiAwsamplify,
+  SiCanva,
+  SiFigma,
+  SiFirebase,
+  SiFlutter,
+  SiReact,
+} from "react-icons/si";
+import heroData from "../data/heroData";
+import heroImage from "../public/images/hero-image.jpg";
 
-const { intro, title, body } = heroData;
+const { intro, title, body, skills } = heroData;
+const [paragraph1, anchor1, paragraph2, paragraph3] = body;
+
+const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
-    <Stack
-      as="section"
-      direction={["column", "column", "row"]}
-      align={[null, null, "center"]}
-      justify="space-between"
-      spacing={[8, null]}
-      id="hero"
-    >
-      <Box maxW={[null, null, "28ch"]}>
-        <Heading
-          as="h1"
-          color="blackAlpha.700"
-          textTransform="uppercase"
-          fontSize="md"
-          fontWeight={600}
-        >
-          {intro}
-        </Heading>
-        <Heading my={6}>{title}</Heading>
-        <Stack align="flex-start" spacing={4}>
-          <Text>
-            {body.p1}{" "}
-            <Link
-              href="https://en.wikipedia.org/wiki/Accra"
-              target="_blank"
-              rel="noreferrer"
-              textDecor="underline"
-              color="blackAlpha.800"
+    <div className="px-4 mx-auto space-y-16 lg:max-w-4xl">
+      <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
+        <div className="flex md:ml-6 md:max-w-sm">
+          <Image src={heroImage} alt="Emmanuel and his wife" />
+        </div>
+        <div className="mb-8 md:max-w-sm md:mb-0">
+          <div className="font-bold">
+            <h1 className="text-sm uppercase opacity-50">{intro}</h1>
+            <h2 className="my-4 text-3xl">{title}</h2>
+          </div>
+          <div className="space-y-3">
+            <p>
+              {paragraph1}{" "}
+              <Link href="https://en.wikipedia.org/wiki/Accra">
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline transition-opacity underline-offset-2 text-slate-900 hover:opacity-80"
+                >
+                  {anchor1}
+                  <span className="sr-only">(open in new tab)</span>
+                </a>
+              </Link>
+              .
+            </p>
+            <p>{paragraph2}</p>
+            <p>{paragraph3}</p>
+          </div>
+        </div>
+      </article>
+
+      <section
+        id="tech stack"
+        className="flex flex-wrap justify-center gap-4 font-semibold"
+      >
+        {skills.map((name, idx) => {
+          const Icon = Icons[idx];
+
+          return (
+            <span
+              key={name}
+              className="flex items-center gap-2 px-6 py-1 rounded-full opacity-70 bg-zinc-100"
             >
-              {body.a1}.
-            </Link>
-          </Text>
-          <Text>{body.p2}</Text>
-          <Text>{body.p3}</Text>
-        </Stack>
-      </Box>
-      <Stack pos="relative" maxW={[null, null, 360]}>
-        <Image alt="Emmanuel and his wife" src={heroImage} />
-      </Stack>
-    </Stack>
+              <Icon />
+              {name}
+            </span>
+          );
+        })}
+      </section>
+    </div>
   );
 }
 

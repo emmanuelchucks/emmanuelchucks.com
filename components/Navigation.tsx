@@ -1,23 +1,22 @@
-import { Button, HStack, Link } from "@chakra-ui/react";
-import siteData from "utils/site-data";
+import Link from "next/link";
+import siteData from "../data/siteData";
 
-const { navigation } = siteData;
+const navigation = siteData.navigation;
 
 function Navigation({ id }: NavigationProps) {
   return (
     <nav id={id}>
-      <HStack as="ul" spacing={4}>
+      <ul className="inline-flex space-x-2">
         {navigation.map((navItem, idx) => (
-          <Button as="li" variant="link" key={navItem}>
-            <Link
-              href={`#${idx ? navItem.toLowerCase() : ""}`}
-              textTransform="capitalize"
-            >
-              {navItem}
+          <li key={navItem}>
+            <Link href={idx ? `/#${navItem}` : "/"}>
+              <a className="px-2 py-1 font-semibold capitalize transition-opacity text-slate-800 hover:opacity-70">
+                {navItem}
+              </a>
             </Link>
-          </Button>
+          </li>
         ))}
-      </HStack>
+      </ul>
     </nav>
   );
 }
