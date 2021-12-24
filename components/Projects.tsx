@@ -1,12 +1,18 @@
+import Image from "next/image";
+import placeholder from "../public/images/placeholder.jpg";
+
 function Projects() {
   return (
     <div id="projects">
       <h2 className="px-4 mx-auto text-3xl font-bold lg:max-w-4xl">Projects</h2>
-      <div className="flex px-4 py-16 space-x-4 lg:space-x-8 snap-x lg:px-96 projectList">
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="p-8 bg-gray-50 snap-center shrink-0">
-            <div className="bg-red-200 h-96 aspect-video" />
-            <h3 className="my-6 text-4xl font-extrabold opacity-20">
+      <div className="flex px-4 space-x-4 lg:space-x-8 snap-x lg:px-16 xl:px-52 2xl:px-96 projectList">
+        {[0, 1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="my-16 snap-center w-[min(85vw,_560px)] shrink-0"
+          >
+            <Image alt="" src={placeholder} />
+            <h3 className="my-6 text-5xl font-extrabold opacity-20">
               Project {i}
             </h3>
             <p>
@@ -15,6 +21,7 @@ function Projects() {
               consectetur quaerat magnam molestias veritatis suscipit nostrum
               non impedit pariatur placeat praesentium.
             </p>
+            <button className="px-2 py-1 mt-8 uppercase">More info →</button>
           </div>
         ))}
       </div>

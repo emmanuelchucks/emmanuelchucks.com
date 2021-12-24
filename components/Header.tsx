@@ -2,7 +2,7 @@ import Navigation from "./Navigation";
 
 function Header() {
   return (
-    <header className="container mx-auto lg:max-w-5xl">
+    <header className="container mx-auto lg:max-w-4xl xl:max-w-5xl">
       <div className="flex items-baseline justify-between px-4 mt-4 md:mt-8">
         <h6
           aria-hidden
