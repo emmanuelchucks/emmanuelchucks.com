@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer components {
-  #projectList {
+  .projectList {
     -ms-overflow-style: none; /* for Internet Explorer, Edge */
     scrollbar-width: none; /* for Firefox */
     overflow-y: scroll;
     touch-action: pan-x;
   }
 
-  #projectList::-webkit-scrollbar {
+  .projectList::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
   }
 }
