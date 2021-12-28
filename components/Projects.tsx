@@ -21,7 +21,9 @@ function Projects() {
               consectetur quaerat magnam molestias veritatis suscipit nostrum
               non impedit pariatur placeat praesentium.
             </p>
-            <button className="px-2 py-1 mt-8 uppercase">More info →</button>
+            <button className="px-2 py-1 mt-8 uppercase">
+              More info &rarr;
+            </button>
           </div>
         ))}
       </div>
