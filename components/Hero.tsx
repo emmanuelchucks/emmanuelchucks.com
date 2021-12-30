@@ -9,7 +9,6 @@ import {
   SiReact,
 } from "react-icons/si";
 import heroData from "../data/heroData";
-import heroImage from "../public/images/hero-image.jpg";
 
 const { intro, title, body, skills } = heroData;
 const [paragraph1, anchor1, paragraph2, paragraph3] = body;
@@ -18,10 +17,16 @@ const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
-    <div className="px-4 mx-auto space-y-24 lg:max-w-4xl">
+    <div className="container px-4 mx-auto space-y-24 lg:max-w-4xl">
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="flex md:max-w-xs lg:max-w-sm">
-          <Image priority src={heroImage} alt="Emmanuel and his wife" />
+        <div className="relative flex md:max-w-xs lg:max-w-sm">
+          <Image
+            priority
+            src="/images/hero-image.jpg"
+            alt="Emmanuel and his wife"
+            width={600}
+            height={900}
+          />
         </div>
         <div className="mb-8 md:max-w-sm md:mb-0">
           <div className="font-bold">

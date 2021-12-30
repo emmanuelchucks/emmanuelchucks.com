@@ -46,7 +46,7 @@ function Contact() {
   );
 
   return (
-    <div id="contact" className="px-4 mx-auto lg:max-w-4xl">
+    <div id="contact" className="container px-4 mx-auto lg:max-w-4xl">
       <h2 className="text-3xl font-bold">Contact</h2>
       <h3>{"Let's get in touch"}</h3>
 

@@ -4,7 +4,9 @@ import placeholder from "../public/images/placeholder.jpg";
 function Projects() {
   return (
     <div id="projects">
-      <h2 className="px-4 mx-auto text-3xl font-bold lg:max-w-4xl">Projects</h2>
+      <h2 className="container px-4 mx-auto text-3xl font-bold lg:max-w-4xl">
+        Projects
+      </h2>
       <div className="flex px-4 space-x-4 lg:space-x-8 snap-x lg:px-16 xl:px-52 2xl:px-96 projectList">
         {[0, 1, 2, 3].map((i) => (
           <div
@@ -12,7 +14,7 @@ function Projects() {
             className="my-16 snap-center w-[min(85vw,_560px)] shrink-0"
           >
             <Image alt="" src={placeholder} />
-            <h3 className="my-6 text-5xl font-extrabold opacity-20">
+            <h3 className="my-6 text-4xl font-extrabold opacity-30">
               Project {i}
             </h3>
             <p>
