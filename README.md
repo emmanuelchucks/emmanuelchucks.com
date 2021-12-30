@@ -13,6 +13,10 @@ npm i
 npm run dev
 ```
 
+## Environment Variables
+
+SENDGRID_API_KEY=
+
 ## TODO
 
 - [ ] Contact form
