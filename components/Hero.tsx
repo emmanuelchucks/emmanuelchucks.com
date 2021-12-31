@@ -40,7 +40,7 @@ function Hero() {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  className="underline transition-opacity underline-offset-2 text-slate-900 hover:opacity-80"
+                  className="underline transition-opacity underline-offset-2 text-gray-900 hover:opacity-80"
                 >
                   {anchor1}
                   <span className="sr-only">(open in new tab)</span>
@@ -64,7 +64,7 @@ function Hero() {
           return (
             <span
               key={name}
-              className="flex items-center gap-2 px-6 py-1 rounded-full opacity-70 bg-zinc-100"
+              className="flex items-center gap-2 px-6 py-1 rounded-full opacity-70 bg-gray-100"
             >
               <Icon />
               {name}

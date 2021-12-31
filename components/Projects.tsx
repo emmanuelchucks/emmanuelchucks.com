@@ -7,27 +7,26 @@ function Projects() {
       <h2 className="container px-4 mx-auto text-3xl font-bold lg:max-w-4xl">
         Projects
       </h2>
-      <div className="flex px-4 space-x-4 lg:space-x-8 snap-x lg:px-16 xl:px-52 2xl:px-96 projectList">
-        {[0, 1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="my-16 snap-center w-[min(85vw,_560px)] shrink-0"
-          >
-            <Image alt="" src={placeholder} />
-            <h3 className="my-6 text-4xl font-extrabold opacity-30">
-              Project {i}
-            </h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
-              odio cupiditate ab atque odit nisi voluptas, ullam excepturi
-              consectetur quaerat magnam molestias veritatis suscipit nostrum
-              non impedit pariatur placeat praesentium.
-            </p>
-            <button className="px-2 py-1 mt-8 uppercase">
-              More info &rarr;
-            </button>
-          </div>
-        ))}
+      <div className="container px-4 mx-auto lg:max-w-7xl">
+        <div className="grid mt-16 gap-y-24 md:grid-cols-2 md:gap-x-8 xl:gap-x-16 xl:px-16">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i}>
+              <Image alt="" src={placeholder} />
+              <h3 className="my-6 text-4xl font-extrabold text-gray-400">
+                Project {i}
+              </h3>
+              <p className="text-gray-700">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore
+                odio cupiditate ab atque odit nisi voluptas, ullam excepturi
+                consectetur quaerat magnam molestias veritatis suscipit nostrum
+                non impedit pariatur placeat praesentium.
+              </p>
+              <button className="px-4 py-2 mt-8 font-semibold text-gray-900 uppercase bg-gray-200 rounded-md">
+                More info &rarr;
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

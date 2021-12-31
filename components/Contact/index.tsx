@@ -26,23 +26,17 @@ function Contact() {
   };
 
   const SubmitFailed = (
-    <div
-      role="alert"
-      className="flex items-center gap-2 px-4 py-2 md:max-w-[55%] text-rose-900 bg-rose-100"
-    >
+    <>
       <FiInfo />
       Something went wrong. Please try again.
-    </div>
+    </>
   );
 
   const SubmitSucceeded = (
-    <div
-      role="alert"
-      className="text-green-900 bg-green-100 flex items-center gap-2 px-4 py-2 md:max-w-[55%]"
-    >
+    <>
       <FiCheckCircle />
       {"Email sent! I'll get back to you soon."}
-    </div>
+    </>
   );
 
   return (
@@ -76,11 +70,16 @@ function Contact() {
         />
 
         {isSubmitSuccessful ? (
-          error ? (
-            SubmitFailed
-          ) : (
-            SubmitSucceeded
-          )
+          <div
+            role="alert"
+            className={`flex items-center gap-2 px-4 py-2 md:max-w-[55%] ${
+              error
+                ? "text-rose-900 bg-rose-100"
+                : "text-green-900 bg-green-100"
+            }`}
+          >
+            {error ? SubmitFailed : SubmitSucceeded}
+          </div>
         ) : (
           <button
             type="submit"
