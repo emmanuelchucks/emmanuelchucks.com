@@ -12,13 +12,8 @@ function Footer() {
         {socials.map(([name, url]) => (
           <li key={name}>
             <Link href={`https://${url}`}>
-              <a
-                target="_blank"
-                rel="noreferrer"
-                className="px-2 py-1 transition-colors hover:bg-gray-200"
-              >
+              <a className="px-2 py-1 transition-colors hover:bg-gray-200">
                 {name}
-                <span className="sr-only">(open in new tab)</span>
               </a>
             </Link>
           </li>

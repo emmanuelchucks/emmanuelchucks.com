@@ -37,13 +37,8 @@ function Hero() {
             <p>
               {paragraph1}{" "}
               <Link href="https://en.wikipedia.org/wiki/Accra">
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline transition-opacity underline-offset-2 text-gray-900 hover:opacity-80"
-                >
+                <a className="text-gray-900 underline transition-opacity underline-offset-2 hover:opacity-80">
                   {anchor1}
-                  <span className="sr-only">(open in new tab)</span>
                 </a>
               </Link>
               .
@@ -64,7 +59,7 @@ function Hero() {
           return (
             <span
               key={name}
-              className="flex items-center gap-2 px-6 py-1 rounded-full opacity-70 bg-gray-100"
+              className="flex items-center gap-2 px-6 py-1 bg-gray-100 rounded-full opacity-70"
             >
               <Icon />
               {name}
