@@ -1,18 +1,18 @@
 import Link from "next/link";
-import siteData from "../data/siteData";
+import siteData from "../data/site";
 import Navigation from "./Navigation";
 
 const { socials } = siteData;
 
 function Footer() {
   return (
-    <footer className="pt-24 pb-12 text-center bg-gray-100">
+    <footer className="pt-24 pb-12 text-center bg-slate-100">
       <Navigation id="footer navigation" />
       <ul className="inline-flex my-6 space-x-2">
         {socials.map(([name, url]) => (
           <li key={name}>
-            <Link href={`https://${url}`}>
-              <a className="px-2 py-1 transition-colors hover:bg-gray-200">
+            <Link href={"https://" + url}>
+              <a className="px-2 py-1 transition-colors hover:bg-slate-200">
                 {name}
               </a>
             </Link>
