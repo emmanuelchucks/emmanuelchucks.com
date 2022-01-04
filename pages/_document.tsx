@@ -1,12 +1,12 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import siteData from "../data/siteData";
+import siteData from "../data/site";
 
 const { title, meta, theme } = siteData;
 
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en" className="scroll-smooth scroll-p-8 md:scroll-p-16">
+      <Html lang="en" className="scroll-smooth scroll-p-16">
         <Head>
           <meta name="theme-color" content={theme} />
           <meta name="description" content={meta.description} />
