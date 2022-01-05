@@ -35,7 +35,7 @@ function InputField({
         type={type}
         placeholder={placeholder}
         aria-required={required ? "true" : "false"}
-        ariad-describedby={`${label}-error`}
+        aria-describedby={`${label}-error`}
         aria-invalid={error ? "true" : "false"}
         className={`block w-full px-2 py-1 border-2 rounded-md md:w-[55%] ${
           errorMessage ? "outline-rose-600 border-rose-600" : ""

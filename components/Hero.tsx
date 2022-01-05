@@ -17,7 +17,7 @@ const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
-    <section className="container px-4 mx-auto space-y-24 lg:max-w-4xl">
+    <div className="container px-4 mx-auto space-y-24 lg:max-w-4xl">
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
         <div className="relative flex justify-center shadow-xl md:max-w-xs lg:max-w-sm">
           <Image
@@ -64,7 +64,7 @@ function Hero() {
           })}
         </ul>
       </section>
-    </section>
+    </div>
   );
 }
 
