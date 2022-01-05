@@ -9,7 +9,7 @@ function Header() {
       >
         e<span className="hidden sm:inline">mmanuel</span>.
       </h6>
-      <Navigation id="main navigation" />
+      <Navigation label="Main Navigation" />
     </header>
   );
 }

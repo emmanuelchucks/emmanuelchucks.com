@@ -29,7 +29,7 @@ function Hero() {
           />
         </div>
         <div className="mb-8 md:max-w-sm md:mb-0">
-          <h1 className="text-sm font-bold uppercase opacity-50">{intro}</h1>
+          <h1 className="text-sm font-bold uppercase opacity-60">{intro}</h1>
           <h2 className="my-4 text-3xl font-bold">{title}</h2>
           <div className="space-y-3">
             <p>
@@ -59,7 +59,7 @@ function Hero() {
               key={name}
               className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70"
             >
-              <Icon />
+              <Icon aria-hidden />
               {name}
             </span>
           );

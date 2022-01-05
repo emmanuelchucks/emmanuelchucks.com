@@ -35,12 +35,13 @@ function InputField({
         type={type}
         placeholder={placeholder}
         aria-required={required ? "true" : "false"}
+        ariad-describedby={`${label}-error`}
         aria-invalid={error ? "true" : "false"}
         className={`block w-full px-2 py-1 border-2 rounded-md md:w-[55%] ${
           errorMessage ? "outline-rose-600 border-rose-600" : ""
         } ${isTextarea ? "h-32" : ""}`}
       />
-      <span role="alert" className="text-sm text-rose-600">
+      <span id={`${label}-error`} className="text-sm text-rose-600">
         {errorMessage}
       </span>
     </div>

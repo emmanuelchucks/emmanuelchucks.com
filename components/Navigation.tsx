@@ -3,9 +3,9 @@ import siteData from "../data/site";
 
 const navigation = siteData.navigation;
 
-function Navigation({ id }: NavigationProps) {
+function Navigation({ label }: NavigationProps) {
   return (
-    <nav id={id}>
+    <nav aria-label={label}>
       <ul className="inline-flex space-x-2">
         {navigation.map((navItem, idx) => (
           <li key={navItem}>
@@ -22,7 +22,7 @@ function Navigation({ id }: NavigationProps) {
 }
 
 type NavigationProps = {
-  id: string;
+  label: string;
 };
 
 export default Navigation;
