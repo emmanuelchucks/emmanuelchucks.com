@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <title>Emmanuel Chucks - Full-Stack Engineer and UI/UX Designer</title>
       </Head>
 
-      <div className="flex flex-col justify-between min-h-screen space-y-16">
+      <div className="flex flex-col justify-between min-h-screen space-y-16 dark:bg-zinc-900 dark:text-zinc-200">
         <Header />
 
         <main className="space-y-24">

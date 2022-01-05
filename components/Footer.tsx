@@ -6,13 +6,13 @@ const { socials } = siteData;
 
 function Footer() {
   return (
-    <footer className="pt-24 pb-12 text-center bg-slate-100">
+    <footer className="pt-24 pb-12 text-center bg-slate-100 dark:bg-[#1e2021]">
       <Navigation label="Footer navigation" />
       <ul className="inline-flex my-6 space-x-2">
         {socials.map(([name, url]) => (
           <li key={name}>
             <Link href={"https://" + url}>
-              <a className="px-2 py-1 transition-colors hover:bg-slate-200">
+              <a className="px-2 py-1 transition-colors rounded hover:bg-slate-200 dark:hover:bg-zinc-900">
                 {name}
               </a>
             </Link>
