@@ -40,11 +40,20 @@ function Contact() {
   );
 
   return (
-    <div id="contact" className="container px-4 mx-auto lg:max-w-4xl">
+    <section id="contact" className="container px-4 mx-auto lg:max-w-4xl">
       <h2 className="text-3xl font-bold">Contact</h2>
-      <h3>{"Let's get in touch"}</h3>
+      <p>{"Let's get in touch"}</p>
 
-      <form className="my-16 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="my-16 space-y-4"
+        onSubmit={
+          isSubmitting
+            ? (e) => {
+                e.preventDefault();
+              }
+            : handleSubmit(onSubmit)
+        }
+      >
         <InputField
           label="name"
           placeholder="Leonardo"
@@ -72,7 +81,7 @@ function Contact() {
         {isSubmitSuccessful ? (
           <div
             role="alert"
-            className={`flex items-center gap-2 px-4 py-2 md:max-w-[55%] ${
+            className={`flex items-center gap-2 px-4 py-2 md:max-w-[55%] text-sm md:text-base ${
               error
                 ? "text-rose-900 bg-rose-100"
                 : "text-green-900 bg-green-100"
@@ -84,14 +93,15 @@ function Contact() {
           <button
             type="submit"
             aria-disabled={isSubmitting}
-            disabled={isSubmitting}
-            className="px-12 py-2 font-semibold transition-opacity bg-black rounded-md text-gray-50 hover:opacity-80 disabled:opacity-40"
+            className={`px-12 py-2 font-semibold transition-opacity bg-black rounded-md text-slate-50 hover:bg-opacity-80 ${
+              isSubmitting ? "cursor-not-allowed" : ""
+            }`}
           >
             {isSubmitting ? "Sending..." : "Send"}
           </button>
         )}
       </form>
-    </div>
+    </section>
   );
 }
 

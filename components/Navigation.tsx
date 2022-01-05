@@ -1,16 +1,16 @@
 import Link from "next/link";
-import siteData from "../data/siteData";
+import siteData from "../data/site";
 
 const navigation = siteData.navigation;
 
-function Navigation({ id }: NavigationProps) {
+function Navigation({ label }: NavigationProps) {
   return (
-    <nav id={id}>
+    <nav aria-label={label}>
       <ul className="inline-flex space-x-2">
         {navigation.map((navItem, idx) => (
           <li key={navItem}>
             <Link href={idx ? `/#${navItem}` : "/"}>
-              <a className="px-2 py-1 font-semibold capitalize transition-opacity text-gray-800 hover:opacity-70">
+              <a className="px-2 py-1 font-semibold capitalize transition-opacity text-slate-800 hover:text-opacity-80">
                 {navItem}
               </a>
             </Link>
@@ -22,7 +22,7 @@ function Navigation({ id }: NavigationProps) {
 }
 
 type NavigationProps = {
-  id: string;
+  label: string;
 };
 
 export default Navigation;
