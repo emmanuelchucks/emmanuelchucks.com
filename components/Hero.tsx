@@ -19,7 +19,7 @@ function Hero() {
   return (
     <section className="container px-4 mx-auto space-y-24 lg:max-w-4xl">
       <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="relative flex justify-center shadow-2xl md:max-w-xs lg:max-w-sm">
+        <div className="relative flex justify-center shadow-xl md:max-w-xs lg:max-w-sm">
           <Image
             priority
             src="/images/hero-image.jpg"
@@ -47,23 +47,22 @@ function Hero() {
         </div>
       </article>
 
-      <section
-        id="tech stack"
-        className="flex flex-wrap justify-center gap-4 font-semibold"
-      >
-        {skills.map((name, idx) => {
-          const Icon = Icons[idx];
+      <section aria-label="Tech stack">
+        <ul className="flex flex-wrap justify-center gap-4 font-semibold">
+          {skills.map((name, idx) => {
+            const Icon = Icons[idx];
 
-          return (
-            <span
-              key={name}
-              className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70"
-            >
-              <Icon aria-hidden />
-              {name}
-            </span>
-          );
-        })}
+            return (
+              <li
+                key={name}
+                className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70"
+              >
+                <Icon aria-hidden />
+                {name}
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </section>
   );
