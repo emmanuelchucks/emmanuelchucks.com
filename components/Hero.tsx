@@ -35,7 +35,7 @@ function Hero() {
             <p>
               {paragraph1}{" "}
               <Link href="https://en.wikipedia.org/wiki/Accra">
-                <a className="underline transition-opacity text-slate-900 underline-offset-2 hover:opacity-80">
+                <a className="underline transition-opacity text-slate-900 underline-offset-2 hover:opacity-80 dark:text-zinc-300">
                   {anchor1}
                 </a>
               </Link>
@@ -55,7 +55,7 @@ function Hero() {
             return (
               <li
                 key={name}
-                className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70"
+                className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70 dark:bg-zinc-800"
               >
                 <Icon aria-hidden />
                 {name}

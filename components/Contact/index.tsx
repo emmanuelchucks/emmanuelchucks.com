@@ -45,7 +45,7 @@ function Contact() {
       <p>{"Let's get in touch"}</p>
 
       <form
-        className="my-16 space-y-4"
+        className="my-16 space-y-8"
         onSubmit={
           isSubmitting
             ? (e) => {
@@ -81,10 +81,10 @@ function Contact() {
         {isSubmitSuccessful ? (
           <div
             role="alert"
-            className={`flex items-center gap-2 px-4 py-2 md:max-w-[55%] text-sm md:text-base ${
+            className={`flex items-center gap-2 px-4 py-2 md:max-w-[55%] rounded-md text-sm md:text-base ${
               error
-                ? "text-rose-900 bg-rose-100"
-                : "text-green-900 bg-green-100"
+                ? "text-red-900 bg-red-100 dark:text-red-100 dark:bg-red-700"
+                : "text-green-900 bg-green-100 dark:text-green-100 dark:bg-green-700"
             }`}
           >
             {error ? SubmitFailed : SubmitSucceeded}
