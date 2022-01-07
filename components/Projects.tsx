@@ -6,7 +6,7 @@ import ExternalLink from "./ExternalLink";
 
 function Projects() {
   return (
-    <section className="py-24 bg-slate-100 dark:bg-opacity-5">
+    <section className="py-24 bg-slate-100 dark:bg-neutral-900">
       <header id="projects" className="container px-4 mx-auto lg:max-w-4xl">
         <h2 className="text-3xl font-bold">Projects</h2>
         <p>

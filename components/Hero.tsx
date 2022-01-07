@@ -54,7 +54,7 @@ function Hero() {
             return (
               <li
                 key={name}
-                className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70 dark:bg-zinc-800"
+                className="flex items-center gap-2 px-6 py-1 rounded-full bg-slate-100 opacity-70 dark:bg-opacity-5"
               >
                 <Icon aria-hidden />
                 {name}
