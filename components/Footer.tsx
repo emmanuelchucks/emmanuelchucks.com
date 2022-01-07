@@ -12,7 +12,7 @@ function Footer() {
         {socials.map(([name, url]) => (
           <li key={name}>
             <Link href={"https://" + url}>
-              <a className="px-2 py-1 transition-colors rounded hover:bg-slate-200 dark:hover:bg-zinc-900">
+              <a className="px-2 py-1 transition-colors rounded hover:bg-slate-200 dark:hover:bg-opacity-10">
                 {name}
               </a>
             </Link>
