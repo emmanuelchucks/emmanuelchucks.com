@@ -37,8 +37,10 @@ function InputField({
         aria-required={required ? "true" : "false"}
         aria-describedby={`${label}-error`}
         aria-invalid={error ? "true" : "false"}
-        className={`block w-full px-2 py-1 border-2 rounded-md md:w-[55%] dark:bg-current ${
-          errorMessage ? "border-red-600 dark:border-red-400" : ""
+        className={`block w-full px-2 py-1 border-2 rounded-md md:w-[55%]  ${
+          errorMessage
+            ? "border-red-600 dark:border-red-400 dark:border-opacity-100"
+            : "dark:border-opacity-30"
         } ${isTextarea ? "h-32" : ""}`}
       />
       <span
