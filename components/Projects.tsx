@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import projectsData from "../data/projects";
 import siteData from "../data/site";
-import placeholder from "../public/images/placeholder.jpg";
 
 function Projects() {
   return (
@@ -10,7 +9,9 @@ function Projects() {
       <header id="projects" className="container px-4 mx-auto lg:max-w-4xl">
         <h2 className="text-3xl font-bold">Projects</h2>
         <p>
-          {"You can find my hobby and open source projects on "}
+          {
+            "These are commercial projects I've done professionally. You can find my hobby and open source projects on "
+          }
           <Link
             href={"https://" + siteData.socials[1][1] + "?tab=repositories"}
           >

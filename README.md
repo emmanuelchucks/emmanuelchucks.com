@@ -4,6 +4,14 @@
 
 My personal portfolio website to showcase my latest work.
 
+## Features
+
+- Contact form with SendGrid
+- Fully responsive
+- Dark mode
+- Accessibility
+- Lighthouse score
+
 ## Running Locally
 
 ```bash
@@ -16,14 +24,6 @@ npm run dev
 ## Environment Variables
 
 SENDGRID_API_KEY=
-
-## TODO
-
-- [ ] Contact form
-- [ ] Screenshots (mobile and web)
-- [ ] Lighthouse score
-- [ ] PWA (with next-pwa)
-- [ ] Sitemap (with next-sitemap)
 
 ## Built Using
 
