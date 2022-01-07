@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import projectsData from "../data/projects";
 import siteData from "../data/site";
+import ExternalLink from "./ExternalLink";
 
 function Projects() {
   return (
@@ -12,13 +13,10 @@ function Projects() {
           {
             "These are commercial projects I've done professionally. You can find my hobby and open source projects on "
           }
-          <Link
+          <ExternalLink
             href={"https://" + siteData.socials[1][1] + "?tab=repositories"}
-          >
-            <a className="underline transition-opacity text-slate-900 underline-offset-2 hover:opacity-80 dark:text-zinc-300">
-              Github
-            </a>
-          </Link>
+            text="GitHub"
+          />
         </p>
       </header>
 

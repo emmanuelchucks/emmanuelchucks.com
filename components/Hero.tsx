@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   SiAwsamplify,
   SiCanva,
@@ -9,6 +8,7 @@ import {
   SiReact,
 } from "react-icons/si";
 import heroData from "../data/hero";
+import ExternalLink from "./ExternalLink";
 
 const { intro, title, body, skills } = heroData;
 const [paragraph1, anchor1, paragraph2, paragraph3] = body;
@@ -34,11 +34,10 @@ function Hero() {
           <div className="space-y-3">
             <p>
               {paragraph1}{" "}
-              <Link href="https://en.wikipedia.org/wiki/Accra">
-                <a className="underline transition-opacity text-slate-900 underline-offset-2 hover:opacity-80 dark:text-zinc-300">
-                  {anchor1}
-                </a>
-              </Link>
+              <ExternalLink
+                href="https://en.wikipedia.org/wiki/Accra"
+                text={anchor1}
+              />
               .
             </p>
             <p>{paragraph2}</p>
