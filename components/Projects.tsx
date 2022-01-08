@@ -2,14 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import projectsData from "../data/projects";
 import siteData from "../data/site";
+import Container from "./Container";
 import ExternalLink from "./ExternalLink";
 
 function Projects() {
   return (
-    <section className="py-24 bg-slate-100 dark:bg-neutral-900">
-      <header id="projects" className="container px-4 mx-auto lg:max-w-4xl">
-        <h2 className="text-3xl font-bold">Projects</h2>
-        <p>
+    <section className="py-24 space-y-14 bg-slate-100 dark:bg-neutral-900">
+      <Container as="header" className="py-0">
+        <h2 id="projects" className="text-3xl font-bold">
+          Projects
+        </h2>
+        <p className="mt-2">
           {
             "These are commercial projects I've done professionally. You can find my hobby and open source projects on "
           }
@@ -18,9 +21,9 @@ function Projects() {
             text="GitHub"
           />
         </p>
-      </header>
+      </Container>
 
-      <div className="container grid gap-16 px-4 mx-auto mt-16 lg:gap-24 md:grid-cols-2 lg:px-16 lg:max-w-6xl">
+      <Container className="grid gap-16 py-0 lg:gap-24 md:grid-cols-2 lg:px-16 xl:max-w-6xl">
         {projectsData.map(({ name, description, highlights, image, link }) => (
           <article
             key={link}
@@ -49,7 +52,7 @@ function Projects() {
             </Link>
           </article>
         ))}
-      </div>
+      </Container>
     </section>
   );
 }
