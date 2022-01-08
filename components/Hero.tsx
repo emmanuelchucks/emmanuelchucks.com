@@ -8,6 +8,7 @@ import {
   SiReact,
 } from "react-icons/si";
 import heroData from "../data/hero";
+import Container from "./Container";
 import ExternalLink from "./ExternalLink";
 
 const { intro, title, body, skills } = heroData;
@@ -17,9 +18,9 @@ const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
-    <div className="container px-4 mx-auto space-y-24 lg:max-w-4xl">
-      <article className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="relative flex justify-center shadow-xl md:max-w-xs lg:max-w-sm">
+    <Container as="article" className="space-y-24 py-14">
+      <div className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
+        <div className="relative flex justify-center shadow-xl">
           <Image
             priority
             src="/images/hero-image.jpg"
@@ -28,7 +29,8 @@ function Hero() {
             height={600}
           />
         </div>
-        <div className="mb-8 md:max-w-sm md:mb-0">
+
+        <div className="mb-10 md:max-w-sm md:mb-0 md:pr-10 lg:pr-0">
           <h1 className="text-sm font-bold uppercase opacity-60">{intro}</h1>
           <h2 className="my-4 text-3xl font-bold">{title}</h2>
           <div className="space-y-3">
@@ -44,7 +46,7 @@ function Hero() {
             <p>{paragraph3}</p>
           </div>
         </div>
-      </article>
+      </div>
 
       <section aria-label="Tech stack">
         <ul className="flex flex-wrap justify-center gap-4 font-semibold">
@@ -63,7 +65,7 @@ function Hero() {
           })}
         </ul>
       </section>
-    </div>
+    </Container>
   );
 }
 

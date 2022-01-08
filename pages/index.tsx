@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
       <Header />
 
-      <main className="py-16 space-y-24">
+      <main>
         <Hero />
         <Projects />
         <Contact />
