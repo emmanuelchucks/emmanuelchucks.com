@@ -33,7 +33,7 @@ function Projects() {
               height={900}
               objectFit="cover"
             />
-            <h3 className="text-3xl font-extrabold text-slate-500 dark:text-zinc-500">
+            <h3 className="text-4xl font-bold text-slate-500 dark:text-zinc-500">
               {name}
             </h3>
             <p>{description}</p>
