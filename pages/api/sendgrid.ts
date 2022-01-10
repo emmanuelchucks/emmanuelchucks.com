@@ -4,6 +4,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY!);
 
 async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
+  if (!req.body.name.trim()) {
+    return res.status(400).json({ error: "Missing name" });
+  } else if (!req.body.email.trim()) {
+    return res.status(400).json({ error: "Missing email" });
+  }
+
   try {
     await sendgrid.send({
       to: "echucks19@gmail.com",

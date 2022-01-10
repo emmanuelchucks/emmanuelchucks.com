@@ -29,7 +29,7 @@ function Contact() {
   const SubmitFailed = (
     <>
       <FiInfo />
-      Something went wrong. Please try again.
+      {error}
     </>
   );
 
