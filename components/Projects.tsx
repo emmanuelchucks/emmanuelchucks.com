@@ -7,7 +7,7 @@ import ExternalLink from "./ExternalLink";
 
 function Projects() {
   return (
-    <section className="py-24 space-y-14 bg-slate-100 dark:bg-neutral-900">
+    <section className="py-24 space-y-14">
       <Container as="header" className="py-0">
         <h2 id="projects" className="text-3xl font-bold">
           Projects
@@ -23,11 +23,11 @@ function Projects() {
         </p>
       </Container>
 
-      <Container className="grid gap-16 py-0 lg:gap-24 md:grid-cols-2 lg:px-16 xl:max-w-6xl">
+      <Container className="grid gap-16 pt-8 lg:gap-24 md:grid-cols-2 lg:px-0 xl:max-w-6xl">
         {projectsData.map(({ name, description, highlights, image, link }) => (
           <article
             key={link}
-            className="space-y-6 text-slate-700 dark:text-zinc-300"
+            className="px-10 py-12 space-y-6 rounded-3xl text-slate-700 dark:text-zinc-300 bg-slate-100 dark:bg-neutral-900"
           >
             <Image
               alt={`${name} logo`}

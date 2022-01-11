@@ -35,7 +35,7 @@ function InputField({
         type={type}
         placeholder={placeholder}
         aria-required={required ? "true" : "false"}
-        aria-describedby={`${label}-error`}
+        aria-describedby={`${label}-error-message`}
         aria-invalid={error ? "true" : "false"}
         className={`block w-full px-2 py-1 border-2 rounded-md md:w-[55%] ${
           errorMessage
@@ -44,7 +44,7 @@ function InputField({
         } ${isTextarea ? "h-32" : ""}`}
       />
       <span
-        id={`${label}-error`}
+        id={`${label}-error-message`}
         className="text-sm text-red-600 dark:text-red-400"
       >
         {errorMessage}

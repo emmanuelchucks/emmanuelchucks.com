@@ -31,7 +31,9 @@ function Hero() {
         </div>
 
         <div className="mb-10 md:max-w-sm md:mb-0 md:pr-10 lg:pr-0">
-          <h1 className="text-sm font-bold uppercase opacity-60">{intro}</h1>
+          <h1 className="text-sm font-bold tracking-wide uppercase opacity-60">
+            {intro}
+          </h1>
           <h2 className="my-4 text-3xl font-bold">{title}</h2>
           <div className="space-y-3">
             <p>
