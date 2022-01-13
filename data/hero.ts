@@ -7,7 +7,7 @@ const heroData = {
 
     "I love to design things, write code, and read about tech. I play the piano to help me relax and meditate.",
 
-    "I am available to work or collaborate on freelance and part-time projects.",
+    "I am available to work or collaborate on freelance and remote work.",
   ],
   skills: ["React", "Flutter", "AWS", "Firebase", "Figma", "Canva"],
 };

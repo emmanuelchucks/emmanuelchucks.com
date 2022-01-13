@@ -6,7 +6,10 @@ const { title, meta, theme } = siteData;
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en" className="scroll-smooth scroll-p-16">
+      <Html
+        lang="en"
+        className="scroll-smooth scroll-p-16 dark:[color-scheme:dark]"
+      >
         <Head>
           <meta name="theme-color" content={theme} />
           <meta name="description" content={meta.description} />
