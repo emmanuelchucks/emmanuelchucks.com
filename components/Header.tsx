@@ -5,7 +5,7 @@ function Header() {
   return (
     <Container
       as="header"
-      className="flex items-baseline justify-between w-full py-0 mt-6 md:mt-8 xl:max-w-5xl"
+      className="flex items-baseline justify-between mt-6 md:mt-8 xl:max-w-5xl"
     >
       <p
         aria-hidden

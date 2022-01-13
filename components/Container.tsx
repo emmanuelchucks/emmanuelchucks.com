@@ -3,7 +3,7 @@ function Container({ as, className: clasname, children }: ContainerProps) {
 
   return (
     <Component
-      className={`container px-4 md:px-7 lg:px-0 py-24 mx-auto lg:max-w-4xl ${clasname}`}
+      className={`container px-4 md:px-7 lg:px-0 mx-auto lg:max-w-4xl ${clasname}`}
     >
       {children}
     </Component>

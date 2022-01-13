@@ -30,7 +30,7 @@ function Screenshot({ name, images }: ScreenshotProps) {
           alt={`Screenshot of ${name}'s website`}
           src={darkSmall}
           width={500}
-          height={750}
+          height={800}
           objectFit="cover"
           objectPosition="top left"
         />
@@ -40,7 +40,7 @@ function Screenshot({ name, images }: ScreenshotProps) {
           alt={`Screenshot of ${name}'s website`}
           src={lightSmall}
           width={500}
-          height={750}
+          height={800}
           objectFit="cover"
           objectPosition="top left"
         />
