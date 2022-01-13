@@ -26,7 +26,7 @@ function Projects() {
       <Container className="grid gap-16 lg:gap-24 md:grid-cols-2 xl:max-w-6xl">
         {projectsData.map(({ name, description, images, link }) => (
           <Link key={link} href={link}>
-            <a className="relative overflow-hidden transition-all rounded-2xl bg-slate-100 dark:bg-neutral-900 hover:ring">
+            <a className="relative overflow-hidden transition-all rounded-2xl bg-slate-100 dark:bg-neutral-900 hover:opacity-80">
               <Screenshot name={name} images={images} />
 
               <div className="absolute inset-0 flex flex-col justify-end">
