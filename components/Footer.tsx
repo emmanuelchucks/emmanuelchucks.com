@@ -8,7 +8,10 @@ function Footer() {
   return (
     <footer className="pt-24 pb-12 text-center bg-slate-100 dark:bg-neutral-900">
       <Navigation label="Footer navigation" />
-      <ul className="inline-flex my-6 space-x-2">
+      <ul
+        aria-label="Social media links"
+        className="inline-flex my-6 space-x-2"
+      >
         {socials.map(([name, url]) => (
           <li key={name}>
             <Link href={"https://" + url}>

@@ -20,6 +20,7 @@ function Projects() {
             href={"https://" + siteData.socials[1][1] + "?tab=repositories"}
             text="GitHub"
           />
+          .
         </p>
       </Container>
 
