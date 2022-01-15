@@ -18,9 +18,9 @@ const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
-    <Container as="article" className="space-y-24 py-14">
+    <Container as="article" className="py-16 space-y-24">
       <div className="flex flex-col-reverse md:flex-row-reverse md:items-center md:justify-between">
-        <div className="relative flex justify-center shadow-xl">
+        <div className="flex justify-center shadow-xl">
           <Image
             priority
             src="/images/hero-image.jpg"
