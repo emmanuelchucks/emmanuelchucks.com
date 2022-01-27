@@ -9,7 +9,7 @@ const heroData = {
 
     "I am available to work or collaborate on freelance and remote work.",
   ],
-  skills: ["React", "Flutter", "AWS", "Firebase", "Figma", "Canva"],
+  skills: ["React", "Flutter", "Swift (iOS)", "Firebase", "Figma", "Canva"],
 };
 
 export default heroData;

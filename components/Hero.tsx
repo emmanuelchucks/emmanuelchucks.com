@@ -1,6 +1,6 @@
 import Image from "next/image";
 import {
-  SiAwsamplify,
+  SiSwift,
   SiCanva,
   SiFigma,
   SiFirebase,
@@ -14,7 +14,7 @@ import ExternalLink from "./ExternalLink";
 const { intro, title, body, skills } = heroData;
 const [paragraph1, anchor1, paragraph2, paragraph3] = body;
 
-const Icons = [SiReact, SiFlutter, SiAwsamplify, SiFirebase, SiFigma, SiCanva];
+const Icons = [SiReact, SiFlutter, SiSwift, SiFirebase, SiFigma, SiCanva];
 
 function Hero() {
   return (
