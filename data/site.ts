@@ -11,6 +11,7 @@ const siteData = {
     ["Twitter", "twitter.com/emmanuelchucks"],
     ["Github", "github.com/emmanuelchucks"],
     ["Dev", "dev.to/emmanuelchucks"],
+    ["Medium", "medium.com/@emmanuelchucks"],
   ],
 };
 

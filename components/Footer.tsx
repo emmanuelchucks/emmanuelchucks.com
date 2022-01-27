@@ -22,8 +22,11 @@ function Footer() {
           </li>
         ))}
       </ul>
-      <p>Made in Accra, Ghana 🇬🇭</p>
-      <small>&copy; {new Date().getFullYear()}. MIT Licence</small>
+
+      <div className="text-sm">
+        <p>Made in Accra, Ghana 🇬🇭</p>
+        <small>&copy; {new Date().getFullYear()}. MIT Licence</small>
+      </div>
     </footer>
   );
 }

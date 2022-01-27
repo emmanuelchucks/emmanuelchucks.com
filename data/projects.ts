@@ -2,7 +2,7 @@ const projectsData = [
   {
     name: "Care for the Streets",
     description:
-      "A website and mobile app for a charity that helps children with special needs in Accra.",
+      "A website and app for a charity that helps homeless kids with special needs in Accra.",
     images: {
       darkLarge: "/images/screenshot-darkLarge.png",
       darkSmall: "/images/screenshot-darkSmall.png",
@@ -14,7 +14,7 @@ const projectsData = [
   {
     name: "Jordan Gospel Centre",
     description:
-      "An online presence for a local family church to help boost outreach and attract newcomers.",
+      "An online presence for a local church to help boost outreach and attract newcomers.",
     images: {
       darkLarge: "/images/screenshot-darkLarge.png",
       darkSmall: "/images/screenshot-darkSmall.png",
@@ -26,7 +26,7 @@ const projectsData = [
   {
     name: "Avaron World",
     description:
-      "A website and mobile app for a fashion brand popular for its eccentric clothing style.",
+      "A website and app for a music artiste with a fashion brand known for its eccentric style.",
     images: {
       darkLarge: "/images/screenshot-darkLarge.png",
       darkSmall: "/images/screenshot-darkSmall.png",
@@ -38,7 +38,7 @@ const projectsData = [
   {
     name: "Songs of Old",
     description:
-      "An online library of lyrics for old and obscure public domain songs with solfege and chords.",
+      "An online library of lyrics for obscure public domain songs with solfege and chords.",
     images: {
       darkLarge: "/images/screenshot-darkLarge.png",
       darkSmall: "/images/screenshot-darkSmall.png",
