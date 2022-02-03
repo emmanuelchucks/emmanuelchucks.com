@@ -24,7 +24,7 @@ function Hero() {
           <Image
             priority
             src="/images/hero-image.jpg"
-            alt="Emmanuel and his wife"
+            alt="Emmanuel and his wife smiling at each other"
             width={400}
             height={600}
           />
