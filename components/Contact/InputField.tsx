@@ -4,7 +4,7 @@ import {
   UseFormRegister,
   ValidationRule,
 } from "react-hook-form";
-import type { FormData } from "./";
+import type { FormInput } from "./";
 
 function InputField({
   type,
@@ -14,12 +14,8 @@ function InputField({
   placeholder,
   isTextarea,
   error,
-  pattern,
 }: InputFieldProps) {
   const Component = isTextarea ? "textarea" : "input";
-  const errorMessage =
-    (error?.type === "required" && "This field is required") ||
-    (error?.type === "pattern" && "Please enter a valid email address");
 
   return (
     <div className="block space-y-2">
@@ -30,7 +26,7 @@ function InputField({
         </span>
       </label>
       <Component
-        {...register(label, { required, pattern })}
+        {...register(label, { required })}
         id={label}
         type={type}
         placeholder={placeholder}
@@ -38,7 +34,7 @@ function InputField({
         aria-describedby={`${label}-error-message`}
         aria-invalid={error ? "true" : "false"}
         className={`block px-2 py-1 border-2 rounded-md w-[var(--input-width)] ${
-          errorMessage
+          error
             ? "border-red-600 dark:border-red-400 dark:border-opacity-100"
             : "dark:border-opacity-30"
         } ${isTextarea ? "h-32" : ""}`}
@@ -47,20 +43,19 @@ function InputField({
         id={`${label}-error-message`}
         className="text-sm text-red-600 dark:text-red-400"
       >
-        {errorMessage}
+        {error?.type}
       </span>
     </div>
   );
 }
 
 type InputFieldProps = {
-  register: UseFormRegister<FormData>;
-  label: Path<FormData>;
+  register: UseFormRegister<FormInput>;
+  label: Path<FormInput>;
   type?: string;
   error?: FieldError;
   placeholder: string;
   isTextarea?: boolean;
-  pattern?: ValidationRule<RegExp>;
   required?: ValidationRule<boolean>;
 };
 
