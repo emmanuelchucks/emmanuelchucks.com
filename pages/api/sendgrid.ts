@@ -13,12 +13,20 @@ async function sendEmail(req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).json({ error: "Missing email" });
   }
 
+  const emailContent = `
+  Name: ${name}
+  Email: ${email}
+
+  Message:
+  ${message}
+  `;
+
   try {
     await sendgrid.send({
       to: "echucks19@gmail.com",
       from: "contact@emmanuelchucks.com",
       subject: "Website Contact Form",
-      text: JSON.stringify({ name, email, message }, null, 2),
+      text: emailContent,
     });
   } catch (error: any) {
     return res.status(error.statusCode || 500).json({ error: error.message });
