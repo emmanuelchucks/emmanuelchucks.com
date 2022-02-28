@@ -9,11 +9,11 @@ function Contact() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<FormData>();
+  } = useForm<FormInput>();
 
   const [error, setError] = useState("");
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: FormInput) => {
     const response = await fetch("/api/sendgrid", {
       method: "POST",
       headers: {
@@ -73,7 +73,6 @@ function Contact() {
           placeholder="leonardo@email.com"
           register={register}
           error={errors.email}
-          pattern={/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i}
           required
         />
         <InputField
@@ -109,7 +108,7 @@ function Contact() {
   );
 }
 
-export type FormData = {
+export type FormInput = {
   name: string;
   email: string;
   message: string;
