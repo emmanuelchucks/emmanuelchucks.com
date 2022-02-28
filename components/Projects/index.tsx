@@ -1,9 +1,6 @@
-import Link from "next/link";
-import projectsData from "../../data/projects";
 import siteData from "../../data/site";
 import Container from "../Container";
 import ExternalLink from "../ExternalLink";
-import Screenshot from "./Screenshot";
 
 function Projects() {
   return (
@@ -14,8 +11,11 @@ function Projects() {
         </h2>
         <p className="mt-2 max-w-prose">
           {
-            "These are commercial projects I've worked on professionally. You can find my hobby and open source projects on "
+            "I'm currently working on a few professional projects in private. Will post them here soon. In the meantime, check out my hobby projects on "
           }
+          {/* {
+            "These are commercial projects I've worked on professionally. You can find my hobby and open source projects on "
+          }*/}
           <ExternalLink
             href={"https://" + siteData.socials[1][1] + "?tab=repositories"}
             text="GitHub"
@@ -24,7 +24,7 @@ function Projects() {
         </p>
       </Container>
 
-      <Container className="grid gap-16 lg:gap-24 md:grid-cols-2 xl:max-w-6xl">
+      {/* <Container className="grid gap-16 lg:gap-24 md:grid-cols-2 xl:max-w-6xl">
         {projectsData.map(({ name, description, images, link }) => (
           <Link key={link} href={link}>
             <a className="relative overflow-hidden transition-opacity rounded-2xl bg-slate-100 dark:bg-neutral-900 hover:opacity-80">
@@ -37,7 +37,7 @@ function Projects() {
             </a>
           </Link>
         ))}
-      </Container>
+      </Container> */}
     </section>
   );
 }
