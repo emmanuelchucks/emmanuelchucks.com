@@ -1,6 +1,6 @@
 import type { Context } from "sonik"
 
-export default function Index(c: Context) {
+export default async function Index(c: Context) {
 	return c.render(
 		<div>
 			<h2>
