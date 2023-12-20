@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import sonik from 'sonik/vite'
-import pages from '@sonikjs/cloudflare-pages'
+import pages from "@sonikjs/cloudflare-pages"
+import sonik from "sonik/vite"
+import { defineConfig } from "vite"
 
 export default defineConfig({
-  plugins: [sonik(), pages()],
+	plugins: [sonik(), pages()],
 })

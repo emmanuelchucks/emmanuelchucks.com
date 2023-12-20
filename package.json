@@ -1,21 +1,25 @@
 {
-  "name": "emmanuelchucks.com",
-  "version": "0.0.0",
-  "type": "module",
-  "private": true,
-  "scripts": {
-    "build": "vite build",
-    "dev": "vite",
-    "deploy": "$npm_execpath build && wrangler pages deploy ./dist"
-  },
-  "dependencies": {
-    "hono": "^3.7.6",
-    "sonik": "^0.1.0"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230518.0",
-    "@sonikjs/cloudflare-pages": "^0.0.1",
-    "vite": "^4.4.11",
-    "wrangler": "^3.13.1"
-  }
+	"name": "emmanuelchucks.com",
+	"version": "0.0.0",
+	"type": "module",
+	"private": true,
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"deploy": "$npm_execpath build && wrangler pages deploy ./dist",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"hono": "^3.7.6",
+		"sonik": "^0.1.0"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20230518.0",
+		"@sonikjs/cloudflare-pages": "^0.0.1",
+		"prettier": "^3.1.1",
+		"prettier-plugin-organize-imports": "^3.2.4",
+		"prettier-plugin-tailwindcss": "^0.5.9",
+		"vite": "^4.4.11",
+		"wrangler": "^3.13.1"
+	}
 }

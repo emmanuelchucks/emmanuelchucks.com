@@ -1,8 +1,8 @@
-import { createApp } from 'sonik/default'
-import { serveStatic } from 'hono/cloudflare-pages'
+import { serveStatic } from "hono/cloudflare-pages"
+import { createApp } from "sonik/default"
 
 const app = createApp()
-app.use('/static/*', serveStatic())
+app.use("/static/*", serveStatic())
 
 app.showRoutes()
 
