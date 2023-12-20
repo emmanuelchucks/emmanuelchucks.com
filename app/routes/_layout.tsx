@@ -4,7 +4,7 @@ const handler: LayoutHandler = async ({ children, head }) => (
 	<html lang="en">
 		<head>
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
-			<link href="/static/global.css" rel="stylesheet" />
+			<link href="/static/styles/global.css" rel="stylesheet" />
 			{head.createTags()}
 		</head>
 		<body>
