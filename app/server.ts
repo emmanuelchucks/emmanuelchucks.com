@@ -1,9 +1,10 @@
 import { serveStatic } from "hono/cloudflare-pages"
+import { showRoutes } from "hono/dev"
 import { createApp } from "sonik/default"
 
 const app = createApp()
 app.use("/static/*", serveStatic())
 
-app.showRoutes()
+showRoutes(app)
 
 export default app
