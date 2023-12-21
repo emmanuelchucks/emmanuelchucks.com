@@ -4,7 +4,7 @@
 	"type": "module",
 	"private": true,
 	"scripts": {
-		"build": "vite build",
+		"build": "conc 'tailwindcss -i ./app/styles/global.css -o ./static/styles/global.css' 'vite build'",
 		"dev": "conc 'tailwindcss -i ./app/styles/global.css -o ./static/styles/global.css --watch' 'vite'",
 		"deploy": "$npm_execpath build && wrangler pages deploy ./dist",
 		"format": "prettier --write ."
