@@ -1,9 +1,17 @@
 import type { LayoutHandler } from "sonik"
 
+const canonicalUrl = import.meta.env.PROD
+	? "https://emmanuelchucks.com"
+	: "http://localhost:5173"
+
 const handler: LayoutHandler = async ({ children, head }) => (
 	<html lang="en">
 		<head>
+			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			<meta name="theme-color" content="#ffffff" />
+			<link rel="canonical" href={canonicalUrl} />
+			<link rel="icon" type="image/png" href="/static/favicon.png" />
 			<link href="/static/styles/global.css" rel="stylesheet" />
 			{head.createTags()}
 		</head>

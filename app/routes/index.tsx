@@ -49,8 +49,14 @@ export default async function Index(c: Context) {
 			</article>
 		</main>,
 		{
-			title: "Welcome to Sonik!",
-			meta: [{ name: "description", content: "This an example for Sonik" }],
+			title: "Emmanuel Chucks - Full-Stack Software Engineer",
+			meta: [
+				{
+					name: "description",
+					content:
+						"In the digital realm, a coder emerges as a modern artisan, traversing the realms of front-end and back-end with the grace of a seasoned knight.",
+				},
+			],
 		},
 	)
 }
