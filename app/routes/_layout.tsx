@@ -4,7 +4,8 @@ const canonicalUrl = import.meta.env.PROD
 	? "https://emmanuelchucks.com"
 	: "http://localhost:5173"
 
-const handler: LayoutHandler = async ({ children, head }) => (
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+const handler: LayoutHandler = ({ children, head }) => (
 	<html lang="en">
 		<head>
 			<meta charset="utf-8" />

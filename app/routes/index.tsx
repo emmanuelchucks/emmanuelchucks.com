@@ -1,6 +1,7 @@
 import type { Context } from "sonik"
 
-export default async function Index(c: Context) {
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export default function Index(c: Context) {
 	return c.render(
 		<main>
 			<article class="grid gap-y-4 leading-7">

@@ -1,5 +1,6 @@
 import type { NotFoundHandler } from "sonik"
 
-const handler: NotFoundHandler = async () => <p>Not Found</p>
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+const handler: NotFoundHandler = () => <p>404: Not Found</p>
 
 export default handler
