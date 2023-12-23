@@ -5,7 +5,7 @@ const canonicalUrl = import.meta.env.PROD
 	: "http://localhost:5173"
 
 /* eslint-disable-next-line @typescript-eslint/promise-function-async */
-const handler: LayoutHandler = ({ children, head }) => (
+const Layout: LayoutHandler = ({ children, head }) => (
 	<html lang="en">
 		<head>
 			<meta charset="utf-8" />
@@ -55,4 +55,4 @@ const handler: LayoutHandler = ({ children, head }) => (
 	</html>
 )
 
-export default handler
+export default Layout
