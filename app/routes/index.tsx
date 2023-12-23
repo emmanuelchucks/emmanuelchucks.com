@@ -6,13 +6,15 @@ export default function Index(c: Context) {
 		<main>
 			<article class="grid gap-y-4 leading-7">
 				<h1 class="sr-only">Full-Stack Software Engineer</h1>
-				<a
-					href="mailto:hi@emmanuelchucks.com?subject=Mail from Website"
-					class="rounded-lg border border-neutral-200 bg-neutral-100 px-4 py-2 text-center font-medium text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300"
-				>
+				<p class="rounded-lg border border-neutral-200 bg-neutral-100 px-4 py-2 text-center font-medium text-neutral-600 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-300">
 					<span class="sr-only">Send me an email: </span>
-					hi@emmanuelchucks.com
-				</a>
+					<a
+						href="mailto:hi@emmanuelchucks.com?subject=Mail from Website"
+						class="underline underline-offset-4"
+					>
+						hi@emmanuelchucks.com
+					</a>
+				</p>
 				<p>
 					In the digital realm, a coder emerges as a modern artisan, traversing
 					the realms of front-end and back-end with the grace of a seasoned
