@@ -6,7 +6,6 @@
 		"esModuleInterop": true,
 		"strict": true,
 		"lib": ["esnext"],
-		"types": ["@cloudflare/workers-types", "vite/client", "node"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx"
 	}

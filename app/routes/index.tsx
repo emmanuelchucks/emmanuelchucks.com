@@ -1,7 +1,6 @@
-import type { Context } from "sonik"
+import { createRoute } from "sonik/factory"
 
-/* eslint-disable-next-line @typescript-eslint/promise-function-async */
-export default function Index(c: Context) {
+export default createRoute((c) => {
 	return c.render(
 		<main>
 			<article class="grid gap-y-4 leading-7">
@@ -62,4 +61,4 @@ export default function Index(c: Context) {
 			],
 		},
 	)
-}
+})
