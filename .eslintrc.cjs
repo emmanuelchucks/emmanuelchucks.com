@@ -1,25 +1,16 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+	root: true,
 	env: {
 		browser: true,
 		es2024: true,
 	},
-	extends: ["xo", "prettier"],
-	overrides: [
-		{
-			env: {
-				node: true,
-			},
-			files: [".eslintrc.{js,cjs}"],
-			parserOptions: {
-				sourceType: "script",
-			},
-		},
-		{
-			extends: ["xo-typescript", "prettier"],
-			files: ["*.ts", "*.tsx"],
-		},
+	extends: [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"prettier",
 	],
+	parser: "@typescript-eslint/parser",
 	parserOptions: {
 		ecmaVersion: "latest",
 		sourceType: "module",
