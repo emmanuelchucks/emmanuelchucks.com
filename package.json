@@ -1,31 +1,21 @@
 {
-	"name": "emmanuelchucks.com",
-	"type": "module",
-	"private": true,
-	"scripts": {
-		"build": "conc 'tailwindcss -i ./app/styles/global.css -o ./static/styles/global.css' 'vite build'",
-		"dev": "conc 'tailwindcss -i ./app/styles/global.css -o ./static/styles/global.css --watch' 'vite'",
-		"deploy": "$npm_execpath build && wrangler pages deploy ./dist",
-		"format": "prettier --write ."
-	},
-	"dependencies": {
-		"hono": "^3.11.10",
-		"sonik": "0.0.0-x-0.0.5"
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20231218.0",
-		"@sonikjs/cloudflare-pages": "^0.0.1",
-		"@typescript-eslint/eslint-plugin": "^6.15.0",
-		"concurrently": "^8.2.2",
-		"eslint": "^8.56.0",
-		"eslint-config-prettier": "^9.1.0",
-		"prettier": "^3.1.1",
-		"prettier-plugin-organize-imports": "^3.2.4",
-		"prettier-plugin-tailwindcss": "^0.5.9",
-		"tailwindcss": "^3.4.0",
-		"typescript": "^5.3.3",
-		"vite": "^5.0.10",
-		"wrangler": "^3.22.1"
-	},
-	"packageManager": "bun@1.0.20"
+  "name": "emmanuelchucks.com",
+  "type": "module",
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "node ./.output/server/index.mjs"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.10.5",
+    "@solidjs/start": "^0.4.2",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.26",
+    "solid-js": "^1.8.7",
+    "tailwindcss": "^3.3.3",
+    "vinxi": "0.0.54"
+  },
+  "engines": {
+    "node": ">=18"
+  }
 }
