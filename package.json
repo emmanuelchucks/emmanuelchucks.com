@@ -1,21 +1,27 @@
 {
-  "name": "emmanuelchucks.com",
-  "type": "module",
-  "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "start": "node ./.output/server/index.mjs"
-  },
-  "dependencies": {
-    "@solidjs/router": "^0.10.5",
-    "@solidjs/start": "^0.4.2",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.26",
-    "solid-js": "^1.8.7",
-    "tailwindcss": "^3.3.3",
-    "vinxi": "0.0.54"
-  },
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "emmanuelchucks.com",
+	"type": "module",
+	"scripts": {
+		"dev": "vinxi dev",
+		"build": "vinxi build",
+		"start": "node ./.output/server/index.mjs",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"@solidjs/router": "^0.10.5",
+		"@solidjs/start": "^0.4.2",
+		"autoprefixer": "^10.4.14",
+		"postcss": "^8.4.26",
+		"solid-js": "^1.8.7",
+		"tailwindcss": "^3.3.3",
+		"vinxi": "0.0.54"
+	},
+	"devDependencies": {
+		"prettier": "^3.1.1",
+		"prettier-plugin-organize-imports": "^3.2.4",
+		"prettier-plugin-tailwindcss": "^0.5.9"
+	},
+	"engines": {
+		"node": ">=20"
+	}
 }
