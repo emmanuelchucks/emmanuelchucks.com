@@ -17,6 +17,7 @@ export default function Home() {
 						class="size-16 rounded-full"
 					/>
 				</header>
+
 				<section class="flex flex-row flex-wrap gap-x-6 gap-y-2 font-semibold text-neutral-800 dark:text-neutral-400">
 					<div class="flex flex-row gap-x-2">
 						<span>↗</span>
