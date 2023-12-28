@@ -1,4 +1,6 @@
+name = "emmanuelchucks-com"
 main = "./.output/server/index.mjs"
+compatibility_date = "2023-12-28"
 compatibility_flags = ["nodejs_compat"]
 
 [site]
