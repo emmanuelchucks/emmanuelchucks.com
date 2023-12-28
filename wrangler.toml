@@ -1,1 +1,5 @@
+main = "./.output/server/index.mjs"
 compatibility_flags = ["nodejs_compat"]
+
+[site]
+bucket = ".output/public"
