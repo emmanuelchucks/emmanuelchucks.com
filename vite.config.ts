@@ -1,6 +1,7 @@
 import { defineConfig } from "@solidjs/start/config"
 // @ts-expect-error - no types yet
 import mdx from "@vinxi/plugin-mdx"
+import rehypeShikiji from "rehype-shikiji"
 
 export default defineConfig({
 	start: {
@@ -18,6 +19,17 @@ export default defineConfig({
 			jsx: true,
 			jsxImportSource: "solid-js",
 			providerImportSource: "solid-mdx",
+			rehypePlugins: [
+				[
+					rehypeShikiji,
+					{
+						themes: {
+							light: "one-dark-pro",
+							dark: "one-dark-pro",
+						},
+					},
+				],
+			],
 		}),
 	],
 })

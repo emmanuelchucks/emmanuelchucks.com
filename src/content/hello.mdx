@@ -1,11 +1,18 @@
 # Hello world! Yes
 
 ```tsx
-import { Hello } from 'hello-world-yes';
+import { Hello } from "hello-world-yes"
 
-const App = () => <Hello name="world" />;
+function App() {
+	return (
+		<div>
+			<h1>Hello!</h1>
+			<Hello />
+		</div>
+	)
+}
 ```
 
-import { Counter } from '../components/Counter';
+import { Counter } from "../components/counter.tsx"
 
 <Counter />
