@@ -1,7 +1,10 @@
 import { defineConfig } from "@solidjs/start/config"
+// @ts-expect-error - no types yet
+import mdx from "@vinxi/plugin-mdx"
 
 export default defineConfig({
 	start: {
+		extensions: ["mdx", "md"],
 		server: {
 			preset: "cloudflare-module",
 			rollupConfig: {
@@ -9,4 +12,12 @@ export default defineConfig({
 			},
 		},
 	},
+	plugins: [
+		/* eslint-disable-next-line @typescript-eslint/no-unsafe-call */
+		mdx.withImports({})({
+			jsx: true,
+			jsxImportSource: "solid-js",
+			providerImportSource: "solid-mdx",
+		}),
+	],
 })
