@@ -1,4 +1,4 @@
-import Content from "../content/hello.mdx"
+import Content from "~/content/hello.mdx"
 
 export default function Blog() {
 	return (
