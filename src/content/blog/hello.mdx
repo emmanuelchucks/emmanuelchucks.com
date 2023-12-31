@@ -1,4 +1,9 @@
-# Hello world!
+export const frontmatter = {
+	id: "jd36i44y",
+	title: "Hello",
+}
+
+# {frontmatter.title}
 
 ```tsx
 enum LogLevel {
@@ -26,6 +31,6 @@ function printImportant(key: LogLevelStrings, message: string) {
 printImportant("ERROR", "This is a message")
 ```
 
-import { Counter } from "../components/counter.tsx"
+import { Counter } from "~/components/counter.tsx"
 
 <Counter />
