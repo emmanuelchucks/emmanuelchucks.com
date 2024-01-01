@@ -15,7 +15,7 @@ export default createHandler(() => (
 					/>
 					{assets}
 				</head>
-				<body class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-200">
+				<body class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50">
 					<div id="app">{children}</div>
 					{scripts}
 				</body>
