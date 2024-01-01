@@ -4,17 +4,17 @@ export default function Home() {
 	return (
 		<main>
 			<article class="grid gap-y-8 leading-7">
-				<header class="flex flex-row items-center justify-between gap-x-4 text-neutral-950 dark:text-neutral-50">
-					<div>
-						<h1 class="text-4xl font-bold">Emmanuel Chucks</h1>
-						<p class="text-neutral-600 dark:text-neutral-400">
-							Ambitious software engineer
-						</p>
-					</div>
+				<header class="grid grid-flow-col grid-cols-[auto_min-content] grid-rows-[repeat(2,_minmax(0,_min-content))] items-center gap-x-4 text-neutral-950 dark:text-neutral-50">
+					<h1 class="text-4xl font-bold">Emmanuel Chucks</h1>
+					<p class="text-neutral-600 dark:text-neutral-400">
+						Ambitious software engineer
+					</p>
 					<img
 						src={profilePicture}
 						alt="Emmanuel Chucks smiling"
-						class="size-16 rounded-full"
+						width={64}
+						height={64}
+						class="size-16 rounded-full sm:row-span-2"
 					/>
 				</header>
 				<section class="flex flex-row flex-wrap gap-x-6 gap-y-2 font-semibold text-neutral-800 dark:text-neutral-400">
