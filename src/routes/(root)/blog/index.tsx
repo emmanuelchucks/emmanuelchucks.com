@@ -1,20 +1,10 @@
-import {
-	createAsync,
-	useSearchParams,
-	type RouteDefinition,
-} from "@solidjs/router"
+import { useSearchParams } from "@solidjs/router"
 import { For } from "solid-js"
 import { formatDate, getPostsByQuery, handleSearchPosts } from "~/lib/posts"
 
-export const route = {
-	load({ params }) {
-		void getPostsByQuery(params.q)
-	},
-} satisfies RouteDefinition
-
 export default function Blog() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const posts = createAsync(async () => getPostsByQuery(searchParams.q))
+	const posts = () => getPostsByQuery(searchParams.q)
 
 	return (
 		<div class="grid gap-y-10">
