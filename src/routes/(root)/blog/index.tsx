@@ -43,7 +43,7 @@ export default function Blog() {
 				</noscript>
 			</form>
 			<For each={posts()}>
-				{(post) => <a href={post.frontmatter.slug}>{post.frontmatter.title}</a>}
+				{(post) => <a href={post.frontmatter.url}>{post.frontmatter.title}</a>}
 			</For>
 		</div>
 	)

@@ -31,7 +31,7 @@ export const getPostsByQuery = cache(async (query: string | undefined) => {
 	const allPosts = posts.map(({ frontmatter }) => ({
 		frontmatter: {
 			...frontmatter,
-			slug: `/blog/${frontmatter.title.toLowerCase()}-${frontmatter.id}`,
+			url: `/blog/${frontmatter.title.toLowerCase()}-${frontmatter.id}`,
 		},
 	}))
 	if (!query) return allPosts
