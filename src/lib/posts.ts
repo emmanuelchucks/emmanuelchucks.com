@@ -1,4 +1,4 @@
-import { action, cache, redirect } from "@solidjs/router"
+import { action, redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
 import { array, coerce, object, parse, string, type Input } from "valibot"
 
@@ -27,8 +27,7 @@ parse(
 	posts.map((post) => post.frontmatter),
 )
 
-export const getPostsByQuery = cache(async (query: string | undefined) => {
-	"use server"
+export function getPostsByQuery(query: string | undefined) {
 	const allPosts = posts.map(({ frontmatter }) => ({
 		frontmatter: {
 			...frontmatter,
@@ -40,7 +39,7 @@ export const getPostsByQuery = cache(async (query: string | undefined) => {
 		frontmatter.title.toLowerCase().includes(query.toLowerCase()),
 	)
 	return filteredPosts
-}, "posts")
+}
 
 export function getPostById(id: string) {
 	const uniquePart = id.split("-").at(-1)
