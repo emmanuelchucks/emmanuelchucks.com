@@ -1,16 +1,31 @@
 import { action, cache, redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
+import { array, coerce, date, object, parse, string, type Input } from "valibot"
+
+const frontmatterSchema = object({
+	id: string("id is required"),
+	title: string("title is required"),
+	author: string("author is required"),
+	publishedAt: coerce(
+		date("publishedAt is required"),
+		(i) => new Date(i as string),
+	),
+})
+
+type FrontMatter = Input<typeof frontmatterSchema>
 
 const blogFiles = import.meta.glob<
 	true,
 	string,
-	{
-		default: () => JSX.Element
-		frontmatter: { id: string; title: string }
-	}
+	{ default: () => JSX.Element; frontmatter: FrontMatter }
 >("~/content/blog/*.mdx", { eager: true })
 
 const posts = Object.values(blogFiles)
+
+parse(
+	array(frontmatterSchema),
+	posts.map((post) => post.frontmatter),
+)
 
 export const getPostsByQuery = cache(async (query: string | undefined) => {
 	"use server"
