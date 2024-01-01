@@ -1,14 +1,13 @@
 import { action, cache, redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
-import { array, coerce, date, object, parse, string, type Input } from "valibot"
+import { array, coerce, object, parse, string, type Input } from "valibot"
 
 const frontmatterSchema = object({
 	id: string("id is required"),
 	title: string("title is required"),
 	author: string("author is required"),
-	publishedAt: coerce(
-		date("publishedAt is required"),
-		(i) => new Date(i as string),
+	publishedAt: coerce(string("publishedAt is required"), (i) =>
+		new Date(i as string).toISOString(),
 	),
 })
 
@@ -47,6 +46,15 @@ export function getPostById(id: string) {
 	const post = posts.find((post) => post.frontmatter.id === uniquePart)
 	if (!post) throw new Error(`No post found for id: ${id}`)
 	return post
+}
+
+export function formatDate(date: string) {
+	return new Date(date).toLocaleDateString("en-US", {
+		weekday: "long",
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	})
 }
 
 export const handleSearchPosts = action(async (formData: FormData) => {
