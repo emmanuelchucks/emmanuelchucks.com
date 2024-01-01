@@ -1,3 +1,4 @@
+import { action, cache, redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
 
 const blogFiles = import.meta.glob<
@@ -11,15 +12,20 @@ const blogFiles = import.meta.glob<
 
 const posts = Object.values(blogFiles)
 
-export function getAllPosts() {
+export const getPostsByQuery = cache(async (query: string | undefined) => {
+	"use server"
 	const allPosts = posts.map(({ frontmatter }) => ({
 		frontmatter: {
 			...frontmatter,
 			slug: `/blog/${frontmatter.title.toLowerCase()}-${frontmatter.id}`,
 		},
 	}))
-	return allPosts
-}
+	if (!query) return allPosts
+	const filteredPosts = allPosts.filter(({ frontmatter }) =>
+		frontmatter.title.toLowerCase().includes(query.toLowerCase()),
+	)
+	return filteredPosts
+}, "posts")
 
 export function getPostById(id: string) {
 	const uniquePart = id.split("-").at(-1)
@@ -27,3 +33,10 @@ export function getPostById(id: string) {
 	if (!post) throw new Error(`No post found for id: ${id}`)
 	return post
 }
+
+export const handleSearchPosts = action(async (formData: FormData) => {
+	"use server"
+	const query = formData.get("q") as string
+	/* eslint-disable-next-line @typescript-eslint/no-throw-literal */
+	throw redirect("/blog?q=" + query)
+})
