@@ -12,6 +12,7 @@
 		"strict": true,
 		"types": ["vinxi/client"],
 		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
 		"paths": {
 			"~/*": ["./src/*"]
 		}
