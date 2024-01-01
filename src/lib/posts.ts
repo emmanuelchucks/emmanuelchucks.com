@@ -12,13 +12,13 @@ const blogFiles = import.meta.glob<
 const posts = Object.values(blogFiles)
 
 export function getAllPosts() {
-	return posts.map(({ frontmatter, ...rest }) => ({
-		...rest,
+	const allPosts = posts.map(({ frontmatter }) => ({
 		frontmatter: {
 			...frontmatter,
 			slug: `/blog/${frontmatter.title.toLowerCase()}-${frontmatter.id}`,
 		},
 	}))
+	return allPosts
 }
 
 export function getPostById(id: string) {
