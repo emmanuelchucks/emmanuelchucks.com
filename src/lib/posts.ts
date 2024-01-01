@@ -5,6 +5,7 @@ import { array, coerce, object, parse, string, type Input } from "valibot"
 const frontmatterSchema = object({
 	id: string("id is required"),
 	title: string("title is required"),
+	description: string("description is required"),
 	author: string("author is required"),
 	publishedAt: coerce(string("publishedAt is required"), (i) =>
 		new Date(i as string).toISOString(),
@@ -48,7 +49,13 @@ export function getPostById(id: string) {
 	return post
 }
 
-export function formatDate(date: string) {
+export function formatDate(date: string, type: "short" | "long") {
+	if (type === "short")
+		return new Date(date).toLocaleDateString("en-US", {
+			year: "numeric",
+			month: "short",
+			day: "numeric",
+		})
 	return new Date(date).toLocaleDateString("en-US", {
 		weekday: "long",
 		year: "numeric",

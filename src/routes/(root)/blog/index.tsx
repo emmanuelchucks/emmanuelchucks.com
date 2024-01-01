@@ -4,7 +4,7 @@ import {
 	type RouteDefinition,
 } from "@solidjs/router"
 import { For } from "solid-js"
-import { getPostsByQuery, handleSearchPosts } from "~/lib/posts"
+import { formatDate, getPostsByQuery, handleSearchPosts } from "~/lib/posts"
 
 export const route = {
 	load({ params }) {
@@ -43,7 +43,29 @@ export default function Blog() {
 				</noscript>
 			</form>
 			<For each={posts()}>
-				{(post) => <a href={post.frontmatter.url}>{post.frontmatter.title}</a>}
+				{(post) => (
+					<div class="grid gap-y-2 sm:grid-cols-[auto_40ch] md:grid-cols-[auto_45ch]">
+						<time
+							datetime={post.frontmatter.publishedAt}
+							class="text-sm text-neutral-600 dark:text-neutral-400"
+						>
+							{formatDate(post.frontmatter.publishedAt, "short")}
+						</time>
+						<div class="mx-4 grid gap-y-2 sm:mx-auto">
+							<h2 class="line-clamp-1 text-2xl font-semibold">
+								<a
+									href={post.frontmatter.url}
+									class="underline underline-offset-4"
+								>
+									{post.frontmatter.title}
+								</a>
+							</h2>
+							<p class="line-clamp-3 text-neutral-700 dark:text-neutral-300">
+								{post.frontmatter.description}
+							</p>
+						</div>
+					</div>
+				)}
 			</For>
 		</div>
 	)
