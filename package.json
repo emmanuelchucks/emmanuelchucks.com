@@ -10,6 +10,7 @@
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
+		"@solidjs/meta": "^0.29.3",
 		"@solidjs/router": "^0.10.5",
 		"@solidjs/start": "^0.4.2",
 		"@tailwindcss/typography": "^0.5.10",

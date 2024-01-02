@@ -11,11 +11,6 @@ export default createHandler(() => (
 					<meta charset="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 					<link rel="icon" href="/favicon.png" />
-					<title>Emmanuel Chucks - Full-Stack Engineer</title>
-					<meta
-						name="description"
-						content="Emmanuel Chucks is a full-stack engineer based in Accra, Ghana. A passionate builder with an eye for pleasant design."
-					/>
 					{assets}
 				</head>
 				<body class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50 [&_*]:outline-neutral-700 dark:[&_*]:outline-neutral-300">
