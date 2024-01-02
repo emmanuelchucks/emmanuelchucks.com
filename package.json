@@ -9,6 +9,7 @@
 		"format": "prettier --write ."
 	},
 	"dependencies": {
+		"@sindresorhus/slugify": "^2.2.1",
 		"@solidjs/router": "^0.10.5",
 		"@solidjs/start": "^0.4.2",
 		"@vinxi/plugin-mdx": "^3.6.7",
