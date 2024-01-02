@@ -19,7 +19,7 @@ export default function Home() {
 				</header>
 				<aside class="flex flex-row flex-wrap gap-x-6 gap-y-2 font-semibold text-neutral-800 dark:text-neutral-200">
 					<div class="flex flex-row gap-x-2">
-						<span>↗</span>
+						<span aria-hidden>↗</span>
 						<a
 							href="mailto:hi@emmanuelchucks.com?subject=Mail from Website"
 							class="underline decoration-2 underline-offset-2"
@@ -28,7 +28,7 @@ export default function Home() {
 						</a>
 					</div>
 					<div class="flex flex-row gap-x-2">
-						<span>↗</span>
+						<span aria-hidden>↗</span>
 						<a
 							href="https://x.com/emmanuelchucks"
 							class="underline decoration-2 underline-offset-2"
@@ -37,7 +37,7 @@ export default function Home() {
 						</a>
 					</div>
 					<div class="flex flex-row gap-x-2">
-						<span>↗</span>
+						<span aria-hidden>↗</span>
 						<a
 							href="https://github.com/emmanuelchucks"
 							class="underline decoration-2 underline-offset-2"
@@ -46,7 +46,7 @@ export default function Home() {
 						</a>
 					</div>
 				</aside>
-				<div class="grid max-w-[34em] gap-y-4 leading-7 text-neutral-700 dark:text-neutral-300">
+				<div class="grid gap-y-4 leading-7 text-neutral-700 dark:text-neutral-300">
 					<p>
 						In the vast expanse of the digital realm, he emerges as a coding
 						virtuoso, effortlessly navigating front-end intricacies and
