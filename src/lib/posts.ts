@@ -19,7 +19,7 @@ const blogFiles = import.meta.glob<
 	true,
 	string,
 	{ default: () => JSX.Element; frontmatter: FrontMatter }
->("~/content/blog/*.mdx", { eager: true })
+>("~/content/blog/**/*.mdx", { eager: true })
 
 const posts = Object.values(blogFiles)
 
