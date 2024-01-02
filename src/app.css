@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+[type="search"]::-webkit-search-cancel-button {
+	filter: brightness(0) saturate(100%) invert(26%) sepia(0%) saturate(1051%)
+		hue-rotate(135deg) brightness(85%) contrast(89%);
+}
+
+@media (prefers-color-scheme: dark) {
+	[type="search"]::-webkit-search-cancel-button {
+		filter: brightness(0) saturate(100%) invert(94%) sepia(15%) saturate(0%)
+			hue-rotate(176deg) brightness(89%) contrast(92%);
+	}
+}
