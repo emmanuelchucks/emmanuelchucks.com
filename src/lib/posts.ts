@@ -1,3 +1,4 @@
+import slugify from "@sindresorhus/slugify"
 import { action, redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
 import { array, coerce, object, parse, string, type Input } from "valibot"
@@ -28,12 +29,15 @@ parse(
 )
 
 export function getPostsByQuery(query: string | undefined) {
-	const allPosts = posts.map(({ frontmatter }) => ({
-		frontmatter: {
-			...frontmatter,
-			url: `/blog/${frontmatter.title.toLowerCase()}-${frontmatter.id}`,
-		},
-	}))
+	const allPosts = posts.map(({ frontmatter }) => {
+		const slug = slugify(frontmatter.title.toLowerCase() + "-" + frontmatter.id)
+		return {
+			frontmatter: {
+				...frontmatter,
+				url: `/blog/${slug}`,
+			},
+		}
+	})
 	if (!query) return allPosts
 	const filteredPosts = allPosts.filter(({ frontmatter }) =>
 		frontmatter.title.toLowerCase().includes(query.toLowerCase()),
