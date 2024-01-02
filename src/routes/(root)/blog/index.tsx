@@ -7,10 +7,10 @@ export default function Blog() {
 	const posts = () => getPostsByQuery(searchParams.q)
 
 	return (
-		<div class="grid gap-y-10">
+		<main class="grid gap-y-10">
 			<form action={handleSearchPosts} method="post">
 				<label for="query" class="sr-only">
-					Search
+					Search posts
 				</label>
 				<input
 					name="q"
@@ -57,6 +57,6 @@ export default function Blog() {
 					</div>
 				)}
 			</For>
-		</div>
+		</main>
 	)
 }
