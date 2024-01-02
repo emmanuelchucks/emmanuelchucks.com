@@ -1,4 +1,28 @@
-import { type JSX } from "solid-js"
+import { useMatch } from "@solidjs/router"
+import { For, type JSX } from "solid-js"
+
+const navigationLinks = [
+	{ name: "Home", href: "/" },
+	{ name: "Blog", href: "/blog" },
+]
+
+type NavigationLink = (typeof navigationLinks)[number]
+
+function NavItem(props: NavigationLink) {
+	const isMatch = useMatch(() => props.href)
+
+	return (
+		<li>
+			<a
+				href={props.href}
+				aria-current={isMatch() ? "page" : undefined}
+				class="decoration-2 underline-offset-2 hover:underline"
+			>
+				{props.name}
+			</a>
+		</li>
+	)
+}
 
 export default function RootLayout(props: { children: JSX.Element }) {
 	return (
@@ -7,22 +31,9 @@ export default function RootLayout(props: { children: JSX.Element }) {
 				<header class="font-semibold text-neutral-700 dark:text-neutral-300">
 					<nav>
 						<ul class="flex flex-row gap-x-8">
-							<li>
-								<a
-									href="/"
-									class="decoration-2 underline-offset-2 hover:underline"
-								>
-									Home
-								</a>
-							</li>
-							<li>
-								<a
-									href="/blog"
-									class="decoration-2 underline-offset-2 hover:underline"
-								>
-									Blog
-								</a>
-							</li>
+							<For each={navigationLinks}>
+								{(link) => <NavItem {...link} />}
+							</For>
 						</ul>
 					</nav>
 				</header>
