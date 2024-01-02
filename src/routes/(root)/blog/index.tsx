@@ -42,7 +42,7 @@ export default function Blog() {
 							{formatDate(post.frontmatter.publishedAt, "short")}
 						</time>
 						<div class="mx-4 grid gap-y-2 sm:mx-auto">
-							<h2 class="line-clamp-1 text-2xl font-semibold">
+							<h2 class="text-2xl font-semibold">
 								<a
 									href={post.frontmatter.url}
 									class="underline underline-offset-4"
