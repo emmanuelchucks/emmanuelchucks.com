@@ -11,7 +11,7 @@ export default function Home() {
 			/>
 			<main>
 				<article class="grid gap-y-8">
-					<header class="grid grid-flow-col grid-cols-[auto_max-content] grid-rows-[repeat(2,_minmax(0,_max-content))] items-center gap-x-4 text-neutral-950 dark:text-neutral-50">
+					<header class="grid grid-flow-col grid-cols-[auto_max-content] grid-rows-[repeat(2,_max-content)] items-center gap-x-4 text-neutral-950 dark:text-neutral-50">
 						<h1 class="text-4xl font-bold">Emmanuel Chucks</h1>
 						<p class="text-neutral-600 dark:text-neutral-400">
 							Ambitious software engineer
@@ -21,7 +21,7 @@ export default function Home() {
 							alt="Emmanuel Chucks smiling"
 							width={64}
 							height={64}
-							class="size-16 rounded-full sm:row-span-2"
+							class="size-16 rounded-full sm:row-span-full"
 						/>
 					</header>
 					<aside class="flex flex-row flex-wrap gap-x-6 gap-y-2 font-semibold text-neutral-800 dark:text-neutral-200">

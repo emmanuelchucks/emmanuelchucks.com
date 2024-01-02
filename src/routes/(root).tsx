@@ -6,11 +6,8 @@ const navigationLinks = [
 	{ name: "Blog", href: "/blog" },
 ]
 
-type NavigationLink = (typeof navigationLinks)[number]
-
 function NavItem(props: NavigationLink) {
 	const isMatch = useMatch(() => props.href)
-
 	return (
 		<li>
 			<a
@@ -42,3 +39,5 @@ export default function RootLayout(props: { children: JSX.Element }) {
 		</div>
 	)
 }
+
+type NavigationLink = (typeof navigationLinks)[number]
