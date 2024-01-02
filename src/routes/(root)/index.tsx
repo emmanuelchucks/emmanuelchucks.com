@@ -48,39 +48,33 @@ export default function Home() {
 				</aside>
 				<div class="grid max-w-[34em] gap-y-4 leading-7 text-neutral-700 dark:text-neutral-300">
 					<p>
-						In the digital realm, a coder emerges as a modern artisan,
-						traversing the realms of front-end and back-end with the grace of a
-						seasoned knight.
+						In the vast expanse of the digital realm, he emerges as a coding
+						virtuoso, effortlessly navigating front-end intricacies and
+						sculpting back-end landscapes with the finesse of Typescript.
 					</p>
 					<p>
-						Armed with obnoxious TypeScript skills, he weaves intricate digital
-						tapestries that captivate all who behold them, employing algorithms
-						as finely tuned as celestial lyres.
+						Wielding the artistry of version control, he directs the symphony of
+						code using Git, ensuring a seamless dance of branches and merges,
+						all harmoniously deployed and protected under the watchful gaze of
+						Cloudflare.
 					</p>
 					<p>
-						A maestro of version control, he wields Git with the finesse of
-						Solomon's wisdom, ensuring no pull request goes astray in the
-						bustling land of startupshire.
+						His commit messages, a blend of puns and memes, infuse levity into
+						mundane stand-up meetings, turning bug-squashing sessions into
+						moments of hearty laughter. With each resolved error, he strides
+						closer to the elusive digital nirvana, an AWS-powered kingdom sought
+						by tech monarchs.
 					</p>
 					<p>
-						His code commits, adorned with memes and punctuated with puns,
-						transform even mundane stand-up meetings into comedic galas.
+						In the marketplace of ideas, he is a shrewd trader, effortlessly
+						translating stakeholder aspirations into a choreography of code and
+						design that gracefully pirouettes through the dynamic landscape of
+						modern technologies.
 					</p>
 					<p>
-						Facing bugs and errors with a hearty laugh, he knows each fix is a
-						step closer to the digital nirvana sought by kings and queens of the
-						industry.
-					</p>
-					<p>
-						In the marketplace of ideas, he is a savvy trader, seamlessly
-						translating the desires of stakeholders into code that dances like
-						David before the Ark.
-					</p>
-					<p>
-						His name echoes through the annals of tech history as a beacon of
-						both humor and skill, a full-stack engineer who, like a digital
-						troubadour, brings laughter and functionality to the kingdom of
-						Silicon.
+						His name echoes as a beacon of both humor and expertise, a
+						full-stack artisan who seamlessly weaves these technological
+						elements into the ever-evolving tapestry of Silicon's landscape.
 					</p>
 				</div>
 			</article>
