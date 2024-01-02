@@ -46,7 +46,7 @@ export default function Home() {
 						</a>
 					</div>
 				</aside>
-				<div class="grid gap-y-4 leading-7 text-neutral-700 dark:text-neutral-300">
+				<div class="grid max-w-[34em] gap-y-4 leading-7 text-neutral-700 dark:text-neutral-300">
 					<p>
 						In the digital realm, a coder emerges as a modern artisan,
 						traversing the realms of front-end and back-end with the grace of a
