@@ -8,12 +8,18 @@ export default function RootLayout(props: { children: JSX.Element }) {
 					<nav>
 						<ul class="flex flex-row gap-x-8">
 							<li>
-								<a href="/" class="underline-offset-4 hover:underline">
+								<a
+									href="/"
+									class="decoration-2 underline-offset-2 hover:underline"
+								>
 									Home
 								</a>
 							</li>
 							<li>
-								<a href="/blog" class="underline-offset-4 hover:underline">
+								<a
+									href="/blog"
+									class="decoration-2 underline-offset-2 hover:underline"
+								>
 									Blog
 								</a>
 							</li>

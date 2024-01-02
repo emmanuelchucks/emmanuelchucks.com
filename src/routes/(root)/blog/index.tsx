@@ -45,7 +45,7 @@ export default function Blog() {
 							<h2 class="text-2xl font-semibold">
 								<a
 									href={post.frontmatter.url}
-									class="underline underline-offset-4"
+									class="underline decoration-2 underline-offset-2"
 								>
 									{post.frontmatter.title}
 								</a>
