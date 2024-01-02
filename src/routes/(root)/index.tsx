@@ -22,7 +22,7 @@ export default function Home() {
 						<span>↗</span>
 						<a
 							href="mailto:hi@emmanuelchucks.com?subject=Mail from Website"
-							class="underline underline-offset-4"
+							class="underline decoration-2 underline-offset-2"
 						>
 							Send me an email
 						</a>
@@ -31,7 +31,7 @@ export default function Home() {
 						<span>↗</span>
 						<a
 							href="https://x.com/emmanuelchucks"
-							class="underline underline-offset-4"
+							class="underline decoration-2 underline-offset-2"
 						>
 							Connect on X
 						</a>
@@ -40,7 +40,7 @@ export default function Home() {
 						<span>↗</span>
 						<a
 							href="https://github.com/emmanuelchucks"
-							class="underline underline-offset-4"
+							class="underline decoration-2 underline-offset-2"
 						>
 							GitHub
 						</a>
