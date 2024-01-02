@@ -20,7 +20,7 @@ export default function Blog() {
 					onInput={(e) => {
 						setSearchParams({ q: e.currentTarget.value })
 					}}
-					class="w-full rounded-md bg-neutral-100 px-4 py-2 placeholder:text-neutral-400 dark:bg-neutral-900 dark:placeholder:text-neutral-600"
+					class="[&::-webkit-search-cancel-button]:bg-cancel-button dark:[&::-webkit-search-cancel-button]:bg-cancel-button-dark w-full rounded-md bg-neutral-100 px-4 py-2 placeholder:text-neutral-400 dark:bg-neutral-900 dark:placeholder:text-neutral-600 [&::-webkit-search-cancel-button]:ms-3 [&::-webkit-search-cancel-button]:inline-block [&::-webkit-search-cancel-button]:size-3 [&::-webkit-search-cancel-button]:[-webkit-appearance:none]"
 				/>
 				<noscript>
 					<p class="mt-2 text-sm text-neutral-500">
