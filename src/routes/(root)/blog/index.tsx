@@ -23,40 +23,45 @@ export default function Blog() {
 					class="w-full rounded-md bg-neutral-100 px-4 py-2 placeholder:text-neutral-400 dark:bg-neutral-900 dark:placeholder:text-neutral-600 [&::-webkit-search-cancel-button]:ms-4"
 				/>
 				<noscript>
-					<p class="mt-2 text-sm text-neutral-500">
+					<p class="prose prose-neutral mt-2 text-sm text-neutral-600 dark:prose-invert dark:text-neutral-400">
 						Press
-						<kbd class="mx-1 rounded bg-neutral-100 px-2 py-1 dark:bg-neutral-900">
-							Enter
-						</kbd>
+						<kbd class="mx-1 bg-neutral-100 dark:bg-neutral-900">Enter</kbd>
 						to search
 					</p>
 				</noscript>
 			</form>
-			<For each={posts()}>
-				{(post) => (
-					<div class="grid gap-y-2 sm:grid-cols-[auto_40ch] md:grid-cols-[auto_45ch]">
-						<time
-							datetime={post.frontmatter.publishedAt}
-							class="text-sm text-neutral-600 dark:text-neutral-400"
-						>
-							{formatDate(post.frontmatter.publishedAt, "short")}
-						</time>
-						<div class="mx-4 grid gap-y-2 sm:mx-auto">
-							<h2 class="text-2xl font-semibold">
-								<a
-									href={post.frontmatter.url}
-									class="underline decoration-2 underline-offset-2"
-								>
-									{post.frontmatter.title}
-								</a>
-							</h2>
-							<p class="line-clamp-3 text-neutral-700 dark:text-neutral-300">
-								{post.frontmatter.description}
-							</p>
+			<section aria-live="polite">
+				<h1 class="sr-only">
+					{searchParams.q
+						? `Search results for ${searchParams.q}`
+						: "All posts"}
+				</h1>
+				<For each={posts()}>
+					{(post) => (
+						<div class="grid gap-y-2 sm:grid-cols-[auto_40ch] md:grid-cols-[auto_45ch]">
+							<time
+								datetime={post.frontmatter.publishedAt}
+								class="text-sm text-neutral-600 dark:text-neutral-400"
+							>
+								{formatDate(post.frontmatter.publishedAt, "short")}
+							</time>
+							<div class="mx-4 grid gap-y-2 sm:mx-auto">
+								<h2 class="text-2xl font-semibold">
+									<a
+										href={post.frontmatter.url}
+										class="underline decoration-2 underline-offset-2"
+									>
+										{post.frontmatter.title}
+									</a>
+								</h2>
+								<p class="line-clamp-3 text-neutral-700 dark:text-neutral-300">
+									{post.frontmatter.description}
+								</p>
+							</div>
 						</div>
-					</div>
-				)}
-			</For>
+					)}
+				</For>
+			</section>
 		</main>
 	)
 }
