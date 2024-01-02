@@ -45,13 +45,19 @@ export default function Blog() {
 					</h1>
 					<For each={posts()}>
 						{(post) => (
-							<div class="grid gap-y-2 sm:grid-cols-[auto_40ch] md:grid-cols-[auto_45ch]">
-								<time
-									datetime={post.frontmatter.publishedAt}
-									class="text-sm text-neutral-600 dark:text-neutral-400"
-								>
-									{formatDate(post.frontmatter.publishedAt, "short")}
-								</time>
+							<div class="grid justify-between gap-y-2 sm:grid-cols-[auto_24em] md:grid-cols-[auto_26em]">
+								<div class="grid grid-cols-[repeat(3,_max-content)] items-baseline justify-items-end gap-x-2 text-neutral-600 sm:grid-cols-1 sm:grid-rows-[repeat(2,_max-content)] dark:text-neutral-400">
+									<time
+										datetime={post.frontmatter.publishedAt}
+										class="font-medium"
+									>
+										{formatDate(post.frontmatter.publishedAt, "short")}
+									</time>
+									<span aria-hidden class="text-sm sm:hidden">
+										-
+									</span>
+									<p class="text-sm">{post.frontmatter.readTime}</p>
+								</div>
 								<div class="mx-4 grid gap-y-2 sm:mx-auto">
 									<h2 class="text-2xl font-semibold">
 										<a

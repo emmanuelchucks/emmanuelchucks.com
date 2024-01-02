@@ -11,12 +11,15 @@ export default function Post() {
 			<Title>{frontmatter.title} - Emmanuel Chucks</Title>
 			<Meta name="description" content={frontmatter.description} />
 			<main class="grid gap-y-4">
-				<time
-					dateTime={frontmatter.publishedAt}
-					class="text-sm text-neutral-600 dark:text-neutral-400"
-				>
-					{formatDate(frontmatter.publishedAt, "long")}
-				</time>
+				<div class="flex flex-row items-baseline gap-x-2 text-neutral-600 dark:text-neutral-400">
+					<time dateTime={frontmatter.publishedAt} class="font-medium">
+						{formatDate(frontmatter.publishedAt, "long")}
+					</time>
+					<span aria-hidden class="text-sm">
+						-
+					</span>
+					<p class="text-sm">{frontmatter.readTime}</p>
+				</div>
 				<article class="prose prose-neutral min-w-0 dark:prose-invert prose-pre:bg-neutral-100 dark:prose-pre:bg-neutral-900 dark:[&_.shiki_span]:!text-[--shiki-dark]">
 					<Content />
 				</article>
