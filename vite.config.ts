@@ -2,6 +2,8 @@ import { defineConfig } from "@solidjs/start/config"
 // @ts-expect-error - no types yet
 import mdx from "@vinxi/plugin-mdx"
 import rehypeShikiji from "rehype-shikiji"
+import remarkReadingTime from "remark-reading-time"
+import readingMdxTime from "remark-reading-time/mdx"
 
 export default defineConfig({
 	start: {
@@ -19,6 +21,7 @@ export default defineConfig({
 			jsx: true,
 			jsxImportSource: "solid-js",
 			providerImportSource: "solid-mdx",
+			remarkPlugins: [remarkReadingTime, readingMdxTime],
 			rehypePlugins: [
 				[
 					rehypeShikiji,
