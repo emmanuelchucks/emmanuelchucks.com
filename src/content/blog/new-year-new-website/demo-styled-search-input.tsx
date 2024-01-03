@@ -1,5 +1,3 @@
-"use client"
-
 import { For, Show, createSignal } from "solid-js"
 
 export function StyledSearchInput() {
