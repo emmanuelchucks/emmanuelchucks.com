@@ -16,7 +16,7 @@ export function StyledSearchInput() {
 					e.preventDefault()
 				}}
 			>
-				<label for="query" class="sr-only">
+				<label for="name-search-query" class="sr-only">
 					Search names
 				</label>
 				<input
