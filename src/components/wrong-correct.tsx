@@ -6,7 +6,7 @@ export function Wrong(props: { heading: string; children: JSX.Element }) {
 	return (
 		<section aria-labelledby={id}>
 			<h3 id={id}>
-				<span aria-hidden>❌</span> Wrong
+				<span aria-hidden="true">❌</span> Wrong
 				<span class="sr-only"> version for {props.heading}</span>
 			</h3>
 			{props.children}
@@ -19,7 +19,7 @@ export function Correct(props: { heading: string; children: JSX.Element }) {
 	return (
 		<section aria-labelledby={id}>
 			<h3 id={id}>
-				<span aria-hidden>✅</span> Correct
+				<span aria-hidden="true">✅</span> Correct
 				<span class="sr-only"> version for {props.heading}</span>
 			</h3>
 			{props.children}

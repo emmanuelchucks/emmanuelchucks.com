@@ -26,7 +26,7 @@ export default function Home() {
 					</div>
 					<aside class="flex flex-row flex-wrap gap-x-6 gap-y-2 font-semibold text-neutral-800 dark:text-neutral-200">
 						<div class="flex flex-row gap-x-2">
-							<span aria-hidden>↗</span>
+							<span aria-hidden="true">↗</span>
 							<a
 								href="mailto:hi@emmanuelchucks.com?subject=Mail from Website"
 								class="underline decoration-2 underline-offset-2"
@@ -35,7 +35,7 @@ export default function Home() {
 							</a>
 						</div>
 						<div class="flex flex-row gap-x-2">
-							<span aria-hidden>↗</span>
+							<span aria-hidden="true">↗</span>
 							<a
 								href="https://twitter.com/emmanuelchucks"
 								class="underline decoration-2 underline-offset-2"
@@ -44,7 +44,7 @@ export default function Home() {
 							</a>
 						</div>
 						<div class="flex flex-row gap-x-2">
-							<span aria-hidden>↗</span>
+							<span aria-hidden="true">↗</span>
 							<a
 								href="https://github.com/emmanuelchucks"
 								class="underline decoration-2 underline-offset-2"

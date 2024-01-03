@@ -65,7 +65,7 @@ export default function Blog() {
 										>
 											{formatDate(post.frontmatter.publishedAt, "short")}
 										</time>
-										<span aria-hidden class="text-sm sm:hidden">
+										<span aria-hidden="true" class="text-sm sm:hidden">
 											-
 										</span>
 										<p class="text-sm">{post.frontmatter.readTime}</p>
