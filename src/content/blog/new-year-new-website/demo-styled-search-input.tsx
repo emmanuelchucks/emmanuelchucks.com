@@ -11,6 +11,7 @@ export function StyledSearchInput() {
 	return (
 		<div class="grid h-72 content-center">
 			<form
+				aria-labelledby="name-search-query"
 				onSubmit={(e) => {
 					e.preventDefault()
 				}}
@@ -20,7 +21,7 @@ export function StyledSearchInput() {
 				</label>
 				<input
 					name="q"
-					id="query"
+					id="name-search-query"
 					type="search"
 					placeholder="Search names"
 					onInput={(e) => {
@@ -36,8 +37,12 @@ export function StyledSearchInput() {
 					</p>
 				</noscript>
 			</form>
-			<section aria-live="polite" class="min-h-32">
-				<h3 class="sr-only">
+			<section
+				aria-live="polite"
+				aria-labelledby="name-search-results"
+				class="min-h-32"
+			>
+				<h3 id="name-search-results" class="sr-only">
 					{searchQuery() ? `Results for ${searchQuery()}` : "All names"}
 				</h3>
 				<Show when={filteredNames().length} fallback={<p>No results</p>}>
