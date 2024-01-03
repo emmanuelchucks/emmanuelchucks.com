@@ -59,7 +59,7 @@ export function getPostById(id: string) {
 	}
 }
 
-export const searchPostsAction = action(async (formData: FormData) => {
+export const searchPosts = action(async (formData: FormData) => {
 	"use server"
 	const query = parse(string(), formData.get("q"))
 	/* eslint-disable-next-line @typescript-eslint/no-throw-literal */
