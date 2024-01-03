@@ -7,6 +7,7 @@ import readingMdxTime from "remark-reading-time/mdx"
 
 export default defineConfig({
 	start: {
+		islands: true,
 		extensions: ["mdx", "md"],
 		server: {
 			preset: "cloudflare-module",

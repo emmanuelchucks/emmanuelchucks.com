@@ -18,26 +18,25 @@ const blogFiles = import.meta.glob<true, string, MdxFile>(
 	{ eager: true },
 )
 
-const allPosts = Object.values(blogFiles).map(
-	({ frontmatter, readingTime, ...rest }) => {
+const posts = Object.values(blogFiles)
+
+parse(
+	array(frontmatterSchema),
+	posts.map((post) => post.frontmatter),
+)
+
+export function getPostsByQuery(query: string | undefined) {
+	const allPosts = posts.map(({ frontmatter, readingTime }) => {
 		const slug = slugify(frontmatter.title.toLowerCase() + "-" + frontmatter.id)
 		return {
-			...rest,
 			frontmatter: {
 				...frontmatter,
+				publishedAt: formatDate(frontmatter.publishedAt, "short"),
 				readTime: readingTime.text,
 				url: `/blog/${slug}`,
 			},
 		}
-	},
-)
-
-parse(
-	array(frontmatterSchema),
-	allPosts.map((post) => post.frontmatter),
-)
-
-export function getPostsByQuery(query: string | undefined) {
+	})
 	if (!query) return allPosts
 	const filteredPosts = allPosts.filter(({ frontmatter }) =>
 		frontmatter.title.toLowerCase().includes(query.toLowerCase()),
@@ -47,12 +46,27 @@ export function getPostsByQuery(query: string | undefined) {
 
 export function getPostById(id: string) {
 	const uniquePart = id.split("-").at(-1)
-	const post = allPosts.find((post) => post.frontmatter.id === uniquePart)
+	const post = posts.find((post) => post.frontmatter.id === uniquePart)
 	if (!post) throw new Error(`No post found for id: ${id}`)
-	return post
+	return {
+		...post,
+		frontmatter: {
+			...post.frontmatter,
+			publishedAt: formatDate(post.frontmatter.publishedAt, "long"),
+			readTime: post.readingTime.text,
+			url: `/blog/${id}`,
+		},
+	}
 }
 
-export function formatDate(date: string, type: "short" | "long") {
+export const searchPostsAction = action(async (formData: FormData) => {
+	"use server"
+	const query = parse(string(), formData.get("q"))
+	/* eslint-disable-next-line @typescript-eslint/no-throw-literal */
+	throw redirect("/blog?q=" + query)
+})
+
+function formatDate(date: string, type: "short" | "long") {
 	if (type === "short")
 		return new Date(date).toLocaleDateString("en-US", {
 			year: "numeric",
@@ -66,13 +80,6 @@ export function formatDate(date: string, type: "short" | "long") {
 		day: "numeric",
 	})
 }
-
-export const handleSearchPosts = action(async (formData: FormData) => {
-	"use server"
-	const query = formData.get("q") as string
-	/* eslint-disable-next-line @typescript-eslint/no-throw-literal */
-	throw redirect("/blog?q=" + query)
-})
 
 type FrontMatter = Input<typeof frontmatterSchema>
 

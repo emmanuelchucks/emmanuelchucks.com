@@ -1,6 +1,6 @@
 import { Meta, Title } from "@solidjs/meta"
 import { useParams } from "@solidjs/router"
-import { formatDate, getPostById } from "~/lib/posts"
+import { getPostById } from "~/lib/posts"
 
 export default function Post() {
 	const parmas = useParams()
@@ -13,7 +13,7 @@ export default function Post() {
 			<main class="grid gap-y-4">
 				<div class="flex flex-row items-baseline gap-x-2 text-neutral-600 dark:text-neutral-400">
 					<time dateTime={frontmatter.publishedAt} class="font-medium">
-						{formatDate(frontmatter.publishedAt, "long")}
+						{frontmatter.publishedAt}
 					</time>
 					<span aria-hidden="true" class="text-sm">
 						-
