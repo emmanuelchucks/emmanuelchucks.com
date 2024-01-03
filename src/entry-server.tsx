@@ -13,7 +13,7 @@ export default createHandler(() => (
 					<link rel="icon" href="/favicon.png" />
 					{assets}
 				</head>
-				<body class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50 [&_*]:outline-neutral-700 dark:[&_*]:outline-neutral-300">
+				<body class="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50">
 					<div id="app">{children}</div>
 					{scripts}
 				</body>
