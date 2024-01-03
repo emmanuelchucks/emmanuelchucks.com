@@ -1,7 +1,7 @@
 import { Meta, Title } from "@solidjs/meta"
 import { useSearchParams } from "@solidjs/router"
 import { For, Show } from "solid-js"
-import { formatDate, getPostsByQuery, handleSearchPosts } from "~/lib/posts"
+import { getPostsByQuery, searchPostsAction } from "~/lib/posts"
 
 export default function Blog() {
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -16,7 +16,7 @@ export default function Blog() {
 			/>
 			<main class="grid gap-y-10">
 				<form
-					action={handleSearchPosts}
+					action={searchPostsAction}
 					method="post"
 					aria-labelledby="post-search-query"
 				>
@@ -63,7 +63,7 @@ export default function Blog() {
 											datetime={post.frontmatter.publishedAt}
 											class="font-medium"
 										>
-											{formatDate(post.frontmatter.publishedAt, "short")}
+											{post.frontmatter.publishedAt}
 										</time>
 										<span aria-hidden="true" class="text-sm sm:hidden">
 											-
