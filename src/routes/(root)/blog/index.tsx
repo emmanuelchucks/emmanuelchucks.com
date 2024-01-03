@@ -1,7 +1,7 @@
 import { Meta, Title } from "@solidjs/meta"
 import { useSearchParams } from "@solidjs/router"
 import { For, Show } from "solid-js"
-import { getPostsByQuery, searchPostsAction } from "~/lib/posts"
+import { getPostsByQuery, searchPosts } from "~/lib/posts"
 
 export default function Blog() {
 	const [searchParams, setSearchParams] = useSearchParams()
@@ -16,7 +16,7 @@ export default function Blog() {
 			/>
 			<main class="grid gap-y-10">
 				<form
-					action={searchPostsAction}
+					action={searchPosts}
 					method="post"
 					aria-labelledby="post-search-query"
 				>
