@@ -18,7 +18,7 @@ export default function Home() {
 						</p>
 						<img
 							src={profilePicture}
-							alt="Emmanuel Chucks smiling"
+							alt="Emmanuel Chucks in native clothing, smiling"
 							width={64}
 							height={64}
 							class="size-16 rounded-full sm:row-span-full"
