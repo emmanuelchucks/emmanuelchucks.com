@@ -15,7 +15,7 @@ export default function Post() {
 					<time dateTime={frontmatter.publishedAt} class="font-medium">
 						{formatDate(frontmatter.publishedAt, "long")}
 					</time>
-					<span aria-hidden class="text-sm">
+					<span aria-hidden="true" class="text-sm">
 						-
 					</span>
 					<p class="text-sm">{frontmatter.readTime}</p>
