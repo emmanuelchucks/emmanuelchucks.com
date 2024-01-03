@@ -1,21 +1,26 @@
 import type { JSX } from "solid-js"
+import { createUniqueId } from "solid-js"
 
-export function Wrong(props: { children: JSX.Element }) {
+export function Wrong(props: { heading: string; children: JSX.Element }) {
+	const id = createUniqueId()
 	return (
-		<section>
-			<h3>
+		<section aria-labelledby={id}>
+			<h3 id={id}>
 				<span aria-hidden>❌</span> Wrong
+				<span class="sr-only"> version for {props.heading}</span>
 			</h3>
 			{props.children}
 		</section>
 	)
 }
 
-export function Correct(props: { children: JSX.Element }) {
+export function Correct(props: { heading: string; children: JSX.Element }) {
+	const id = createUniqueId()
 	return (
-		<section>
-			<h3>
+		<section aria-labelledby={id}>
+			<h3 id={id}>
 				<span aria-hidden>✅</span> Correct
+				<span class="sr-only"> version for {props.heading}</span>
 			</h3>
 			{props.children}
 		</section>
