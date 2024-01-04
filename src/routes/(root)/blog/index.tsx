@@ -1,11 +1,26 @@
 import { Meta, Title } from "@solidjs/meta"
-import { useSearchParams } from "@solidjs/router"
+import {
+	action,
+	cache,
+	createAsync,
+	useSearchParams,
+	type RouteDefinition,
+} from "@solidjs/router"
 import { For, Show } from "solid-js"
 import { getPostsByQuery, searchPosts } from "~/lib/posts"
 
+const getPostsByQueryData = cache(getPostsByQuery, "posts")
+const searchPostsAction = action(searchPosts, "searchPosts")
+
+export const route = {
+	load({ params }) {
+		void getPostsByQueryData(params.q)
+	},
+} satisfies RouteDefinition
+
 export default function Blog() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const posts = () => getPostsByQuery(searchParams.q)
+	const posts = createAsync(async () => getPostsByQueryData(searchParams.q))
 
 	return (
 		<>
@@ -16,7 +31,7 @@ export default function Blog() {
 			/>
 			<main class="grid gap-y-10">
 				<form
-					action={searchPosts}
+					action={searchPostsAction}
 					method="post"
 					aria-labelledby="post-search-query"
 				>
@@ -48,7 +63,7 @@ export default function Blog() {
 							: "All posts"}
 					</h1>
 					<Show
-						when={posts().length}
+						when={posts()?.length}
 						fallback={
 							<p class="text-neutral-600 dark:text-neutral-400">
 								No posts found
