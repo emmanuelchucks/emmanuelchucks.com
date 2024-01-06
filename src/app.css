@@ -22,4 +22,12 @@
 	:where(a, input, button):focus-visible {
 		@apply rounded-sm outline-none ring-2 ring-neutral-700 dark:ring-neutral-300;
 	}
+
+	:where(h1, h2, h3, h4, h5, h6) {
+		@apply text-balance;
+	}
+
+	:where(p) {
+		@apply text-pretty;
+	}
 }
