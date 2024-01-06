@@ -4,6 +4,7 @@ import mdx from "@vinxi/plugin-mdx"
 import rehypeShikiji from "rehype-shikiji"
 import remarkReadingTime from "remark-reading-time"
 import readingMdxTime from "remark-reading-time/mdx"
+import { imagetools } from "vite-imagetools"
 
 export default defineConfig({
 	start: {
@@ -16,6 +17,7 @@ export default defineConfig({
 		},
 	},
 	plugins: [
+		imagetools(),
 		/* eslint-disable-next-line @typescript-eslint/no-unsafe-call */
 		mdx.withImports({})({
 			jsx: true,
