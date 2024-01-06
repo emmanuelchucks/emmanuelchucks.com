@@ -18,8 +18,7 @@ export default function Home() {
 							Ambitious software engineer
 						</p>
 						<img
-							/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */
-							src={profilePicture}
+							src={profilePicture as string}
 							alt="Emmanuel Chucks in native clothing, smiling"
 							width={64}
 							height={64}
