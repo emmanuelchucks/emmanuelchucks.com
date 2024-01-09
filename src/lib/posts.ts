@@ -1,7 +1,6 @@
 "use server"
 
 import slugify from "@sindresorhus/slugify"
-import { redirect } from "@solidjs/router"
 import { type JSX } from "solid-js"
 import { array, coerce, object, parse, string, type Input } from "valibot"
 
@@ -72,12 +71,6 @@ export function getPostById(id: string) {
 			url: `/blog/${id}`,
 		},
 	}
-}
-
-export const searchPosts = (formData: FormData) => {
-	const query = parse(string(), formData.get("q"))
-	/* eslint-disable-next-line @typescript-eslint/no-throw-literal */
-	throw redirect("/blog?q=" + query)
 }
 
 function formatDate(date: string, type: "short" | "long") {
