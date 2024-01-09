@@ -1,22 +1,9 @@
 import { Meta, Title } from "@solidjs/meta"
-import {
-	cache,
-	createAsync,
-	type RouteDefinition,
-	type RouteSectionProps,
-} from "@solidjs/router"
+import { type RouteSectionProps } from "@solidjs/router"
 import { getPostById } from "~/lib/posts"
 
-const getPostByIdData = cache(getPostById, "post")
-
-export const route = {
-	load({ params }) {
-		void getPostByIdData(params.id)
-	},
-} satisfies RouteDefinition
-
 export default function Post(props: RouteSectionProps) {
-	const post = createAsync(async () => getPostByIdData(props.params.id))
+	const post = () => getPostById(props.params.id)
 
 	return (
 		<>

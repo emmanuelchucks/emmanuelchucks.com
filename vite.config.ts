@@ -8,6 +8,7 @@ import { imagetools } from "vite-imagetools"
 
 export default defineConfig({
 	start: {
+		islands: true,
 		extensions: ["mdx", "md"],
 		server: {
 			preset: "cloudflare-module",

@@ -1,26 +1,13 @@
 import { Meta, Title } from "@solidjs/meta"
-import {
-	action,
-	cache,
-	createAsync,
-	useSearchParams,
-	type RouteDefinition,
-} from "@solidjs/router"
+import { action, useSearchParams } from "@solidjs/router"
 import { For, Show } from "solid-js"
 import { getPostsByQuery, searchPosts } from "~/lib/posts"
 
-const getPostsByQueryData = cache(getPostsByQuery, "posts")
 const searchPostsAction = action(searchPosts, "searchPosts")
-
-export const route = {
-	load({ params }) {
-		void getPostsByQueryData(params.q)
-	},
-} satisfies RouteDefinition
 
 export default function Blog() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const posts = createAsync(async () => getPostsByQueryData(searchParams.q))
+	const posts = () => getPostsByQuery(searchParams.q)
 
 	return (
 		<>
