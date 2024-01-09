@@ -1,6 +1,6 @@
 import { Meta, Title } from "@solidjs/meta"
 // @ts-expect-error - required for image import
-import profilePicture from "~/assets/images/emmanuel-chucks.jpeg?w=64&format=webp"
+import profilePicture from "~/assets/images/emmanuel-chucks.jpeg?w=128&format=webp"
 
 export default function Home() {
 	return (
