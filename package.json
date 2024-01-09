@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "vinxi dev",
 		"build": "vinxi build",
-		"start": "wrangler dev",
+		"preview": "$npm_execpath run build && wrangler dev",
 		"deploy": "wrangler deploy",
 		"format": "prettier --write ."
 	},
