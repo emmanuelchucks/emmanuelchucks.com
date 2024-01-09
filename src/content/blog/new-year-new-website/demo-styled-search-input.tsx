@@ -27,7 +27,7 @@ export function StyledSearchInput() {
 					onInput={(e) => {
 						setSearchQuery(e.currentTarget.value)
 					}}
-					class="w-full rounded-md bg-neutral-200 px-4 py-2 placeholder:text-neutral-400 dark:bg-neutral-800 dark:placeholder:text-neutral-600 [&::-webkit-search-cancel-button]:ms-4"
+					class="w-full rounded-md bg-neutral-50 px-4 py-2 placeholder:text-neutral-400 dark:bg-neutral-800 dark:placeholder:text-neutral-600 [&::-webkit-search-cancel-button]:ms-4"
 				/>
 				<noscript>
 					<p class="prose prose-neutral mt-2 text-sm text-neutral-600 dark:prose-invert dark:text-neutral-400">
