@@ -19,7 +19,7 @@ export default function Post(props: RouteSectionProps) {
 					</span>
 					<p class="text-sm">{post()?.frontmatter.readTime}</p>
 				</div>
-				<article class="prose prose-neutral min-w-0 dark:prose-invert prose-pre:bg-neutral-100 dark:prose-pre:bg-neutral-900 dark:[&_.shiki_span]:!text-[--shiki-dark]">
+				<article class="prose prose-neutral min-w-0 dark:prose-invert prose-pre:bg-white dark:prose-pre:bg-neutral-900 dark:[&_.shiki_span]:!text-[--shiki-dark]">
 					{post()?.content()}
 				</article>
 			</main>
