@@ -2,11 +2,11 @@
 	"name": "emmanuelchucks.com",
 	"type": "module",
 	"scripts": {
-		"dev": "vinxi dev",
 		"build": "vinxi build",
-		"preview": "$npm_execpath run build && wrangler dev",
 		"deploy": "wrangler deploy",
-		"format": "prettier --write ."
+		"dev": "vinxi dev",
+		"format": "prettier --write .",
+		"preview": "$npm_execpath run build && wrangler dev"
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
@@ -36,6 +36,7 @@
 		"eslint-plugin-solid": "^0.13.1",
 		"prettier": "^3.2.4",
 		"prettier-plugin-organize-imports": "^3.2.4",
+		"prettier-plugin-packagejson": "^2.4.9",
 		"prettier-plugin-tailwindcss": "^0.5.11",
 		"typescript": "^5.3.3",
 		"wrangler": "^3.24.0"
