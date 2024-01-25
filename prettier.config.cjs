@@ -2,5 +2,9 @@
 module.exports = {
 	semi: false,
 	useTabs: true,
-	plugins: ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+	plugins: [
+		"prettier-plugin-packagejson",
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-tailwindcss",
+	],
 }
