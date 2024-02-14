@@ -1,41 +1,25 @@
-import { defineConfig } from "@solidjs/start/config"
-// @ts-expect-error - no types yet
-import mdx from "@vinxi/plugin-mdx"
-import rehypeShikiji from "rehype-shikiji"
-import remarkReadingTime from "remark-reading-time"
-import readingMdxTime from "remark-reading-time/mdx"
+import pages from "@hono/vite-cloudflare-pages"
+import honox from "honox/vite"
+import client from "honox/vite/client"
+import { defineConfig } from "vite"
 import { imagetools } from "vite-imagetools"
 
-export default defineConfig({
-	start: {
-		islands: true,
-		extensions: ["mdx", "md"],
-		server: {
-			preset: "cloudflare-module",
-			rollupConfig: {
-				external: ["__STATIC_CONTENT_MANIFEST", "node:async_hooks"],
-			},
-		},
-	},
-	plugins: [
-		imagetools(),
-		/* eslint-disable-next-line @typescript-eslint/no-unsafe-call */
-		mdx.withImports({})({
-			jsx: true,
-			jsxImportSource: "solid-js",
-			providerImportSource: "solid-mdx",
-			remarkPlugins: [remarkReadingTime, readingMdxTime],
-			rehypePlugins: [
-				[
-					rehypeShikiji,
-					{
-						themes: {
-							light: "github-light",
-							dark: "github-dark",
-						},
+export default defineConfig(({ mode }) => {
+	if (mode === "client") {
+		return {
+			plugins: [client()],
+			build: {
+				rollupOptions: {
+					input: ["/app/style.css"],
+					output: {
+						assetFileNames: "static/assets/[name].[ext]",
 					},
-				],
-			],
-		}),
-	],
+				},
+			},
+		}
+	}
+
+	return {
+		plugins: [honox(), pages(), imagetools()],
+	}
 })

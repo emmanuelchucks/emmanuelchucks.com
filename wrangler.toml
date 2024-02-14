@@ -1,7 +1,0 @@
-name = "emmanuelchucks-com"
-main = ".output/server/index.mjs"
-compatibility_date = "2024-01-03"
-compatibility_flags = ["nodejs_compat"]
-
-[site]
-bucket = ".output/public"

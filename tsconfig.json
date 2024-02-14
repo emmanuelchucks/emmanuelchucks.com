@@ -2,19 +2,11 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
-		"esModuleInterop": true,
-		"jsx": "preserve",
-		"jsxImportSource": "solid-js",
-		"allowJs": true,
-		"noEmit": true,
+		"moduleResolution": "Bundler",
 		"strict": true,
-		"types": ["vinxi/client"],
-		"isolatedModules": true,
-		"verbatimModuleSyntax": true,
-		"paths": {
-			"~/*": ["./src/*"],
-		},
-	},
+		"lib": ["ESNext", "DOM"],
+		"types": ["@cloudflare/workers-types", "vite/client"],
+		"jsx": "react-jsx",
+		"jsxImportSource": "hono/jsx"
+	}
 }
