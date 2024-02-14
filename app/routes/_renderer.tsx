@@ -16,6 +16,7 @@ export default jsxRenderer(({ children, title, description }) => (
 			) : (
 				<link href="/app/style.css" rel="stylesheet" />
 			)}
+			<link rel="icon" href="/static/favicon.png" />
 		</head>
 		<body
 			class={cx(
