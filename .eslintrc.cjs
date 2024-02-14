@@ -1,9 +1,10 @@
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
 	env: {
 		browser: true,
-		es2024: true,
+		es2021: true,
 	},
-	extends: ["xo", "plugin:solid/typescript", "prettier"],
+	extends: ["xo", "prettier"],
 	overrides: [
 		{
 			env: {
@@ -23,5 +24,7 @@ module.exports = {
 		ecmaVersion: "latest",
 		sourceType: "module",
 	},
+	plugins: ["only-warn"],
+	ignorePatterns: ["dist", "node_modules"],
 	rules: {},
 }
