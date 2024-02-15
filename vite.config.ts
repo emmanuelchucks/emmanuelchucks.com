@@ -1,6 +1,11 @@
 import pages from "@hono/vite-cloudflare-pages"
+import mdx from "@mdx-js/rollup"
 import honox from "honox/vite"
 import client from "honox/vite/client"
+import remarkFrontmatter from "remark-frontmatter"
+import remarkMdxFrontmatter from "remark-mdx-frontmatter"
+import remarkReadingTime from "remark-reading-time"
+import remarkMdxReadingTime from "remark-reading-time/mdx"
 import { defineConfig } from "vite"
 import { imagetools } from "vite-imagetools"
 
@@ -8,18 +13,23 @@ export default defineConfig(({ mode }) => {
 	if (mode === "client") {
 		return {
 			plugins: [client()],
-			build: {
-				rollupOptions: {
-					input: ["/app/style.css"],
-					output: {
-						assetFileNames: "static/assets/[name].[ext]",
-					},
-				},
-			},
 		}
 	}
 
 	return {
-		plugins: [honox(), pages(), imagetools()],
+		plugins: [
+			honox(),
+			pages(),
+			imagetools(),
+			mdx({
+				jsxImportSource: "hono/jsx",
+				remarkPlugins: [
+					remarkFrontmatter,
+					remarkMdxFrontmatter,
+					remarkReadingTime,
+					remarkMdxReadingTime,
+				],
+			}),
+		],
 	}
 })

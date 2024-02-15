@@ -1,0 +1,36 @@
+import slugify from "@sindresorhus/slugify"
+import * as v from "valibot"
+
+const frontmatterSchema = v.object({
+	id: v.string("id is required"),
+	title: v.string("title is required"),
+	description: v.string("description is required"),
+	author: v.string("author is required"),
+	publishedAt: v.coerce(v.string("publishedAt is required"), (i) =>
+		new Date(i as string).toISOString(),
+	),
+})
+
+const posts = import.meta.glob<{
+	frontmatter: v.Input<typeof frontmatterSchema>
+	readingTime: { text: string }
+	default: () => JSX.Element
+}>("/posts/*.mdx", {
+	eager: true,
+})
+
+export function getPosts() {
+	return Object.values(posts).map((post) => {
+		v.parse(frontmatterSchema, post.frontmatter)
+		const slug = slugify(
+			post.frontmatter.title.toLowerCase() + "-" + post.frontmatter.id,
+		)
+		return {
+			...post.frontmatter,
+			readingTime: post.readingTime.text,
+			href: `/blog/${slug}`,
+			/* eslint-disable-next-line @typescript-eslint/naming-convention */
+			Content: post.default,
+		}
+	})
+}
