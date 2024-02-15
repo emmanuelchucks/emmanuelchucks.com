@@ -6,9 +6,9 @@ const frontmatterSchema = v.object({
 	title: v.string("title is required"),
 	description: v.string("description is required"),
 	author: v.string("author is required"),
-	publishedAt: v.coerce(v.string("publishedAt is required"), (i) =>
-		new Date(i as string).toISOString(),
-	),
+	publishedAt: v.string("publishedAt is required"),
+})
+
 })
 
 const posts = import.meta.glob<{
@@ -27,10 +27,12 @@ export function getPosts() {
 		)
 		return {
 			...post.frontmatter,
-			readingTime: post.readingTime.text,
-			href: `/blog/${slug}`,
 			/* eslint-disable-next-line @typescript-eslint/naming-convention */
 			Content: post.default,
+			readingTime: post.readingTime.text,
+			href: `/blog/${slugify(
+				post.frontmatter.title.toLowerCase() + "-" + post.frontmatter.id,
+			)}`,
 		}
 	})
 }
