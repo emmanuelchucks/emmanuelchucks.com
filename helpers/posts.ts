@@ -9,11 +9,13 @@ const frontmatterSchema = v.object({
 	publishedAt: v.string("publishedAt is required"),
 })
 
+const readingTimeSchema = v.object({
+	text: v.string("text is required"),
 })
 
 const posts = import.meta.glob<{
 	frontmatter: v.Input<typeof frontmatterSchema>
-	readingTime: { text: string }
+	readingTime: v.Input<typeof readingTimeSchema>
 	default: () => JSX.Element
 }>("/posts/*.mdx", {
 	eager: true,
@@ -22,9 +24,8 @@ const posts = import.meta.glob<{
 export function getPosts() {
 	return Object.values(posts).map((post) => {
 		v.parse(frontmatterSchema, post.frontmatter)
-		const slug = slugify(
-			post.frontmatter.title.toLowerCase() + "-" + post.frontmatter.id,
-		)
+		v.parse(readingTimeSchema, post.readingTime)
+
 		return {
 			...post.frontmatter,
 			/* eslint-disable-next-line @typescript-eslint/naming-convention */
