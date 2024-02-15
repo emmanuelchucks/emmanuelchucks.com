@@ -10,7 +10,7 @@ const frontmatterSchema = v.object({
 })
 
 const readingTimeSchema = v.object({
-	text: v.string("text is required"),
+	text: v.string("reading time text is required"),
 })
 
 const posts = import.meta.glob<{
