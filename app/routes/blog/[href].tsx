@@ -13,5 +13,9 @@ export default createRoute(async (c) => {
 		<article>
 			<post.Content />
 		</article>,
+		{
+			title: `${post.title} - Emmanuel Chucks`,
+			description: post.description,
+		},
 	)
 })
