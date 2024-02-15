@@ -15,5 +15,10 @@ export default createRoute(async (c) => {
 				))}
 			</ul>
 		</div>,
+		{
+			title: "Blog - Emmanuel Chucks",
+			description:
+				"Writing about all things tech and design related, sharing everything I learn on my engineering journey.",
+		},
 	)
 })
