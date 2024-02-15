@@ -10,17 +10,13 @@ export default jsxRenderer(({ children, title, description }) => (
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<meta name="description" content={description} />
 			<title>{title}</title>
-			<Script src="/app/client.ts" />
-			{import.meta.env.PROD ? (
-				<link href="/static/assets/style.css" rel="stylesheet" />
-			) : (
-				<link href="/app/style.css" rel="stylesheet" />
-			)}
 			<link rel="icon" href="/static/favicon.png" />
+			<link href="/app/style.css" rel="stylesheet" />
+			<Script src="/app/client.ts" />
 		</head>
 		<body
 			class={cx(
-				"mx-4 my-16 grid max-w-screen-sm gap-y-8 bg-neutral-50 text-neutral-950",
+				"mx-4 my-16 grid max-w-screen-sm grid-rows-[auto,1fr] gap-y-16 bg-neutral-50 text-neutral-950",
 				"sm:mx-8",
 				"md:col-start-2 md:mx-auto",
 				"dark:bg-neutral-950 dark:text-neutral-50",
