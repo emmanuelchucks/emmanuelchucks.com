@@ -1,6 +1,7 @@
 import { cx } from "hono/css"
 import { jsxRenderer } from "hono/jsx-renderer"
 import { Script } from "honox/server"
+import styles from "../style.css?url"
 
 export default jsxRenderer(async ({ children, title, description }) => (
 	<html lang="en">
@@ -10,7 +11,7 @@ export default jsxRenderer(async ({ children, title, description }) => (
 			<meta name="description" content={description} />
 			<title>{title}</title>
 			<link rel="icon" href="/static/favicon.png" />
-			<link href="/app/style.css" rel="stylesheet" />
+			<link href={styles} rel="stylesheet" />
 			<Script src="/app/client.ts" />
 		</head>
 		<body
