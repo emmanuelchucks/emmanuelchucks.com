@@ -1,5 +1,6 @@
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
+import { A } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
 
 export default createRoute(async (c) => {
@@ -15,11 +16,17 @@ export default createRoute(async (c) => {
 			class={cx(
 				"prose prose-neutral min-w-0",
 				"dark:prose-invert",
+				"prose-p:text-pretty",
 				"prose-pre:bg-white prose-pre:dark:bg-neutral-900",
+				"prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance",
 				"[&_.shiki_span]:dark:!text-[--shiki-dark]",
 			)}
 		>
-			<post.Content />
+			<post.Content
+				components={{
+					a: A,
+				}}
+			/>
 		</article>,
 		{
 			title: `${post.title} - Emmanuel Chucks`,

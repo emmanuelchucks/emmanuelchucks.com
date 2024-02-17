@@ -16,7 +16,9 @@ const readingTimeSchema = v.object({
 const posts = import.meta.glob<{
 	frontmatter: v.Input<typeof frontmatterSchema>
 	readingTime: v.Input<typeof readingTimeSchema>
-	default: () => JSX.Element
+	default: (props: {
+		components: Partial<JSX.IntrinsicElements>
+	}) => JSX.Element
 }>("/posts/*.mdx", {
 	eager: true,
 })
