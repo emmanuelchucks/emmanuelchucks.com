@@ -31,9 +31,7 @@ export function getPosts() {
 			/* eslint-disable-next-line @typescript-eslint/naming-convention */
 			Content: post.default,
 			readingTime: post.readingTime.text,
-			href: `/blog/${slugify(
-				post.frontmatter.title.toLowerCase() + "-" + post.frontmatter.id,
-			)}`,
+			href: `/blog/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
 		}
 	})
 }
