@@ -9,11 +9,11 @@ dependencies:
     specifier: ^2.2.1
     version: 2.2.1
   hono:
-    specifier: ^4.0.2
-    version: 4.0.2
+    specifier: ^4.0.3
+    version: 4.0.3
   honox:
-    specifier: ^0.1.0
-    version: 0.1.0(hono@4.0.2)
+    specifier: ^0.1.3
+    version: 0.1.3(hono@4.0.3)
   valibot:
     specifier: ^0.28.1
     version: 0.28.1
@@ -24,7 +24,7 @@ devDependencies:
     version: 4.20240208.0
   '@hono/vite-cloudflare-pages':
     specifier: ^0.2.5
-    version: 0.2.5(hono@4.0.2)
+    version: 0.2.5(hono@4.0.3)
   '@mdx-js/rollup':
     specifier: ^3.0.1
     version: 3.0.1(rollup@4.10.0)
@@ -62,8 +62,8 @@ devDependencies:
     specifier: ^3.2.4
     version: 3.2.4(prettier@3.2.5)(typescript@5.3.3)
   prettier-plugin-packagejson:
-    specifier: ^2.4.10
-    version: 2.4.10(prettier@3.2.5)
+    specifier: ^2.4.11
+    version: 2.4.11(prettier@3.2.5)
   prettier-plugin-tailwindcss:
     specifier: ^0.5.11
     version: 0.5.11(prettier-plugin-organize-imports@3.2.4)(prettier@3.2.5)
@@ -83,14 +83,14 @@ devDependencies:
     specifier: ^5.3.3
     version: 5.3.3
   vite:
-    specifier: ^5.1.2
-    version: 5.1.2
+    specifier: ^5.1.3
+    version: 5.1.3
   vite-imagetools:
     specifier: ^6.2.9
     version: 6.2.9(rollup@4.10.0)
   wrangler:
-    specifier: ^3.28.2
-    version: 3.28.2(@cloudflare/workers-types@4.20240208.0)
+    specifier: ^3.28.3
+    version: 3.28.3(@cloudflare/workers-types@4.20240208.0)
 
 packages:
 
@@ -745,23 +745,23 @@ packages:
     engines: {node: '>=18.14.1'}
     dev: false
 
-  /@hono/vite-cloudflare-pages@0.2.5(hono@4.0.2):
+  /@hono/vite-cloudflare-pages@0.2.5(hono@4.0.3):
     resolution: {integrity: sha512-/Cw4bREPf2OelHDc/2oVXYXemyKz+wXkC+5uK8ZLo8c2JV7vthSchQPWK7O6BGe7al0z5qKVqhTYkfZvuW0T5w==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
     dependencies:
-      hono: 4.0.2
+      hono: 4.0.3
     dev: true
 
-  /@hono/vite-dev-server@0.5.1(hono@4.0.2):
+  /@hono/vite-dev-server@0.5.1(hono@4.0.3):
     resolution: {integrity: sha512-YGc1kaPn9ZSMmdbBKr4SeFP7dKLnEwHxXqQJaN8vffH1Y24BcDGpa7Qp3Vb7LQBCbo3Va7GYEsSfAXAxWX0i8g==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       hono: '*'
     dependencies:
       '@hono/node-server': 1.7.0
-      hono: 4.0.2
+      hono: 4.0.3
       miniflare: 3.20240129.2
       minimatch: 9.0.3
     transitivePeerDependencies:
@@ -2379,24 +2379,26 @@ packages:
       '@types/hast': 3.0.4
     dev: true
 
-  /hono@4.0.2:
-    resolution: {integrity: sha512-ZW/13BsQmQHlFb3IYGuzgbzY0wBO6WTvOHbpmUfVhVvdMyBNGtuz55quxM7JXoG2orzmv5hEorOAm3ocwzaV0Q==}
+  /hono@4.0.3:
+    resolution: {integrity: sha512-LLZFvqiksAO6Hf080XCUbsEjRxIrqEoiIN1HUzL0xtYP+BZUxGfeWg8yB5Dvp/sI7T0Lt4XdtGTGLwpIzAsl8w==}
     engines: {node: '>=16.0.0'}
 
-  /honox@0.1.0(hono@4.0.2):
-    resolution: {integrity: sha512-evn/KuRPx46/Y7E20//ANCt/IgcKGZmhgxrW/vlpHEMJwprOmA32xRhTPFuJvDdyZRL/jFvQsR5bU/024CQUaA==}
+  /honox@0.1.3(hono@4.0.3):
+    resolution: {integrity: sha512-tyzl3/PNGsKVUbZKA2ecqZySLjl5cDljZqiC/LNWUTOJ/fWIuHCh944elBthXhwoTk8a0X5k1ni6Sl1uXW2WIw==}
     engines: {node: '>=18.14.1'}
+    peerDependencies:
+      hono: '>=4.*'
     dependencies:
       '@babel/generator': 7.23.6
       '@babel/parser': 7.23.9
       '@babel/traverse': 7.23.9
       '@babel/types': 7.23.9
-      '@hono/vite-dev-server': 0.5.1(hono@4.0.2)
+      '@hono/vite-dev-server': 0.5.1(hono@4.0.3)
+      hono: 4.0.3
     optionalDependencies:
       '@rollup/rollup-linux-x64-gnu': 4.10.0
     transitivePeerDependencies:
       - bufferutil
-      - hono
       - supports-color
       - utf-8-validate
     dev: false
@@ -3078,6 +3080,30 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
+    dev: false
+
+  /miniflare@3.20240129.3:
+    resolution: {integrity: sha512-PCmLJ+UvtbpPj/fgNzTGbd+U5QBkt3akRNcdks9RBJU2SH+gUCp7iahsaI4GA344NX5MIbC6ctw1A6TfcA+aFA==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      acorn: 8.11.3
+      acorn-walk: 8.3.2
+      capnp-ts: 0.7.0
+      exit-hook: 2.2.1
+      glob-to-regexp: 0.4.1
+      stoppable: 1.1.0
+      undici: 5.28.3
+      workerd: 1.20240129.0
+      ws: 8.16.0
+      youch: 3.3.3
+      zod: 3.22.4
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
+    dev: true
 
   /minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -3357,8 +3383,8 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /prettier-plugin-packagejson@2.4.10(prettier@3.2.5):
-    resolution: {integrity: sha512-qFzOfQDHi1tzvVJRuZ2jh1j6IFV5MURh5m5WDt+qfEMOf4SSL5RpwSysiX8u0W1PJYsM0vKJGNULt43wwteKiQ==}
+  /prettier-plugin-packagejson@2.4.11(prettier@3.2.5):
+    resolution: {integrity: sha512-zmOmM96GkAjT2zUdHSQJnpyVpbisBkewDluo2NLHjI/JN7uOCZlEzWVaMhdqyZ8LVdQDfzamvbvSw4swd3Az1A==}
     peerDependencies:
       prettier: '>= 1.16.0'
     peerDependenciesMeta:
@@ -4075,8 +4101,8 @@ packages:
       - rollup
     dev: true
 
-  /vite@5.1.2:
-    resolution: {integrity: sha512-uwiFebQbTWRIGbCaTEBVAfKqgqKNKMJ2uPXsXeLIZxM8MVMjoS3j0cG8NrPxdDIadaWnPSjrkLWffLSC+uiP3Q==}
+  /vite@5.1.3:
+    resolution: {integrity: sha512-UfmUD36DKkqhi/F75RrxvPpry+9+tTkrXfMNZD+SboZqBCMsxKtO52XeGzzuh7ioz+Eo/SYDBbdb0Z7vgcDJew==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -4130,8 +4156,8 @@ packages:
       '@cloudflare/workerd-linux-arm64': 1.20240129.0
       '@cloudflare/workerd-windows-64': 1.20240129.0
 
-  /wrangler@3.28.2(@cloudflare/workers-types@4.20240208.0):
-    resolution: {integrity: sha512-hlD4f2avBZuR1+qo9Um6D1prdWrSRtGTo9h6o/AKce+bHQEJWoJgJKHeLmrpZlLtHg/gGR1Xa1xzrexhuIzeJw==}
+  /wrangler@3.28.3(@cloudflare/workers-types@4.20240208.0):
+    resolution: {integrity: sha512-pLuvWA5W8FhjI/a7Mr5F491KOqNMYzyWVN7dmwr+52sPv2BFrfN1v6btmhHYotSblCH8yfs5DmuxwdKuVPMw9w==}
     engines: {node: '>=16.17.0'}
     hasBin: true
     peerDependencies:
@@ -4147,7 +4173,7 @@ packages:
       blake3-wasm: 2.1.5
       chokidar: 3.6.0
       esbuild: 0.17.19
-      miniflare: 3.20240129.2
+      miniflare: 3.20240129.3
       nanoid: 3.3.7
       path-to-regexp: 6.2.1
       resolve: 1.22.8
