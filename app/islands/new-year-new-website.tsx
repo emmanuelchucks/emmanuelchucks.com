@@ -1,5 +1,5 @@
-import { cx } from "hono/css"
 import { useState } from "hono/jsx"
+import { SearchInput } from "../../components/search-input"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
@@ -21,38 +21,15 @@ export async function StyledSearchInput() {
 					e.preventDefault()
 				}}
 			>
-				<label for={searchQueryId} class="sr-only">
-					Search names
-				</label>
-				<input
+				<SearchInput
 					name="q"
 					id={searchQueryId}
 					type="search"
 					placeholder="Search names"
-					onInput={(event) => {
-						setSearchQuery((event.currentTarget as HTMLInputElement).value)
+					onInput={(e) => {
+						setSearchQuery((e.currentTarget as HTMLInputElement).value)
 					}}
-					class={cx(
-						"w-full rounded-md bg-neutral-50 px-4 py-2",
-						"placeholder:text-neutral-400 placeholder:dark:text-neutral-600",
-						"[&::-webkit-search-cancel-button]:ms-4",
-						"dark:bg-neutral-800",
-					)}
 				/>
-				<noscript>
-					<p
-						class={cx(
-							"prose prose-neutral mt-2 text-sm text-neutral-600",
-							"dark:prose-invert dark:text-neutral-400",
-						)}
-					>
-						Press
-						<kbd class={cx("mx-1 bg-neutral-100", "dark:bg-neutral-900")}>
-							Enter
-						</kbd>
-						to search
-					</p>
-				</noscript>
 			</form>
 			<section
 				aria-live="polite"

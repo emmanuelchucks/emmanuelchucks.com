@@ -2,6 +2,7 @@ import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 // @ts-expect-error - required for image import
 import profilePicture from "../../assets/emmanuel-chucks.jpeg?w=128&format=webp"
+import { A } from "../../components/primitives"
 
 export default createRoute(async (c) =>
 	c.render(
@@ -47,12 +48,7 @@ export default createRoute(async (c) =>
 					].map(async (link) => (
 						<div class="flex flex-row gap-x-2">
 							<span aria-hidden="true">↗</span>
-							<a
-								href={link.href}
-								class="underline decoration-2 underline-offset-2"
-							>
-								{link.text}
-							</a>
+							<A href={link.href}>{link.text}</A>
 						</div>
 					))}
 				</aside>

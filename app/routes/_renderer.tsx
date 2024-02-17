@@ -1,10 +1,11 @@
-import { cx } from "hono/css"
+import { Style, cx } from "hono/css"
 import { jsxRenderer } from "hono/jsx-renderer"
 import { Script } from "honox/server"
+import { A } from "../../components/primitives"
 import styles from "../style.css?url"
 
 export default jsxRenderer(async ({ children, title, description }) => (
-	<html lang="en">
+	<html lang="en" class="[color-scheme:light_dark]">
 		<head>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +14,7 @@ export default jsxRenderer(async ({ children, title, description }) => (
 			<link rel="icon" href="/static/favicon.png" />
 			<link href={styles} rel="stylesheet" />
 			<Script src="/app/client.ts" />
+			<Style />
 		</head>
 		<body
 			class={cx(
@@ -32,16 +34,12 @@ export default jsxRenderer(async ({ children, title, description }) => (
 							{ text: "Blog", href: "/blog" },
 						].map(async (link) => (
 							<li>
-								<a
+								<A
 									href={link.href}
 									// Aria-current={true ? "page" : undefined}
-									class={cx(
-										"decoration-2 underline-offset-2",
-										"hover:underline",
-									)}
 								>
 									{link.text}
-								</a>
+								</A>
 							</li>
 						))}
 					</ul>
