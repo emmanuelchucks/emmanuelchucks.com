@@ -5,7 +5,7 @@ import { A } from "../../components/primitives"
 import styles from "../style.css?url"
 
 export default jsxRenderer(async ({ children, title, description }) => (
-	<html lang="en" class="[color-scheme:light_dark]">
+	<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
 		<head>
 			<meta charset="utf-8" />
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
