@@ -1,3 +1,4 @@
+import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 import { getPosts } from "../../../helpers/posts"
 
@@ -10,7 +11,14 @@ export default createRoute(async (c) => {
 	}
 
 	return c.render(
-		<article>
+		<article
+			class={cx(
+				"prose prose-neutral min-w-0",
+				"dark:prose-invert",
+				"prose-pre:bg-white prose-pre:dark:bg-neutral-900",
+				"[&_.shiki_span]:dark:!text-[--shiki-dark]",
+			)}
+		>
 			<post.Content />
 		</article>,
 		{
