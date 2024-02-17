@@ -2,8 +2,7 @@ import { cx } from "hono/css"
 import { jsxRenderer } from "hono/jsx-renderer"
 import { Script } from "honox/server"
 
-/* eslint-disable-next-line @typescript-eslint/promise-function-async */
-export default jsxRenderer(({ children, title, description }) => (
+export default jsxRenderer(async ({ children, title, description }) => (
 	<html lang="en">
 		<head>
 			<meta charset="utf-8" />
