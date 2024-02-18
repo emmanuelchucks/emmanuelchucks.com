@@ -17,7 +17,7 @@ export default createRoute(async (c) => {
 				"prose prose-neutral min-w-0",
 				"dark:prose-invert",
 				"prose-p:text-pretty",
-				"prose-pre:bg-white prose-pre:dark:bg-neutral-900",
+				"prose-pre:bg-white prose-pre:dark:!bg-neutral-900",
 				"prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance",
 				"[&_.shiki_span]:dark:!text-[--shiki-dark]",
 			)}

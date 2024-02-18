@@ -1,5 +1,6 @@
 import pages from "@hono/vite-cloudflare-pages"
 import mdx from "@mdx-js/rollup"
+import rehypeShiki from "@shikijs/rehype"
 import honox from "honox/vite"
 import client from "honox/vite/client"
 import remarkFrontmatter from "remark-frontmatter"
@@ -28,6 +29,17 @@ export default defineConfig(({ mode }) => {
 					remarkMdxFrontmatter,
 					remarkReadingTime,
 					remarkMdxReadingTime,
+				],
+				rehypePlugins: [
+					[
+						rehypeShiki,
+						{
+							themes: {
+								light: "github-light",
+								dark: "github-dark",
+							},
+						},
+					],
 				],
 			}),
 		],
