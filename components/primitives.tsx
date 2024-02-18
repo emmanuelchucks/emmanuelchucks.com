@@ -5,9 +5,10 @@ export async function A(props: JSX.IntrinsicElements["a"]) {
 		<a
 			{...props}
 			class={cx(
-				"rounded-sm outline-none ring-neutral-700",
+				"rounded-sm underline decoration-2 underline-offset-2 outline-none ring-neutral-700",
 				"dark:ring-neutral-300",
 				"focus-visible:ring-2",
+				props.class,
 			)}
 		/>
 	)
