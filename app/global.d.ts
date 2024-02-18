@@ -15,7 +15,7 @@ declare module "hono" {
 		/* eslint-disable-next-line @typescript-eslint/prefer-function-type */
 		(
 			content: string | Promise<string>,
-			head?: Head,
+			props: Head,
 		): Response | Promise<Response>
 	}
 }
