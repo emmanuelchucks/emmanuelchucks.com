@@ -23,17 +23,21 @@ const posts = import.meta.glob<{
 	eager: true,
 })
 
-export function getPosts() {
-	return Object.values(posts).map((post) => {
-		v.parse(frontmatterSchema, post.frontmatter)
-		v.parse(readingTimeSchema, post.readingTime)
+export function getPosts(filter = "") {
+	return Object.values(posts)
+		.filter((post) =>
+			post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
+		)
+		.map((post) => {
+			v.parse(frontmatterSchema, post.frontmatter)
+			v.parse(readingTimeSchema, post.readingTime)
 
-		return {
-			...post.frontmatter,
-			/* eslint-disable-next-line @typescript-eslint/naming-convention */
-			Content: post.default,
-			readingTime: post.readingTime.text,
-			href: `/blog/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
-		}
-	})
+			return {
+				...post.frontmatter,
+				/* eslint-disable-next-line @typescript-eslint/naming-convention */
+				Content: post.default,
+				readingTime: post.readingTime.text,
+				href: `/blog/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
+			}
+		})
 }
