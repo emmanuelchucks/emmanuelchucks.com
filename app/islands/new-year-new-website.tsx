@@ -18,6 +18,7 @@ export async function StyledSearchInput() {
 			>
 				<legend class="sr-only">Search names of prolific programmers</legend>
 				<SearchInput
+					label="Search names"
 					id="search-names"
 					name="q"
 					type="search"

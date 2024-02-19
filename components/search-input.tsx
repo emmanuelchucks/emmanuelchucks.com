@@ -1,11 +1,15 @@
 import { cx } from "hono/css"
 import { Input } from "./primitives"
 
-export async function SearchInput(props: JSX.IntrinsicElements["input"]) {
+export async function SearchInput(
+	props: JSX.IntrinsicElements["input"] & {
+		label: string
+	},
+) {
 	return (
 		<>
 			<label for={props.id} class="sr-only">
-				Search names
+				{props.label}
 			</label>
 			<Input {...props} />
 			<noscript>
