@@ -24,7 +24,8 @@ export async function StyledSearchInput() {
 					type="search"
 					placeholder="Search names"
 					onInput={(e) => {
-						setSearchQuery((e.currentTarget as HTMLInputElement).value)
+						if (!(e.currentTarget instanceof HTMLInputElement)) return
+						setSearchQuery(e.currentTarget.value)
 					}}
 				/>
 			</form>
