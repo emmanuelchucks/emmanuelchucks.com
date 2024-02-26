@@ -18,6 +18,7 @@ export default createRoute(async (c) => {
 					id="serach-posts"
 					type="search"
 					placeholder="Search posts"
+					value={q}
 				/>
 			</form>
 			<section aria-live="polite" class="mt-8">
