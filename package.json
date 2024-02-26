@@ -12,7 +12,7 @@
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
-		"hono": "^4.0.5",
+		"hono": "^4.0.7",
 		"honox": "^0.1.5",
 		"valibot": "^0.29.0"
 	},
@@ -22,8 +22,8 @@
 		"@mdx-js/rollup": "^3.0.1",
 		"@shikijs/rehype": "^1.1.7",
 		"@tailwindcss/typography": "^0.5.10",
-		"@typescript-eslint/eslint-plugin": "^7.0.2",
-		"@typescript-eslint/parser": "^7.0.2",
+		"@typescript-eslint/eslint-plugin": "^7.1.0",
+		"@typescript-eslint/parser": "^7.1.0",
 		"autoprefixer": "^10.4.17",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -44,5 +44,5 @@
 		"vite-imagetools": "^6.2.9",
 		"wrangler": "^3.29.0"
 	},
-	"packageManager": "pnpm@8.15.3"
+	"packageManager": "pnpm@8.15.4"
 }
