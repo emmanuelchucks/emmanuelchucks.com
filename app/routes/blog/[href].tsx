@@ -1,8 +1,6 @@
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
-import StyledSearchInput from "../../islands/new-year-new-website"
 
 export default createRoute(async (c) => {
 	const posts = getPosts()
@@ -25,12 +23,7 @@ export default createRoute(async (c) => {
 				"focus-visible:prose-pre:ring-2",
 			)}
 		>
-			<post.Content
-				components={{
-					a: A,
-					StyledSearchInput,
-				}}
-			/>
+			<post.Content />
 		</article>,
 		{
 			title: `${post.title} - Emmanuel Chucks`,
