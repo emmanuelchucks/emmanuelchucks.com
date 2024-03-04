@@ -14,7 +14,8 @@ export async function A(props: JSX.IntrinsicElements["a"]) {
 	)
 }
 
-export async function Input(props: JSX.IntrinsicElements["input"]) {
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export function Input(props: JSX.IntrinsicElements["input"]) {
 	return (
 		<input
 			{...props}

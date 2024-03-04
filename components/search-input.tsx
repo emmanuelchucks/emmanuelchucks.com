@@ -1,7 +1,8 @@
 import { cx } from "hono/css"
 import { Input } from "./primitives"
 
-export async function SearchInput(
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export function SearchInput(
 	props: JSX.IntrinsicElements["input"] & {
 		label: string
 	},

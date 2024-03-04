@@ -3,7 +3,8 @@ import { SearchInput } from "../../components/search-input"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
-export async function StyledSearchInput() {
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export default function StyledSearchInput() {
 	const [searchQuery, setSearchQuery] = useState("")
 	const filteredNames = names.filter((name) =>
 		name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -35,7 +36,8 @@ export async function StyledSearchInput() {
 				</h3>
 				{filteredNames.length ? (
 					<ul>
-						{filteredNames.map(async (name) => (
+						{/* eslint-disable-next-line @typescript-eslint/promise-function-async */}
+						{filteredNames.map((name) => (
 							<li>{name}</li>
 						))}
 					</ul>
