@@ -12,8 +12,8 @@
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
-		"hono": "^4.0.8",
-		"honox": "^0.1.5",
+		"hono": "^4.0.9",
+		"honox": "^0.1.6",
 		"valibot": "^0.29.0"
 	},
 	"devDependencies": {
@@ -22,9 +22,9 @@
 		"@mdx-js/rollup": "^3.0.1",
 		"@shikijs/rehype": "^1.1.7",
 		"@tailwindcss/typography": "^0.5.10",
-		"@typescript-eslint/eslint-plugin": "^7.1.0",
-		"@typescript-eslint/parser": "^7.1.0",
-		"autoprefixer": "^10.4.17",
+		"@typescript-eslint/eslint-plugin": "^7.1.1",
+		"@typescript-eslint/parser": "^7.1.1",
+		"autoprefixer": "^10.4.18",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-config-xo": "^0.44.0",
@@ -42,7 +42,7 @@
 		"typescript": "^5.3.3",
 		"vite": "^5.1.4",
 		"vite-imagetools": "^6.2.9",
-		"wrangler": "^3.30.0"
+		"wrangler": "^3.30.1"
 	},
 	"packageManager": "pnpm@8.15.4"
 }
