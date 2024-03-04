@@ -43,5 +43,9 @@ export default defineConfig(({ mode }) => {
 				],
 			}),
 		],
+		build: {
+			assetsDir: "static",
+			ssrEmitAssets: true,
+		},
 	}
 })
