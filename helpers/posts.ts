@@ -1,6 +1,5 @@
 import slugify from "@sindresorhus/slugify"
 import * as v from "valibot"
-import { A } from "../components/primitives"
 
 const frontmatterSchema = v.object({
 	id: v.string("id is required"),
@@ -24,19 +23,6 @@ const posts = import.meta.glob<{
 	eager: true,
 })
 
-const islands = import.meta.glob<{
-	default: () => JSX.Element
-}>("/app/islands/*.tsx", {
-	eager: true,
-})
-
-const islandsMap = Object.fromEntries(
-	Object.entries(islands).map(([_key, value]) => [
-		value.default.name.replace("Wrapped", ""),
-		value.default,
-	]),
-)
-
 export function getPosts(filter = "") {
 	return Object.values(posts)
 		.filter((post) =>
@@ -48,11 +34,10 @@ export function getPosts(filter = "") {
 
 			return {
 				...post.frontmatter,
+				/* eslint-disable-next-line @typescript-eslint/naming-convention */
+				Content: post.default,
 				readingTime: post.readingTime.text,
 				href: `/blog/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
-				/* eslint-disable-next-line @typescript-eslint/naming-convention */
-				Content: async () =>
-					post.default({ components: { a: A, ...islandsMap } }),
 			}
 		})
 }
