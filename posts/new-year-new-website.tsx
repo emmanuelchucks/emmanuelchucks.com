@@ -1,4 +1,4 @@
-export { StyledSearchInput } from "../app/islands/new-year-new-website"
+export { default as StyledSearchInput } from "../app/islands/new-year-new-website"
 
 export async function DarkModeScrollbars() {
 	return (
