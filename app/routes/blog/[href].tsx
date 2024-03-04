@@ -2,7 +2,7 @@ import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 import { A } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
-import StyledSearchInput from "../../islands/new-year-new-website"
+import StyledSearchInput from "../../islands/styled-search-input"
 
 export default createRoute(async (c) => {
 	const posts = getPosts()
