@@ -25,19 +25,19 @@ export default createRoute(async (c) => {
 	}
 
 	return c.render(
-		<main>
-			<article
-				class={cx(
-					"prose prose-neutral min-w-0",
-					"dark:prose-invert",
-					"prose-p:text-pretty",
-					"prose-pre:bg-white prose-pre:outline-none prose-pre:ring-neutral-700",
-					"prose-pre:dark:!bg-neutral-900 prose-pre:dark:!ring-neutral-300",
-					"prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance",
-					"[&_.shiki_span]:dark:!text-[--shiki-dark]",
-					"focus-visible:prose-pre:ring-2",
-				)}
-			>
+		<main
+			class={cx(
+				"prose prose-neutral min-w-0",
+				"dark:prose-invert",
+				"prose-p:text-pretty",
+				"prose-pre:bg-white prose-pre:outline-none prose-pre:ring-neutral-700",
+				"prose-pre:dark:!bg-neutral-900 prose-pre:dark:!ring-neutral-300",
+				"prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance",
+				"[&_.shiki_span]:dark:!text-[--shiki-dark]",
+				"focus-visible:prose-pre:ring-2",
+			)}
+		>
+			<article>
 				<post.Content
 					components={{
 						a: A,
