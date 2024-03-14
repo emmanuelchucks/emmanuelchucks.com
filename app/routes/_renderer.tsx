@@ -14,7 +14,7 @@ export default jsxRenderer(async ({ title, description, children }) => {
 				<meta name="description" content={description} />
 				<title>{title}</title>
 				<link rel="icon" href="/static/favicon.png" />
-				<link href={styles} rel="stylesheet" />
+				<link rel="stylesheet" href={styles} />
 				<Script src="/app/client.ts" />
 				<Style />
 			</head>
