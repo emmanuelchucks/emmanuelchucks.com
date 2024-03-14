@@ -26,10 +26,13 @@ export default jsxRenderer(async ({ title, description, children }) => {
 					"dark:bg-neutral-950 dark:text-neutral-50",
 				)}
 			>
-				<header
-					class={cx("font-semibold text-neutral-700", "dark:text-neutral-300")}
-				>
-					<nav>
+				<header>
+					<nav
+						class={cx(
+							"font-semibold text-neutral-700",
+							"dark:text-neutral-300",
+						)}
+					>
 						<ul class="flex flex-row gap-x-8">
 							{[
 								{ text: "Home", href: "/" },
