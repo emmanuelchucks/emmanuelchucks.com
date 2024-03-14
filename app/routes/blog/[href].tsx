@@ -2,7 +2,19 @@ import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 import { A } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
-import StyledSearchInput from "../../islands/styled-search-input"
+
+const islands = import.meta.glob<{
+	default: () => JSX.Element
+}>("/app/islands/*.tsx", {
+	eager: true,
+})
+
+const islandComponents = Object.fromEntries(
+	Object.values(islands).map((island) => [
+		island.default.name.replace("Wrapped", ""),
+		island.default,
+	]),
+)
 
 export default createRoute(async (c) => {
 	const posts = getPosts()
@@ -28,7 +40,7 @@ export default createRoute(async (c) => {
 			<post.Content
 				components={{
 					a: A,
-					StyledSearchInput,
+					...islandComponents,
 				}}
 			/>
 		</article>,
