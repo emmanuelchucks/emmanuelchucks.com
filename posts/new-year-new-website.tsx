@@ -1,8 +1,10 @@
+import { default as DarkModeSwitcher } from "../app/islands/dark-mode-switcher"
+
 export { default as StyledSearchInput } from "../app/islands/styled-search-input"
 
 export async function DarkModeScrollbars() {
 	return (
-		<>
+		<DarkModeSwitcher>
 			<p>
 				Using JavaScript, it is possible to dynamically change parts of a page
 				without requiring the entire page to reload — for instance, to update a
@@ -47,6 +49,6 @@ export async function DarkModeScrollbars() {
 				announcement of elements which have an implicit live region role (such
 				as role="alert").
 			</p>
-		</>
+		</DarkModeSwitcher>
 	)
 }

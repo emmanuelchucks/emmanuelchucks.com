@@ -1,3 +1,4 @@
+import { cx } from "hono/css"
 import { useState } from "hono/jsx"
 import { SearchInput } from "../../components/search-input"
 
@@ -11,7 +12,13 @@ export default function StyledSearchInput() {
 	)
 
 	return (
-		<div class="grid h-72 content-center">
+		<div
+			class={cx(
+				"mx-auto grid min-h-64 max-w-xs content-center",
+				"sm:min-h-72 sm:max-w-md",
+				"md:max-w-lg",
+			)}
+		>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault()
