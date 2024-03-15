@@ -1,5 +1,6 @@
 import { cx } from "hono/css"
 import { useReducer, type Child } from "hono/jsx"
+import { Button } from "../../components/primitives"
 
 /* eslint-disable-next-line @typescript-eslint/promise-function-async */
 export default function DarkModeSwitcher(props: { children: Child }) {
@@ -18,9 +19,17 @@ export default function DarkModeSwitcher(props: { children: Child }) {
 				"sm:p-16",
 			)}
 		>
-			<button onClick={toggleDarkMode}>
+			<Button
+				onClick={toggleDarkMode}
+				data-theme={isDarkMode ? "dark" : "light"}
+				class={cx(
+					"border px-4 py-2 ring-offset-4",
+					"data-[theme=light]:ring-offset-white",
+					"data-[theme=dark]:ring-offset-neutral-900",
+				)}
+			>
 				{isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-			</button>
+			</Button>
 			{props.children}
 		</div>
 	)

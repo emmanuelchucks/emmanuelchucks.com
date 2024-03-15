@@ -15,6 +15,21 @@ export async function A(props: JSX.IntrinsicElements["a"]) {
 }
 
 /* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export function Button(props: JSX.IntrinsicElements["button"]) {
+	return (
+		<button
+			{...props}
+			class={cx(
+				"cursor-default rounded-md outline-none ring-neutral-700",
+				"dark:ring-neutral-300",
+				"focus-visible:ring-2",
+				props.class,
+			)}
+		/>
+	)
+}
+
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
 export function Input(props: JSX.IntrinsicElements["input"]) {
 	return (
 		<input
