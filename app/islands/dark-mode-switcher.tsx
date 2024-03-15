@@ -13,8 +13,8 @@ export default function DarkModeSwitcher(props: { children: Child }) {
 			data-theme={isDarkMode ? "dark" : "light"}
 			class={cx(
 				"max-h-96 min-h-72 overflow-y-auto p-8",
-				"data-[theme=light]:bg-white data-[theme=light]:text-neutral-950",
-				"data-[theme=dark]:bg-neutral-900 data-[theme=dark]:text-neutral-50",
+				"data-[theme=light]:bg-white data-[theme=light]:text-neutral-950 data-[theme=light]:[color-scheme:light]",
+				"data-[theme=dark]:bg-neutral-900 data-[theme=dark]:text-neutral-50 data-[theme=dark]:[color-scheme:dark]",
 				"sm:p-16",
 			)}
 		>
