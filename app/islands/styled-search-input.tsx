@@ -1,6 +1,6 @@
 import { cx } from "hono/css"
 import { useState } from "hono/jsx"
-import { Input } from "../../components/primitives"
+import { Button, Input } from "../../components/primitives"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
@@ -23,6 +23,7 @@ export default function StyledSearchInput() {
 				onSubmit={(e) => {
 					e.preventDefault()
 				}}
+				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
 					<legend class="sr-only">Search names of prolific programmers</legend>
@@ -40,6 +41,12 @@ export default function StyledSearchInput() {
 						}}
 					/>
 				</fieldset>
+				<Button
+					type="submit"
+					class="rounded-md bg-neutral-100 px-4 py-2 dark:bg-neutral-700"
+				>
+					Search
+				</Button>
 			</form>
 			<section aria-live="polite" class="min-h-32">
 				<h3 class="sr-only">
