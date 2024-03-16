@@ -20,13 +20,16 @@ export default function StyledSearchInput() {
 			)}
 		>
 			<form
+				aria-labelledby="search-names-legend"
 				onSubmit={(e) => {
 					e.preventDefault()
 				}}
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
-					<legend class="sr-only">Search names of prolific programmers</legend>
+					<legend id="search-names-legend" class="sr-only">
+						Search names of prolific programmers
+					</legend>
 					<label for="search-names" class="sr-only">
 						Search names
 					</label>
@@ -48,9 +51,13 @@ export default function StyledSearchInput() {
 					Search
 				</Button>
 			</form>
-			<section aria-live="polite" class="min-h-32">
-				<h3 class="sr-only">
-					{searchQuery ? `Results for ${searchQuery}` : "All names"}
+			<section
+				aria-labelledby="search-names-results-heading"
+				aria-live="polite"
+				class="min-h-32"
+			>
+				<h3 id="search-names-results-heading" class="sr-only">
+					{searchQuery ? `Results for '${searchQuery}'` : "All names"}
 				</h3>
 				{filteredNames.length ? (
 					<ul>
