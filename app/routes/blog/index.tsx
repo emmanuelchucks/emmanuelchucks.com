@@ -9,9 +9,14 @@ export default createRoute(async (c) => {
 
 	return c.render(
 		<main>
-			<form class="grid grid-cols-[1fr_auto] gap-x-2">
+			<form
+				aria-labelledby="serach-posts-legend"
+				class="grid grid-cols-[1fr_auto] gap-x-2"
+			>
 				<fieldset>
-					<legend class="sr-only">Search posts by title or description</legend>
+					<legend id="serach-posts-legend" class="sr-only">
+						Search posts by title or description
+					</legend>
 					<label for="serach-posts" class="sr-only">
 						Search posts
 					</label>
@@ -30,8 +35,14 @@ export default createRoute(async (c) => {
 					Search
 				</Button>
 			</form>
-			<section aria-live="polite" class="mt-8">
-				<h1 class="sr-only">{q ? `Search results for ${q}` : "All posts"}</h1>
+			<section
+				aria-labelledby="search-posts-result-heading"
+				aria-live="polite"
+				class="mt-8"
+			>
+				<h1 id="search-posts-result-heading" class="sr-only">
+					{q ? `Search results for '${q}'` : "All posts"}
+				</h1>
 				{posts.length ? (
 					posts.map(async (post) => (
 						<div
