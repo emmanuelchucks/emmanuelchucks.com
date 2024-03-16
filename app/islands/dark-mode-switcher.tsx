@@ -20,6 +20,7 @@ export default function DarkModeSwitcher(props: { children: Child }) {
 			)}
 		>
 			<Button
+				type="button"
 				onClick={toggleDarkMode}
 				data-theme={isDarkMode ? "dark" : "light"}
 				class={cx(
