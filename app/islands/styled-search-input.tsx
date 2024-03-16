@@ -1,6 +1,6 @@
 import { cx } from "hono/css"
 import { useState } from "hono/jsx"
-import { SearchInput } from "../../components/search-input"
+import { Input } from "../../components/primitives"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
@@ -26,8 +26,10 @@ export default function StyledSearchInput() {
 			>
 				<fieldset>
 					<legend class="sr-only">Search names of prolific programmers</legend>
-					<SearchInput
-						label="Search names"
+					<label for="search-names" class="sr-only">
+						Search names
+					</label>
+					<Input
 						id="search-names"
 						name="q"
 						type="search"
