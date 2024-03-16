@@ -1,6 +1,6 @@
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A, Input } from "../../../components/primitives"
+import { A, Button, Input } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
 
 export default createRoute(async (c) => {
@@ -9,7 +9,7 @@ export default createRoute(async (c) => {
 
 	return c.render(
 		<main>
-			<form>
+			<form class="grid grid-cols-[1fr_auto] gap-x-2">
 				<fieldset>
 					<legend class="sr-only">Search posts by title or description</legend>
 					<label for="serach-posts" class="sr-only">
@@ -23,6 +23,12 @@ export default createRoute(async (c) => {
 						value={q}
 					/>
 				</fieldset>
+				<Button
+					type="submit"
+					class="rounded-md bg-neutral-100 px-4 py-2 dark:bg-neutral-900"
+				>
+					Search
+				</Button>
 			</form>
 			<section aria-live="polite" class="mt-8">
 				<h1 class="sr-only">{q ? `Search results for ${q}` : "All posts"}</h1>
