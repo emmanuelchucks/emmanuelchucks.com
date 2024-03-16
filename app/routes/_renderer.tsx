@@ -20,7 +20,7 @@ export default jsxRenderer(async ({ title, description, children }) => {
 			</head>
 			<body
 				class={cx(
-					"mx-4 my-16 grid max-w-screen-sm grid-rows-[auto,1fr] gap-y-16 bg-neutral-50 text-neutral-950",
+					"mx-4 my-16 grid max-w-2xl grid-rows-[auto,1fr] gap-y-16 bg-neutral-50 text-neutral-950",
 					"sm:mx-8",
 					"md:col-start-2 md:mx-auto",
 					"dark:bg-neutral-950 dark:text-neutral-50",
