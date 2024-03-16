@@ -1,6 +1,7 @@
 import { css, cx } from "hono/css"
 
-export async function A(props: JSX.IntrinsicElements["a"]) {
+/* eslint-disable-next-line @typescript-eslint/promise-function-async */
+export function A(props: JSX.IntrinsicElements["a"]) {
 	return (
 		<a
 			{...props}

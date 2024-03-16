@@ -21,10 +21,10 @@ export default function StyledSearchInput() {
 		>
 			<form
 				aria-labelledby="search-names-legend"
+				class="grid grid-cols-[1fr_auto] gap-x-2"
 				onSubmit={(e) => {
 					e.preventDefault()
 				}}
-				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
 					<legend id="search-names-legend" class="sr-only">
