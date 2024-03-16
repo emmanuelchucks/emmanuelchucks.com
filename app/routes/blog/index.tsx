@@ -1,7 +1,6 @@
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A } from "../../../components/primitives"
-import { SearchInput } from "../../../components/search-input"
+import { A, Input } from "../../../components/primitives"
 import { getPosts } from "../../../helpers/posts"
 
 export default createRoute(async (c) => {
@@ -13,8 +12,10 @@ export default createRoute(async (c) => {
 			<form>
 				<fieldset>
 					<legend class="sr-only">Search posts by title or description</legend>
-					<SearchInput
-						label="Search posts"
+					<label for="serach-posts" class="sr-only">
+						Search posts
+					</label>
+					<Input
 						name="q"
 						id="serach-posts"
 						type="search"
