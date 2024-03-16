@@ -23,7 +23,9 @@ export default function DarkModeSwitcher(props: { children: Child }) {
 				onClick={toggleDarkMode}
 				data-theme={isDarkMode ? "dark" : "light"}
 				class={cx(
-					"border px-4 py-2 ring-offset-4",
+					"px-4 py-2",
+					"data-[theme=light]:bg-neutral-100",
+					"data-[theme=dark]:bg-neutral-800",
 					"data-[theme=light]:border-neutral-700 data-[theme=light]:ring-neutral-700 data-[theme=light]:ring-offset-white",
 					"data-[theme=dark]:border-neutral-300 data-[theme=dark]:ring-neutral-300 data-[theme=dark]:ring-offset-neutral-900",
 				)}
