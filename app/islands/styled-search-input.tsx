@@ -24,18 +24,20 @@ export default function StyledSearchInput() {
 					e.preventDefault()
 				}}
 			>
-				<legend class="sr-only">Search names of prolific programmers</legend>
-				<SearchInput
-					label="Search names"
-					id="search-names"
-					name="q"
-					type="search"
-					placeholder="Search names"
-					onInput={(e) => {
-						if (!(e.currentTarget instanceof HTMLInputElement)) return
-						setSearchQuery(e.currentTarget.value)
-					}}
-				/>
+				<fieldset>
+					<legend class="sr-only">Search names of prolific programmers</legend>
+					<SearchInput
+						label="Search names"
+						id="search-names"
+						name="q"
+						type="search"
+						placeholder="Search names"
+						onInput={(e) => {
+							if (!(e.currentTarget instanceof HTMLInputElement)) return
+							setSearchQuery(e.currentTarget.value)
+						}}
+					/>
+				</fieldset>
 			</form>
 			<section aria-live="polite" class="min-h-32">
 				<h3 class="sr-only">

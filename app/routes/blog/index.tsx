@@ -11,15 +11,17 @@ export default createRoute(async (c) => {
 	return c.render(
 		<main>
 			<form>
-				<legend class="sr-only">Search posts by title or description</legend>
-				<SearchInput
-					label="Search posts"
-					name="q"
-					id="serach-posts"
-					type="search"
-					placeholder="Search posts"
-					value={q}
-				/>
+				<fieldset>
+					<legend class="sr-only">Search posts by title or description</legend>
+					<SearchInput
+						label="Search posts"
+						name="q"
+						id="serach-posts"
+						type="search"
+						placeholder="Search posts"
+						value={q}
+					/>
+				</fieldset>
 			</form>
 			<section aria-live="polite" class="mt-8">
 				<h1 class="sr-only">{q ? `Search results for ${q}` : "All posts"}</h1>
