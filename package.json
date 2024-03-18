@@ -12,8 +12,8 @@
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
-		"hono": "^4.1.0",
-		"honox": "^0.1.8",
+		"hono": "^4.1.1",
+		"honox": "^0.1.9",
 		"valibot": "^0.30.0"
 	},
 	"devDependencies": {
@@ -30,7 +30,7 @@
 		"eslint-config-xo": "^0.44.0",
 		"eslint-config-xo-typescript": "^4.0.0",
 		"eslint-plugin-only-warn": "^1.1.0",
-		"postcss": "^8.4.35",
+		"postcss": "^8.4.36",
 		"prettier": "^3.2.5",
 		"prettier-plugin-organize-imports": "^3.2.4",
 		"prettier-plugin-packagejson": "^2.4.12",
@@ -44,5 +44,5 @@
 		"vite-imagetools": "^6.2.9",
 		"wrangler": "^3.34.2"
 	},
-	"packageManager": "pnpm@8.15.4"
+	"packageManager": "pnpm@8.15.5"
 }
