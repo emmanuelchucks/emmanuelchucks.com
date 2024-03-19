@@ -10,7 +10,7 @@ export function DemoBox(props: { heading: string; children: Child }) {
 			class={cx("overflow-clip rounded-md bg-white", "dark:bg-neutral-900")}
 		>
 			<h3 id={`demo-heading-${id}`} class="sr-only">
-				Demo for {props.heading}
+				Demo for '{props.heading}'
 			</h3>
 			{props.children}
 		</section>
