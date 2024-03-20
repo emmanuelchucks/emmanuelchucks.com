@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 import { A } from "../../../components/primitives"
@@ -27,6 +28,19 @@ export default createRoute(async (c) => {
 			)}
 		>
 			<article>
+				<div
+					class={cx(
+						"not-prose flex flex-row gap-x-2 text-sm text-neutral-600",
+						"dark:text-neutral-400",
+						"sm:text-base",
+					)}
+				>
+					<time datetime={post.publishedAt} class="font-medium">
+						{format(post.publishedAt, "EEEE, MMMM d, yyyy")}
+					</time>
+					<span aria-hidden="true">{" · "}</span>
+					<p>{post.readingTime}</p>
+				</div>
 				<post.Content
 					components={{
 						a: A,
