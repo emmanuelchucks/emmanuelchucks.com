@@ -54,6 +54,7 @@ export function Input(props: JSX.IntrinsicElements["input"]) {
 						}
 					}
 				`,
+				props.class,
 			)}
 		/>
 	)
