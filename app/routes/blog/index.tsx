@@ -1,3 +1,4 @@
+import { format } from "date-fns"
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
 import { A, Button, Input } from "../../../components/primitives"
@@ -53,7 +54,7 @@ export default createRoute(async (c) => {
 							)}
 						>
 							<time datetime={post.publishedAt} class="self-end font-medium">
-								{post.publishedAt}
+								{format(post.publishedAt, "MMM d, yyyy")}
 							</time>
 							<p
 								class={cx(
