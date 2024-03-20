@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240314.0",
 		"@hono/vite-cloudflare-pages": "^0.2.5",
+		"@hono/vite-dev-server": "^0.9.0",
 		"@mdx-js/rollup": "^3.0.1",
 		"@shikijs/rehype": "^1.2.0",
 		"@tailwindcss/typography": "^0.5.10",
