@@ -1,4 +1,5 @@
 import pages from "@hono/vite-cloudflare-pages"
+import adapter from "@hono/vite-dev-server/cloudflare"
 import mdx from "@mdx-js/rollup"
 import rehypeShiki from "@shikijs/rehype"
 import honox from "honox/vite"
@@ -19,9 +20,13 @@ export default defineConfig(({ mode }) => {
 
 	return {
 		plugins: [
-			honox(),
 			pages(),
 			imagetools(),
+			honox({
+				devServer: {
+					adapter,
+				},
+			}),
 			mdx({
 				jsxImportSource: "hono/jsx",
 				remarkPlugins: [
