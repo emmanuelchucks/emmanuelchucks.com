@@ -8,7 +8,6 @@ type Head = {
 declare module "hono" {
 	/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
 	interface Env {
-		Variables: unknown
 		Bindings: {
 			VIEWS_COUNTER: KVNamespace
 		}
