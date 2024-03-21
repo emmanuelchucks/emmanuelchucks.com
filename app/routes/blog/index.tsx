@@ -31,8 +31,8 @@ export default createRoute(async (c) => {
 	return c.render(
 		<main>
 			<form
-				aria-labelledby="serach-posts-legend"
 				action={c.req.path}
+				aria-labelledby="serach-posts-legend"
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
