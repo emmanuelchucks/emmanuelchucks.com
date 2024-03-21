@@ -21,6 +21,7 @@ export default function StyledSearchInput() {
 		>
 			<form
 				aria-labelledby="search-names-legend"
+				action="#"
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 				onSubmit={(e) => {
 					e.preventDefault()

@@ -32,6 +32,7 @@ export default createRoute(async (c) => {
 		<main>
 			<form
 				aria-labelledby="serach-posts-legend"
+				action={c.req.path}
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
