@@ -38,6 +38,7 @@ export default function StyledSearchInput() {
 						name="q"
 						type="search"
 						placeholder="Search names"
+						class="bg-neutral-50"
 						onInput={(e) => {
 							if (!(e.currentTarget instanceof HTMLInputElement)) return
 							setSearchQuery(e.currentTarget.value)
