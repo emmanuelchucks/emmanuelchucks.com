@@ -8,6 +8,26 @@ export default createRoute(async (c) => {
 	const q = c.req.query("q")
 	const posts = getPosts(q)
 
+	const viewsCountList = await c.env.VIEWS_COUNTER.list()
+	const viewsCountPromiseResults = await Promise.allSettled(
+		viewsCountList.keys.map(async (key) => [
+			key.name,
+			Number((await c.env.VIEWS_COUNTER.get(key.name)) ?? 2),
+		]),
+	)
+
+	const formattedViewsCountMap = Object.fromEntries(
+		viewsCountPromiseResults
+			.filter(
+				(result): result is PromiseFulfilledResult<[string, number]> =>
+					result.status === "fulfilled",
+			)
+			.map((result) => [
+				result.value[0],
+				new Intl.NumberFormat().format(result.value[1]),
+			]),
+	)
+
 	return c.render(
 		<main>
 			<form
@@ -48,39 +68,44 @@ export default createRoute(async (c) => {
 					posts.map(async (post) => (
 						<div
 							class={cx(
-								"grid grid-cols-[auto_1fr] justify-between gap-x-1 gap-y-1",
-								"sm:grid-flow-col sm:grid-cols-[auto_24em] sm:grid-rows-[auto_1fr]",
-								"md:grid-cols-[auto_26em]",
+								"grid justify-between gap-y-1",
+								"sm:grid-cols-[0.5fr_24em]",
+								"md:grid-cols-[0.5fr_28em]",
 							)}
 						>
-							<time datetime={post.publishedAt} class="self-end font-medium">
-								{format(post.publishedAt, "MMM d, yyyy")}
-							</time>
-							<p
+							<div
 								class={cx(
-									"self-center text-sm text-neutral-700",
-									"sm:self-auto sm:text-end",
-									"dark:text-neutral-300",
+									"flex flex-row gap-x-2 text-sm text-neutral-600",
+									"dark:text-neutral-400",
+									"sm:row-span-2 sm:flex-col sm:items-end",
 								)}
 							>
+								<time
+									datetime={post.publishedAt}
+									class={cx(
+										"font-medium",
+										"sm:text-base sm:text-neutral-700 sm:dark:text-neutral-300",
+									)}
+								>
+									{format(post.publishedAt, "MMM d, yyyy")}
+								</time>
 								<span aria-hidden="true" class="sm:hidden">
-									{" - "}
+									{" · "}
 								</span>
-								{post.readingTime}
-							</p>
-							<h2
-								class={cx(
-									"col-span-full text-2xl font-semibold",
-									"sm:col-span-1",
-								)}
-							>
+								<p>{post.readingTime}</p>
+								<span aria-hidden="true" class="sm:hidden">
+									{" · "}
+								</span>
+								<p>{formattedViewsCountMap[post.id]} views</p>
+							</div>
+							<h2 class={cx("text-2xl font-semibold")}>
 								<A href={post.href}>{post.title}</A>
 							</h2>
 							<p
 								class={cx(
-									"col-span-full mt-1 line-clamp-3 text-neutral-700",
+									"mt-1 line-clamp-3 text-neutral-700",
 									"dark:text-neutral-300",
-									"sm:col-span-1",
+									"sm:col-start-2",
 								)}
 							>
 								{post.description}

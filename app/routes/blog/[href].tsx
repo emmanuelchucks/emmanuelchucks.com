@@ -14,6 +14,11 @@ export default createRoute(async (c) => {
 		return c.notFound()
 	}
 
+	const viewsCount = Number((await c.env.VIEWS_COUNTER.get(post.id)) ?? 2)
+	void c.env.VIEWS_COUNTER.put(post.id, String(viewsCount + 1))
+
+	const formattedViewsCount = new Intl.NumberFormat().format(viewsCount)
+
 	return c.render(
 		<main
 			class={cx(
@@ -40,6 +45,8 @@ export default createRoute(async (c) => {
 					</time>
 					<span aria-hidden="true">{" · "}</span>
 					<p>{post.readingTime}</p>
+					<span aria-hidden="true">{" · "}</span>
+					<p>{formattedViewsCount} views</p>
 				</div>
 				<post.Content
 					components={{
