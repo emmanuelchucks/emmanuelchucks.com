@@ -1,6 +1,6 @@
 import { cx } from "hono/css"
 import { useState } from "hono/jsx"
-import { Button, Input } from "../../components/primitives"
+import { Button, Input } from "~/components/primitives"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 

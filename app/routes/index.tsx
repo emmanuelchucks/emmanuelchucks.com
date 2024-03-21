@@ -1,9 +1,9 @@
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A } from "../../components/primitives"
+import { A } from "~/components/primitives"
 
 // @ts-expect-error - required for image import
-import profilePicture from "../../assets/emmanuel-chucks.jpeg?w=128&format=webp"
+import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp"
 
 export default createRoute(async (c) =>
 	c.render(

@@ -1,8 +1,8 @@
 import { format } from "date-fns"
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A, Button, Input } from "../../../components/primitives"
-import { getPosts } from "../../../helpers/posts"
+import { A, Button, Input } from "~/components/primitives"
+import { getPosts } from "~/helpers/posts"
 
 export default createRoute(async (c) => {
 	const q = c.req.query("q")

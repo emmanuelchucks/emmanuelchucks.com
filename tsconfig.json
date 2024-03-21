@@ -7,6 +7,10 @@
 		"lib": ["ESNext", "DOM"],
 		"types": ["@cloudflare/workers-types", "vite/client"],
 		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx"
+		"jsxImportSource": "hono/jsx",
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["app/*"]
+		}
 	}
 }
