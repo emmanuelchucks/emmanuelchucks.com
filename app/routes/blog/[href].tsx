@@ -1,10 +1,10 @@
 import { format } from "date-fns"
 import { cx } from "hono/css"
 import { createRoute } from "honox/factory"
-import { A } from "../../../components/primitives"
-import { getPosts } from "../../../helpers/posts"
-import DarkModeSwitcher from "../../islands/dark-mode-switcher"
-import StyledSearchInput from "../../islands/styled-search-input"
+import { A } from "~/components/primitives"
+import { getPosts } from "~/helpers/posts"
+import DarkModeSwitcher from "~/islands/dark-mode-switcher"
+import StyledSearchInput from "~/islands/styled-search-input"
 
 export default createRoute(async (c) => {
 	const posts = getPosts()

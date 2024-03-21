@@ -10,11 +10,12 @@ import remarkReadingTime from "remark-reading-time"
 import remarkMdxReadingTime from "remark-reading-time/mdx"
 import { defineConfig } from "vite"
 import { imagetools } from "vite-imagetools"
+import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig(({ mode }) => {
 	if (mode === "client") {
 		return {
-			plugins: [client()],
+			plugins: [client(), tsconfigPaths()],
 		}
 	}
 
@@ -22,6 +23,7 @@ export default defineConfig(({ mode }) => {
 		plugins: [
 			pages(),
 			imagetools(),
+			tsconfigPaths(),
 			honox({
 				devServer: {
 					adapter,
