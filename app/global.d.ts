@@ -1,4 +1,5 @@
-import {} from "hono"
+/* eslint-disable @typescript-eslint/consistent-type-definitions, @typescript-eslint/ban-types, @typescript-eslint/prefer-function-type */
+import "hono"
 
 type Head = {
 	title?: string
@@ -6,19 +7,16 @@ type Head = {
 }
 
 declare module "hono" {
-	/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
 	interface Env {
+		Variables: {}
 		Bindings: {
 			VIEWS_COUNTER: KVNamespace
 		}
 	}
-
-	/* eslint-disable-next-line @typescript-eslint/consistent-type-definitions */
 	interface ContextRenderer {
-		/* eslint-disable-next-line @typescript-eslint/prefer-function-type */
 		(
 			content: string | Promise<string>,
-			props: Head,
+			head: Head,
 		): Response | Promise<Response>
 	}
 }
