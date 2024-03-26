@@ -23,9 +23,7 @@ const posts = import.meta.glob<{
 	eager: true,
 })
 
-export function getPosts(
-	filter = "",
-): Array<v.Output<typeof frontmatterSchema>> {
+export function getPosts(filter = "") {
 	return Object.values(posts)
 		.filter((post) =>
 			post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),

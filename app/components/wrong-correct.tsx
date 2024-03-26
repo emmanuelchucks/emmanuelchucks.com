@@ -1,7 +1,4 @@
-export function Wrong(props: {
-	heading: string
-	children: JSX.Element
-}): JSX.Element {
+export function Wrong(props: { heading: string; children: JSX.Element }) {
 	const id = String(Math.random()).substring(2, 6)
 	return (
 		<section aria-labelledby={`wrong-section-heading-${id}`}>
@@ -14,10 +11,7 @@ export function Wrong(props: {
 	)
 }
 
-export function Correct(props: {
-	heading: string
-	children: JSX.Element
-}): JSX.Element {
+export function Correct(props: { heading: string; children: JSX.Element }) {
 	const id = String(Math.random()).substring(2, 6)
 	return (
 		<section aria-labelledby={`correct-section-heading-${id}`}>

@@ -4,7 +4,7 @@ import { Script } from "honox/server"
 import { A } from "~/components/primitives"
 import styles from "~/style.css?url"
 
-export default jsxRenderer(async ({ title, description, children }) => {
+export default jsxRenderer(({ title, description, children }) => {
 	const c = useRequestContext()
 	return (
 		<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
@@ -37,7 +37,7 @@ export default jsxRenderer(async ({ title, description, children }) => {
 							{[
 								{ text: "Home", href: "/" },
 								{ text: "Blog", href: "/blog" },
-							].map(async (link) => (
+							].map((link) => (
 								<li>
 									<A
 										href={link.href}

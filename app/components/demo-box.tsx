@@ -1,7 +1,6 @@
 import { cx } from "hono/css"
 import { type Child } from "hono/jsx"
 
-/* eslint-disable-next-line @typescript-eslint/promise-function-async */
 export function DemoBox(props: { heading: string; children: Child }) {
 	const id = String(Math.random()).substring(2, 6)
 	return (

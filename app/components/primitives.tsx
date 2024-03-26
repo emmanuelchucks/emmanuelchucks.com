@@ -1,6 +1,6 @@
 import { css, cx } from "hono/css"
 
-export function A(props: JSX.IntrinsicElements["a"]): JSX.Element {
+export function A(props: JSX.IntrinsicElements["a"]) {
 	return (
 		<a
 			{...props}
@@ -14,7 +14,7 @@ export function A(props: JSX.IntrinsicElements["a"]): JSX.Element {
 	)
 }
 
-export function Button(props: JSX.IntrinsicElements["button"]): JSX.Element {
+export function Button(props: JSX.IntrinsicElements["button"]) {
 	return (
 		<button
 			{...props}
@@ -28,7 +28,7 @@ export function Button(props: JSX.IntrinsicElements["button"]): JSX.Element {
 	)
 }
 
-export function Input(props: JSX.IntrinsicElements["input"]): JSX.Element {
+export function Input(props: JSX.IntrinsicElements["input"]) {
 	return (
 		<input
 			{...props}
