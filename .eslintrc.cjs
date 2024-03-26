@@ -18,6 +18,9 @@ module.exports = {
 		{
 			extends: ["xo-typescript", "prettier"],
 			files: ["*.ts", "*.tsx"],
+			rules: {
+				curly: ["error", "all"],
+			},
 		},
 	],
 	parserOptions: {
@@ -27,6 +30,6 @@ module.exports = {
 	plugins: ["only-warn"],
 	ignorePatterns: ["dist", "node_modules"],
 	rules: {
-		"@typescript-eslint/explicit-function-return-type": "error",
+		"@typescript-eslint/explicit-function-return-type": ["error"],
 	},
 }
