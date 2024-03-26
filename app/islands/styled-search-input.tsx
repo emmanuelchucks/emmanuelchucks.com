@@ -40,8 +40,9 @@ export default function StyledSearchInput(): JSX.Element {
 						placeholder="Search names"
 						class="bg-neutral-50"
 						onInput={(e) => {
-							if (!(e.currentTarget instanceof HTMLInputElement)) return
-							setSearchQuery(e.currentTarget.value)
+							if (e.currentTarget instanceof HTMLInputElement) {
+								setSearchQuery(e.currentTarget.value)
+							}
 						}}
 					/>
 				</fieldset>
