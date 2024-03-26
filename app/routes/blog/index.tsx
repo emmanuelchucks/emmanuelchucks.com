@@ -66,7 +66,7 @@ export default createRoute(async (c) => {
 					{q ? `Search results for '${q}'` : "All posts"}
 				</h1>
 				{posts.length ? (
-					posts.map(async (post) => (
+					posts.map((post) => (
 						<div
 							class={cx(
 								"grid justify-between gap-y-1",

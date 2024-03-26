@@ -29,7 +29,5 @@ module.exports = {
 	},
 	plugins: ["only-warn"],
 	ignorePatterns: ["dist", "node_modules"],
-	rules: {
-		"@typescript-eslint/explicit-function-return-type": ["error"],
-	},
+	rules: {},
 }
