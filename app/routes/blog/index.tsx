@@ -89,7 +89,10 @@ export default createRoute(async (c) => {
 											"sm:text-base sm:text-neutral-700 sm:dark:text-neutral-300",
 										)}
 									>
-										{format(post.publishedAt, "MMM d, yyyy")}
+										{format(
+											post.publishedAt,
+											"MMM d, yyyy",
+										)}
 									</time>
 									<span aria-hidden="true" class="sm:hidden">
 										{" · "}
@@ -98,7 +101,9 @@ export default createRoute(async (c) => {
 									<span aria-hidden="true" class="sm:hidden">
 										{" · "}
 									</span>
-									<p>{formattedViewsCountMap[post.id]} views</p>
+									<p>
+										{formattedViewsCountMap[post.id]} views
+									</p>
 								</div>
 								<h2 class={cx("text-2xl font-semibold")}>
 									<A href={post.href}>{post.title}</A>

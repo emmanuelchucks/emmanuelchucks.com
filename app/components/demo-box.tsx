@@ -9,7 +9,10 @@ export function DemoBox(props: {
 	return (
 		<section
 			aria-labelledby={`demo-heading-${id}`}
-			class={cx("overflow-clip rounded-md bg-white", "dark:bg-neutral-900")}
+			class={cx(
+				"overflow-clip rounded-md bg-white",
+				"dark:bg-neutral-900",
+			)}
 		>
 			<h3 id={`demo-heading-${id}`} class="sr-only">
 				Demo for '{props.heading}'
