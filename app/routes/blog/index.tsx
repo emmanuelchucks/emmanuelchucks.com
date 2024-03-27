@@ -66,53 +66,55 @@ export default createRoute(async (c) => {
 					{q ? `Search results for '${q}'` : "All posts"}
 				</h1>
 				{posts.length ? (
-					posts.map((post) => (
-						<div
-							class={cx(
-								"grid justify-between gap-y-1",
-								"sm:grid-cols-[0.5fr_24em]",
-								"md:grid-cols-[0.5fr_28em]",
-							)}
-						>
+					posts.map(
+						(post): JSX.Element => (
 							<div
 								class={cx(
-									"flex flex-row gap-x-2 text-sm text-neutral-600",
-									"dark:text-neutral-400",
-									"sm:row-span-2 sm:flex-col sm:items-end",
+									"grid justify-between gap-y-1",
+									"sm:grid-cols-[0.5fr_24em]",
+									"md:grid-cols-[0.5fr_28em]",
 								)}
 							>
-								<time
-									datetime={post.publishedAt}
+								<div
 									class={cx(
-										"font-medium",
-										"sm:text-base sm:text-neutral-700 sm:dark:text-neutral-300",
+										"flex flex-row gap-x-2 text-sm text-neutral-600",
+										"dark:text-neutral-400",
+										"sm:row-span-2 sm:flex-col sm:items-end",
 									)}
 								>
-									{format(post.publishedAt, "MMM d, yyyy")}
-								</time>
-								<span aria-hidden="true" class="sm:hidden">
-									{" · "}
-								</span>
-								<p>{post.readingTime}</p>
-								<span aria-hidden="true" class="sm:hidden">
-									{" · "}
-								</span>
-								<p>{formattedViewsCountMap[post.id]} views</p>
+									<time
+										datetime={post.publishedAt}
+										class={cx(
+											"font-medium",
+											"sm:text-base sm:text-neutral-700 sm:dark:text-neutral-300",
+										)}
+									>
+										{format(post.publishedAt, "MMM d, yyyy")}
+									</time>
+									<span aria-hidden="true" class="sm:hidden">
+										{" · "}
+									</span>
+									<p>{post.readingTime}</p>
+									<span aria-hidden="true" class="sm:hidden">
+										{" · "}
+									</span>
+									<p>{formattedViewsCountMap[post.id]} views</p>
+								</div>
+								<h2 class={cx("text-2xl font-semibold")}>
+									<A href={post.href}>{post.title}</A>
+								</h2>
+								<p
+									class={cx(
+										"mt-1 line-clamp-3 text-neutral-700",
+										"dark:text-neutral-300",
+										"sm:col-start-2",
+									)}
+								>
+									{post.description}
+								</p>
 							</div>
-							<h2 class={cx("text-2xl font-semibold")}>
-								<A href={post.href}>{post.title}</A>
-							</h2>
-							<p
-								class={cx(
-									"mt-1 line-clamp-3 text-neutral-700",
-									"dark:text-neutral-300",
-									"sm:col-start-2",
-								)}
-							>
-								{post.description}
-							</p>
-						</div>
-					))
+						),
+					)
 				) : (
 					<p class={cx("text-neutral-600", "dark:text-neutral-400")}>
 						No posts found

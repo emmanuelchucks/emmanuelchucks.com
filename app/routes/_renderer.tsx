@@ -4,7 +4,7 @@ import { Script } from "honox/server"
 import { A } from "~/components/primitives"
 import styles from "~/style.css?url"
 
-export default jsxRenderer(({ title, description, children }) => {
+export default jsxRenderer(({ title, description, children }): JSX.Element => {
 	const c = useRequestContext()
 	return (
 		<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
@@ -37,17 +37,23 @@ export default jsxRenderer(({ title, description, children }) => {
 							{[
 								{ text: "Home", href: "/" },
 								{ text: "Blog", href: "/blog" },
-							].map((link) => (
-								<li>
-									<A
-										href={link.href}
-										aria-current={c.req.path === link.href ? "page" : undefined}
-										class="no-underline"
-									>
-										{link.text}
-									</A>
-								</li>
-							))}
+							].map(
+								(link): JSX.Element => (
+									<li>
+										<A
+											href={link.href}
+											aria-current={
+												c.req.path === link.href
+													? "page"
+													: undefined
+											}
+											class="no-underline"
+										>
+											{link.text}
+										</A>
+									</li>
+								),
+							)}
 						</ul>
 					</nav>
 				</header>

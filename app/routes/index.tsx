@@ -46,12 +46,14 @@ export default createRoute(async (c) =>
 							text: "GitHub",
 							href: "https://github.com/emmanuelchucks",
 						},
-					].map((link) => (
-						<div class="flex flex-row gap-x-2">
-							<span aria-hidden="true">↗</span>
-							<A href={link.href}>{link.text}</A>
-						</div>
-					))}
+					].map(
+						(link): JSX.Element => (
+							<div class="flex flex-row gap-x-2">
+								<span aria-hidden="true">↗</span>
+								<A href={link.href}>{link.text}</A>
+							</div>
+						),
+					)}
 				</aside>
 				<div
 					class={cx(

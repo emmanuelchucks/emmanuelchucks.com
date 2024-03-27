@@ -4,7 +4,7 @@ import { Button, Input } from "~/components/primitives"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
-export default function StyledSearchInput() {
+export default function StyledSearchInput(): JSX.Element {
 	const [searchQuery, setSearchQuery] = useState("")
 	const filteredNames = names.filter((name) =>
 		name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -63,9 +63,11 @@ export default function StyledSearchInput() {
 				</h3>
 				{filteredNames.length ? (
 					<ul>
-						{filteredNames.map((name) => (
-							<li>{name}</li>
-						))}
+						{filteredNames.map(
+							(name): JSX.Element => (
+								<li>{name}</li>
+							),
+						)}
 					</ul>
 				) : (
 					<p>No results</p>

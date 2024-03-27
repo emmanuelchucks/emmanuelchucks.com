@@ -1,6 +1,10 @@
 import slugify from "@sindresorhus/slugify"
 import * as v from "valibot"
 
+type MdxContent = (props: {
+	components: Partial<JSX.IntrinsicElements>
+}) => JSX.Element
+
 const frontmatterSchema = v.object({
 	id: v.string("id is required"),
 	title: v.string("title is required"),
@@ -16,14 +20,18 @@ const readingTimeSchema = v.object({
 const posts = import.meta.glob<{
 	frontmatter: v.Input<typeof frontmatterSchema>
 	readingTime: v.Input<typeof readingTimeSchema>
-	default: (props: {
-		components: Partial<JSX.IntrinsicElements>
-	}) => JSX.Element
+	default: MdxContent
 }>("/posts/*.mdx", {
 	eager: true,
 })
 
-export function getPosts(filter = "") {
+type Post = v.Output<typeof frontmatterSchema> & {
+	Content: MdxContent
+	readingTime: string
+	href: string
+}
+
+export function getPosts(filter = ""): Post[] {
 	return Object.values(posts)
 		.filter((post) =>
 			post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
