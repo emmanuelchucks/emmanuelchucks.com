@@ -7,10 +7,16 @@ import styles from "~/style.css?url"
 export default jsxRenderer(({ title, description, children }): JSX.Element => {
 	const c = useRequestContext()
 	return (
-		<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
+		<html
+			lang="en"
+			class="[color-scheme:light_dark] [scrollbar-gutter:stable]"
+		>
 			<head>
 				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0"
+				/>
 				<meta name="description" content={description} />
 				<title>{title}</title>
 				<link rel="icon" href="/static/favicon.png" />
