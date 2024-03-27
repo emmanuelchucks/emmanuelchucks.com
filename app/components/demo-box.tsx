@@ -1,7 +1,10 @@
 import { cx } from "hono/css"
 import { type Child } from "hono/jsx"
 
-export function DemoBox(props: { heading: string; children: Child }) {
+export function DemoBox(props: {
+	heading: string
+	children: Child
+}): JSX.Element {
 	const id = String(Math.random()).substring(2, 6)
 	return (
 		<section
