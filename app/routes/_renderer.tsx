@@ -4,7 +4,7 @@ import { Script } from "honox/server"
 import { A } from "~/components/primitives"
 import styles from "~/style.css?url"
 
-export default jsxRenderer(({ title, description, children }): JSX.Element => {
+export default jsxRenderer(({ title, description, children }) => {
 	const c = useRequestContext()
 	return (
 		<html
