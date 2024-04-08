@@ -13,16 +13,16 @@
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",
 		"date-fns": "^3.6.0",
-		"hono": "^4.1.7",
+		"hono": "^4.2.2",
 		"honox": "^0.1.9",
 		"valibot": "^0.30.0"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20240329.0",
+		"@cloudflare/workers-types": "^4.20240405.0",
 		"@hono/vite-cloudflare-pages": "^0.2.5",
 		"@hono/vite-dev-server": "^0.10.0",
 		"@mdx-js/rollup": "^3.0.1",
-		"@shikijs/rehype": "^1.2.3",
+		"@shikijs/rehype": "^1.2.4",
 		"@tailwindcss/typography": "^0.5.12",
 		"@typescript-eslint/eslint-plugin": "^7.5.0",
 		"@typescript-eslint/parser": "^7.5.0",
@@ -41,12 +41,12 @@
 		"remark-mdx-frontmatter": "^4.0.0",
 		"remark-reading-time": "^2.0.1",
 		"tailwindcss": "^3.4.3",
-		"typescript": "^5.4.3",
+		"typescript": "^5.4.4",
 		"unplugin-icons": "^0.18.5",
-		"vite": "^5.2.7",
+		"vite": "^5.2.8",
 		"vite-imagetools": "^7.0.1",
 		"vite-tsconfig-paths": "^4.3.2",
-		"wrangler": "^3.42.0"
+		"wrangler": "^3.48.0"
 	},
 	"packageManager": "pnpm@8.15.6"
 }
