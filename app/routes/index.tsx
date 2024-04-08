@@ -3,7 +3,7 @@ import { createRoute } from "honox/factory"
 import { A } from "~/components/primitives"
 
 // @ts-expect-error - required for image import
-import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp"
+import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp&as=metadata"
 
 export default createRoute(async (c) =>
 	c.render(
@@ -20,10 +20,10 @@ export default createRoute(async (c) =>
 						Ambitious software engineer
 					</p>
 					<img
-						src={profilePicture as string}
 						alt="Emmanuel Chucks in native clothing, smiling"
-						width={64}
-						height={64}
+						src={profilePicture.src as string}
+						width={profilePicture.width as number}
+						height={profilePicture.height as number}
 						class={cx("size-16 rounded-full", "sm:row-span-full")}
 					/>
 				</div>
