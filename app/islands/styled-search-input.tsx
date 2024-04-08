@@ -1,10 +1,14 @@
 import { cx } from "hono/css"
-import { useState } from "hono/jsx"
+import { useId, useState } from "hono/jsx"
 import { Button, Input } from "~/components/primitives"
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
 
 export default function StyledSearchInput(): JSX.Element {
+	const searchNamesLegend = useId()
+	const searchNamesInput = useId()
+	const searchNamesResultsHeading = useId()
+
 	const [searchQuery, setSearchQuery] = useState("")
 	const filteredNames = names.filter((name) =>
 		name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -20,25 +24,25 @@ export default function StyledSearchInput(): JSX.Element {
 		>
 			<form
 				action="#"
-				aria-labelledby="search-names-legend"
+				aria-labelledby={searchNamesLegend}
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 				onSubmit={(e) => {
 					e.preventDefault()
 				}}
 			>
 				<fieldset>
-					<legend id="search-names-legend" class="sr-only">
+					<legend id={searchNamesLegend} class="sr-only">
 						Search names of prolific programmers
 					</legend>
-					<label for="search-names" class="sr-only">
+					<label for={searchNamesInput} class="sr-only">
 						Search names
 					</label>
 					<Input
-						id="search-names"
 						name="q"
 						type="search"
 						placeholder="Search names"
 						class="bg-neutral-50"
+						id={searchNamesInput}
 						onInput={(e) => {
 							if (e.currentTarget instanceof HTMLInputElement) {
 								setSearchQuery(e.currentTarget.value)
@@ -54,11 +58,11 @@ export default function StyledSearchInput(): JSX.Element {
 				</Button>
 			</form>
 			<section
-				aria-labelledby="search-names-results-heading"
+				aria-labelledby={searchNamesResultsHeading}
 				aria-live="polite"
 				class="min-h-32"
 			>
-				<h3 id="search-names-results-heading" class="sr-only">
+				<h3 id={searchNamesResultsHeading} class="sr-only">
 					{searchQuery ? `Results for '${searchQuery}'` : "All names"}
 				</h3>
 				{filteredNames.length ? (
