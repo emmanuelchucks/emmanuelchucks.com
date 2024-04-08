@@ -1,10 +1,15 @@
 import { format } from "date-fns"
 import { cx } from "hono/css"
+import { useId } from "hono/jsx"
 import { createRoute } from "honox/factory"
 import { A, Button, Input } from "~/components/primitives"
 import { getPosts } from "~/helpers/posts"
 
 export default createRoute(async (c) => {
+	const searchPostLegend = useId()
+	const searchPostInput = useId()
+	const searchPostsResultHeading = useId()
+
 	const q = c.req.query("q")
 	const posts = getPosts(q)
 
@@ -32,21 +37,21 @@ export default createRoute(async (c) => {
 		<main>
 			<form
 				action={c.req.path}
-				aria-labelledby="serach-posts-legend"
+				aria-labelledby={searchPostLegend}
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 			>
 				<fieldset>
-					<legend id="serach-posts-legend" class="sr-only">
+					<legend id={searchPostLegend} class="sr-only">
 						Search posts by title or description
 					</legend>
-					<label for="serach-posts" class="sr-only">
+					<label for={searchPostInput} class="sr-only">
 						Search posts
 					</label>
 					<Input
 						name="q"
-						id="serach-posts"
 						type="search"
 						placeholder="Search posts"
+						id={searchPostInput}
 						value={q}
 					/>
 				</fieldset>
@@ -58,11 +63,11 @@ export default createRoute(async (c) => {
 				</Button>
 			</form>
 			<section
-				aria-labelledby="search-posts-result-heading"
+				aria-labelledby={searchPostsResultHeading}
 				aria-live="polite"
 				class="mt-8"
 			>
-				<h1 id="search-posts-result-heading" class="sr-only">
+				<h1 id={searchPostsResultHeading} class="sr-only">
 					{q ? `Search results for '${q}'` : "All posts"}
 				</h1>
 				{posts.length ? (
