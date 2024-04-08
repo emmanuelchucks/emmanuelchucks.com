@@ -1,11 +1,10 @@
 import { Style, cx } from "hono/css"
-import { jsxRenderer, useRequestContext } from "hono/jsx-renderer"
+import { jsxRenderer } from "hono/jsx-renderer"
 import { Script } from "honox/server"
 import { A } from "~/components/primitives"
 import styles from "~/style.css?url"
 
-export default jsxRenderer(({ title, description, children }) => {
-	const c = useRequestContext()
+export default jsxRenderer(({ title, description, children }, c) => {
 	return (
 		<html
 			lang="en"
