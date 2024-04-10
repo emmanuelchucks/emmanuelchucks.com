@@ -4,8 +4,7 @@ import { Script } from "honox/server"
 import { A } from "~/components/primitives"
 import styles from "~/style.css?url"
 
-export default jsxRenderer(({ title, description, children }, c) => {
-	return (
+export default jsxRenderer(async ({ title, description, children }, c) => (
 		<html
 			lang="en"
 			class="[color-scheme:light_dark] [scrollbar-gutter:stable]"
