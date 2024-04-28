@@ -1,10 +1,11 @@
 import { cx } from "hono/css"
-import { useId, type Child } from "hono/jsx"
+import { useId, type PropsWithChildren } from "hono/jsx"
 
-export function DemoBox(props: {
-	heading: string
-	children: Child
-}): JSX.Element {
+export function DemoBox(
+	props: PropsWithChildren<{
+		heading: string
+	}>,
+): JSX.Element {
 	const demoHeading = useId()
 	return (
 		<section
