@@ -1,17 +1,14 @@
-import { Style, cx } from "hono/css"
-import { jsxRenderer } from "hono/jsx-renderer"
-import { Script } from "honox/server"
-import { A } from "~/components/primitives"
-import styles from "~/style.css?url"
+import { Style, cx } from "hono/css";
+import { jsxRenderer } from "hono/jsx-renderer";
+import { Script } from "honox/server";
+import { A } from "~/components/primitives";
+import styles from "~/style.css?url";
 
 export default jsxRenderer(async ({ title, description, children }, c) => (
 	<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
 		<head>
 			<meta charset="utf-8" />
-			<meta
-				name="viewport"
-				content="width=device-width, initial-scale=1.0"
-			/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 			<meta name="description" content={description} />
 			<title>{title}</title>
 			<link rel="icon" href="/static/favicon.png" />
@@ -29,10 +26,7 @@ export default jsxRenderer(async ({ title, description, children }, c) => (
 		>
 			<header>
 				<nav
-					class={cx(
-						"font-semibold text-neutral-700",
-						"dark:text-neutral-300",
-					)}
+					class={cx("font-semibold text-neutral-700", "dark:text-neutral-300")}
 				>
 					<ul class="flex flex-row gap-x-8">
 						{[
@@ -40,14 +34,10 @@ export default jsxRenderer(async ({ title, description, children }, c) => (
 							{ text: "Blog", href: "/blog" },
 						].map(
 							(link): JSX.Element => (
-								<li>
+								<li key={link.href}>
 									<A
 										href={link.href}
-										aria-current={
-											c.req.path === link.href
-												? "page"
-												: undefined
-										}
+										aria-current={c.req.path === link.href ? "page" : undefined}
 										class="no-underline"
 									>
 										{link.text}
@@ -61,4 +51,4 @@ export default jsxRenderer(async ({ title, description, children }, c) => (
 			{children}
 		</body>
 	</html>
-))
+));

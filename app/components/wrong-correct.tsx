@@ -1,11 +1,11 @@
-import { useId, type PropsWithChildren } from "hono/jsx"
+import { useId, type PropsWithChildren } from "hono/jsx";
 
 export function Wrong(
 	props: PropsWithChildren<{
-		heading: string
+		heading: string;
 	}>,
 ): JSX.Element {
-	const wrongSectionHeading = useId()
+	const wrongSectionHeading = useId();
 	return (
 		<section aria-labelledby={wrongSectionHeading}>
 			<h3 id={wrongSectionHeading} class="text-base font-medium">
@@ -14,15 +14,15 @@ export function Wrong(
 			</h3>
 			{props.children}
 		</section>
-	)
+	);
 }
 
 export function Correct(
 	props: PropsWithChildren<{
-		heading: string
+		heading: string;
 	}>,
 ): JSX.Element {
-	const correctSectionHeading = useId()
+	const correctSectionHeading = useId();
 	return (
 		<section aria-labelledby={correctSectionHeading}>
 			<h3 id={correctSectionHeading} class="text-base font-medium">
@@ -31,5 +31,5 @@ export function Correct(
 			</h3>
 			{props.children}
 		</section>
-	)
+	);
 }

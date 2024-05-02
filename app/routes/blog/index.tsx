@@ -1,25 +1,25 @@
-import { format } from "date-fns"
-import { cx } from "hono/css"
-import { useId } from "hono/jsx"
-import { createRoute } from "honox/factory"
-import { A, Button, Input } from "~/components/primitives"
-import { getPosts } from "~/helpers/posts"
+import { format } from "date-fns";
+import { cx } from "hono/css";
+import { useId } from "hono/jsx";
+import { createRoute } from "honox/factory";
+import { A, Button, Input } from "~/components/primitives";
+import { getPosts } from "~/helpers/posts";
 
 export default createRoute(async (c) => {
-	const searchPostLegend = useId()
-	const searchPostInput = useId()
-	const searchPostsResultHeading = useId()
+	const searchPostLegend = useId();
+	const searchPostInput = useId();
+	const searchPostsResultHeading = useId();
 
-	const q = c.req.query("q")
-	const posts = getPosts(q)
+	const q = c.req.query("q");
+	const posts = getPosts(q);
 
-	const viewsCountList = await c.env.VIEWS_COUNTER.list()
+	const viewsCountList = await c.env.VIEWS_COUNTER.list();
 	const viewsCountPromiseResults = await Promise.allSettled(
 		viewsCountList.keys.map(async (key) => [
 			key.name,
 			Number((await c.env.VIEWS_COUNTER.get(key.name)) ?? 2),
 		]),
-	)
+	);
 
 	const formattedViewsCountMap = Object.fromEntries(
 		viewsCountPromiseResults
@@ -31,7 +31,7 @@ export default createRoute(async (c) => {
 				result.value[0],
 				new Intl.NumberFormat().format(result.value[1]),
 			]),
-	)
+	);
 
 	return c.render(
 		<main>
@@ -74,6 +74,7 @@ export default createRoute(async (c) => {
 					posts.map(
 						(post): JSX.Element => (
 							<div
+								key={post.id}
 								class={cx(
 									"grid justify-between gap-y-1",
 									"sm:grid-cols-[0.5fr_24em]",
@@ -94,10 +95,7 @@ export default createRoute(async (c) => {
 											"sm:text-base sm:text-neutral-700 sm:dark:text-neutral-300",
 										)}
 									>
-										{format(
-											post.publishedAt,
-											"MMM d, yyyy",
-										)}
+										{format(post.publishedAt, "MMM d, yyyy")}
 									</time>
 									<span aria-hidden="true" class="sm:hidden">
 										{" · "}
@@ -106,9 +104,7 @@ export default createRoute(async (c) => {
 									<span aria-hidden="true" class="sm:hidden">
 										{" · "}
 									</span>
-									<p>
-										{formattedViewsCountMap[post.id]} views
-									</p>
+									<p>{formattedViewsCountMap[post.id]} views</p>
 								</div>
 								<h2 class={cx("text-2xl font-semibold")}>
 									<A href={post.href}>{post.title}</A>
@@ -137,5 +133,5 @@ export default createRoute(async (c) => {
 			description:
 				"Writing about all things tech and design related, sharing everything I learn on my engineering journey.",
 		},
-	)
-})
+	);
+});

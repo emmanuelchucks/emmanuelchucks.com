@@ -7,4 +7,4 @@ export default {
 		"prettier-plugin-organize-imports",
 		"prettier-plugin-tailwindcss",
 	],
-}
+};
