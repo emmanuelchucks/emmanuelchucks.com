@@ -2,9 +2,7 @@ import { cx } from "hono/css";
 import { useReducer, type PropsWithChildren } from "hono/jsx";
 import { Button } from "~/components/primitives";
 
-export default function DarkModeSwitcher(
-	props: PropsWithChildren,
-): JSX.Element {
+export default function DarkModeSwitcher(props: PropsWithChildren) {
 	const [isDarkMode, toggleDarkMode] = useReducer(
 		(isDarkMode) => !isDarkMode,
 		true,

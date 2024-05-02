@@ -5,7 +5,7 @@ export function DemoBox(
 	props: PropsWithChildren<{
 		heading: string;
 	}>,
-): JSX.Element {
+) {
 	const demoHeading = useId();
 	return (
 		<section

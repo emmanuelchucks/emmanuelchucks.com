@@ -4,7 +4,7 @@ import { Script } from "honox/server";
 import { A } from "~/components/primitives";
 import styles from "~/style.css?url";
 
-export default jsxRenderer(async ({ title, description, children }, c) => (
+export default jsxRenderer(({ title, description, children }, c) => (
 	<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
 		<head>
 			<meta charset="utf-8" />
@@ -32,19 +32,17 @@ export default jsxRenderer(async ({ title, description, children }, c) => (
 						{[
 							{ text: "Home", href: "/" },
 							{ text: "Blog", href: "/blog" },
-						].map(
-							(link): JSX.Element => (
-								<li key={link.href}>
-									<A
-										href={link.href}
-										aria-current={c.req.path === link.href ? "page" : undefined}
-										class="no-underline"
-									>
-										{link.text}
-									</A>
-								</li>
-							),
-						)}
+						].map((link) => (
+							<li key={link.href}>
+								<A
+									href={link.href}
+									aria-current={c.req.path === link.href ? "page" : undefined}
+									class="no-underline"
+								>
+									{link.text}
+								</A>
+							</li>
+						))}
 					</ul>
 				</nav>
 			</header>

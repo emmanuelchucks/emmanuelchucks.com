@@ -5,7 +5,7 @@ import { A } from "~/components/primitives";
 // @ts-expect-error - required for image import
 import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp&as=metadata";
 
-export default createRoute(async (c) =>
+export default createRoute((c) =>
 	c.render(
 		<main>
 			<article class="grid gap-y-8">
@@ -46,14 +46,12 @@ export default createRoute(async (c) =>
 							text: "GitHub",
 							href: "https://github.com/emmanuelchucks",
 						},
-					].map(
-						(link): JSX.Element => (
-							<div key={link.href} class="flex flex-row gap-x-2">
-								<span aria-hidden="true">↗</span>
-								<A href={link.href}>{link.text}</A>
-							</div>
-						),
-					)}
+					].map((link) => (
+						<div key={link.href} class="flex flex-row gap-x-2">
+							<span aria-hidden="true">↗</span>
+							<A href={link.href}>{link.text}</A>
+						</div>
+					))}
 				</aside>
 				<div
 					class={cx(
