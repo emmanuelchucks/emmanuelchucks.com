@@ -1,18 +1,18 @@
-import { cx } from "hono/css"
-import { useId, useState } from "hono/jsx"
-import { Button, Input } from "~/components/primitives"
+import { cx } from "hono/css";
+import { useId, useState } from "hono/jsx";
+import { Button, Input } from "~/components/primitives";
 
-const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"]
+const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"];
 
 export default function StyledSearchInput(): JSX.Element {
-	const searchNamesLegend = useId()
-	const searchNamesInput = useId()
-	const searchNamesResultsHeading = useId()
+	const searchNamesLegend = useId();
+	const searchNamesInput = useId();
+	const searchNamesResultsHeading = useId();
 
-	const [searchQuery, setSearchQuery] = useState("")
+	const [searchQuery, setSearchQuery] = useState("");
 	const filteredNames = names.filter((name) =>
 		name.toLowerCase().includes(searchQuery.toLowerCase()),
-	)
+	);
 
 	return (
 		<div
@@ -27,7 +27,7 @@ export default function StyledSearchInput(): JSX.Element {
 				aria-labelledby={searchNamesLegend}
 				class="grid grid-cols-[1fr_auto] gap-x-2"
 				onSubmit={(e) => {
-					e.preventDefault()
+					e.preventDefault();
 				}}
 			>
 				<fieldset>
@@ -45,7 +45,7 @@ export default function StyledSearchInput(): JSX.Element {
 						id={searchNamesInput}
 						onInput={(e) => {
 							if (e.currentTarget instanceof HTMLInputElement) {
-								setSearchQuery(e.currentTarget.value)
+								setSearchQuery(e.currentTarget.value);
 							}
 						}}
 					/>
@@ -69,7 +69,7 @@ export default function StyledSearchInput(): JSX.Element {
 					<ul>
 						{filteredNames.map(
 							(name): JSX.Element => (
-								<li>{name}</li>
+								<li key={name}>{name}</li>
 							),
 						)}
 					</ul>
@@ -78,5 +78,5 @@ export default function StyledSearchInput(): JSX.Element {
 				)}
 			</section>
 		</div>
-	)
+	);
 }

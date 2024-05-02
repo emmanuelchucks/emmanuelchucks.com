@@ -1,23 +1,23 @@
-import { format } from "date-fns"
-import { cx } from "hono/css"
-import { createRoute } from "honox/factory"
-import { A } from "~/components/primitives"
-import { getPosts } from "~/helpers/posts"
-import DarkModeSwitcher from "~/islands/dark-mode-switcher"
-import StyledSearchInput from "~/islands/styled-search-input"
+import { format } from "date-fns";
+import { cx } from "hono/css";
+import { createRoute } from "honox/factory";
+import { A } from "~/components/primitives";
+import { getPosts } from "~/helpers/posts";
+import DarkModeSwitcher from "~/islands/dark-mode-switcher";
+import StyledSearchInput from "~/islands/styled-search-input";
 
 export default createRoute(async (c) => {
-	const posts = getPosts()
-	const post = posts.find((post) => c.req.param("href").endsWith(post.id))
+	const posts = getPosts();
+	const post = posts.find((post) => c.req.param("href").endsWith(post.id));
 
 	if (!post) {
-		return c.notFound()
+		return c.notFound();
 	}
 
-	const viewsCount = Number((await c.env.VIEWS_COUNTER.get(post.id)) ?? 2)
-	void c.env.VIEWS_COUNTER.put(post.id, String(viewsCount + 1))
+	const viewsCount = Number((await c.env.VIEWS_COUNTER.get(post.id)) ?? 2);
+	void c.env.VIEWS_COUNTER.put(post.id, String(viewsCount + 1));
 
-	const formattedViewsCount = new Intl.NumberFormat().format(viewsCount)
+	const formattedViewsCount = new Intl.NumberFormat().format(viewsCount);
 
 	return c.render(
 		<main
@@ -61,5 +61,5 @@ export default createRoute(async (c) => {
 			title: `${post.title} - Emmanuel Chucks`,
 			description: post.description,
 		},
-	)
-})
+	);
+});

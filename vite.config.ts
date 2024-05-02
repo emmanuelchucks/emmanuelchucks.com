@@ -1,22 +1,22 @@
-import pages from "@hono/vite-cloudflare-pages"
-import adapter from "@hono/vite-dev-server/cloudflare"
-import mdx from "@mdx-js/rollup"
-import rehypeShiki from "@shikijs/rehype"
-import honox from "honox/vite"
-import client from "honox/vite/client"
-import remarkFrontmatter from "remark-frontmatter"
-import remarkMdxFrontmatter from "remark-mdx-frontmatter"
-import remarkReadingTime from "remark-reading-time"
-import remarkMdxReadingTime from "remark-reading-time/mdx"
-import { defineConfig } from "vite"
-import { imagetools } from "vite-imagetools"
-import tsconfigPaths from "vite-tsconfig-paths"
+import pages from "@hono/vite-cloudflare-pages";
+import adapter from "@hono/vite-dev-server/cloudflare";
+import mdx from "@mdx-js/rollup";
+import rehypeShiki from "@shikijs/rehype";
+import honox from "honox/vite";
+import client from "honox/vite/client";
+import remarkFrontmatter from "remark-frontmatter";
+import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import remarkReadingTime from "remark-reading-time";
+import remarkMdxReadingTime from "remark-reading-time/mdx";
+import { defineConfig } from "vite";
+import { imagetools } from "vite-imagetools";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => {
 	if (mode === "client") {
 		return {
 			plugins: [client(), tsconfigPaths()],
-		}
+		};
 	}
 
 	return {
@@ -54,5 +54,5 @@ export default defineConfig(({ mode }) => {
 			assetsDir: "static",
 			ssrEmitAssets: true,
 		},
-	}
-})
+	};
+});
