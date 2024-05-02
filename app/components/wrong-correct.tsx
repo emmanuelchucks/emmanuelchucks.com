@@ -4,7 +4,7 @@ export function Wrong(
 	props: PropsWithChildren<{
 		heading: string;
 	}>,
-): JSX.Element {
+) {
 	const wrongSectionHeading = useId();
 	return (
 		<section aria-labelledby={wrongSectionHeading}>
@@ -21,7 +21,7 @@ export function Correct(
 	props: PropsWithChildren<{
 		heading: string;
 	}>,
-): JSX.Element {
+) {
 	const correctSectionHeading = useId();
 	return (
 		<section aria-labelledby={correctSectionHeading}>

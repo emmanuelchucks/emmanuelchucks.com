@@ -4,7 +4,7 @@ import { Button, Input } from "~/components/primitives";
 
 const names = ["The Primeagen", "TJ DeVries", "Yusuke Wada"];
 
-export default function StyledSearchInput(): JSX.Element {
+export default function StyledSearchInput() {
 	const searchNamesLegend = useId();
 	const searchNamesInput = useId();
 	const searchNamesResultsHeading = useId();
@@ -67,11 +67,9 @@ export default function StyledSearchInput(): JSX.Element {
 				</h3>
 				{filteredNames.length ? (
 					<ul>
-						{filteredNames.map(
-							(name): JSX.Element => (
-								<li key={name}>{name}</li>
-							),
-						)}
+						{filteredNames.map((name) => (
+							<li key={name}>{name}</li>
+						))}
 					</ul>
 				) : (
 					<p>No results</p>

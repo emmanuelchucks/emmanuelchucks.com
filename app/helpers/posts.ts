@@ -25,13 +25,7 @@ const posts = import.meta.glob<{
 	eager: true,
 });
 
-type Post = v.Output<typeof frontmatterSchema> & {
-	Content: MdxContent;
-	readingTime: string;
-	href: string;
-};
-
-export function getPosts(filter = ""): Post[] {
+export function getPosts(filter = "") {
 	return Object.values(posts)
 		.filter((post) =>
 			post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
@@ -42,7 +36,6 @@ export function getPosts(filter = ""): Post[] {
 
 			return {
 				...post.frontmatter,
-				/* eslint-disable-next-line @typescript-eslint/naming-convention */
 				Content: post.default,
 				readingTime: post.readingTime.text,
 				href: `/blog/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
