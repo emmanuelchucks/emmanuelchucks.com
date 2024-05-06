@@ -1,4 +1,4 @@
-import { useId, type PropsWithChildren } from "hono/jsx";
+import { type PropsWithChildren, useId } from "hono/jsx";
 
 export function Wrong(
 	props: PropsWithChildren<{
