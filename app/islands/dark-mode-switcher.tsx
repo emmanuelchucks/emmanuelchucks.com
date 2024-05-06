@@ -1,5 +1,5 @@
 import { cx } from "hono/css";
-import { useReducer, type PropsWithChildren } from "hono/jsx";
+import { type PropsWithChildren, useReducer } from "hono/jsx";
 import { Button } from "~/components/primitives";
 
 export default function DarkModeSwitcher(props: PropsWithChildren) {
