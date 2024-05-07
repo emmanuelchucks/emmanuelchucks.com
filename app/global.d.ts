@@ -7,12 +7,12 @@ type Head = {
 
 declare module "hono" {
 	interface Env {
+		Variables: {};
 		Bindings: {
 			VIEWS_COUNTER: KVNamespace;
 		};
 	}
 	interface ContextRenderer {
-		// biome-ignore lint/style/useShorthandFunctionType: No alternative
 		(
 			content: string | Promise<string>,
 			head?: Head,
