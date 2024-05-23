@@ -40,7 +40,7 @@ export default createRoute((c) =>
 						},
 						{
 							text: "Connect on X",
-							href: "https://twitter.com/emmanuelchucks",
+							href: "https://x.com/emmanuelchucks",
 						},
 						{
 							text: "GitHub",
