@@ -16,6 +16,14 @@ export default defineConfig(({ mode }) => {
 	if (mode === "client") {
 		return {
 			plugins: [client(), tsconfigPaths()],
+			build: {
+				rollupOptions: {
+					input: ["/app/style.css"],
+					output: {
+						assetFileNames: "static/assets/[name].[hash].[ext]",
+					},
+				},
+			},
 		};
 	}
 
