@@ -1,7 +1,8 @@
 import { Style, cx } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Link, Script } from "honox/server";
+import { Script } from "honox/server";
 import { A } from "~/components/primitives";
+import styles from "~/style.css?url";
 
 export default jsxRenderer(({ title, description, children }, c) => (
 	<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
@@ -11,8 +12,8 @@ export default jsxRenderer(({ title, description, children }, c) => (
 			<meta name="description" content={description} />
 			<title>{title}</title>
 			<link rel="icon" href="/static/favicon.png" />
-			<Link rel="stylesheet" href="/app/style.css" />
-			<Script src="/app/client.ts" />
+			<link rel="stylesheet" href={styles} />
+			<Script src="/app/client.ts" async />
 			<Style />
 		</head>
 		<body
