@@ -3,7 +3,6 @@ import adapter from "@hono/vite-dev-server/cloudflare";
 import mdx from "@mdx-js/rollup";
 import rehypeShiki from "@shikijs/rehype";
 import honox from "honox/vite";
-import client from "honox/vite/client";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import remarkReadingTime from "remark-reading-time";
@@ -12,55 +11,39 @@ import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-export default defineConfig(({ mode }) => {
-	if (mode === "client") {
-		return {
-			plugins: [client(), tsconfigPaths()],
-			build: {
-				rollupOptions: {
-					input: ["/app/style.css"],
-					output: {
-						assetFileNames: "static/assets/[name].[hash].[ext]",
-					},
-				},
+export default defineConfig({
+	plugins: [
+		pages(),
+		imagetools(),
+		tsconfigPaths(),
+		honox({
+			devServer: {
+				adapter,
 			},
-		};
-	}
-
-	return {
-		plugins: [
-			pages(),
-			imagetools(),
-			tsconfigPaths(),
-			honox({
-				devServer: {
-					adapter,
-				},
-			}),
-			mdx({
-				jsxImportSource: "hono/jsx",
-				remarkPlugins: [
-					remarkFrontmatter,
-					remarkMdxFrontmatter,
-					remarkReadingTime,
-					remarkMdxReadingTime,
-				],
-				rehypePlugins: [
-					[
-						rehypeShiki,
-						{
-							themes: {
-								light: "github-light",
-								dark: "github-dark",
-							},
+		}),
+		mdx({
+			jsxImportSource: "hono/jsx",
+			remarkPlugins: [
+				remarkFrontmatter,
+				remarkMdxFrontmatter,
+				remarkReadingTime,
+				remarkMdxReadingTime,
+			],
+			rehypePlugins: [
+				[
+					rehypeShiki,
+					{
+						themes: {
+							light: "github-light",
+							dark: "github-dark",
 						},
-					],
+					},
 				],
-			}),
-		],
-		build: {
-			assetsDir: "static",
-			ssrEmitAssets: true,
-		},
-	};
+			],
+		}),
+	],
+	build: {
+		assetsDir: "static",
+		ssrEmitAssets: true,
+	},
 });

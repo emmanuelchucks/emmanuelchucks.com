@@ -1,4 +1,5 @@
 import { css, cx } from "hono/css";
+import type { JSX } from "hono/jsx";
 
 export function A(props: JSX.IntrinsicElements["a"]) {
 	return (
