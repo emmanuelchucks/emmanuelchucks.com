@@ -1,8 +1,8 @@
 import { cx } from "hono/css";
 import { type PropsWithChildren, useReducer } from "hono/jsx";
-import { Button } from "~/components/primitives";
+import { Button } from "~/components/button";
 
-export default function DarkModeSwitcher(props: PropsWithChildren) {
+export default function DarkModeSwitcher({ children }: PropsWithChildren) {
 	const [isDarkMode, toggleDarkMode] = useReducer(
 		(isDarkMode) => !isDarkMode,
 		true,
@@ -12,10 +12,12 @@ export default function DarkModeSwitcher(props: PropsWithChildren) {
 		<div
 			data-theme={isDarkMode ? "dark" : "light"}
 			class={cx(
-				"max-h-96 min-h-72 overflow-y-auto p-8",
-				"data-[theme=light]:bg-white data-[theme=light]:text-neutral-950 data-[theme=light]:[color-scheme:light]",
-				"data-[theme=dark]:bg-neutral-900 data-[theme=dark]:text-neutral-50 data-[theme=dark]:[color-scheme:dark]",
-				"sm:p-16",
+				"p-8 sm:p-16",
+				"overflow-y-auto",
+				"max-h-96 min-h-72",
+				"data-[theme=light]:text-neutral-950 data-[theme=dark]:text-neutral-50",
+				"data-[theme=light]:bg-white data-[theme=dark]:bg-neutral-900",
+				"data-[theme=light]:[color-scheme:light] data-[theme=dark]:[color-scheme:dark]",
 			)}
 		>
 			<Button
@@ -24,15 +26,14 @@ export default function DarkModeSwitcher(props: PropsWithChildren) {
 				data-theme={isDarkMode ? "dark" : "light"}
 				class={cx(
 					"px-4 py-2",
-					"data-[theme=light]:bg-neutral-100",
-					"data-[theme=dark]:bg-neutral-800",
-					"data-[theme=light]:border-neutral-700 data-[theme=light]:ring-neutral-700 data-[theme=light]:ring-offset-white",
-					"data-[theme=dark]:border-neutral-300 data-[theme=dark]:ring-neutral-300 data-[theme=dark]:ring-offset-neutral-900",
+					"data-[theme=light]:bg-neutral-100 data-[theme=dark]:bg-neutral-800",
+					"data-[theme=light]:border-neutral-700 data-[theme=dark]:border-neutral-300",
 				)}
 			>
 				{isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
 			</Button>
-			{props.children}
+
+			{children}
 		</div>
 	);
 }
