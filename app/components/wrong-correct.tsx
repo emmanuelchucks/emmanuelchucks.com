@@ -1,35 +1,35 @@
-import { type PropsWithChildren, useId } from "hono/jsx";
+import type { PropsWithChildren } from "hono/jsx";
 
-export function Wrong(
-	props: PropsWithChildren<{
-		heading: string;
-	}>,
-) {
-	const wrongSectionHeading = useId();
+export function Wrong({
+	heading,
+	children,
+}: PropsWithChildren<{
+	heading: string;
+}>) {
 	return (
-		<section aria-labelledby={wrongSectionHeading}>
-			<h3 id={wrongSectionHeading} class="text-base font-medium">
+		<div>
+			<p class="text-base font-medium">
 				<span aria-hidden="true">❌</span> Wrong
-				<span class="sr-only"> version for '{props.heading}'</span>
-			</h3>
-			{props.children}
-		</section>
+				<span class="sr-only"> version for '{heading}'</span>
+			</p>
+			{children}
+		</div>
 	);
 }
 
-export function Correct(
-	props: PropsWithChildren<{
-		heading: string;
-	}>,
-) {
-	const correctSectionHeading = useId();
+export function Correct({
+	heading,
+	children,
+}: PropsWithChildren<{
+	heading: string;
+}>) {
 	return (
-		<section aria-labelledby={correctSectionHeading}>
-			<h3 id={correctSectionHeading} class="text-base font-medium">
+		<div>
+			<p class="text-base font-medium">
 				<span aria-hidden="true">✅</span> Correct
-				<span class="sr-only"> version for '{props.heading}'</span>
-			</h3>
-			{props.children}
-		</section>
+				<span class="sr-only"> version for '{heading}'</span>
+			</p>
+			{children}
+		</div>
 	);
 }
