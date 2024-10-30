@@ -20,6 +20,9 @@ export default defineConfig({
 			devServer: {
 				adapter,
 			},
+			client: {
+				input: ["app/style.css"],
+			},
 		}),
 		mdx({
 			jsxImportSource: "hono/jsx",
