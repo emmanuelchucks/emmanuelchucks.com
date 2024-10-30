@@ -4,9 +4,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"check": "biome check --write .",
 		"build": "vite build --mode client && vite build",
-		"preview": "$npm_execpath run build && wrangler pages dev ./dist"
+		"preview": "wrangler pages dev",
+		"check": "biome check --write",
+		"format": "biome format --write"
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",

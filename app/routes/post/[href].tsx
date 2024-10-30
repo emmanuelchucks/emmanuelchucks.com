@@ -3,8 +3,6 @@ import { createRoute } from "honox/factory";
 import { A } from "~/components/a";
 import { PostMeta } from "~/components/post-meta";
 import { getPost } from "~/helpers/posts";
-import DarkModeSwitcher from "~/islands/$dark-mode-switcher";
-import StyledSearchInput from "~/islands/$styled-search-input";
 
 export default createRoute((c) => {
 	const post = getPost(c.req.param("href"));
@@ -26,13 +24,7 @@ export default createRoute((c) => {
 		>
 			<article>
 				<PostMeta post={post} />
-				<post.Content
-					components={{
-						a: A,
-						StyledSearchInput,
-						DarkModeSwitcher,
-					}}
-				/>
+				<post.Content components={{ a: A }} />
 			</article>
 		</main>,
 		{
