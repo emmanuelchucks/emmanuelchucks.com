@@ -1,21 +1,20 @@
 import { Style, cx } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
-import { Script } from "honox/server";
+import { Link, Script } from "honox/server";
 import { A } from "~/components/a";
-import styles from "~/style.css?url";
 
 export default jsxRenderer(({ title, description, children }, c) => {
 	const isHome = c.req.path === "/";
 
 	return (
-		<html lang="en" class="[color-scheme:light_dark] [scrollbar-gutter:stable]">
+		<html lang="en" class="scheme-light-dark [scrollbar-gutter:stable]">
 			<head>
 				<meta charset="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<meta name="description" content={description} />
 				<title>{title}</title>
 				<link rel="icon" href="/static/favicon.png" />
-				<link rel="stylesheet" href={styles} />
+				<Link href="/app/style.css" rel="stylesheet" />
 				<Script src="/app/client.ts" async />
 				<Style />
 			</head>
@@ -35,7 +34,7 @@ export default jsxRenderer(({ title, description, children }, c) => {
 								href="/"
 								class="font-medium text-neutral-800 dark:text-neutral-200"
 							>
-								home
+								← Home
 							</A>
 						</nav>
 					</header>
