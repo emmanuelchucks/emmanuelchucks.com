@@ -5,7 +5,7 @@ import { PostMeta } from "./post-meta";
 
 export function PostCard({ key, post }: { key: string; post: Post }) {
 	return (
-		<div key={key} class="grid gap-y-2">
+		<div key={key} class="grid gap-y-3">
 			<h2 class="text-3xl font-semibold">
 				<A href={post.href}>{post.title}</A>
 			</h2>

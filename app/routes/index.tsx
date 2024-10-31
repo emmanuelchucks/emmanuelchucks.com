@@ -59,7 +59,7 @@ export default createRoute((c) => {
 					Posts
 				</h2>
 
-				<div class="mt-6 grid gap-y-4">
+				<div class="mt-6 grid gap-y-14">
 					{posts.map((post) => (
 						<PostCard key={post.id} post={post} />
 					))}

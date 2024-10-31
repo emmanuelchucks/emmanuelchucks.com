@@ -7,7 +7,8 @@
 		"build": "vite build --mode client && vite build",
 		"preview": "wrangler pages dev",
 		"check": "biome check --write",
-		"format": "biome format --write"
+		"format": "biome format --write",
+		"type-check": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@sindresorhus/slugify": "^2.2.1",

@@ -18,11 +18,11 @@ const readingTimeSchema = v.object({
 	text: v.string("reading time text is required"),
 });
 
-type MdxContent = (props: {
-	components: Partial<JSX.IntrinsicElements> & Record<string, unknown>;
-}) => HtmlEscapedString;
+type MdxContent = (
+	props: Partial<{ components: Partial<JSX.IntrinsicElements> }>,
+) => HtmlEscapedString;
 
-const posts = import.meta.glob<{
+const postMdxFiles = import.meta.glob<{
 	frontmatter: v.InferInput<typeof frontmatterSchema>;
 	readingTime: v.InferInput<typeof readingTimeSchema>;
 	default: MdxContent;
@@ -42,22 +42,15 @@ export type Post = {
 };
 
 export function getPosts(filter = ""): Post[] {
-	return Object.values(posts)
+	return Object.values(postMdxFiles)
 		.filter((post) =>
 			post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
 		)
+		.sort((a, b) =>
+			b.frontmatter.publishedAt.localeCompare(a.frontmatter.publishedAt),
+		)
 		.map((post) => {
-			v.parse(frontmatterSchema, post.frontmatter, {
-				message(issue) {
-					return `Invalid frontmatter for ${post.frontmatter.title}: ${issue.message}`;
-				},
-			});
-
-			v.parse(readingTimeSchema, post.readingTime, {
-				message(issue) {
-					return `Invalid reading time for ${post.frontmatter.title}: ${issue.message}`;
-				},
-			});
+			parsePost(post);
 
 			return {
 				...post.frontmatter,
@@ -71,4 +64,18 @@ export function getPosts(filter = ""): Post[] {
 export function getPost(href: string): Post | undefined {
 	const posts = getPosts();
 	return posts.find((post) => post.id === href.split("-").pop());
+}
+
+function parsePost(post: (typeof postMdxFiles)[number]): void {
+	v.parse(frontmatterSchema, post.frontmatter, {
+		message(issue) {
+			return `Invalid frontmatter for ${post.frontmatter.title}: ${issue.message}`;
+		},
+	});
+
+	v.parse(readingTimeSchema, post.readingTime, {
+		message(issue) {
+			return `Invalid reading time for ${post.frontmatter.title}: ${issue.message}`;
+		},
+	});
 }

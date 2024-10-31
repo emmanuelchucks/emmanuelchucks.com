@@ -3,6 +3,7 @@ import { createRoute } from "honox/factory";
 import { A } from "~/components/a";
 import { PostMeta } from "~/components/post-meta";
 import { getPost } from "~/helpers/posts";
+import { SOCIALS } from "~/helpers/socials";
 
 export default createRoute((c) => {
 	const post = getPost(c.req.param("href"));
@@ -24,7 +25,8 @@ export default createRoute((c) => {
 		>
 			<article>
 				<PostMeta post={post} />
-				<post.Content components={{ a: A }} />
+				<post.Content />
+				<A href={SOCIALS[1].href}>→ @emmanuelchucks</A>
 			</article>
 		</main>,
 		{
