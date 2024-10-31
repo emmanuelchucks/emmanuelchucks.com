@@ -1,6 +1,7 @@
 import { Style, cx } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
+import { BackgroundGrid } from "~/components/$background-grid";
 import { A } from "~/components/a";
 
 export default jsxRenderer(({ title, description, children }, c) => {
@@ -27,6 +28,10 @@ export default jsxRenderer(({ title, description, children }, c) => {
 					isHome ? "my-24" : "my-16",
 				)}
 			>
+				<BackgroundGrid
+					squareSize={240}
+					className="fixed inset-0 w-full h-full -z-10"
+				/>
 				{!isHome && (
 					<header>
 						<nav>
