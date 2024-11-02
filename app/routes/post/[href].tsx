@@ -15,6 +15,7 @@ export default createRoute((c) => {
 	return c.render(
 		<main
 			class={cx(
+				"mt-24",
 				"prose prose-neutral dark:prose-invert",
 				"prose-p:text-pretty",
 				"prose-pre:bg-white prose-pre:dark:!bg-neutral-900",
@@ -26,7 +27,9 @@ export default createRoute((c) => {
 			<article>
 				<PostMeta post={post} />
 				<post.Content />
-				<A href={SOCIALS[1].href}>→ @emmanuelchucks</A>
+				<div class="mt-16">
+					<A href={SOCIALS[1].href}>→ @emmanuelchucks</A>
+				</div>
 			</article>
 		</main>,
 		{

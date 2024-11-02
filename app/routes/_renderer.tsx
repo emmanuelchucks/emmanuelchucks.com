@@ -21,17 +21,12 @@ export default jsxRenderer(({ title, description, children }, c) => {
 			</head>
 			<body
 				class={cx(
-					"max-w-2xl",
-					"mx-4 sm:mx-8 md:mx-auto",
-					"grid gap-y-16 grid-rows-[auto,1fr] md:col-start-2",
+					"max-w-2xl overflow-x-hidden",
+					"mx-4 my-24 sm:mx-8 md:mx-auto",
 					"text-neutral-950 bg-neutral-50 dark:text-neutral-50 dark:bg-neutral-950",
-					isHome ? "my-24" : "my-16",
 				)}
 			>
-				<BackgroundGrid
-					squareSize={240}
-					className="fixed inset-0 w-full h-full -z-10"
-				/>
+				<BackgroundGrid squareSize={240} />
 				{!isHome && (
 					<header>
 						<nav>

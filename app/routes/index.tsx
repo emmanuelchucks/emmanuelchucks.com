@@ -15,9 +15,8 @@ export default createRoute((c) => {
 		<main>
 			<div
 				class={cx(
-					"grid grid-flow-col items-center gap-x-4 gap-y-1",
+					"grid grid-flow-col items-center gap-x-10 gap-y-1",
 					"grid-cols-[auto_max-content] grid-rows-[repeat(2,_max-content)]",
-					"text-neutral-950 dark:text-neutral-50",
 				)}
 			>
 				<h1 class="text-4xl font-bold">Emmanuel Chucks</h1>
@@ -29,14 +28,13 @@ export default createRoute((c) => {
 					src={profilePicture.src}
 					width={profilePicture.width}
 					height={profilePicture.height}
-					class={cx("size-16 rounded-full", "sm:row-span-full")}
+					class="size-16 rounded-full [@media_(min-width:445px)]:row-span-full"
 				/>
 			</div>
 
 			<aside
 				class={cx(
-					"mt-6",
-					"font-semibold",
+					"mt-6 font-semibold",
 					"text-neutral-800 dark:text-neutral-200",
 					"flex flex-row flex-wrap gap-x-6 gap-y-2",
 				)}
@@ -52,7 +50,7 @@ export default createRoute((c) => {
 			<section class="mt-24">
 				<h2
 					class={cx(
-						"text-2xl font-semibold",
+						"text-xl font-semibold",
 						"text-neutral-600 dark:text-neutral-400",
 					)}
 				>

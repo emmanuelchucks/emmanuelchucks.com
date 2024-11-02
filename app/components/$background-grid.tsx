@@ -80,7 +80,11 @@ export function BackgroundGrid({
 	return (
 		<div
 			ref={containerRef}
-			className={cx("absolute inset-0 overflow-hidden", className)}
+			className={cx(
+				"fixed inset-0 overflow-hidden",
+				"w-full h-full -z-10",
+				className,
+			)}
 		>
 			<div
 				className={cx(
