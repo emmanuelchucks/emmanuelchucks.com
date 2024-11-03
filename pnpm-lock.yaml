@@ -11,6 +11,9 @@ importers:
       '@sindresorhus/slugify':
         specifier: ^2.2.1
         version: 2.2.1
+      '@xstate/store':
+        specifier: ^2.6.0
+        version: 2.6.0(@hono/react-compat@0.0.1(hono@4.6.8))
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
@@ -20,12 +23,6 @@ importers:
       honox:
         specifier: ^0.1.26
         version: 0.1.26(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
-      jotai:
-        specifier: ^2.10.1
-        version: 2.10.1(@hono/react-compat@0.0.1(hono@4.6.8))
-      jotai-scope:
-        specifier: ^0.7.2
-        version: 0.7.2(@hono/react-compat@0.0.1(hono@4.6.8))(jotai@2.10.1(@hono/react-compat@0.0.1(hono@4.6.8)))
       react:
         specifier: npm:@hono/react-compat@^0.0.1
         version: '@hono/react-compat@0.0.1(hono@4.6.8)'
@@ -1020,6 +1017,17 @@ packages:
   '@vue/shared@3.4.31':
     resolution: {integrity: sha512-Yp3wtJk//8cO4NItOPpi3QkLExAr/aLBGZMmTtW9WpdwBCJpRM6zj9WgWktXAl8IDIozwNMByT45JP3tO3ACWA==}
 
+  '@xstate/store@2.6.0':
+    resolution: {integrity: sha512-pHiGIn378yPSCY36f/8iFF1KtKTKpGINqUVJH/dYydzWT+uXc4zKUQ+XUk0qTHchTvBXQ/UivRox2Q19ZnzTjw==}
+    peerDependencies:
+      react: ^18.2.0
+      solid-js: ^1.7.6
+    peerDependenciesMeta:
+      react:
+        optional: true
+      solid-js:
+        optional: true
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -1512,24 +1520,6 @@ packages:
   jiti@2.3.3:
     resolution: {integrity: sha512-EX4oNDwcXSivPrw2qKH2LB5PoFxEvgtv2JgwW0bU858HoLQ+kutSvjLMUqBd0PeJYEinLWhoI9Ol0eYMqj/wNQ==}
     hasBin: true
-
-  jotai-scope@0.7.2:
-    resolution: {integrity: sha512-Gwed97f3dDObrO43++2lRcgOqw4O2sdr4JCjP/7eHK1oPACDJ7xKHGScpJX9XaflU+KBHXF+VhwECnzcaQiShg==}
-    peerDependencies:
-      jotai: '>=2.9.2'
-      react: '>=17.0.0'
-
-  jotai@2.10.1:
-    resolution: {integrity: sha512-4FycO+BOTl2auLyF2Chvi6KTDqdsdDDtpaL/WHQMs8f3KS1E3loiUShQzAzFA/sMU5cJ0hz/RT1xum9YbG/zaA==}
-    engines: {node: '>=12.20.0'}
-    peerDependencies:
-      '@types/react': '>=17.0.0'
-      react: '>=17.0.0'
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      react:
-        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3055,6 +3045,10 @@ snapshots:
 
   '@vue/shared@3.4.31': {}
 
+  '@xstate/store@2.6.0(@hono/react-compat@0.0.1(hono@4.6.8))':
+    optionalDependencies:
+      react: '@hono/react-compat@0.0.1(hono@4.6.8)'
+
   acorn-jsx@5.3.2(acorn@8.12.1):
     dependencies:
       acorn: 8.12.1
@@ -3611,15 +3605,6 @@ snapshots:
   itty-time@1.0.6: {}
 
   jiti@2.3.3: {}
-
-  jotai-scope@0.7.2(@hono/react-compat@0.0.1(hono@4.6.8))(jotai@2.10.1(@hono/react-compat@0.0.1(hono@4.6.8))):
-    dependencies:
-      jotai: 2.10.1(@hono/react-compat@0.0.1(hono@4.6.8))
-      react: '@hono/react-compat@0.0.1(hono@4.6.8)'
-
-  jotai@2.10.1(@hono/react-compat@0.0.1(hono@4.6.8)):
-    optionalDependencies:
-      react: '@hono/react-compat@0.0.1(hono@4.6.8)'
 
   js-tokens@4.0.0: {}
 
