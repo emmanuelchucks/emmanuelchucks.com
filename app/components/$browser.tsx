@@ -1,5 +1,5 @@
 import { cx } from "hono/css";
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "hono/jsx";
 import {
 	WindowProvider,
 	useFloatingWindows,
@@ -36,8 +36,8 @@ function Shell({ children }: PropsWithChildren) {
 	);
 	const { activate } = useWindowAction();
 
-	const isActive =
-		!floatingWindowIds.includes(id) || floatingWindowIds.at(-1) === id;
+	const isFloating = floatingWindowIds.includes(id);
+	const isActive = !isFloating || floatingWindowIds.at(-1) === id;
 
 	return (
 		<div
@@ -45,13 +45,14 @@ function Shell({ children }: PropsWithChildren) {
 			data-closed={mode === "closed" ? "true" : undefined}
 			data-minimized={mode === "minimized" ? "true" : undefined}
 			data-fullscreen={mode === "fullscreen" ? "true" : undefined}
+			data-floating={isFloating ? "true" : undefined}
 			data-active={isActive ? "true" : undefined}
 			onKeyDown={undefined}
 			onFocusCapture={activate}
 			onClick={activate}
 			className={cx(
 				"group/shell rounded-md overflow-hidden will-change-transform",
-				"data-closed:hidden data-active:z-1000",
+				"data-closed:hidden data-active:z-1000 data-floating:absolute",
 			)}
 		>
 			{children}
@@ -90,7 +91,7 @@ function TopBar({ title, children }: PropsWithChildren<{ title: string }>) {
 				"group-data-minimized/shell:hidden",
 			)}
 		>
-			<div class="group/top-bar flex gap-x-2 p-2">{children}</div>
+			<div class="group/top-bar-buttons flex gap-x-2 p-2">{children}</div>
 			<span className="sr-only">{title}</span>
 		</div>
 	);
@@ -104,15 +105,16 @@ function CloseButton() {
 			className={cx(
 				"relative w-3 h-3 rounded-full",
 				"bg-neutral-300 dark:bg-neutral-700",
-				"group-data-active/shell:bg-red-500 group-hover/top-bar:bg-red-500",
+				"group-data-active/shell:bg-red-500 group-hover/top-bar-buttons:bg-red-500",
 			)}
 		>
 			<button
 				type="button"
-				aria-label="Close"
 				onClick={close}
 				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
-			/>
+			>
+				<span class="sr-only">Close</span>
+			</button>
 		</div>
 	);
 }
@@ -127,16 +129,17 @@ function MinimizeButton() {
 				"relative w-3 h-3 rounded-full",
 				"bg-neutral-300 dark:bg-neutral-700",
 				"has-aria-disabled:bg-neutral-300 has-aria-disabled:dark:bg-neutral-700",
-				"group-data-active/shell:bg-yellow-500 group-hover/top-bar:bg-yellow-500",
+				"group-data-active/shell:bg-yellow-500 group-hover/top-bar-buttons:bg-yellow-500",
 			)}
 		>
 			<button
 				type="button"
-				aria-label="Minimize"
 				onClick={toggleMinimize}
 				aria-disabled={mode === "fullscreen" ? "true" : undefined}
 				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
-			/>
+			>
+				<span class="sr-only">Minimize</span>
+			</button>
 		</div>
 	);
 }
@@ -150,17 +153,18 @@ function FullscreenButton() {
 			className={cx(
 				"relative w-3 h-3 rounded-full",
 				"bg-neutral-300 dark:bg-neutral-700",
-				"group-data-active/shell:bg-green-500 group-hover/top-bar:bg-green-500",
+				"group-data-active/shell:bg-green-500 group-hover/top-bar-buttons:bg-green-500",
 			)}
 		>
 			<button
 				type="button"
 				onClick={toggleFullscreen}
-				aria-label={
-					mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"
-				}
 				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
-			/>
+			>
+				<span class="sr-only">
+					{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
+				</span>
+			</button>
 		</div>
 	);
 }
@@ -169,7 +173,7 @@ function Content({ children }: PropsWithChildren) {
 	return (
 		<div
 			className={cx(
-				"w-full h-[400px] overflow-auto",
+				"w-full aspect-square overflow-auto sm:aspect-[4/3]",
 				"bg-neutral-100 dark:bg-neutral-900",
 				"group-data-minimized/shell:hidden group-data-fullscreen/shell:h-full",
 			)}

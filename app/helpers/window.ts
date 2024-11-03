@@ -1,6 +1,5 @@
 import { type SnapshotFromStore, createStore } from "@xstate/store";
 import { useSelector } from "@xstate/store/react";
-import type { HtmlEscapedString } from "hono/utils/html";
 import {
 	type PropsWithChildren,
 	createContext,
@@ -8,7 +7,8 @@ import {
 	useContext,
 	useId,
 	useState,
-} from "react";
+} from "hono/jsx";
+import type { HtmlEscapedString } from "hono/utils/html";
 
 type FloatingWindowsStore = typeof floatingWindowsStore;
 
@@ -116,14 +116,11 @@ function initializeWindowStore() {
 				context.dragStartPosition.y = event.e.clientY - context.position.y;
 
 				if (!getIsFloating(context.id)) {
-					const { width, height } = currentWindow.getBoundingClientRect();
+					const dimensions = currentWindow.getBoundingClientRect();
 					const placeholder = document.createElement("div");
 					placeholder.id = `${context.id}-placeholder`;
-					currentWindow.style.position = "absolute";
-					placeholder.style.width = `${width}px`;
-					placeholder.style.height = `${height}px`;
-					currentWindow.style.width = `${width}px`;
-					currentWindow.style.height = `${height}px`;
+					placeholder.style.height = `${dimensions.height}px`;
+					currentWindow.style.width = `${dimensions.width}px`;
 					currentWindow.insertAdjacentHTML("afterend", placeholder.outerHTML);
 				}
 
