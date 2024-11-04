@@ -6,7 +6,7 @@ import {
 	useFloatingWindows,
 	useWindow,
 	useWindowAction,
-} from "~/helpers/window";
+} from "~/components/windows";
 
 export function Browser({
 	title,
@@ -52,7 +52,7 @@ function Shell({ id, ref, children }: WindowProps) {
 	const { activate } = useWindowAction();
 
 	const isFloating = floatingWindowIds.includes(id);
-	const isActive = !isFloating || floatingWindowIds.at(-1) === id;
+	const isActive = !isFloating || floatingWindowIds.at(0) === id;
 
 	return (
 		<div
