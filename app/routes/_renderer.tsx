@@ -26,7 +26,7 @@ export default jsxRenderer(({ title, description, children }, c) => {
 					"text-neutral-950 bg-neutral-50 dark:text-neutral-50 dark:bg-neutral-950",
 				)}
 			>
-				<BackgroundGrid squareSize={240} />
+				<BackgroundGrid />
 				{!isHome && (
 					<header>
 						<nav>

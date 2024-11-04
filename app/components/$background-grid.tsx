@@ -1,70 +1,41 @@
 import { cx } from "hono/css";
-import { useCallback, useEffect, useRef, useState } from "hono/jsx";
-
-interface BackgroundGridProps {
-	className?: string;
-	squareSize?: number;
-	gap?: number;
-	maxOffset?: number;
-}
+import { useEffect, useRef, useState } from "hono/jsx";
 
 export function BackgroundGrid({
-	className = "",
-	squareSize = 16,
 	gap = 4,
+	squareSize = 240,
 	maxOffset = 24,
-}: BackgroundGridProps) {
+}: {
+	gap?: number;
+	squareSize?: number;
+	maxOffset?: number;
+}) {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-	const [squares, setSquares] = useState<{ x: number; y: number }[]>([]);
-
-	const calculateSquares = useCallback(
-		(width: number, height: number) => {
-			const totalSize = squareSize + gap;
-			const cols = Math.ceil(width / totalSize) + 2;
-			const rows = Math.ceil(height / totalSize) + 2;
-
-			const newSquares = [];
-			for (let y = -1; y < rows; y++) {
-				for (let x = -1; x < cols; x++) {
-					newSquares.push({
-						x: x * totalSize,
-						y: y * totalSize,
-					});
-				}
-			}
-			return newSquares;
-		},
-		[squareSize, gap],
-	);
+	const [gridSize, setGridSize] = useState({ rows: 0, cols: 0 });
 
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		const updateDimensions = () => {
-			const { width, height } =
-				containerRef.current?.getBoundingClientRect() ?? {
-					width: 0,
-					height: 0,
-				};
-			setSquares(calculateSquares(width, height));
-		};
+		const resizeObserver = new ResizeObserver(() => {
+			if (!containerRef.current) return;
+			const dimensions = containerRef.current.getBoundingClientRect();
+			const totalSize = squareSize + gap;
+			const cols = Math.ceil(dimensions.width / totalSize) + 2;
+			const rows = Math.ceil(dimensions.height / totalSize) + 2;
+			setGridSize({ rows, cols });
+		});
 
-		const resizeObserver = new ResizeObserver(updateDimensions);
 		resizeObserver.observe(containerRef.current);
-		updateDimensions();
-
 		return () => resizeObserver.disconnect();
-	}, [calculateSquares]);
+	}, [squareSize, gap]);
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
 			if (!containerRef.current) return;
-
 			const rect = containerRef.current.getBoundingClientRect();
 			const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
 			const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
-
 			requestAnimationFrame(() => {
 				setMousePosition({ x, y });
 			});
@@ -77,56 +48,37 @@ export function BackgroundGrid({
 	const offsetX = mousePosition.x * maxOffset;
 	const offsetY = mousePosition.y * maxOffset;
 
+	const squares = Array.from({ length: gridSize.rows * gridSize.cols });
+
 	return (
-		<div
-			ref={containerRef}
-			className={cx(
-				"fixed inset-0 overflow-hidden",
-				"w-full h-full -z-10",
-				className,
-			)}
-		>
+		<div ref={containerRef} className="fixed inset-0 -z-10">
 			<div
 				className={cx(
-					"absolute inset-0",
+					"grid absolute inset-0",
 					"transition-transform duration-700 ease-out will-change-transform",
 				)}
 				style={{
+					gap: `${gap}px`,
+					gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
 					transform: `translate(${offsetX}px, ${offsetY}px)`,
 				}}
 			>
-				{squares.map((square, index) => (
-					<GridSquare
-						key={String(index)}
-						x={square.x}
-						y={square.y}
-						size={squareSize}
-					/>
+				{squares.map((_, index) => (
+					<GridSquare key={String(index)} />
 				))}
 			</div>
 		</div>
 	);
 }
 
-interface GridSquareProps {
-	x: number;
-	y: number;
-	size: number;
-}
-
-function GridSquare({ x, y, size }: GridSquareProps) {
+function GridSquare() {
 	return (
 		<div
 			className={cx(
-				"absolute rounded-[1px]",
+				"rounded-[1px] aspect-square",
 				"transition-colors duration-300",
 				"bg-black/1 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2",
 			)}
-			style={{
-				transform: `translate(${x}px, ${y}px)`,
-				width: `${size}px`,
-				height: `${size}px`,
-			}}
 		/>
 	);
 }
