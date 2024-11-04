@@ -3,7 +3,8 @@ import { type PropsWithChildren, useId, useRef } from "hono/jsx";
 import {
 	type WindowProps,
 	WindowProvider,
-	useFloatingWindows,
+	useIsActive,
+	useIsFloating,
 	useWindow,
 	useWindowAction,
 } from "~/components/windows";
@@ -46,13 +47,9 @@ function Placeholder({ id }: Pick<WindowProps, "id">) {
 
 function Shell({ id, ref, children }: WindowProps) {
 	const mode = useWindow((state) => state.context.mode);
-	const floatingWindowIds = useFloatingWindows(
-		(state) => state.context.windowIds,
-	);
+	const isFloating = useIsFloating(id);
+	const isActive = useIsActive(id);
 	const { activate } = useWindowAction();
-
-	const isFloating = floatingWindowIds.includes(id);
-	const isActive = !isFloating || floatingWindowIds.at(0) === id;
 
 	return (
 		<div
@@ -63,12 +60,12 @@ function Shell({ id, ref, children }: WindowProps) {
 			data-fullscreen={mode === "fullscreen" ? "true" : undefined}
 			data-floating={isFloating ? "true" : undefined}
 			data-active={isActive ? "true" : undefined}
-			onKeyDown={undefined}
 			onFocusCapture={activate}
-			onClick={activate}
+			onMouseDownCapture={activate}
 			className={cx(
 				"group/shell rounded-md overflow-hidden will-change-transform",
-				"data-closed:hidden data-active:z-1000 data-floating:absolute",
+				"data-closed:hidden data-floating:absolute",
+				"data-floating:data-minimized:hidden",
 			)}
 		>
 			{children}
@@ -119,9 +116,9 @@ function CloseButton() {
 	return (
 		<div
 			className={cx(
-				"relative w-3 h-3 rounded-full",
-				"bg-neutral-300 dark:bg-neutral-700",
-				"group-data-active/shell:bg-red-500 group-hover/top-bar-buttons:bg-red-500",
+				"relative w-3 h-3 rounded-full bg-red-500",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
 			<button
@@ -142,10 +139,10 @@ function MinimizeButton() {
 	return (
 		<div
 			className={cx(
-				"relative w-3 h-3 rounded-full",
-				"bg-neutral-300 dark:bg-neutral-700",
-				"has-aria-disabled:bg-neutral-300 has-aria-disabled:dark:bg-neutral-700",
-				"group-data-active/shell:bg-yellow-500 group-hover/top-bar-buttons:bg-yellow-500",
+				"relative w-3 h-3 rounded-full bg-yellow-500",
+				"has-aria-disabled:bg-neutral-300 dark:has-aria-disabled:bg-neutral-700",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
 			<button
@@ -167,9 +164,9 @@ function FullscreenButton() {
 	return (
 		<div
 			className={cx(
-				"relative w-3 h-3 rounded-full",
-				"bg-neutral-300 dark:bg-neutral-700",
-				"group-data-active/shell:bg-green-500 group-hover/top-bar-buttons:bg-green-500",
+				"relative w-3 h-3 rounded-full bg-green-500",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
 			<button
