@@ -2,10 +2,10 @@ import { type SnapshotFromStore, createStore } from "@xstate/store";
 import { useSelector } from "@xstate/store/react";
 import {
 	type PropsWithChildren,
+	type RefObject,
 	createContext,
 	jsx,
 	useContext,
-	useId,
 	useState,
 } from "hono/jsx";
 import type { HtmlEscapedString } from "hono/utils/html";
@@ -45,16 +45,17 @@ export function useFloatingWindows<T>(
 }
 
 type Mode = "default" | "closed" | "minimized" | "fullscreen";
-type Position = { x: number; y: number };
 type WindowStore = ReturnType<typeof initializeWindowStore>;
 
-function initializeWindowStore() {
-	return createStore({
+function initializeWindowStore({ id, ref }: WindowProps) {
+	const store = createStore({
 		context: {
-			id: useId(),
+			id,
+			ref,
 			mode: "default" as Mode,
-			position: { x: 0, y: 0 } as Position,
-			dragStartPosition: { x: 0, y: 0 } as Position,
+			position: { x: 0, y: 0 },
+			dimensions: { width: 0, height: 0 },
+			dragStartPosition: { x: 0, y: 0 },
 		},
 		on: {
 			activate: {
@@ -67,21 +68,16 @@ function initializeWindowStore() {
 			close: {
 				mode: (context, event: { e: MouseEvent }) => {
 					event.e.stopPropagation();
-					const currentWindow = document.getElementById(context.id);
-					if (!currentWindow) return context.mode;
 					if (context.mode === "fullscreen") {
 						exitFullscreen();
 					}
 					floatingWindowsStore.send({ type: "remove", id: context.id });
-					currentWindow.style.display = "none";
 					return "closed" as const;
 				},
 			},
 			toggleMinimize: {
 				mode: (context, event: { e: MouseEvent }) => {
 					event.e.stopPropagation();
-					const currentWindow = document.getElementById(context.id);
-					if (!currentWindow) return context.mode;
 					if (context.mode === "fullscreen") return context.mode;
 					if (context.mode === "minimized") {
 						return "default";
@@ -92,42 +88,38 @@ function initializeWindowStore() {
 			toggleFullscreen: {
 				mode: (context, event: { e: MouseEvent }) => {
 					event.e.stopPropagation();
-					const currentWindow = document.getElementById(context.id);
-					if (!currentWindow) return context.mode;
+					if (!context.ref.current) return context.mode;
 					if (context.mode === "fullscreen") {
 						exitFullscreen();
 						return "default";
 					}
-					requestFullscreen(currentWindow);
+					requestFullscreen(context.ref.current);
 					return "fullscreen";
 				},
 			},
 			startDragging: (context, event: { e: MouseEvent }) => {
+				event.e.stopPropagation();
+				if (!context.ref.current) return context;
 				if (context.mode !== "default") return context;
 				if (event.e.target !== event.e.currentTarget) {
 					return context;
 				}
-
-				const currentWindow = document.getElementById(context.id);
-				if (!currentWindow) return context;
 
 				document.body.setAttribute("inert", "");
 				context.dragStartPosition.x = event.e.clientX - context.position.x;
 				context.dragStartPosition.y = event.e.clientY - context.position.y;
 
 				if (!getIsFloating(context.id)) {
-					const dimensions = currentWindow.getBoundingClientRect();
-					const placeholder = document.createElement("div");
-					placeholder.id = `${context.id}-placeholder`;
-					placeholder.style.height = `${dimensions.height}px`;
-					currentWindow.style.width = `${dimensions.width}px`;
-					currentWindow.insertAdjacentHTML("afterend", placeholder.outerHTML);
+					context.dimensions = context.ref.current.getBoundingClientRect();
+					context.ref.current.style.width = `${context.dimensions.width}px`;
 				}
 
+				floatingWindowsStore.send({ type: "add", id: context.id });
 				const onMouseMove = (e: MouseEvent) => {
+					if (!context.ref.current) return;
 					context.position.x = e.clientX - context.dragStartPosition.x;
 					context.position.y = e.clientY - context.dragStartPosition.y;
-					currentWindow.style.transform = `translate(${context.position.x}px, ${context.position.y}px)`;
+					context.ref.current.style.transform = `translate(${context.position.x}px, ${context.position.y}px)`;
 				};
 
 				const onMouseUp = () => {
@@ -136,7 +128,6 @@ function initializeWindowStore() {
 					document.removeEventListener("mouseup", onMouseUp);
 				};
 
-				floatingWindowsStore.send({ type: "add", id: context.id });
 				document.addEventListener("mousemove", onMouseMove);
 				document.addEventListener("mouseup", onMouseUp);
 
@@ -144,12 +135,19 @@ function initializeWindowStore() {
 			},
 		},
 	});
+
+	return store;
 }
 
 const WindowContext = createContext<WindowStore | undefined>(undefined);
 
-export function WindowProvider({ children }: PropsWithChildren) {
-	const [windowStore] = useState(initializeWindowStore);
+export type WindowProps = PropsWithChildren<{
+	id: string;
+	ref: RefObject<HTMLDivElement>;
+}>;
+
+export function WindowProvider({ id, ref, children }: WindowProps) {
+	const [windowStore] = useState(initializeWindowStore({ id, ref }));
 	return jsx(
 		WindowContext.Provider,
 		{ value: windowStore },
