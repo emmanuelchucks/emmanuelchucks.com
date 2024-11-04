@@ -4,11 +4,9 @@ import {
 	type PropsWithChildren,
 	type RefObject,
 	createContext,
-	jsx,
 	useContext,
 	useState,
 } from "hono/jsx";
-import type { HtmlEscapedString } from "hono/utils/html";
 
 type FloatingWindowsStore = typeof floatingWindowsStore;
 
@@ -22,7 +20,7 @@ const floatingWindowsStore = createStore({
 				const cleanedIds = context.windowIds.filter(
 					(windowId) => windowId !== event.id,
 				);
-				return [...cleanedIds, event.id];
+				return [event.id, ...cleanedIds];
 			},
 		},
 		remove: {
@@ -148,11 +146,11 @@ export type WindowProps = PropsWithChildren<{
 
 export function WindowProvider({ id, ref, children }: WindowProps) {
 	const [windowStore] = useState(initializeWindowStore({ id, ref }));
-	return jsx(
-		WindowContext.Provider,
-		{ value: windowStore },
-		children as HtmlEscapedString,
-	) as unknown as HtmlEscapedString;
+	return (
+		<WindowContext.Provider value={windowStore}>
+			{children}
+		</WindowContext.Provider>
+	);
 }
 
 export function useWindow<T>(
