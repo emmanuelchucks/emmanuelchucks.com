@@ -21,8 +21,9 @@ export default jsxRenderer(({ title, description, children }, c) => {
 			</head>
 			<body
 				class={cx(
-					"max-w-2xl overflow-x-hidden",
-					"mx-4 my-24 sm:mx-8 md:mx-auto",
+					"mx-auto my-24 overflow-x-hidden",
+					"w-[min(100%-var(--spacing-8),_var(--width-2xl))]",
+					"sm:w-[min(100%-var(--spacing-24),_var(--width-2xl))]",
 					"text-neutral-950 bg-neutral-50 dark:text-neutral-50 dark:bg-neutral-950",
 				)}
 			>
