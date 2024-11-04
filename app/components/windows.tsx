@@ -8,49 +8,87 @@ import {
 	useState,
 } from "hono/jsx";
 
-type FloatingWindowsStore = typeof floatingWindowsStore;
+type WindowManagerStore = typeof windowManagerStore;
 
-const floatingWindowsStore = createStore({
+const windowManagerStore = createStore({
 	context: {
-		windowIds: [] as string[],
+		floatingWindows: new Set<string>(),
+		activeWindow: { id: "", zIndex: 0 },
 	},
 	on: {
-		add: {
-			windowIds: (context, event: { id: string }) => {
-				const cleanedIds = context.windowIds.filter(
-					(windowId) => windowId !== event.id,
-				);
-				return [event.id, ...cleanedIds];
+		addFloatingWindow: {
+			floatingWindows: (context, event: { id: string }) => {
+				context.floatingWindows.add(event.id);
+				return new Set(context.floatingWindows);
 			},
 		},
-		remove: {
-			windowIds: (context, event: { id: string }) => {
-				return context.windowIds.filter((windowId) => windowId !== event.id);
-			},
+		removeFloatingWindow: (context, event: { id: string }) => {
+			context.floatingWindows.delete(event.id);
+			const nextFloatingWindowId = [...context.floatingWindows].at(-1);
+			if (!nextFloatingWindowId) return context;
+			return {
+				floatingWindows: new Set(context.floatingWindows),
+				activeWindow: {
+					id: nextFloatingWindowId,
+					zIndex: context.activeWindow.zIndex,
+				},
+			};
+		},
+		activateWindow: (context, event: { id: string }) => {
+			if (getIsFloating(event.id)) {
+				context.floatingWindows.delete(event.id);
+				context.floatingWindows.add(event.id);
+			}
+
+			const newZIndex =
+				context.activeWindow.id === event.id
+					? context.activeWindow.zIndex
+					: context.activeWindow.zIndex + 1;
+
+			return {
+				floatingWindows: new Set(context.floatingWindows),
+				activeWindow: { id: event.id, zIndex: newZIndex },
+			};
 		},
 	},
 });
 
+function getActiveWindow() {
+	const windowManagerSnapshot = windowManagerStore.getSnapshot();
+	return windowManagerSnapshot.context.activeWindow;
+}
+
 function getIsFloating(id: string) {
-	const snapshot = floatingWindowsStore.getSnapshot();
-	return snapshot.context.windowIds.includes(id);
+	const windowManagerSnapshot = windowManagerStore.getSnapshot();
+	return windowManagerSnapshot.context.floatingWindows.has(id);
 }
 
-export function useFloatingWindows<T>(
-	selector: (snapshot: SnapshotFromStore<FloatingWindowsStore>) => T,
+export function useWindowManager<T>(
+	selector: (snapshot: SnapshotFromStore<WindowManagerStore>) => T,
 ) {
-	return useSelector(floatingWindowsStore, selector);
+	return useSelector(windowManagerStore, selector);
 }
 
-type Mode = "default" | "closed" | "minimized" | "fullscreen";
+export function useIsFloating(id: string) {
+	const floatingWindows = useWindowManager(
+		(state) => state.context.floatingWindows,
+	);
+	return floatingWindows.has(id);
+}
+
+export function useIsActive(id: string) {
+	const activeWindow = useWindowManager((state) => state.context.activeWindow);
+	return activeWindow.id === id;
+}
+
 type WindowStore = ReturnType<typeof initializeWindowStore>;
 
 function initializeWindowStore({ id, ref }: WindowProps) {
-	const store = createStore({
+	const windowStore = createStore({
 		context: {
 			id,
 			ref,
-			mode: "default" as Mode,
+			mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
 			position: { x: 0, y: 0 },
 			dimensions: { width: 0, height: 0 },
 			dragStartPosition: { x: 0, y: 0 },
@@ -58,8 +96,10 @@ function initializeWindowStore({ id, ref }: WindowProps) {
 		on: {
 			activate: {
 				id: (context) => {
-					if (!getIsFloating(context.id)) return context.id;
-					floatingWindowsStore.send({ type: "add", id: context.id });
+					if (!context.ref.current) return;
+					windowManagerStore.send({ type: "activateWindow", id: context.id });
+					const activeWindow = getActiveWindow();
+					context.ref.current.style.zIndex = String(activeWindow.zIndex);
 					return context.id;
 				},
 			},
@@ -69,7 +109,10 @@ function initializeWindowStore({ id, ref }: WindowProps) {
 					if (context.mode === "fullscreen") {
 						exitFullscreen();
 					}
-					floatingWindowsStore.send({ type: "remove", id: context.id });
+					windowManagerStore.send({
+						type: "removeFloatingWindow",
+						id: context.id,
+					});
 					return "closed" as const;
 				},
 			},
@@ -110,9 +153,12 @@ function initializeWindowStore({ id, ref }: WindowProps) {
 				if (!getIsFloating(context.id)) {
 					context.dimensions = context.ref.current.getBoundingClientRect();
 					context.ref.current.style.width = `${context.dimensions.width}px`;
+					windowManagerStore.send({
+						type: "addFloatingWindow",
+						id: context.id,
+					});
 				}
 
-				floatingWindowsStore.send({ type: "add", id: context.id });
 				const onMouseMove = (e: MouseEvent) => {
 					if (!context.ref.current) return;
 					context.position.x = e.clientX - context.dragStartPosition.x;
@@ -134,7 +180,7 @@ function initializeWindowStore({ id, ref }: WindowProps) {
 		},
 	});
 
-	return store;
+	return windowStore;
 }
 
 const WindowContext = createContext<WindowStore | undefined>(undefined);
@@ -156,21 +202,24 @@ export function WindowProvider({ id, ref, children }: WindowProps) {
 export function useWindow<T>(
 	selector: (snapshot: SnapshotFromStore<WindowStore>) => T,
 ) {
-	const store = useContext(WindowContext);
-	if (!store) throw new Error("WindowProvider not found");
-	return useSelector(store, selector);
+	const windowStore = useContext(WindowContext);
+	if (!windowStore) throw new Error("WindowProvider not found");
+	return useSelector(windowStore, selector);
 }
 
 export function useWindowAction() {
 	const windowStore = useContext(WindowContext);
-	const close = (e: MouseEvent) => windowStore?.send({ type: "close", e });
+	if (!windowStore) throw new Error("WindowProvider not found");
+
+	const close = (e: MouseEvent) => windowStore.send({ type: "close", e });
 	const toggleMinimize = (e: MouseEvent) =>
-		windowStore?.send({ type: "toggleMinimize", e });
+		windowStore.send({ type: "toggleMinimize", e });
 	const toggleFullscreen = (e: MouseEvent) =>
-		windowStore?.send({ type: "toggleFullscreen", e });
-	const activate = () => windowStore?.send({ type: "activate" });
+		windowStore.send({ type: "toggleFullscreen", e });
+	const activate = () => windowStore.send({ type: "activate" });
 	const startDragging = (e: MouseEvent) =>
-		windowStore?.send({ type: "startDragging", e });
+		windowStore.send({ type: "startDragging", e });
+
 	return {
 		close,
 		toggleMinimize,
