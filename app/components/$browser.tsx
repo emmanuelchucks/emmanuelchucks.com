@@ -1,6 +1,7 @@
 import { cx } from "hono/css";
-import type { PropsWithChildren } from "hono/jsx";
+import { type PropsWithChildren, useId, useRef } from "hono/jsx";
 import {
+	type WindowProps,
 	WindowProvider,
 	useFloatingWindows,
 	useWindow,
@@ -11,11 +12,14 @@ export function Browser({
 	title,
 	children,
 }: PropsWithChildren<{ title: string }>) {
+	const id = useId();
+	const ref = useRef<HTMLDivElement>(null);
+
 	if (!title) throw new Error("Browser must have a title");
 
 	return (
-		<WindowProvider>
-			<Shell>
+		<WindowProvider id={id} ref={ref}>
+			<Shell id={id} ref={ref}>
 				<Minimized title={title} />
 				<TopBar title={title}>
 					<CloseButton />
@@ -24,12 +28,23 @@ export function Browser({
 				</TopBar>
 				<Content>{children}</Content>
 			</Shell>
+			<Placeholder id={id} />
 		</WindowProvider>
 	);
 }
 
-function Shell({ children }: PropsWithChildren) {
-	const id = useWindow((state) => state.context.id);
+function Placeholder({ id }: Pick<WindowProps, "id">) {
+	const dimensions = useWindow((state) => state.context.dimensions);
+
+	return (
+		<div
+			id={`${id}-placeholder`}
+			style={{ height: `${dimensions.height}px` }}
+		/>
+	);
+}
+
+function Shell({ id, ref, children }: WindowProps) {
 	const mode = useWindow((state) => state.context.mode);
 	const floatingWindowIds = useFloatingWindows(
 		(state) => state.context.windowIds,
@@ -42,6 +57,7 @@ function Shell({ children }: PropsWithChildren) {
 	return (
 		<div
 			id={id}
+			ref={ref}
 			data-closed={mode === "closed" ? "true" : undefined}
 			data-minimized={mode === "minimized" ? "true" : undefined}
 			data-fullscreen={mode === "fullscreen" ? "true" : undefined}
