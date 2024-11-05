@@ -25,11 +25,18 @@ export default createRoute((c) => {
 			)}
 		>
 			<article>
-				<PostMeta post={post} />
-				<post.Content />
-				<div class="mt-16">
-					<A href={SOCIALS[1].href}>→ @emmanuelchucks</A>
-				</div>
+				<header>
+					<PostMeta post={post} />
+					<h1>{post.title}</h1>
+				</header>
+				<main>
+					<post.Content />
+				</main>
+				<footer class="mt-16">
+					<A href={SOCIALS[1].href}>
+						<span aria-hidden>→ </span>@emmanuelchucks
+					</A>
+				</footer>
 			</article>
 		</main>,
 		{

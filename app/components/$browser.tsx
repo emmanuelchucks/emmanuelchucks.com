@@ -21,7 +21,6 @@ export function Browser({
 	return (
 		<WindowProvider id={id} ref={ref}>
 			<Shell id={id} ref={ref}>
-				<Minimized title={title} />
 				<TopBar title={title}>
 					<CloseButton />
 					<MinimizeButton />
@@ -63,33 +62,14 @@ function Shell({ id, ref, children }: WindowProps) {
 			onFocusCapture={activate}
 			onMouseDownCapture={activate}
 			className={cx(
-				"group/shell rounded-md overflow-hidden will-change-transform",
+				"group/shell not-prose",
+				"rounded-md overflow-hidden will-change-transform",
 				"data-closed:hidden data-floating:absolute",
 				"data-floating:data-minimized:hidden",
 			)}
 		>
-			{children}
+			<figure>{children}</figure>
 		</div>
-	);
-}
-
-function Minimized({ title }: PropsWithChildren<{ title: string }>) {
-	const { toggleMinimize } = useWindowAction();
-
-	return (
-		<button
-			type="button"
-			aria-label="Undock"
-			onClick={toggleMinimize}
-			className={cx(
-				"hidden gap-x-2",
-				"w-full px-4 py-2 font-medium",
-				"bg-neutral-200 dark:bg-neutral-800",
-				"group-data-minimized/shell:flex",
-			)}
-		>
-			{title}
-		</button>
 	);
 }
 
@@ -100,12 +80,23 @@ function TopBar({ title, children }: PropsWithChildren<{ title: string }>) {
 		<div
 			onMouseDown={startDragging}
 			className={cx(
-				"flex bg-neutral-200 dark:bg-neutral-800",
-				"group-data-minimized/shell:hidden",
+				"flex items-center flex-row-reverse justify-end",
+				"bg-neutral-200 dark:bg-neutral-800",
 			)}
 		>
-			<div class="group/top-bar-buttons flex gap-x-2 p-2">{children}</div>
-			<span className="sr-only">{title}</span>
+			<figcaption className="group-not-data-minimized/shell:sr-only">
+				<span class="sr-only">Demo for </span>
+				{title}
+			</figcaption>
+			<div
+				class={cx(
+					"group/top-bar-buttons",
+					"p-2 flex gap-x-2",
+					"group-data-minimized/shell:p-4",
+				)}
+			>
+				{children}
+			</div>
 		</div>
 	);
 }
@@ -117,6 +108,7 @@ function CloseButton() {
 		<div
 			className={cx(
 				"relative w-3 h-3 rounded-full bg-red-500",
+				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
@@ -165,6 +157,7 @@ function FullscreenButton() {
 		<div
 			className={cx(
 				"relative w-3 h-3 rounded-full bg-green-500",
+				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
