@@ -13,22 +13,22 @@ importers:
         version: 2.2.1
       '@xstate/store':
         specifier: ^2.6.0
-        version: 2.6.0(@hono/react-compat@0.0.1(hono@4.6.8))
+        version: 2.6.0(@hono/react-compat@0.0.1(hono@4.6.9))
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
       hono:
-        specifier: ^4.6.8
-        version: 4.6.8
+        specifier: ^4.6.9
+        version: 4.6.9
       honox:
         specifier: ^0.1.26
-        version: 0.1.26(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
+        version: 0.1.26(hono@4.6.9)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
       react:
         specifier: npm:@hono/react-compat@^0.0.1
-        version: '@hono/react-compat@0.0.1(hono@4.6.8)'
+        version: '@hono/react-compat@0.0.1(hono@4.6.9)'
       react-dom:
         specifier: npm:@hono/react-compat@^0.0.1
-        version: '@hono/react-compat@0.0.1(hono@4.6.8)'
+        version: '@hono/react-compat@0.0.1(hono@4.6.9)'
       valibot:
         specifier: ^1.0.0-beta.3
         version: 1.0.0-beta.3(typescript@5.6.3)
@@ -41,10 +41,10 @@ importers:
         version: 4.20241022.0
       '@hono/vite-cloudflare-pages':
         specifier: ^0.4.2
-        version: 0.4.2(hono@4.6.8)
+        version: 0.4.2(hono@4.6.9)
       '@hono/vite-dev-server':
         specifier: ^0.16.0
-        version: 0.16.0(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
+        version: 0.16.0(hono@4.6.9)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
       '@mdx-js/rollup':
         specifier: ^3.1.0
         version: 3.1.0(rollup@4.24.3)
@@ -73,8 +73,8 @@ importers:
         specifier: ^5.6.3
         version: 5.6.3
       unplugin-icons:
-        specifier: ^0.19.3
-        version: 0.19.3(@vue/compiler-sfc@3.4.31)
+        specifier: ^0.20.0
+        version: 0.20.0(@vue/compiler-sfc@3.4.31)
       vite:
         specifier: ^5.4.10
         version: 5.4.10(@types/node@20.14.10)(lightningcss@1.27.0)
@@ -82,8 +82,8 @@ importers:
         specifier: ^7.0.4
         version: 7.0.4(rollup@4.24.3)
       vite-tsconfig-paths:
-        specifier: ^5.0.1
-        version: 5.0.1(typescript@5.6.3)(vite@5.4.10(@types/node@20.14.10)(lightningcss@1.27.0))
+        specifier: ^5.1.0
+        version: 5.1.0(typescript@5.6.3)(vite@5.4.10(@types/node@20.14.10)(lightningcss@1.27.0))
       wrangler:
         specifier: ^3.84.1
         version: 3.84.1(@cloudflare/workers-types@4.20241022.0)
@@ -1423,8 +1423,8 @@ packages:
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
-  hono@4.6.8:
-    resolution: {integrity: sha512-f+2Ec9JAzabT61pglDiLJcF/DjiSefZkjCn9bzm1cYLGkD5ExJ3Jnv93ax9h0bn7UPLHF81KktoyjdQfWI2n1Q==}
+  hono@4.6.9:
+    resolution: {integrity: sha512-p/pN5yZLuZaHzyAOT2nw2/Ud6HhJHYmDNGH6Ck1OWBhPMVeM1r74jbCRwNi0gyFRjjbsGgoHbOyj7mT1PDNbTw==}
     engines: {node: '>=16.9.0'}
 
   honox@0.1.26:
@@ -2145,12 +2145,13 @@ packages:
   unist-util-visit@5.0.0:
     resolution: {integrity: sha512-MR04uvD+07cwl/yhVuVWAtw+3GOR/knlL55Nd/wAdblk27GCVt3lqpTivy/tkJcZoNPzTwS1Y+KMojlLDhoTzg==}
 
-  unplugin-icons@0.19.3:
-    resolution: {integrity: sha512-EUegRmsAI6+rrYr0vXjFlIP+lg4fSC4zb62zAZKx8FGXlWAGgEGBCa3JDe27aRAXhistObLPbBPhwa/0jYLFkQ==}
+  unplugin-icons@0.20.0:
+    resolution: {integrity: sha512-817iCV6AMADLHHcs9R15XII5Jaz++thnaQRzXbd0IZDcxi43iekoKENpuxqZN3k3+aOqJfqxcZ6I8POJ35UCEA==}
     peerDependencies:
       '@svgr/core': '>=7.0.0'
       '@svgx/core': ^1.0.1
       '@vue/compiler-sfc': ^3.0.2 || ^2.7.0
+      svelte: ^3.0.0 || ^4.0.0 || ^5.0.0
       vue-template-compiler: ^2.6.12
       vue-template-es2015-compiler: ^1.9.0
     peerDependenciesMeta:
@@ -2159,6 +2160,8 @@ packages:
       '@svgx/core':
         optional: true
       '@vue/compiler-sfc':
+        optional: true
+      svelte:
         optional: true
       vue-template-compiler:
         optional: true
@@ -2187,8 +2190,8 @@ packages:
     resolution: {integrity: sha512-C9C7b2p/8/TCN2g26tE9haoer2i8K4x0v2RXUiHsIjiz221vQuKItCQ+VyiVCsUMPXfJC/tlZsmCZVBz5jh7uA==}
     engines: {node: '>=18.0.0'}
 
-  vite-tsconfig-paths@5.0.1:
-    resolution: {integrity: sha512-yqwv+LstU7NwPeNqajZzLEBVpUFU6Dugtb2P84FXuvaoYA+/70l9MHE+GYfYAycVyPSDYZ7mjOFuYBRqlEpTig==}
+  vite-tsconfig-paths@5.1.0:
+    resolution: {integrity: sha512-Y1PLGHCJfAq1Zf4YIGEsmuU/NCX1epoZx9zwSr32Gjn3aalwQHRKr5aUmbo6r0JHeHkqmWpmDg7WOynhYXw1og==}
     peerDependencies:
       vite: '*'
     peerDependenciesMeta:
@@ -2596,18 +2599,18 @@ snapshots:
 
   '@hono/node-server@1.12.0': {}
 
-  '@hono/react-compat@0.0.1(hono@4.6.8)':
+  '@hono/react-compat@0.0.1(hono@4.6.9)':
     dependencies:
-      hono: 4.6.8
+      hono: 4.6.9
 
-  '@hono/vite-cloudflare-pages@0.4.2(hono@4.6.8)':
+  '@hono/vite-cloudflare-pages@0.4.2(hono@4.6.9)':
     dependencies:
-      hono: 4.6.8
+      hono: 4.6.9
 
-  '@hono/vite-dev-server@0.16.0(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))':
+  '@hono/vite-dev-server@0.16.0(hono@4.6.9)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))':
     dependencies:
       '@hono/node-server': 1.12.0
-      hono: 4.6.8
+      hono: 4.6.9
       minimatch: 9.0.5
     optionalDependencies:
       miniflare: 3.20241022.0
@@ -3045,9 +3048,9 @@ snapshots:
 
   '@vue/shared@3.4.31': {}
 
-  '@xstate/store@2.6.0(@hono/react-compat@0.0.1(hono@4.6.8))':
+  '@xstate/store@2.6.0(@hono/react-compat@0.0.1(hono@4.6.9))':
     optionalDependencies:
-      react: '@hono/react-compat@0.0.1(hono@4.6.8)'
+      react: '@hono/react-compat@0.0.1(hono@4.6.9)'
 
   acorn-jsx@5.3.2(acorn@8.12.1):
     dependencies:
@@ -3526,16 +3529,16 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.4
 
-  hono@4.6.8: {}
+  hono@4.6.9: {}
 
-  honox@0.1.26(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0)):
+  honox@0.1.26(hono@4.6.9)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0)):
     dependencies:
       '@babel/generator': 7.25.6
       '@babel/parser': 7.25.6
       '@babel/traverse': 7.25.6
       '@babel/types': 7.25.6
-      '@hono/vite-dev-server': 0.16.0(hono@4.6.8)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
-      hono: 4.6.8
+      '@hono/vite-dev-server': 0.16.0(hono@4.6.9)(miniflare@3.20241022.0)(wrangler@3.84.1(@cloudflare/workers-types@4.20241022.0))
+      hono: 4.6.9
       jsonc-parser: 3.3.1
       precinct: 12.1.2
     optionalDependencies:
@@ -4488,7 +4491,7 @@ snapshots:
       unist-util-is: 6.0.0
       unist-util-visit-parents: 6.0.1
 
-  unplugin-icons@0.19.3(@vue/compiler-sfc@3.4.31):
+  unplugin-icons@0.20.0(@vue/compiler-sfc@3.4.31):
     dependencies:
       '@antfu/install-pkg': 0.4.1
       '@antfu/utils': 0.7.10
@@ -4532,7 +4535,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-tsconfig-paths@5.0.1(typescript@5.6.3)(vite@5.4.10(@types/node@20.14.10)(lightningcss@1.27.0)):
+  vite-tsconfig-paths@5.1.0(typescript@5.6.3)(vite@5.4.10(@types/node@20.14.10)(lightningcss@1.27.0)):
     dependencies:
       debug: 4.3.6
       globrex: 0.1.2
