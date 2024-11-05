@@ -4,8 +4,8 @@ import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp&as=m
 import { cx } from "hono/css";
 import { createRoute } from "honox/factory";
 import { A } from "~/components/a";
-import { PostCard } from "~/components/post-card";
-import { getPosts } from "~/helpers/posts";
+import { PostMeta } from "~/components/post-meta";
+import { type Post, getPosts } from "~/helpers/posts";
 import { SOCIALS } from "~/helpers/socials";
 
 export default createRoute((c) => {
@@ -48,20 +48,14 @@ export default createRoute((c) => {
 			</aside>
 
 			<section class="mt-24">
-				<h2
-					class={cx(
-						"text-xl font-semibold",
-						"text-neutral-600 dark:text-neutral-400",
-					)}
-				>
+				<h2 class="text-xl font-semibold text-neutral-600 dark:text-neutral-400">
 					Posts
 				</h2>
-
-				<div class="mt-6 grid gap-y-14">
+				<ul class="mt-6 grid gap-y-14">
 					{posts.map((post) => (
 						<PostCard key={post.id} post={post} />
 					))}
-				</div>
+				</ul>
 			</section>
 		</main>,
 		{
@@ -71,3 +65,17 @@ export default createRoute((c) => {
 		},
 	);
 });
+
+function PostCard({ key, post }: { key: string; post: Post }) {
+	return (
+		<li key={key} class="grid gap-y-3">
+			<h3 class="text-2xl font-semibold">
+				<A href={post.href}>{post.title}</A>
+			</h3>
+			<PostMeta post={post} />
+			<p class={cx("line-clamp-3", "text-neutral-700 dark:text-neutral-300")}>
+				{post.description}
+			</p>
+		</li>
+	);
+}

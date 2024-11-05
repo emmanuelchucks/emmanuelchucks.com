@@ -35,7 +35,7 @@ export default jsxRenderer(({ title, description, children }, c) => {
 								href="/"
 								class="font-medium text-neutral-800 dark:text-neutral-200"
 							>
-								← Home
+								<span aria-hidden="true">← </span>Home
 							</A>
 						</nav>
 					</header>
