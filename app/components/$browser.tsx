@@ -1,13 +1,12 @@
 import { cx } from "hono/css";
 import { type PropsWithChildren, useId, useRef } from "hono/jsx";
 import {
-	type WindowProps,
 	WindowProvider,
-	useIsActive,
-	useIsFloating,
-	useWindow,
+	useIsActiveWindow,
+	useIsFloatingWindow,
 	useWindowAction,
-} from "~/components/windows";
+	useWindowSelector,
+} from "./windows";
 
 export function Browser({
 	title,
@@ -19,22 +18,23 @@ export function Browser({
 	if (!title) throw new Error("Browser must have a title");
 
 	return (
-		<WindowProvider id={id} ref={ref}>
-			<Shell id={id} ref={ref}>
-				<TopBar title={title}>
+		<WindowProvider id={id} ref={ref} title={title}>
+			<Shell>
+				<TopBar>
 					<CloseButton />
 					<MinimizeButton />
 					<FullscreenButton />
 				</TopBar>
 				<Content>{children}</Content>
 			</Shell>
-			<Placeholder id={id} />
+			<Placeholder />
 		</WindowProvider>
 	);
 }
 
-function Placeholder({ id }: Pick<WindowProps, "id">) {
-	const dimensions = useWindow((state) => state.context.dimensions);
+function Placeholder() {
+	const id = useWindowSelector((state) => state.context.id);
+	const dimensions = useWindowSelector((state) => state.context.dimensions);
 
 	return (
 		<div
@@ -44,10 +44,12 @@ function Placeholder({ id }: Pick<WindowProps, "id">) {
 	);
 }
 
-function Shell({ id, ref, children }: WindowProps) {
-	const mode = useWindow((state) => state.context.mode);
-	const isFloating = useIsFloating(id);
-	const isActive = useIsActive(id);
+function Shell({ children }: PropsWithChildren) {
+	const id = useWindowSelector((state) => state.context.id);
+	const ref = useWindowSelector((state) => state.context.ref);
+	const isFloatingWindow = useIsFloatingWindow();
+	const isActiveWindow = useIsActiveWindow();
+	const mode = useWindowSelector((state) => state.context.mode);
 	const { activate } = useWindowAction();
 
 	return (
@@ -57,8 +59,8 @@ function Shell({ id, ref, children }: WindowProps) {
 			data-closed={mode === "closed" ? "true" : undefined}
 			data-minimized={mode === "minimized" ? "true" : undefined}
 			data-fullscreen={mode === "fullscreen" ? "true" : undefined}
-			data-floating={isFloating ? "true" : undefined}
-			data-active={isActive ? "true" : undefined}
+			data-floating={isFloatingWindow ? "true" : undefined}
+			data-active={isActiveWindow ? "true" : undefined}
 			onFocusCapture={activate}
 			onMouseDownCapture={activate}
 			className={cx(
@@ -73,7 +75,8 @@ function Shell({ id, ref, children }: WindowProps) {
 	);
 }
 
-function TopBar({ title, children }: PropsWithChildren<{ title: string }>) {
+function TopBar({ children }: PropsWithChildren) {
+	const title = useWindowSelector((state) => state.context.title);
 	const { startDragging } = useWindowAction();
 
 	return (
@@ -105,73 +108,89 @@ function CloseButton() {
 	const { close } = useWindowAction();
 
 	return (
-		<div
-			className={cx(
+		<button
+			type="button"
+			onClick={close}
+			class={cx(
 				"relative w-3 h-3 rounded-full bg-red-500",
 				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
-			<button
-				type="button"
-				onClick={close}
-				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
+			<span class="sr-only">Close</span>
+			<span
+				class={cx(
+					"grid place-items-center opacity-0",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+				)}
 			>
-				<span class="sr-only">Close</span>
-			</button>
-		</div>
+				<span class="w-2 h-0.5 bg-red-900/50 rotate-45 absolute" />
+				<span class="w-2 h-0.5 bg-red-900/50 -rotate-45 absolute" />
+			</span>
+		</button>
 	);
 }
 
 function MinimizeButton() {
-	const mode = useWindow((state) => state.context.mode);
+	const mode = useWindowSelector((state) => state.context.mode);
 	const { toggleMinimize } = useWindowAction();
 
 	return (
-		<div
-			className={cx(
+		<button
+			type="button"
+			onClick={toggleMinimize}
+			aria-disabled={mode === "fullscreen" ? "true" : undefined}
+			class={cx(
+				"group/minimized-button",
 				"relative w-3 h-3 rounded-full bg-yellow-500",
 				"has-aria-disabled:bg-neutral-300 dark:has-aria-disabled:bg-neutral-700",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
-			<button
-				type="button"
-				onClick={toggleMinimize}
-				aria-disabled={mode === "fullscreen" ? "true" : undefined}
-				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
+			<span class="sr-only">Minimize</span>
+			<span
+				class={cx(
+					"grid place-items-center opacity-0",
+					"group-aria-disabled/minimized-button:opacity-0",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+				)}
 			>
-				<span class="sr-only">Minimize</span>
-			</button>
-		</div>
+				<span class="w-1.5 h-0.5 bg-yellow-900/50 absolute" />
+			</span>
+		</button>
 	);
 }
 
 function FullscreenButton() {
-	const mode = useWindow((state) => state.context.mode);
+	const mode = useWindowSelector((state) => state.context.mode);
 	const { toggleFullscreen } = useWindowAction();
 
 	return (
-		<div
-			className={cx(
+		<button
+			type="button"
+			onClick={toggleFullscreen}
+			class={cx(
 				"relative w-3 h-3 rounded-full bg-green-500",
 				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
-			<button
-				type="button"
-				onClick={toggleFullscreen}
-				class="absolute inset-0 [@media_(pointer:_coarse)]:hidden"
+			<span class="sr-only">
+				{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
+			</span>
+			<span
+				class={cx(
+					"grid place-items-center opacity-0",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+				)}
 			>
-				<span class="sr-only">
-					{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
-				</span>
-			</button>
-		</div>
+				<div class="absolute top-[1px] left-[1px] border-[3px] border-transparent border-t-green-900/75 border-l-green-900/75" />
+				<div class="absolute bottom-[2px] right-[2px] border-[3px] border-transparent border-b-green-900/75 border-r-green-900/75" />
+			</span>
+		</button>
 	);
 }
 
@@ -181,7 +200,7 @@ function Content({ children }: PropsWithChildren) {
 			className={cx(
 				"w-full aspect-square overflow-auto sm:aspect-[4/3]",
 				"bg-neutral-100 dark:bg-neutral-900",
-				"group-data-minimized/shell:hidden group-data-fullscreen/shell:h-full",
+				"group-data-minimized/shell:hidden group-data-fullscreen/shell:h-svh",
 			)}
 		>
 			{children}
