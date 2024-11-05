@@ -51,9 +51,9 @@ export function BackgroundGrid({
 	const squares = Array.from({ length: gridSize.rows * gridSize.cols });
 
 	return (
-		<div ref={containerRef} className="fixed inset-0 -z-10">
+		<div ref={containerRef} class="fixed inset-0 -z-10">
 			<div
-				className={cx(
+				class={cx(
 					"grid absolute inset-0",
 					"transition-transform duration-700 ease-out will-change-transform",
 				)}
@@ -74,7 +74,7 @@ export function BackgroundGrid({
 function GridSquare() {
 	return (
 		<div
-			className={cx(
+			class={cx(
 				"rounded-[1px] aspect-square",
 				"transition-colors duration-300",
 				"bg-black/1 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2",

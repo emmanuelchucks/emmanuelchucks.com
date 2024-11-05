@@ -63,7 +63,7 @@ function Shell({ children }: PropsWithChildren) {
 			data-active={isActiveWindow ? "true" : undefined}
 			onFocusCapture={activate}
 			onMouseDownCapture={activate}
-			className={cx(
+			class={cx(
 				"group/shell not-prose",
 				"rounded-md overflow-hidden will-change-transform",
 				"data-closed:hidden data-floating:absolute",
@@ -82,12 +82,12 @@ function TopBar({ children }: PropsWithChildren) {
 	return (
 		<div
 			onMouseDown={startDragging}
-			className={cx(
+			class={cx(
 				"flex items-center flex-row-reverse justify-end",
 				"bg-neutral-200 dark:bg-neutral-800",
 			)}
 		>
-			<figcaption className="group-not-data-minimized/shell:sr-only">
+			<figcaption class="group-not-data-minimized/shell:sr-only">
 				<span class="sr-only">Demo for </span>
 				{title}
 			</figcaption>
@@ -197,7 +197,7 @@ function FullscreenButton() {
 function Content({ children }: PropsWithChildren) {
 	return (
 		<div
-			className={cx(
+			class={cx(
 				"w-full aspect-square overflow-auto sm:aspect-[4/3]",
 				"bg-neutral-100 dark:bg-neutral-900",
 				"group-data-minimized/shell:hidden group-data-fullscreen/shell:h-svh",
