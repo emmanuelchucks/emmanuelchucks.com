@@ -129,9 +129,8 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			ref,
 			title,
 			zIndex: 0,
-			position: { x: 0, y: 0 },
+			movement: { x: 0, y: 0 },
 			dimensions: { width: 0, height: 0 },
-			dragStartPosition: { x: 0, y: 0 },
 			mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
 		},
 		on: {
@@ -146,10 +145,12 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 					if (context.mode === "fullscreen") {
 						exitFullscreen();
 					}
-					windowManagerStore.send({
-						type: "removeFloatingWindow",
-						windowStore,
-					});
+					if (getIsFloatingWindow(windowStore)) {
+						windowManagerStore.send({
+							type: "removeFloatingWindow",
+							windowStore,
+						});
+					}
 					return "closed" as const;
 				},
 			},
@@ -190,8 +191,6 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 				}
 
 				document.body.setAttribute("inert", "");
-				context.dragStartPosition.x = event.e.clientX - context.position.x;
-				context.dragStartPosition.y = event.e.clientY - context.position.y;
 
 				if (!getIsFloatingWindow(windowStore)) {
 					context.dimensions = context.ref.current.getBoundingClientRect();
@@ -204,9 +203,9 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 
 				const onMouseMove = (e: MouseEvent) => {
 					if (!context.ref.current) return;
-					context.position.x = e.clientX - context.dragStartPosition.x;
-					context.position.y = e.clientY - context.dragStartPosition.y;
-					context.ref.current.style.transform = `translate(${context.position.x}px, ${context.position.y}px)`;
+					context.movement.x = context.movement.x + e.movementX;
+					context.movement.y = context.movement.y + e.movementY;
+					context.ref.current.style.transform = `translate(${context.movement.x}px, ${context.movement.y}px)`;
 				};
 
 				const onMouseUp = () => {
