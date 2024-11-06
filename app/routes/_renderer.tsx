@@ -1,12 +1,10 @@
 import { Style, cx } from "hono/css";
-import { jsxRenderer } from "hono/jsx-renderer";
+import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { BackgroundGrid } from "~/components/$background-grid";
 import { A } from "~/components/a";
 
-export default jsxRenderer(({ title, description, children }, c) => {
-	const isHome = c.req.path === "/";
-
+export default jsxRenderer(({ title, description, children }) => {
 	return (
 		<html lang="en" class="scheme-light-dark [scrollbar-gutter:stable]">
 			<head>
@@ -21,27 +19,40 @@ export default jsxRenderer(({ title, description, children }, c) => {
 			</head>
 			<body
 				class={cx(
-					"mx-auto my-24 overflow-x-hidden",
-					"w-[min(100%-var(--spacing-8),_var(--width-2xl))]",
-					"sm:w-[min(100%-var(--spacing-24),_var(--width-2xl))]",
-					"text-neutral-950 bg-neutral-50 dark:text-neutral-50 dark:bg-neutral-950",
+					"overflow-x-hidden",
+					"text-neutral-950 dark:text-neutral-50",
+					"bg-neutral-50 dark:bg-neutral-950",
 				)}
 			>
-				<BackgroundGrid />
-				{!isHome && (
-					<header>
-						<nav>
-							<A
-								href="/"
-								class="font-medium text-neutral-800 dark:text-neutral-200"
-							>
-								<span aria-hidden="true">← </span>Home
-							</A>
-						</nav>
-					</header>
-				)}
-				{children}
+				<div
+					class={cx(
+						"mx-auto my-24",
+						"w-[min(100%-var(--spacing-8),_var(--width-2xl))]",
+						"sm:w-[min(100%-var(--spacing-24),_var(--width-2xl))]",
+					)}
+				>
+					<BackgroundGrid />
+					<HeaderNavigation />
+					{children}
+				</div>
 			</body>
 		</html>
 	);
 });
+
+function HeaderNavigation() {
+	const c = useRequestContext();
+	const isHome = c.req.path === "/";
+
+	if (isHome) return null;
+
+	return (
+		<header>
+			<nav>
+				<A href="/" class="font-medium text-neutral-800 dark:text-neutral-200">
+					<span aria-hidden="true">← </span>Home
+				</A>
+			</nav>
+		</header>
+	);
+}
