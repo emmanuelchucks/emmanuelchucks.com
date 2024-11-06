@@ -19,28 +19,34 @@ export function Browser({
 
 	return (
 		<WindowProvider id={id} ref={ref} title={title}>
-			<Shell>
-				<TopBar>
-					<CloseButton />
-					<MinimizeButton />
-					<FullscreenButton />
-				</TopBar>
-				<Content>{children}</Content>
-			</Shell>
-			<Placeholder />
+			<Placeholder>
+				<Shell>
+					<TopBar>
+						<CloseButton />
+						<MinimizeButton />
+						<FullscreenButton />
+					</TopBar>
+					<Content>{children}</Content>
+				</Shell>
+			</Placeholder>
 		</WindowProvider>
 	);
 }
 
-function Placeholder() {
+function Placeholder({ children }: PropsWithChildren) {
 	const id = useWindowSelector((state) => state.context.id);
-	const dimensions = useWindowSelector((state) => state.context.dimensions);
 
 	return (
 		<div
 			id={`${id}-placeholder`}
-			style={{ height: `${dimensions.height}px` }}
-		/>
+			class={cx(
+				"not-prose relative aspect-[4/3]",
+				"not-has-data-floating:has-data-closed:hidden",
+				"not-has-data-floating:has-data-minimized:aspect-auto",
+			)}
+		>
+			{children}
+		</div>
 	);
 }
 
@@ -53,7 +59,7 @@ function Shell({ children }: PropsWithChildren) {
 	const { activate } = useWindowAction();
 
 	return (
-		<div
+		<figure
 			id={id}
 			ref={ref}
 			data-closed={mode === "closed" ? "true" : undefined}
@@ -64,14 +70,13 @@ function Shell({ children }: PropsWithChildren) {
 			onFocusCapture={activate}
 			onMouseDownCapture={activate}
 			class={cx(
-				"group/shell not-prose",
-				"rounded-md overflow-hidden will-change-transform",
-				"data-closed:hidden data-floating:absolute",
-				"data-floating:data-minimized:hidden",
+				"group/shell h-full relative",
+				"rounded-md overflow-clip will-change-transform",
+				"data-closed:hidden data-floating:data-minimized:hidden",
 			)}
 		>
-			<figure>{children}</figure>
-		</div>
+			{children}
+		</figure>
 	);
 }
 
@@ -93,8 +98,7 @@ function TopBar({ children }: PropsWithChildren) {
 			</figcaption>
 			<div
 				class={cx(
-					"group/top-bar-buttons",
-					"p-2 flex gap-x-2",
+					"group/top-bar-buttons p-2 flex gap-x-2",
 					"group-data-minimized/shell:p-4",
 				)}
 			>
@@ -198,9 +202,9 @@ function Content({ children }: PropsWithChildren) {
 	return (
 		<div
 			class={cx(
-				"w-full aspect-square overflow-auto sm:aspect-[4/3]",
+				"h-full overflow-y-auto",
 				"bg-neutral-100 dark:bg-neutral-900",
-				"group-data-minimized/shell:hidden group-data-fullscreen/shell:h-svh",
+				"group-data-minimized/shell:hidden",
 			)}
 		>
 			{children}
