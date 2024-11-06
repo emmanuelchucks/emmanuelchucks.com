@@ -26,14 +26,6 @@ const windowManagerStore = createStore({
 				activeWindow: event.windowStore,
 			};
 		},
-		removeFloatingWindow(context, event: { windowStore: WindowStore }) {
-			context.floatingWindows.delete(event.windowStore);
-			const nextFloatingWindow = [...context.floatingWindows].at(-1);
-			return {
-				floatingWindows: new Set(context.floatingWindows),
-				activeWindow: nextFloatingWindow,
-			};
-		},
 		addDockedWindow(context, event: { windowStore: WindowStore }) {
 			context.dockedWindows.add(event.windowStore);
 			const nextFloatingWindow = [...context.floatingWindows].at(-2);
@@ -70,11 +62,6 @@ const windowManagerStore = createStore({
 				type: "setZIndex",
 				zIndex: newZIndex,
 			});
-
-			if (getIsFloatingWindow(event.windowStore)) {
-				context.floatingWindows.delete(event.windowStore);
-				context.floatingWindows.add(event.windowStore);
-			}
 
 			return {
 				floatingWindows: new Set(context.floatingWindows),
@@ -132,7 +119,6 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			title,
 			zIndex: 0,
 			movement: { x: 0, y: 0 },
-			dimensions: { width: 0, height: 0 },
 			mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
 		},
 		on: {
@@ -146,12 +132,6 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 					event.e.stopPropagation();
 					if (context.mode === "fullscreen") {
 						exitFullscreen();
-					}
-					if (getIsFloatingWindow(windowStore)) {
-						windowManagerStore.send({
-							type: "removeFloatingWindow",
-							windowStore,
-						});
 					}
 					return "closed" as const;
 				},
@@ -195,8 +175,6 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 				document.body.setAttribute("inert", "");
 
 				if (!getIsFloatingWindow(windowStore)) {
-					context.dimensions = context.ref.current.getBoundingClientRect();
-					context.ref.current.style.width = `${context.dimensions.width}px`;
 					windowManagerStore.send({
 						type: "addFloatingWindow",
 						windowStore,
