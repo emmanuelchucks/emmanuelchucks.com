@@ -55,12 +55,14 @@ const windowManagerStore = createStore({
 			};
 		},
 		activateWindow(context, event: { windowStore: WindowStore }) {
-			const newZIndex = getIsActiveWindow(event.windowStore)
-				? event.windowStore.getSnapshot().context.zIndex
-				: (context.activeWindow?.getSnapshot().context.zIndex ?? 0) + 1;
+			const currentActiveWindowSnapshot = context.activeWindow?.getSnapshot();
+			const newActiveWindowSnapshot = event.windowStore.getSnapshot();
 
-			const newActiveWindow =
-				event.windowStore.getSnapshot().context.ref.current;
+			const newZIndex = getIsActiveWindow(event.windowStore)
+				? newActiveWindowSnapshot.context.zIndex
+				: (currentActiveWindowSnapshot?.context.zIndex ?? 0) + 1;
+
+			const newActiveWindow = newActiveWindowSnapshot.context.ref.current;
 			if (!newActiveWindow) return context;
 
 			newActiveWindow.style.zIndex = String(newZIndex);
