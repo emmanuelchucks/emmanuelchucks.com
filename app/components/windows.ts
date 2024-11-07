@@ -118,6 +118,7 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			ref,
 			title,
 			zIndex: 0,
+			windowScrollY: 0,
 			movement: { x: 0, y: 0 },
 			mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
 		},
@@ -139,8 +140,12 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			toggleMinimize: {
 				mode(context, event: { e: MouseEvent }) {
 					event.e.stopPropagation();
+					if (!context.ref.current) return context.mode;
 					if (context.mode === "fullscreen") return context.mode;
 					if (context.mode === "minimized") {
+						const scrollDelta = window.scrollY - context.windowScrollY;
+						context.movement.y = context.movement.y + scrollDelta;
+						context.ref.current.style.transform = `translate(${context.movement.x}px, ${context.movement.y}px)`;
 						return "default";
 					}
 					if (getIsFloatingWindow(windowStore)) {
@@ -149,6 +154,7 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 							windowStore,
 						});
 					}
+					context.windowScrollY = window.scrollY;
 					return "minimized";
 				},
 			},
