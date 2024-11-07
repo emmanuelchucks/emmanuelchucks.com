@@ -172,19 +172,9 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			},
 			startDragging(context, event: { e: MouseEvent }) {
 				event.e.stopPropagation();
-				if (!context.ref.current) return context;
 				if (context.mode !== "default") return context;
 				if (event.e.target !== event.e.currentTarget) {
 					return context;
-				}
-
-				document.body.setAttribute("inert", "");
-
-				if (!getIsFloatingWindow(windowStore)) {
-					windowManagerStore.send({
-						type: "addFloatingWindow",
-						windowStore,
-					});
 				}
 
 				const onMouseMove = (e: MouseEvent) => {
@@ -194,6 +184,7 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 					context.ref.current.style.transform = `translate(${context.movement.x}px, ${context.movement.y}px)`;
 				};
 
+				document.body.setAttribute("inert", "true");
 				const onMouseUp = () => {
 					document.body.removeAttribute("inert");
 					document.removeEventListener("mousemove", onMouseMove);
@@ -202,6 +193,13 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 
 				document.addEventListener("mousemove", onMouseMove);
 				document.addEventListener("mouseup", onMouseUp);
+
+				if (!getIsFloatingWindow(windowStore)) {
+					windowManagerStore.send({
+						type: "addFloatingWindow",
+						windowStore,
+					});
+				}
 
 				return context;
 			},
