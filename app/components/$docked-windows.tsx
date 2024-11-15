@@ -51,7 +51,7 @@ function DockedWindow({ dockedWindow }: { dockedWindow: WindowStore }) {
 			<p class="sr-only">{dockedWindowSnapshot.context.title}</p>
 			<button
 				type="button"
-				onClick={(e) => removeDockedWindow(e, dockedWindow)}
+				onMouseDown={(e) => removeDockedWindow(e, dockedWindow)}
 				class={cx(
 					"grid place-content-center",
 					"p-2 rounded-md bg-neutral-50 dark:bg-neutral-950",
