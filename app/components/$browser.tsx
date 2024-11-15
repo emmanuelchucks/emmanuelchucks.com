@@ -114,7 +114,7 @@ function CloseButton() {
 	return (
 		<button
 			type="button"
-			onClick={close}
+			onMouseDown={close}
 			class={cx(
 				"relative w-3 h-3 rounded-full bg-red-500",
 				"group-data-minimized/shell:hidden",
@@ -143,7 +143,7 @@ function MinimizeButton() {
 	return (
 		<button
 			type="button"
-			onClick={toggleMinimize}
+			onMouseDown={toggleMinimize}
 			aria-disabled={mode === "fullscreen" ? "true" : undefined}
 			class={cx(
 				"group/minimized-button",
@@ -174,7 +174,7 @@ function FullscreenButton() {
 	return (
 		<button
 			type="button"
-			onClick={toggleFullscreen}
+			onMouseDown={toggleFullscreen}
 			class={cx(
 				"relative w-3 h-3 rounded-full bg-green-500",
 				"group-data-minimized/shell:hidden",
