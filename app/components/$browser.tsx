@@ -40,7 +40,7 @@ function Placeholder({ children }: PropsWithChildren) {
 		<div
 			id={`${id}-placeholder`}
 			class={cx(
-				"not-prose relative aspect-[4/3]",
+				"not-prose relative aspect-square sm:aspect-[4/3]",
 				"not-has-data-floating:has-data-closed:hidden",
 				"not-has-data-floating:has-data-minimized:aspect-auto",
 			)}
@@ -125,8 +125,9 @@ function CloseButton() {
 			<span class="sr-only">Close</span>
 			<span
 				class={cx(
-					"grid place-items-center opacity-0",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"bg-purple-900",
+					"place-items-center hidden",
+					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
 				)}
 			>
 				<span class="w-2 h-0.5 bg-red-900/50 rotate-45 absolute" />
@@ -148,7 +149,7 @@ function MinimizeButton() {
 			class={cx(
 				"group/minimized-button",
 				"relative w-3 h-3 rounded-full bg-yellow-500",
-				"has-aria-disabled:bg-neutral-300 dark:has-aria-disabled:bg-neutral-700",
+				"aria-disabled:bg-neutral-300 dark:aria-disabled:bg-neutral-700",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
@@ -156,9 +157,9 @@ function MinimizeButton() {
 			<span class="sr-only">Minimize</span>
 			<span
 				class={cx(
-					"grid place-items-center opacity-0",
-					"group-aria-disabled/minimized-button:opacity-0",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"place-items-center hidden",
+					"group-aria-disabled/minimized-button:hidden",
+					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
 				)}
 			>
 				<span class="w-1.5 h-0.5 bg-yellow-900/50 absolute" />
@@ -187,8 +188,8 @@ function FullscreenButton() {
 			</span>
 			<span
 				class={cx(
-					"grid place-items-center opacity-0",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"place-items-center hidden",
+					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
 				)}
 			>
 				<div class="absolute top-[1px] left-[1px] border-[3px] border-transparent border-t-green-900/75 border-l-green-900/75" />
