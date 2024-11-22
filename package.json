@@ -27,7 +27,7 @@
 		"@hono/vite-dev-server": "^0.17.0",
 		"@mdx-js/rollup": "^3.1.0",
 		"@shikijs/rehype": "^1.23.1",
-		"@tailwindcss/postcss": "4.0.0-beta.1",
+		"@tailwindcss/vite": "4.0.0-beta.1",
 		"@tailwindcss/typography": "0.5.0-alpha.3",
 		"remark-frontmatter": "^5.0.0",
 		"remark-mdx-frontmatter": "^5.0.0",
