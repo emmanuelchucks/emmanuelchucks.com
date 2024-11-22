@@ -27,8 +27,8 @@ export default jsxRenderer(({ title, description, children }) => {
 				<div
 					class={cx(
 						"mx-auto my-24",
-						"w-[min(100%-var(--spacing-8),_var(--width-2xl))]",
-						"sm:w-[min(100%-var(--spacing-24),_var(--width-2xl))]",
+						"w-[min(100%-var(--spacing)*8,_var(--container-2xl))]",
+						"sm:w-[min(100%-var(--spacing)*24,_var(--container-2xl))]",
 					)}
 				>
 					<BackgroundGrid />
