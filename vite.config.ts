@@ -10,12 +10,14 @@ import remarkMdxReadingTime from "remark-reading-time/mdx";
 import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import tsconfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
 	plugins: [
 		pages(),
 		imagetools(),
 		tsconfigPaths(),
+		tailwindcss(),
 		honox({
 			devServer: {
 				adapter,
