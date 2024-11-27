@@ -116,7 +116,7 @@ function CloseButton() {
 			type="button"
 			onMouseDown={close}
 			class={cx(
-				"relative w-3 h-3 rounded-full bg-red-500",
+				"relative size-3 rounded-full bg-red-500",
 				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
@@ -148,7 +148,7 @@ function MinimizeButton() {
 			aria-disabled={mode === "fullscreen" ? "true" : undefined}
 			class={cx(
 				"group/minimized-button",
-				"relative w-3 h-3 rounded-full bg-yellow-500",
+				"relative size-3 rounded-full bg-yellow-500",
 				"aria-disabled:bg-neutral-300 dark:aria-disabled:bg-neutral-700",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
@@ -177,7 +177,7 @@ function FullscreenButton() {
 			type="button"
 			onMouseDown={toggleFullscreen}
 			class={cx(
-				"relative w-3 h-3 rounded-full bg-green-500",
+				"relative size-3 rounded-full bg-green-500",
 				"group-data-minimized/shell:hidden",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",

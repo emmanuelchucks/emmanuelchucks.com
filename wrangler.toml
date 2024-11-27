@@ -1,9 +1,15 @@
 name = "emmanuelchucks-com"
-compatibility_date = "2024-10-30"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = "./dist"
+main = "dist/index.js"
+compatibility_date = "2024-11-27"
+compatibility_flags = ['nodejs_compat']
+
+[assets]
+directory = "dist"
 
 [[kv_namespaces]]
 binding = "VIEWS_COUNTER"
 id = "bd69297e2ff84327bd1a6be0a0176d50"
 preview_id = "8401f4cb5f94458a9e44e24f227a8a1d"
+
+[dev]
+port = 8788

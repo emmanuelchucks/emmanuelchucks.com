@@ -1,7 +1,8 @@
-import pages from "@hono/vite-cloudflare-pages";
+import build from "@hono/vite-build/cloudflare-workers";
 import adapter from "@hono/vite-dev-server/cloudflare";
 import mdx from "@mdx-js/rollup";
 import rehypeShiki from "@shikijs/rehype";
+import tailwindcss from "@tailwindcss/vite";
 import honox from "honox/vite";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkMdxFrontmatter from "remark-mdx-frontmatter";
@@ -10,11 +11,10 @@ import remarkMdxReadingTime from "remark-reading-time/mdx";
 import { defineConfig } from "vite";
 import { imagetools } from "vite-imagetools";
 import tsconfigPaths from "vite-tsconfig-paths";
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
 	plugins: [
-		pages(),
+		build(),
 		imagetools(),
 		tsconfigPaths(),
 		tailwindcss(),
