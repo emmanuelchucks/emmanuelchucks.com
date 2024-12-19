@@ -114,17 +114,12 @@ function CloseButton() {
 	return (
 		<div
 			class={cx(
-				"grid [grid-template-areas:'stack']",
+				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-red-500",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 				"group-data-minimized/shell:hidden",
 			)}
 		>
-			<div
-				class={cx(
-					"size-3 rounded-full bg-red-500 [grid-area:stack]",
-					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
-				)}
-			/>
 			<button
 				type="button"
 				onMouseDown={close}
@@ -144,15 +139,14 @@ function MinimizeButton() {
 	const { toggleMinimize } = useWindowAction();
 
 	return (
-		<div class="grid [grid-template-areas:'stack']">
-			<div
-				class={cx(
-					"size-3 rounded-full bg-yellow-500 [grid-area:stack]",
-					"group-data-fullscreen/shell:bg-neutral-300 dark:group-data-fullscreen/shell:bg-neutral-700",
-					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
-				)}
-			/>
+		<div
+			class={cx(
+				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-yellow-500",
+				"group-data-fullscreen/shell:bg-neutral-300 dark:group-data-fullscreen/shell:bg-neutral-700",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
+			)}
+		>
 			<button
 				type="button"
 				onMouseDown={toggleMinimize}
@@ -176,18 +170,12 @@ function FullscreenButton() {
 	return (
 		<div
 			class={cx(
-				"grid [grid-template-areas:'stack']",
+				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-green-500",
+				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 				"group-data-minimized/shell:hidden",
 			)}
 		>
-			<div
-				class={cx(
-					"size-3 rounded-full bg-green-500 [grid-area:stack]",
-					"group-data-minimized/shell:hidden",
-					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
-				)}
-			/>
 			<button
 				type="button"
 				onMouseDown={toggleFullscreen}
