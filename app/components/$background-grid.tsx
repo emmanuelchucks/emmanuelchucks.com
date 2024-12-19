@@ -54,7 +54,7 @@ export function BackgroundGrid({
 		<div ref={containerRef} class="fixed inset-0 -z-10">
 			<div
 				class={cx(
-					"grid absolute inset-0",
+					"grid fixed inset-0",
 					"transition-transform duration-700 ease-out will-change-transform",
 				)}
 				style={{
