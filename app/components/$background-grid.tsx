@@ -51,22 +51,21 @@ export function BackgroundGrid({
 	const squares = Array.from({ length: gridSize.rows * gridSize.cols });
 
 	return (
-		<div ref={containerRef} class="fixed inset-0 -z-10">
-			<div
-				class={cx(
-					"grid fixed inset-0",
-					"transition-transform duration-700 ease-out will-change-transform",
-				)}
-				style={{
-					gap: `${gap}px`,
-					gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
-					transform: `translate(${offsetX}px, ${offsetY}px)`,
-				}}
-			>
-				{squares.map((_, index) => (
-					<GridSquare key={String(index)} />
-				))}
-			</div>
+		<div
+			ref={containerRef}
+			class={cx(
+				"grid fixed inset-0 -z-10",
+				"transition-transform duration-700 ease-out will-change-transform",
+			)}
+			style={{
+				gap: `${gap}px`,
+				gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
+				transform: `translate(${offsetX}px, ${offsetY}px)`,
+			}}
+		>
+			{squares.map((_, index) => (
+				<GridSquare key={String(index)} />
+			))}
 		</div>
 	);
 }
