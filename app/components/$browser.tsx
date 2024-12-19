@@ -112,28 +112,30 @@ function CloseButton() {
 	const { close } = useWindowAction();
 
 	return (
-		<button
-			type="button"
-			onMouseDown={close}
+		<div
 			class={cx(
-				"relative size-3 rounded-full bg-red-500",
+				"grid [grid-template-areas:'stack']",
 				"group-data-minimized/shell:hidden",
-				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
-			<span class="sr-only">Close</span>
-			<span
+			<div
 				class={cx(
-					"bg-purple-900",
-					"place-items-center hidden",
-					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
+					"size-3 rounded-full bg-red-500 [grid-area:stack]",
+					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
+				)}
+			/>
+			<button
+				type="button"
+				onMouseDown={close}
+				class={cx(
+					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<span class="w-2 h-0.5 bg-red-900/50 rotate-45 absolute" />
-				<span class="w-2 h-0.5 bg-red-900/50 -rotate-45 absolute" />
-			</span>
-		</button>
+				<span class="sr-only">Close</span>
+			</button>
+		</div>
 	);
 }
 
@@ -142,29 +144,33 @@ function MinimizeButton() {
 	const { toggleMinimize } = useWindowAction();
 
 	return (
-		<button
-			type="button"
-			onMouseDown={toggleMinimize}
-			aria-disabled={mode === "fullscreen" ? "true" : undefined}
+		<div
 			class={cx(
-				"group/minimized-button",
-				"relative size-3 rounded-full bg-yellow-500",
-				"aria-disabled:bg-neutral-300 dark:aria-disabled:bg-neutral-700",
-				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
+				"group/minimize-button grid [grid-template-areas:'stack']",
+				"group-data-minimized/shell:hidden",
 			)}
 		>
-			<span class="sr-only">Minimize</span>
-			<span
+			<div
 				class={cx(
-					"place-items-center hidden",
-					"group-aria-disabled/minimized-button:hidden",
-					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
+					"size-3 rounded-full bg-yellow-500 [grid-area:stack]",
+					"peer-aria-disabled:bg-neutral-300 dark:aria-disabled:bg-neutral-700",
+					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
+				)}
+			/>
+			<button
+				type="button"
+				onMouseDown={toggleMinimize}
+				aria-disabled={mode === "fullscreen" ? "true" : undefined}
+				class={cx(
+					"peer hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"group-aria-disabled/minimize-button:hidden",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<span class="w-1.5 h-0.5 bg-yellow-900/50 absolute" />
-			</span>
-		</button>
+				<span class="sr-only">Minimize</span>
+			</button>
+		</div>
 	);
 }
 
@@ -173,29 +179,33 @@ function FullscreenButton() {
 	const { toggleFullscreen } = useWindowAction();
 
 	return (
-		<button
-			type="button"
-			onMouseDown={toggleFullscreen}
+		<div
 			class={cx(
-				"relative size-3 rounded-full bg-green-500",
+				"grid [grid-template-areas:'stack']",
 				"group-data-minimized/shell:hidden",
-				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
-				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 			)}
 		>
-			<span class="sr-only">
-				{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
-			</span>
-			<span
+			<div
 				class={cx(
-					"place-items-center hidden",
-					"group-hover/top-bar-buttons:grid group-focus-within/top-bar-buttons:grid",
+					"size-3 rounded-full bg-green-500 [grid-area:stack]",
+					"group-data-minimized/shell:hidden",
+					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
+					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
+				)}
+			/>
+			<button
+				type="button"
+				onMouseDown={toggleFullscreen}
+				class={cx(
+					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<div class="absolute top-[1px] left-[1px] border-[3px] border-transparent border-t-green-900/75 border-l-green-900/75" />
-				<div class="absolute bottom-[2px] right-[2px] border-[3px] border-transparent border-b-green-900/75 border-r-green-900/75" />
-			</span>
-		</button>
+				<span class="sr-only">
+					{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
+				</span>
+			</button>
+		</div>
 	);
 }
 
