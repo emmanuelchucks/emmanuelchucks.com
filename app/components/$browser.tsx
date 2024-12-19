@@ -144,16 +144,11 @@ function MinimizeButton() {
 	const { toggleMinimize } = useWindowAction();
 
 	return (
-		<div
-			class={cx(
-				"group/minimize-button grid [grid-template-areas:'stack']",
-				"group-data-minimized/shell:hidden",
-			)}
-		>
+		<div class="grid [grid-template-areas:'stack']">
 			<div
 				class={cx(
 					"size-3 rounded-full bg-yellow-500 [grid-area:stack]",
-					"peer-aria-disabled:bg-neutral-300 dark:aria-disabled:bg-neutral-700",
+					"group-data-fullscreen/shell:bg-neutral-300 dark:group-data-fullscreen/shell:bg-neutral-700",
 					"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 					"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 				)}
@@ -163,8 +158,8 @@ function MinimizeButton() {
 				onMouseDown={toggleMinimize}
 				aria-disabled={mode === "fullscreen" ? "true" : undefined}
 				class={cx(
-					"peer hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
-					"group-aria-disabled/minimize-button:hidden",
+					"peer hidden opacity-0 [grid-area:stack]",
+					"aria-disabled:hidden not-aria-disabled:[@media(hover:hover)]:block",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
