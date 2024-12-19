@@ -15,32 +15,32 @@
 		"react": "npm:@hono/react-compat@^0.0.1",
 		"react-dom": "npm:@hono/react-compat@^0.0.1",
 		"@sindresorhus/slugify": "^2.2.1",
-		"@xstate/store": "^2.6.1",
+		"@xstate/store": "^2.6.2",
 		"date-fns": "^4.1.0",
-		"hono": "^4.6.12",
+		"hono": "^4.6.14",
 		"honox": "^0.1.27",
-		"valibot": "^1.0.0-beta.8"
+		"valibot": "^1.0.0-beta.9"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@cloudflare/workers-types": "^4.20241112.0",
-		"@hono/vite-build": "^1.1.0",
+		"@cloudflare/workers-types": "^4.20241218.0",
+		"@hono/vite-build": "^1.2.0",
 		"@hono/vite-cloudflare-pages": "^0.4.2",
 		"@hono/vite-dev-server": "^0.17.0",
 		"@mdx-js/rollup": "^3.1.0",
-		"@shikijs/rehype": "^1.23.1",
+		"@shikijs/rehype": "^1.24.3",
 		"@tailwindcss/typography": "^0.5.15",
-		"@tailwindcss/vite": "^4.0.0-beta.2",
+		"@tailwindcss/vite": "^4.0.0-beta.8",
 		"remark-frontmatter": "^5.0.0",
 		"remark-mdx-frontmatter": "^5.0.0",
 		"remark-reading-time": "^2.0.1",
-		"tailwindcss": "^4.0.0-beta.2",
+		"tailwindcss": "^4.0.0-beta.8",
 		"typescript": "^5.7.2",
-		"unplugin-icons": "^0.20.1",
-		"vite": "^6.0.0",
-		"vite-imagetools": "^7.0.4",
-		"vite-tsconfig-paths": "^5.1.3",
-		"wrangler": "^3.91.0"
+		"unplugin-icons": "^0.22.0",
+		"vite": "^6.0.4",
+		"vite-imagetools": "^7.0.5",
+		"vite-tsconfig-paths": "^5.1.4",
+		"wrangler": "^3.99.0"
 	},
-	"packageManager": "pnpm@9.14.2"
+	"packageManager": "pnpm@9.15.0"
 }
