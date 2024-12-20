@@ -124,11 +124,17 @@ function CloseButton() {
 				type="button"
 				onMouseDown={close}
 				class={cx(
-					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-red-900",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<span class="sr-only">Close</span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+					<title>Close</title>
+					<path
+						fill="currentColor"
+						d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94z"
+					/>
+				</svg>
 			</button>
 		</div>
 	);
@@ -152,12 +158,18 @@ function MinimizeButton() {
 				onMouseDown={toggleMinimize}
 				aria-disabled={mode === "fullscreen" ? "true" : undefined}
 				class={cx(
-					"peer hidden opacity-0 [grid-area:stack]",
+					"peer hidden opacity-0 [grid-area:stack] text-yellow-900",
 					"aria-disabled:hidden not-aria-disabled:[@media(hover:hover)]:block",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<span class="sr-only">Minimize</span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+					<title>{mode === "minimized" ? "Restore" : "Minimize"}</title>
+					<path
+						fill="currentColor"
+						d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5z"
+					/>
+				</svg>
 			</button>
 		</div>
 	);
@@ -180,13 +192,23 @@ function FullscreenButton() {
 				type="button"
 				onMouseDown={toggleFullscreen}
 				class={cx(
-					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-green-900",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
 				)}
 			>
-				<span class="sr-only">
-					{mode === "fullscreen" ? "Exit Fullscreen" : "Enter Fullscreen"}
-				</span>
+				{mode === "fullscreen" ? (
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+						<title>Exit fullscreen</title>
+						<path fill="currentColor" d="M4 4h6l-6 6V4z" />
+						<path fill="currentColor" d="M12 12H6l6-6v6z" />
+					</svg>
+				) : (
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+						<title>Enter fullscreen</title>
+						<path fill="currentColor" d="M4 4h6l-6 6V4z" />
+						<path fill="currentColor" d="M12 12H6l6-6v6z" />
+					</svg>
+				)}
 			</button>
 		</div>
 	);
