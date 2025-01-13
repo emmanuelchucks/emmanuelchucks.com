@@ -3,13 +3,14 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
+		"dev": "vite dev",
 		"build": "vite build --mode client && vite build",
 		"preview": "wrangler dev",
-		"deploy": "$npm_execpath run build && wrangler deploy",
-		"check": "biome check --write",
+		"deploy": "wrangler deploy",
+		"lint": "biome check --write",
 		"format": "biome format --write",
-		"type-check": "tsc --noEmit"
+		"check-types": "tsc --noEmit",
+		"ci-check": "pnpm lint format check-types"
 	},
 	"dependencies": {
 		"react": "npm:@hono/react-compat@^0.0.1",
