@@ -18,17 +18,17 @@
 		"@sindresorhus/slugify": "^2.2.1",
 		"@xstate/store": "^2.6.2",
 		"date-fns": "^4.1.0",
-		"hono": "^4.6.16",
-		"honox": "^0.1.31",
-		"valibot": "^1.0.0-beta.11"
+		"hono": "^4.6.17",
+		"honox": "^0.1.32",
+		"valibot": "^1.0.0-beta.12"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@cloudflare/workers-types": "^4.20250109.0",
 		"@hono/vite-build": "^1.2.1",
-		"@hono/vite-dev-server": "^0.18.0",
+		"@hono/vite-dev-server": "^0.18.1",
 		"@mdx-js/rollup": "^3.1.0",
-		"@shikijs/rehype": "^1.26.2",
+		"@shikijs/rehype": "^1.27.2",
 		"@tailwindcss/typography": "^0.5.16",
 		"@tailwindcss/vite": "^4.0.0-beta.9",
 		"remark-frontmatter": "^5.0.0",
@@ -40,7 +40,7 @@
 		"vite": "^6.0.7",
 		"vite-imagetools": "^7.0.5",
 		"vite-tsconfig-paths": "^5.1.4",
-		"wrangler": "^3.101.0"
+		"wrangler": "^3.103.2"
 	},
 	"packageManager": "pnpm@9.15.4"
 }
