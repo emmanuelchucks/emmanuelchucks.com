@@ -172,6 +172,7 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			},
 			startDragging(context, event: { e: MouseEvent }) {
 				event.e.stopPropagation();
+
 				if (context.mode !== "default") return context;
 				if (event.e.target !== event.e.currentTarget) {
 					return context;
@@ -185,14 +186,20 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 				};
 
 				document.body.setAttribute("inert", "true");
+				const controller = new AbortController();
+
 				const onMouseUp = () => {
 					document.body.removeAttribute("inert");
-					document.removeEventListener("mousemove", onMouseMove);
-					document.removeEventListener("mouseup", onMouseUp);
+					controller.abort();
 				};
 
-				document.addEventListener("mousemove", onMouseMove);
-				document.addEventListener("mouseup", onMouseUp);
+				document.addEventListener("mousemove", onMouseMove, {
+					signal: controller.signal,
+				});
+
+				document.addEventListener("mouseup", onMouseUp, {
+					signal: controller.signal,
+				});
 
 				if (!getIsFloatingWindow(windowStore)) {
 					windowManagerStore.send({

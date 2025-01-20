@@ -41,8 +41,15 @@ export function BackgroundGrid({
 			});
 		};
 
-		window.addEventListener("mousemove", handleMouseMove);
-		return () => window.removeEventListener("mousemove", handleMouseMove);
+		const controller = new AbortController();
+
+		window.addEventListener("mousemove", handleMouseMove, {
+			signal: controller.signal,
+		});
+
+		return () => {
+			controller.abort();
+		};
 	}, []);
 
 	const offsetX = mousePosition.x * maxOffset;
