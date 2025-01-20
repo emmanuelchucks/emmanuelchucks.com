@@ -47,16 +47,18 @@ export default createRoute((c) => {
 				))}
 			</aside>
 
-			<section class="mt-24">
-				<h2 class="text-xl font-semibold text-neutral-600 dark:text-neutral-400">
-					Posts
-				</h2>
-				<ul class="mt-6 grid gap-y-14">
-					{posts.map((post) => (
-						<PostCard key={post.id} post={post} />
-					))}
-				</ul>
-			</section>
+			{Boolean(posts.length) && (
+				<section class="mt-24">
+					<h2 class="text-xl font-semibold text-neutral-600 dark:text-neutral-400">
+						Posts
+					</h2>
+					<ul class="mt-6 grid gap-y-14">
+						{posts.map((post) => (
+							<PostCard key={post.id} post={post} />
+						))}
+					</ul>
+				</section>
+			)}
 		</main>,
 		{
 			title: "Emmanuel Chucks - Full-Stack Engineer",
