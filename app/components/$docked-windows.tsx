@@ -1,15 +1,15 @@
+import { useSelector } from "@xstate/store/react";
 import { cx } from "hono/css";
-import {
-	type WindowStore,
-	useWindowManagerAction,
-	useWindowManagerSelector,
-} from "./windows";
+import { type WindowStore } from "./window";
+import { windowManagerStore } from "./window-manager";
 
 export function DockedWindows() {
-	const activeWindow = useWindowManagerSelector(
+	const activeWindow = useSelector(
+		windowManagerStore,
 		(state) => state.context.activeWindow,
 	);
-	const dockedWindows = useWindowManagerSelector(
+	const dockedWindows = useSelector(
+		windowManagerStore,
 		(state) => state.context.dockedWindows,
 	);
 
@@ -39,7 +39,6 @@ export function DockedWindows() {
 }
 
 function DockedWindow({ dockedWindow }: { dockedWindow: WindowStore }) {
-	const { removeDockedWindow } = useWindowManagerAction();
 	const dockedWindowSnapshot = dockedWindow.getSnapshot();
 
 	const [[firstInitial], [secondInitial]] =
@@ -51,7 +50,12 @@ function DockedWindow({ dockedWindow }: { dockedWindow: WindowStore }) {
 			<p class="sr-only">{dockedWindowSnapshot.context.title}</p>
 			<button
 				type="button"
-				onMouseDown={(e) => removeDockedWindow(e, dockedWindow)}
+				onMouseDown={(e) =>
+					windowManagerStore.trigger.removeDockedWindow({
+						dockedWindow,
+						e,
+					})
+				}
 				class={cx(
 					"grid place-content-center",
 					"p-2 rounded-md bg-neutral-50 dark:bg-neutral-950",

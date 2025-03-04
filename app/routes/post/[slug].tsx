@@ -6,12 +6,15 @@ import { PostMeta } from "~/components/post-meta";
 import { getPost } from "~/helpers/posts";
 import { SOCIALS } from "~/helpers/socials";
 
-export default createRoute((c) => {
-	const post = getPost(c.req.param("href"));
+export default createRoute(async (c) => {
+	const post = getPost(c.req.param("slug"));
 
 	if (!post) {
 		return c.notFound();
 	}
+
+	const viewsCount = Number((await c.env.VIEWS_COUNTER.get(post.id)) ?? 2);
+	c.env.VIEWS_COUNTER.put(post.id, String(viewsCount + 1));
 
 	return c.render(
 		<>
