@@ -1,12 +1,8 @@
+import { useSelector } from "@xstate/store/react";
 import { cx } from "hono/css";
 import { type PropsWithChildren, useId, useRef } from "hono/jsx";
-import {
-	WindowProvider,
-	useIsActiveWindow,
-	useIsFloatingWindow,
-	useWindowAction,
-	useWindowSelector,
-} from "./windows";
+import { WindowProvider, useWindowContext } from "./window";
+import { windowManagerStore } from "./window-manager";
 
 export function Browser({
 	title,
@@ -34,7 +30,8 @@ export function Browser({
 }
 
 function Placeholder({ children }: PropsWithChildren) {
-	const id = useWindowSelector((state) => state.context.id);
+	const windowStore = useWindowContext();
+	const id = useSelector(windowStore, (state) => state.context.id);
 
 	return (
 		<div
@@ -51,12 +48,24 @@ function Placeholder({ children }: PropsWithChildren) {
 }
 
 function Shell({ children }: PropsWithChildren) {
-	const id = useWindowSelector((state) => state.context.id);
-	const ref = useWindowSelector((state) => state.context.ref);
-	const isFloatingWindow = useIsFloatingWindow();
-	const isActiveWindow = useIsActiveWindow();
-	const mode = useWindowSelector((state) => state.context.mode);
-	const { activate } = useWindowAction();
+	const windowStore = useWindowContext();
+	const id = useSelector(windowStore, (state) => state.context.id);
+	const ref = useSelector(windowStore, (state) => state.context.ref);
+	const mode = useSelector(windowStore, (state) => state.context.mode);
+
+	const floatingWindows = useSelector(
+		windowManagerStore,
+		(state) => state.context.floatingWindows,
+	);
+	const activeWindow = useSelector(
+		windowManagerStore,
+		(state) => state.context.activeWindow,
+	);
+
+	const isFloatingWindow = floatingWindows.has(windowStore);
+	const isActiveWindow =
+		activeWindow?.getSnapshot().context.id ===
+		windowStore.getSnapshot().context.id;
 
 	return (
 		<figure
@@ -67,8 +76,12 @@ function Shell({ children }: PropsWithChildren) {
 			data-fullscreen={mode === "fullscreen" ? "true" : undefined}
 			data-floating={isFloatingWindow ? "true" : undefined}
 			data-active={isActiveWindow ? "true" : undefined}
-			onFocusCapture={activate}
-			onMouseDownCapture={activate}
+			onFocusCapture={() => {
+				windowManagerStore.trigger.activateWindow({ windowStore });
+			}}
+			onMouseDownCapture={() => {
+				windowManagerStore.trigger.activateWindow({ windowStore });
+			}}
 			class={cx(
 				"group/shell h-full relative",
 				"rounded-md overflow-clip will-change-transform",
@@ -81,12 +94,14 @@ function Shell({ children }: PropsWithChildren) {
 }
 
 function TopBar({ children }: PropsWithChildren) {
-	const title = useWindowSelector((state) => state.context.title);
-	const { startDragging } = useWindowAction();
+	const windowStore = useWindowContext();
+	const title = useSelector(windowStore, (state) => state.context.title);
 
 	return (
 		<div
-			onMouseDown={startDragging}
+			onMouseDown={(e) => {
+				windowStore.trigger.startDragging({ e });
+			}}
 			class={cx(
 				"flex items-center flex-row-reverse justify-end",
 				"bg-neutral-200 dark:bg-neutral-800",
@@ -109,7 +124,7 @@ function TopBar({ children }: PropsWithChildren) {
 }
 
 function CloseButton() {
-	const { close } = useWindowAction();
+	const windowStore = useWindowContext();
 
 	return (
 		<div
@@ -122,7 +137,9 @@ function CloseButton() {
 		>
 			<button
 				type="button"
-				onMouseDown={close}
+				onMouseDown={(e) => {
+					windowStore.trigger.close({ e });
+				}}
 				class={cx(
 					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-red-900",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
@@ -141,8 +158,8 @@ function CloseButton() {
 }
 
 function MinimizeButton() {
-	const mode = useWindowSelector((state) => state.context.mode);
-	const { toggleMinimize } = useWindowAction();
+	const windowStore = useWindowContext();
+	const mode = useSelector(windowStore, (state) => state.context.mode);
 
 	return (
 		<div
@@ -155,7 +172,9 @@ function MinimizeButton() {
 		>
 			<button
 				type="button"
-				onMouseDown={toggleMinimize}
+				onMouseDown={(e) => {
+					windowStore.trigger.toggleMinimize({ e });
+				}}
 				aria-disabled={mode === "fullscreen" ? "true" : undefined}
 				class={cx(
 					"peer hidden opacity-0 [grid-area:stack] text-yellow-900",
@@ -164,7 +183,9 @@ function MinimizeButton() {
 				)}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-					<title>{mode === "minimized" ? "Restore" : "Minimize"}</title>
+					<title>
+						{mode === "minimized" ? "Restore" : "Minimize"}
+					</title>
 					<path
 						fill="currentColor"
 						d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5z"
@@ -176,8 +197,8 @@ function MinimizeButton() {
 }
 
 function FullscreenButton() {
-	const mode = useWindowSelector((state) => state.context.mode);
-	const { toggleFullscreen } = useWindowAction();
+	const windowStore = useWindowContext();
+	const mode = useSelector(windowStore, (state) => state.context.mode);
 
 	return (
 		<div
@@ -190,7 +211,9 @@ function FullscreenButton() {
 		>
 			<button
 				type="button"
-				onMouseDown={toggleFullscreen}
+				onMouseDown={(e) => {
+					windowStore.trigger.toggleFullscreen({ e });
+				}}
 				class={cx(
 					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-green-900",
 					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",

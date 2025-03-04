@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { cx } from "hono/css";
 import type { Post } from "~/helpers/posts";
-import { getViewsCount } from "~/helpers/views";
+import { getFormattedViewsCount } from "~/helpers/views";
 
 export function PostMeta({ post }: { post: Post }) {
 	return (
@@ -19,7 +19,7 @@ export function PostMeta({ post }: { post: Post }) {
 				{format(post.publishedAt, "EEEE, MMMM d, yyyy")}
 			</time>
 			<span>{post.readingTime}</span>
-			<span>{getViewsCount(post.id)} views</span>
+			<span>{getFormattedViewsCount(post.id)} views</span>
 		</p>
 	);
 }

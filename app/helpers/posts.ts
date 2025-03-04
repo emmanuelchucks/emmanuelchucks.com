@@ -33,7 +33,7 @@ const postMdxFiles = import.meta.glob<{
 export type Post = {
 	Content: MdxContent;
 	readingTime: string;
-	href: string;
+	slug: string;
 	id: string;
 	title: string;
 	description: string;
@@ -56,14 +56,14 @@ export function getPosts(filter = ""): Post[] {
 				...post.frontmatter,
 				Content: post.default,
 				readingTime: post.readingTime.text,
-				href: `/post/${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
+				slug: `${slugify(post.frontmatter.title)}-${post.frontmatter.id}`,
 			};
 		});
 }
 
-export function getPost(href: string): Post | undefined {
+export function getPost(slug: string): Post | undefined {
 	const posts = getPosts();
-	return posts.find((post) => post.id === href.split("-").pop());
+	return posts.find((post) => post.id === slug.split("-").pop());
 }
 
 function parsePost(post: (typeof postMdxFiles)[number]): void {

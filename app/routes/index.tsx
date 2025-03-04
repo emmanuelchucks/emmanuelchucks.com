@@ -72,7 +72,7 @@ function PostCard({ key, post }: { key: string; post: Post }) {
 	return (
 		<li key={key} class="grid gap-y-3">
 			<h3 class="text-2xl font-semibold">
-				<A href={post.href}>{post.title}</A>
+				<A href={`/post/${post.slug}`}>{post.title}</A>
 			</h3>
 			<PostMeta post={post} />
 			<p
