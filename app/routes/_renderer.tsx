@@ -1,5 +1,6 @@
+import { getContext } from "hono/context-storage";
 import { Style, cx } from "hono/css";
-import { jsxRenderer, useRequestContext } from "hono/jsx-renderer";
+import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { BackgroundGrid } from "~/components/$background-grid";
 import { A } from "~/components/a";
@@ -9,7 +10,10 @@ export default jsxRenderer(({ title, description, children }) => {
 		<html lang="en" class="scheme-light-dark [scrollbar-gutter:stable]">
 			<head>
 				<meta charset="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0"
+				/>
 				<meta name="description" content={description} />
 				<title>{title}</title>
 				<link rel="icon" href="/static/favicon.png" />
@@ -41,7 +45,7 @@ export default jsxRenderer(({ title, description, children }) => {
 });
 
 function HeaderNavigation() {
-	const c = useRequestContext();
+	const c = getContext();
 	const isHome = c.req.path === "/";
 
 	if (isHome) return null;
@@ -49,7 +53,10 @@ function HeaderNavigation() {
 	return (
 		<header>
 			<nav>
-				<A href="/" class="font-medium text-neutral-800 dark:text-neutral-200">
+				<A
+					href="/"
+					class="font-medium text-neutral-800 dark:text-neutral-200"
+				>
 					<span aria-hidden="true">← </span>Home
 				</A>
 			</nav>

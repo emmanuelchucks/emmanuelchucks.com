@@ -7,7 +7,7 @@ type Head = {
 
 declare module "hono" {
 	interface Env {
-		Variables: {};
+		Variables: object;
 		Bindings: {
 			VIEWS_COUNTER: KVNamespace;
 		};
