@@ -1,6 +1,6 @@
+import type { WindowStore } from "./window";
 import { useSelector } from "@xstate/store/react";
 import { cx } from "hono/css";
-import { type WindowStore } from "./window";
 import { windowManagerStore } from "./window-manager";
 
 export function DockedWindows() {
@@ -22,9 +22,9 @@ export function DockedWindows() {
 				style={{ zIndex: activeWindow?.getSnapshot().context.zIndex }}
 				class={cx(
 					"mx-auto rounded-xl bg-neutral-200 dark:bg-neutral-800",
-					"not-empty:border border-neutral-300 dark:border-neutral-700",
-					"fixed bottom-2 not-empty:px-4 not-empty:py-2 left-[50%] -translate-x-[50%]",
-					"grid grid-flow-col gap-x-2 place-content-center",
+					"border-neutral-300 not-empty:border dark:border-neutral-700",
+					"fixed bottom-2 left-[50%] -translate-x-[50%] not-empty:px-4 not-empty:py-2",
+					"grid grid-flow-col place-content-center gap-x-2",
 				)}
 			>
 				{dockedWindowsArray.map((dockedWindow) => (
@@ -58,7 +58,7 @@ function DockedWindow({ dockedWindow }: { dockedWindow: WindowStore }) {
 				}
 				class={cx(
 					"grid place-content-center",
-					"p-2 rounded-md bg-neutral-50 dark:bg-neutral-950",
+					"rounded-md bg-neutral-50 p-2 dark:bg-neutral-950",
 					"border border-neutral-300 dark:border-neutral-700",
 				)}
 			>

@@ -1,5 +1,5 @@
 import { getContext } from "hono/context-storage";
-import { Style, cx } from "hono/css";
+import { cx, Style } from "hono/css";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { BackgroundGrid } from "~/components/$background-grid";

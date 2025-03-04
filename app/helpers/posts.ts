@@ -1,6 +1,6 @@
-import slugify from "@sindresorhus/slugify";
 import type { JSX } from "hono/jsx";
 import type { HtmlEscapedString } from "hono/utils/html";
+import slugify from "@sindresorhus/slugify";
 import * as v from "valibot";
 
 const frontmatterSchema = v.object({
@@ -30,7 +30,7 @@ const postMdxFiles = import.meta.glob<{
 	eager: true,
 });
 
-export type Post = {
+export interface Post {
 	Content: MdxContent;
 	readingTime: string;
 	slug: string;
@@ -39,7 +39,7 @@ export type Post = {
 	description: string;
 	author: string;
 	publishedAt: string;
-};
+}
 
 export function getPosts(filter = ""): Post[] {
 	return Object.values(postMdxFiles)

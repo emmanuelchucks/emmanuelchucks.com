@@ -1,13 +1,7 @@
-import { createStore } from "@xstate/store";
-import {
-	type PropsWithChildren,
-	type RefObject,
-	createContext,
-	jsx,
-	useContext,
-	useState,
-} from "hono/jsx";
+import type { PropsWithChildren, RefObject } from "hono/jsx";
 import type { HtmlEscapedString } from "hono/utils/html";
+import { createStore } from "@xstate/store";
+import { createContext, jsx, useContext, useState } from "hono/jsx";
 import { getIsFloatingWindow, windowManagerStore } from "./window-manager";
 
 export type WindowStore = ReturnType<typeof initializeWindowStore>;

@@ -1,9 +1,9 @@
 import "hono";
 
-type Head = {
+interface Head {
 	title: string;
 	description: string;
-};
+}
 
 declare module "hono" {
 	interface Env {

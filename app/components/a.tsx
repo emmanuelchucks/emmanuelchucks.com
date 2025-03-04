@@ -1,5 +1,5 @@
-import { cx } from "hono/css";
 import type { JSX } from "hono/jsx";
+import { cx } from "hono/css";
 
 export function A({ class: className, ...rest }: JSX.IntrinsicElements["a"]) {
 	return (

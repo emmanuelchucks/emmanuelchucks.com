@@ -61,7 +61,7 @@ export function BackgroundGrid({
 		<div
 			ref={containerRef}
 			class={cx(
-				"grid fixed inset-0 -z-10",
+				"fixed inset-0 -z-10 grid",
 				"transition-transform duration-700 ease-out will-change-transform",
 			)}
 			style={{
@@ -81,7 +81,7 @@ function GridSquare() {
 	return (
 		<div
 			class={cx(
-				"rounded-[1px] aspect-square",
+				"aspect-square rounded-[1px]",
 				"transition-colors duration-300",
 				"bg-black/1 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2",
 			)}

@@ -1,7 +1,8 @@
+import type { PropsWithChildren } from "hono/jsx";
 import { useSelector } from "@xstate/store/react";
 import { cx } from "hono/css";
-import { type PropsWithChildren, useId, useRef } from "hono/jsx";
-import { WindowProvider, useWindowContext } from "./window";
+import { useId, useRef } from "hono/jsx";
+import { useWindowContext, WindowProvider } from "./window";
 import { windowManagerStore } from "./window-manager";
 
 export function Browser({
@@ -83,8 +84,8 @@ function Shell({ children }: PropsWithChildren) {
 				windowManagerStore.trigger.activateWindow({ windowStore });
 			}}
 			class={cx(
-				"group/shell h-full relative",
-				"rounded-md overflow-clip will-change-transform",
+				"group/shell relative h-full",
+				"overflow-clip rounded-md will-change-transform",
 				"data-closed:hidden data-floating:data-minimized:hidden",
 			)}
 		>
@@ -103,7 +104,7 @@ function TopBar({ children }: PropsWithChildren) {
 				windowStore.trigger.startDragging({ e });
 			}}
 			class={cx(
-				"flex items-center flex-row-reverse justify-end",
+				"flex flex-row-reverse items-center justify-end",
 				"bg-neutral-200 dark:bg-neutral-800",
 			)}
 		>
@@ -113,7 +114,7 @@ function TopBar({ children }: PropsWithChildren) {
 			</figcaption>
 			<div
 				class={cx(
-					"group/top-bar-buttons p-2 flex gap-x-2",
+					"group/top-bar-buttons flex gap-x-2 p-2",
 					"group-data-minimized/shell:p-4",
 				)}
 			>
@@ -129,7 +130,7 @@ function CloseButton() {
 	return (
 		<div
 			class={cx(
-				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-red-500",
+				"grid size-3 rounded-full bg-red-500 [grid-template-areas:'stack']",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 				"group-data-minimized/shell:hidden",
@@ -141,8 +142,8 @@ function CloseButton() {
 					windowStore.trigger.close({ e });
 				}}
 				class={cx(
-					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-red-900",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"hidden text-red-900 opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100",
 				)}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -164,7 +165,7 @@ function MinimizeButton() {
 	return (
 		<div
 			class={cx(
-				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-yellow-500",
+				"grid size-3 rounded-full bg-yellow-500 [grid-template-areas:'stack']",
 				"group-data-fullscreen/shell:bg-neutral-300 dark:group-data-fullscreen/shell:bg-neutral-700",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
@@ -177,9 +178,9 @@ function MinimizeButton() {
 				}}
 				aria-disabled={mode === "fullscreen" ? "true" : undefined}
 				class={cx(
-					"peer hidden opacity-0 [grid-area:stack] text-yellow-900",
+					"peer hidden text-yellow-900 opacity-0 [grid-area:stack]",
 					"aria-disabled:hidden not-aria-disabled:[@media(hover:hover)]:block",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100",
 				)}
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -203,7 +204,7 @@ function FullscreenButton() {
 	return (
 		<div
 			class={cx(
-				"grid [grid-template-areas:'stack'] size-3 rounded-full bg-green-500",
+				"grid size-3 rounded-full bg-green-500 [grid-template-areas:'stack']",
 				"group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300",
 				"dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700",
 				"group-data-minimized/shell:hidden",
@@ -215,8 +216,8 @@ function FullscreenButton() {
 					windowStore.trigger.toggleFullscreen({ e });
 				}}
 				class={cx(
-					"hidden opacity-0 [grid-area:stack] [@media(hover:hover)]:block text-green-900",
-					"group-hover/top-bar-buttons:opacity-100 group-focus-within/top-bar-buttons:opacity-100",
+					"hidden text-green-900 opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
+					"group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100",
 				)}
 			>
 				{mode === "fullscreen" ? (

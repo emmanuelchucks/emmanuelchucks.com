@@ -1,6 +1,6 @@
+import type { Post } from "~/helpers/posts";
 import { format } from "date-fns";
 import { cx } from "hono/css";
-import type { Post } from "~/helpers/posts";
 import { getFormattedViewsCount } from "~/helpers/views";
 
 export function PostMeta({ post }: { post: Post }) {
