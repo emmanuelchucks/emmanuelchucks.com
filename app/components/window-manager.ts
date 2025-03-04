@@ -1,5 +1,5 @@
-import { createStore } from "@xstate/store";
 import type { WindowStore } from "./window";
+import { createStore } from "@xstate/store";
 
 export const windowManagerStore = createStore({
 	context: {

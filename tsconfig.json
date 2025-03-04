@@ -1,18 +1,18 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"strict": true,
-		"skipLibCheck": true,
-		"lib": ["ESNext", "DOM"],
-		"types": ["@cloudflare/workers-types", "vite/client"],
 		"jsx": "react-jsx",
 		"jsxImportSource": "hono/jsx",
-		"verbatimModuleSyntax": true,
+		"lib": ["ESNext", "DOM"],
 		"baseUrl": ".",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
 		"paths": {
 			"~/*": ["app/*"]
-		}
+		},
+		"types": ["@cloudflare/workers-types", "vite/client"],
+		"strict": true,
+		"verbatimModuleSyntax": true,
+		"skipLibCheck": true
 	}
 }

@@ -1,11 +1,11 @@
-// @ts-expect-error - required for image import
-import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp&as=metadata";
-
+import type { Post } from "~/helpers/posts";
 import { cx } from "hono/css";
 import { createRoute } from "honox/factory";
+// @ts-expect-error - required for image import
+import profilePicture from "~/assets/emmanuel-chucks.jpeg?w=128&format=webp&as=metadata";
 import { A } from "~/components/a";
 import { PostMeta } from "~/components/post-meta";
-import { type Post, getPosts } from "~/helpers/posts";
+import { getPosts } from "~/helpers/posts";
 import { SOCIALS } from "~/helpers/socials";
 
 export default createRoute((c) => {
