@@ -1,0 +1,14 @@
+{
+	"name": "emmanuelchucks",
+	"main": "dist/index.js",
+	"compatibility_date": "2025-03-28",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"directory": "dist"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "VIEWS_COUNTER"
+		}
+	]
+}
