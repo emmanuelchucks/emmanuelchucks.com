@@ -12,7 +12,9 @@ export function Browser({
 	const id = useId();
 	const ref = useRef<HTMLDivElement>(null);
 
-	if (!title) throw new Error("Browser must have a title");
+	if (!title) {
+		throw new Error("Browser must have a title");
+	}
 
 	return (
 		<WindowProvider id={id} ref={ref} title={title}>
