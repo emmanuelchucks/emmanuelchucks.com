@@ -48,7 +48,9 @@ function HeaderNavigation() {
 	const c = getContext();
 	const isHome = c.req.path === "/";
 
-	if (isHome) return null;
+	if (isHome) {
+		return null;
+	}
 
 	return (
 		<header>

@@ -15,14 +15,20 @@ export function BackgroundGrid({
 	const [gridSize, setGridSize] = useState({ rows: 0, cols: 0 });
 
 	useEffect(() => {
-		if (!containerRef.current) return;
+		if (!containerRef.current) {
+			return;
+		}
 
 		const resizeObserver = new ResizeObserver(() => {
-			if (!containerRef.current) return;
+			if (!containerRef.current) {
+				return;
+			}
+
 			const dimensions = containerRef.current.getBoundingClientRect();
 			const totalSize = squareSize + gap;
 			const cols = Math.ceil(dimensions.width / totalSize) + 2;
 			const rows = Math.ceil(dimensions.height / totalSize) + 2;
+
 			setGridSize({ rows, cols });
 		});
 
@@ -32,10 +38,14 @@ export function BackgroundGrid({
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
-			if (!containerRef.current) return;
+			if (!containerRef.current) {
+				return;
+			}
+
 			const rect = containerRef.current.getBoundingClientRect();
 			const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
 			const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
 			requestAnimationFrame(() => {
 				setMousePosition({ x, y });
 			});
