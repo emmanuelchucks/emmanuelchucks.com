@@ -12,7 +12,7 @@ export default createRoute((c) => {
 	const posts = getPosts();
 
 	return c.render(
-		<main>
+		<main class={cx(!posts.length && "grid min-h-[50svh] content-center")}>
 			<div
 				class={cx(
 					"grid grid-flow-col items-center gap-x-10 gap-y-1",
