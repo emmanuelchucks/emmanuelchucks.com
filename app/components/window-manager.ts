@@ -49,8 +49,7 @@ export const windowManagerStore = createStore({
 			};
 		},
 		activateWindow(context, event: { windowStore: WindowStore }) {
-			const currentActiveWindowSnapshot =
-				context.activeWindow?.getSnapshot();
+			const currentActiveWindowSnapshot = context.activeWindow?.getSnapshot();
 			const newActiveWindowSnapshot = event.windowStore.getSnapshot();
 
 			const newZIndex = getIsActiveWindow(event.windowStore)
@@ -93,7 +92,6 @@ export function getIsActiveWindow(windowStore: WindowStore) {
 	const activeWindowSnapshot =
 		windowManagerSnapshot.context.activeWindow?.getSnapshot();
 	return (
-		activeWindowSnapshot?.context.id ===
-		windowStore.getSnapshot().context.id
+		activeWindowSnapshot?.context.id === windowStore.getSnapshot().context.id
 	);
 }

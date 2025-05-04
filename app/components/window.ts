@@ -15,11 +15,7 @@ function initializeWindowStore({ id, ref, title }: WindowProps) {
 			zIndex: 0,
 			windowScrollY: 0,
 			movement: { x: 0, y: 0 },
-			mode: "default" as
-				| "default"
-				| "closed"
-				| "minimized"
-				| "fullscreen",
+			mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
 		},
 		on: {
 			setZIndex(context, event: { zIndex: number }) {

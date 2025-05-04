@@ -75,12 +75,7 @@ function PostCard({ key, post }: { key: string; post: Post }) {
 				<A href={`/post/${post.slug}`}>{post.title}</A>
 			</h3>
 			<PostMeta post={post} />
-			<p
-				class={cx(
-					"line-clamp-3",
-					"text-neutral-700 dark:text-neutral-300",
-				)}
-			>
+			<p class={cx("line-clamp-3", "text-neutral-700 dark:text-neutral-300")}>
 				{post.description}
 			</p>
 		</li>
