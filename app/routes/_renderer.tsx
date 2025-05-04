@@ -10,10 +10,7 @@ export default jsxRenderer(({ title, description, children }) => {
 		<html lang="en" class="scheme-light-dark [scrollbar-gutter:stable]">
 			<head>
 				<meta charset="utf-8" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1.0"
-				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<meta name="description" content={description} />
 				<title>{title}</title>
 				<link rel="icon" href="/static/favicon.png" />
@@ -55,10 +52,7 @@ function HeaderNavigation() {
 	return (
 		<header>
 			<nav>
-				<A
-					href="/"
-					class="font-medium text-neutral-800 dark:text-neutral-200"
-				>
+				<A href="/" class="font-medium text-neutral-800 dark:text-neutral-200">
 					<span aria-hidden="true">← </span>Home
 				</A>
 			</nav>
