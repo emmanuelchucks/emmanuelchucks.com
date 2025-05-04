@@ -10,7 +10,7 @@
 		"paths": {
 			"~/*": ["app/*"]
 		},
-		"types": ["@cloudflare/workers-types", "vite/client"],
+		"types": ["./worker-configuration.d.ts", "vite/client"],
 		"strict": true,
 		"verbatimModuleSyntax": true,
 		"skipLibCheck": true
