@@ -1,18 +1,27 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"jsx": "react-jsx",
-		"jsxImportSource": "hono/jsx",
-		"lib": ["ESNext", "DOM"],
-		"baseUrl": ".",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"paths": {
-			"~/*": ["app/*"]
-		},
-		"types": ["./worker-configuration.d.ts", "vite/client"],
-		"strict": true,
-		"verbatimModuleSyntax": true,
-		"skipLibCheck": true
-	}
+  "compilerOptions": {
+    "target": "es2021",
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "ES2022"],
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "resolveJsonModule": true,
+    "types": [
+      "./worker-configuration.d.ts",
+      "./types/rw.d.ts",
+      "./types/vite.d.ts",
+      "vite/client"
+    ],
+    "checkJs": false,
+    "strict": true,
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true
+  }
 }
