@@ -121,16 +121,3 @@ export function getIsFloatingBrowserWindow(
     browserWindowStore,
   );
 }
-
-export function getIsActiveBrowserWindow(
-  browserWindowStore: BrowserWindowStore,
-) {
-  const browserWindowManagerSnapshot = browserWindowManagerStore.getSnapshot();
-  const activeBrowserWindowSnapshot =
-    browserWindowManagerSnapshot.context.activeBrowserWindow?.getSnapshot();
-
-  return (
-    activeBrowserWindowSnapshot?.context.browserWindowId ===
-    browserWindowStore.getSnapshot().context.browserWindowId
-  );
-}
