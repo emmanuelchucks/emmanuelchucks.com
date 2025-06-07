@@ -1,0 +1,19 @@
+{
+  "name": "emmanuelchucks",
+  "main": "src/worker.tsx",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "VIEWS_COUNTER",
+      "id": "81c91b7abe6d4ea4b5276935b03cc075",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+  "vars": {},
+}
