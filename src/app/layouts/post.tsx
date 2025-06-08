@@ -1,5 +1,6 @@
 import type { LayoutProps } from "rwsdk/router";
 import clsx from "clsx";
+import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
 import { DockedBrowserWindows } from "~/app/components/docked-browser-windows";
 import { PostMeta } from "~/app/components/post";
@@ -7,8 +8,8 @@ import { A } from "~/app/components/primitives";
 import { getPost, postParamsSchema } from "~/app/helpers/post";
 import { SOCIALS } from "~/app/helpers/socials";
 
-export function PostLayout({ requestInfo, children }: LayoutProps) {
-  const validParams = v.parse(postParamsSchema, requestInfo?.params);
+export function PostLayout({ children }: LayoutProps) {
+  const validParams = v.parse(postParamsSchema, requestInfo.params);
   const post = getPost(validParams.slug);
 
   if (!post) return;

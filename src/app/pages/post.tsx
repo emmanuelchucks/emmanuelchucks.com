@@ -1,9 +1,9 @@
-import type { RequestInfo } from "rwsdk/worker";
+import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
 import { getPost, postParamsSchema } from "../helpers/post";
 
-export function Post({ params }: RequestInfo) {
-  const validParams = v.parse(postParamsSchema, params);
+export function Post() {
+  const validParams = v.parse(postParamsSchema, requestInfo.params);
   const post = getPost(validParams.slug);
 
   if (!post) {
