@@ -1,12 +1,6 @@
-import type { Post } from "../helpers/post";
-import { env } from "cloudflare:workers";
 import clsx from "clsx";
 import { format } from "date-fns";
-
-async function getFormattedViewsCount(id: string) {
-  const viewsCount = Number((await env.VIEWS_COUNTER.get(id)) ?? 2);
-  return new Intl.NumberFormat().format(viewsCount);
-}
+import { getFormattedViewsCount, type Post } from "../helpers/post";
 
 export function PostMeta({ post }: { post: Post }) {
   return (
