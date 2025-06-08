@@ -11,6 +11,7 @@ const frontmatterSchema = v.object({
   title: v.string("title is required"),
   description: v.string("description is required"),
   author: v.string("author is required"),
+  isDraft: v.boolean("isDraft is required"),
   publishedAt: v.pipe(
     v.string("publishedAt is required"),
     v.transform((value) => new Date(value)),
@@ -29,7 +30,7 @@ const postMdxFiles = import.meta.glob<{
   frontmatter: v.InferInput<typeof frontmatterSchema>;
   readingTime: v.InferInput<typeof readingTimeSchema>;
   default: MdxContent;
-}>("/src/app/posts/**/post.mdx", {
+}>("/src/app/posts/**/article.mdx", {
   eager: true,
 });
 
@@ -46,8 +47,10 @@ export interface Post {
 
 export function getPosts(filter = "") {
   return Object.values(postMdxFiles)
-    .filter((post) =>
-      post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
+    .filter(
+      (post) =>
+        !post.frontmatter.isDraft &&
+        post.frontmatter.title.toLowerCase().includes(filter.toLowerCase()),
     )
     .sort((a, b) =>
       b.frontmatter.publishedAt.localeCompare(a.frontmatter.publishedAt),
