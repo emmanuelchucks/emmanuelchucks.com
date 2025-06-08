@@ -3,6 +3,7 @@ import { PostMeta } from "~/app/components/post";
 import { A } from "~/app/components/primitives";
 import { getPosts } from "~/app/helpers/post";
 import { SOCIALS } from "~/app/helpers/socials";
+import { link } from "../shared/links";
 
 export function Home() {
   const posts = getPosts();
@@ -64,7 +65,9 @@ export function Home() {
               {posts.map((post) => (
                 <li key={post.id} className="grid gap-y-3">
                   <h3 className="text-2xl font-semibold">
-                    <A href={`/post/${post.slug}`}>{post.title}</A>
+                    <A href={link("/posts/:slug", { slug: post.slug })}>
+                      {post.title}
+                    </A>
                   </h3>
                   <PostMeta post={post} />
                   <p
