@@ -1,5 +1,6 @@
 import type { JSX } from "react";
 import slugify from "@sindresorhus/slugify";
+import { env } from "cloudflare:workers";
 import * as v from "valibot";
 
 export const postParamsSchema = v.object({
@@ -84,4 +85,17 @@ function parsePost(post: (typeof postMdxFiles)[number]) {
       return `Invalid reading time for ${post.frontmatter.title}: ${issue.message}`;
     },
   });
+}
+
+export async function getViewsCount(id: string) {
+  return Number((await env.VIEWS_COUNTER.get(id)) ?? 2);
+}
+
+export async function getFormattedViewsCount(id: string) {
+  return new Intl.NumberFormat().format(await getViewsCount(id));
+}
+
+export async function incrementViewsCount(id: string) {
+  const viewsCount = await getViewsCount(id);
+  await env.VIEWS_COUNTER.put(id, String(viewsCount + 1));
 }

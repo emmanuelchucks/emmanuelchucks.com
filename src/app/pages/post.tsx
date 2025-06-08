@@ -1,6 +1,10 @@
 import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
-import { getPost, postParamsSchema } from "../helpers/post";
+import {
+  getPost,
+  incrementViewsCount,
+  postParamsSchema,
+} from "../helpers/post";
 
 export function Post() {
   const validParams = v.parse(postParamsSchema, requestInfo.params);
@@ -11,6 +15,8 @@ export function Post() {
       status: 404,
     });
   }
+
+  void incrementViewsCount(post.id);
 
   return <post.Content />;
 }
