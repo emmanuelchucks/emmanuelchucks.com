@@ -16,6 +16,7 @@ export function PostLayout({ children }: LayoutProps) {
 
   return (
     <>
+      <title>{`${post.title} - Emmanuel Chucks`}</title>
       <header>
         <nav>
           <A
