@@ -31,7 +31,7 @@ const postMdxFiles = import.meta.glob<{
   frontmatter: v.InferInput<typeof frontmatterSchema>;
   readingTime: v.InferInput<typeof readingTimeSchema>;
   default: MdxContent;
-}>("/src/app/posts/**/article.mdx", {
+}>("/src/posts/**/article.mdx", {
   eager: true,
 });
 
