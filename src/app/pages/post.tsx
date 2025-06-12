@@ -16,7 +16,8 @@ export function PostPage() {
     });
   }
 
+  const MDXContent = post.mdxContent;
   void incrementViewsCount(post.id);
 
-  return <post.Content />;
+  return <MDXContent />;
 }

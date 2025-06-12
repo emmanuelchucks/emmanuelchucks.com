@@ -6,7 +6,8 @@
     "module": "es2022",
     "moduleResolution": "bundler",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "content-collections": ["./.content-collections/generated"]
     },
     "resolveJsonModule": true,
     "types": [
