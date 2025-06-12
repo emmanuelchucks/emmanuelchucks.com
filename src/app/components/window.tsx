@@ -1,24 +1,21 @@
 import { useStore } from "@xstate/store/react";
 import { createContext, useId, useRef } from "react";
-import {
-  browserWindowManagerStore,
-  getIsFloatingBrowserWindow,
-} from "./browser-window-manager";
+import { getIsFloatingWindow, windowManagerStore } from "./window-manager";
 
-export type BrowserWindowStore = ReturnType<typeof useBrowserWindowStore>;
+export type WindowStore = ReturnType<typeof useWindowStore>;
 
-export function useBrowserWindowStore(browserWindowTitle: string) {
-  const browserWindowId = useId();
-  const browserWindowRef = useRef<HTMLElement>(null);
+export function useWindowStore(windowTitle: string) {
+  const windowId = useId();
+  const windowRef = useRef<HTMLElement>(null);
   const windowScrollYRef = useRef(0);
   const movementXRef = useRef(0);
   const movementYRef = useRef(0);
 
-  const browserWindowStore = useStore({
+  const windowStore = useStore({
     context: {
-      browserWindowId,
-      browserWindowRef,
-      browserWindowTitle,
+      windowId,
+      windowRef,
+      windowTitle,
       mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
     },
     on: {
@@ -55,10 +52,10 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
 
         if (context.mode === "minimized") {
           enqueue.effect(() => {
-            if (!context.browserWindowRef.current) return;
+            if (!context.windowRef.current) return;
             const scrollDelta = window.scrollY - windowScrollYRef.current;
             windowScrollYRef.current = windowScrollYRef.current + scrollDelta;
-            context.browserWindowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
+            context.windowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
           });
 
           return {
@@ -68,9 +65,9 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
         }
 
         enqueue.effect(() => {
-          if (getIsFloatingBrowserWindow(browserWindowStore)) {
-            browserWindowManagerStore.trigger.addDockedBrowserWindow({
-              browserWindowStore,
+          if (getIsFloatingWindow(windowStore)) {
+            windowManagerStore.trigger.addDockedWindow({
+              windowStore,
             });
           }
 
@@ -91,7 +88,7 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
           event.mouseEvent.stopPropagation();
         });
 
-        if (!context.browserWindowRef.current) {
+        if (!context.windowRef.current) {
           return context;
         }
 
@@ -107,8 +104,8 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
         }
 
         enqueue.effect(() => {
-          if (!context.browserWindowRef.current) return;
-          requestFullscreen(context.browserWindowRef.current);
+          if (!context.windowRef.current) return;
+          requestFullscreen(context.windowRef.current);
         });
 
         return {
@@ -138,10 +135,10 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
               | MouseEvent
               | React.MouseEvent<HTMLButtonElement, MouseEvent>,
           ) => {
-            if (!context.browserWindowRef.current) return;
+            if (!context.windowRef.current) return;
             movementXRef.current = movementXRef.current + mouseEvent.movementX;
             movementYRef.current = movementYRef.current + mouseEvent.movementY;
-            context.browserWindowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
+            context.windowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
           };
 
           document.body.setAttribute("inert", "true");
@@ -160,9 +157,9 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
             signal: controller.signal,
           });
 
-          if (!getIsFloatingBrowserWindow(browserWindowStore)) {
-            browserWindowManagerStore.trigger.addFloatingBrowserWindow({
-              browserWindowStore,
+          if (!getIsFloatingWindow(windowStore)) {
+            windowManagerStore.trigger.addFloatingWindow({
+              windowStore,
             });
           }
         });
@@ -172,10 +169,10 @@ export function useBrowserWindowStore(browserWindowTitle: string) {
     },
   });
 
-  return browserWindowStore;
+  return windowStore;
 }
 
-export const BrowserWindowContext = createContext({} as BrowserWindowStore);
+export const WindowContext = createContext({} as WindowStore);
 
 function exitFullscreen() {
   document.documentElement.classList.remove("[scrollbar-gutter:stable]");

@@ -2,7 +2,7 @@ import type { LayoutProps } from "rwsdk/router";
 import clsx from "clsx";
 import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
-import { DockedBrowserWindows } from "~/app/components/docked-browser-windows";
+import { DockedWindows } from "~/app/components/docked-windows";
 import { PostMeta } from "~/app/components/post";
 import { A } from "~/app/components/primitives";
 import { getPost, postParamsSchema } from "~/app/helpers/post";
@@ -51,7 +51,7 @@ export function PostLayout({ children }: LayoutProps) {
           </footer>
         </article>
         <aside>
-          <DockedBrowserWindows />
+          <DockedWindows />
         </aside>
       </main>
     </>

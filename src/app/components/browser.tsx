@@ -3,17 +3,17 @@
 import { useSelector } from "@xstate/store/react";
 import { clsx } from "clsx";
 import { use } from "react";
-import { BrowserWindowContext, useBrowserWindowStore } from "./browser-window";
-import { browserWindowManagerStore } from "./browser-window-manager";
+import { useWindowStore, WindowContext } from "./window";
+import { windowManagerStore } from "./window-manager";
 
 export function Browser({
   title,
   children,
 }: React.PropsWithChildren<{ title: string }>) {
-  const browserWindowStore = useBrowserWindowStore(title);
+  const windowStore = useWindowStore(title);
 
   return (
-    <BrowserWindowContext value={browserWindowStore}>
+    <WindowContext value={windowStore}>
       <Placeholder>
         <Shell>
           <TopBar>
@@ -24,20 +24,17 @@ export function Browser({
           <Content>{children}</Content>
         </Shell>
       </Placeholder>
-    </BrowserWindowContext>
+    </WindowContext>
   );
 }
 
 function Placeholder({ children }: React.PropsWithChildren) {
-  const browserWindowStore = use(BrowserWindowContext);
-  const browserWindowId = useSelector(
-    browserWindowStore,
-    (state) => state.context.browserWindowId,
-  );
+  const windowStore = use(WindowContext);
+  const windowId = useSelector(windowStore, (state) => state.context.windowId);
 
   return (
     <div
-      id={`${browserWindowId}-placeholder`}
+      id={`${windowId}-placeholder`}
       className={clsx(
         "not-prose relative aspect-square sm:aspect-[4/3]",
         "not-has-data-floating:has-data-closed:hidden",
@@ -50,53 +47,49 @@ function Placeholder({ children }: React.PropsWithChildren) {
 }
 
 function Shell({ children }: React.PropsWithChildren) {
-  const browserWindowStore = use(BrowserWindowContext);
-  const browserWindowId = useSelector(
-    browserWindowStore,
-    (state) => state.context.browserWindowId,
+  const windowStore = use(WindowContext);
+  const windowId = useSelector(windowStore, (state) => state.context.windowId);
+
+  const windowRef = useSelector(
+    windowStore,
+    (state) => state.context.windowRef,
   );
 
-  const browserWindowRef = useSelector(
-    browserWindowStore,
-    (state) => state.context.browserWindowRef,
+  const mode = useSelector(windowStore, (state) => state.context.mode);
+
+  const floatingWindows = useSelector(
+    windowManagerStore,
+    (state) => state.context.floatingWindows,
   );
 
-  const mode = useSelector(browserWindowStore, (state) => state.context.mode);
-
-  const floatingBrowserWindows = useSelector(
-    browserWindowManagerStore,
-    (state) => state.context.floatingBrowserWindows,
+  const activeWindow = useSelector(
+    windowManagerStore,
+    (state) => state.context.activeWindow,
   );
 
-  const activeBrowserWindow = useSelector(
-    browserWindowManagerStore,
-    (state) => state.context.activeBrowserWindow,
-  );
+  const isFloatingWindow = floatingWindows.has(windowStore);
 
-  const isFloatingBrowserWindow =
-    floatingBrowserWindows.has(browserWindowStore);
-
-  const isActiveBrowserWindow =
-    activeBrowserWindow?.getSnapshot().context.browserWindowId ===
-    browserWindowStore.getSnapshot().context.browserWindowId;
+  const isActiveWindow =
+    activeWindow?.getSnapshot().context.windowId ===
+    windowStore.getSnapshot().context.windowId;
 
   return (
     <figure
-      id={browserWindowId}
-      ref={browserWindowRef}
+      id={windowId}
+      ref={windowRef}
       data-closed={mode === "closed" ? "true" : undefined}
       data-minimized={mode === "minimized" ? "true" : undefined}
       data-fullscreen={mode === "fullscreen" ? "true" : undefined}
-      data-floating={isFloatingBrowserWindow ? "true" : undefined}
-      data-active={isActiveBrowserWindow ? "true" : undefined}
+      data-floating={isFloatingWindow ? "true" : undefined}
+      data-active={isActiveWindow ? "true" : undefined}
       onFocusCapture={() => {
-        browserWindowManagerStore.trigger.activateBrowserWindow({
-          browserWindowStore,
+        windowManagerStore.trigger.activateWindow({
+          windowStore,
         });
       }}
       onMouseDownCapture={() => {
-        browserWindowManagerStore.trigger.activateBrowserWindow({
-          browserWindowStore,
+        windowManagerStore.trigger.activateWindow({
+          windowStore,
         });
       }}
       className={clsx(
@@ -111,16 +104,16 @@ function Shell({ children }: React.PropsWithChildren) {
 }
 
 function TopBar({ children }: React.PropsWithChildren) {
-  const browserWindowStore = use(BrowserWindowContext);
-  const browserWindowTitle = useSelector(
-    browserWindowStore,
-    (state) => state.context.browserWindowTitle,
+  const windowStore = use(WindowContext);
+  const windowTitle = useSelector(
+    windowStore,
+    (state) => state.context.windowTitle,
   );
 
   return (
     <div
       onMouseDown={(mouseEvent) => {
-        browserWindowStore.trigger.startDragging({ mouseEvent });
+        windowStore.trigger.startDragging({ mouseEvent });
       }}
       className={clsx(
         "flex flex-row-reverse items-center justify-end",
@@ -129,7 +122,7 @@ function TopBar({ children }: React.PropsWithChildren) {
     >
       <figcaption className="group-not-data-minimized/shell:sr-only">
         <span className="sr-only">Demo for </span>
-        {browserWindowTitle}
+        {windowTitle}
       </figcaption>
       <div
         className={clsx(
@@ -144,7 +137,7 @@ function TopBar({ children }: React.PropsWithChildren) {
 }
 
 function CloseButton() {
-  const browserWindowStore = use(BrowserWindowContext);
+  const windowStore = use(WindowContext);
 
   return (
     <div
@@ -158,7 +151,7 @@ function CloseButton() {
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
-          browserWindowStore.trigger.close({ mouseEvent });
+          windowStore.trigger.close({ mouseEvent });
         }}
         className={clsx(
           "hidden text-red-900 opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
@@ -178,8 +171,8 @@ function CloseButton() {
 }
 
 function MinimizeButton() {
-  const browserWindowStore = use(BrowserWindowContext);
-  const mode = useSelector(browserWindowStore, (state) => state.context.mode);
+  const windowStore = use(WindowContext);
+  const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (
     <div
@@ -193,7 +186,7 @@ function MinimizeButton() {
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
-          browserWindowStore.trigger.toggleMinimize({ mouseEvent });
+          windowStore.trigger.toggleMinimize({ mouseEvent });
         }}
         aria-disabled={mode === "fullscreen" ? "true" : undefined}
         className={clsx(
@@ -215,8 +208,8 @@ function MinimizeButton() {
 }
 
 function FullscreenButton() {
-  const browserWindowStore = use(BrowserWindowContext);
-  const mode = useSelector(browserWindowStore, (state) => state.context.mode);
+  const windowStore = use(WindowContext);
+  const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (
     <div
@@ -230,7 +223,7 @@ function FullscreenButton() {
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
-          browserWindowStore.trigger.toggleFullscreen({ mouseEvent });
+          windowStore.trigger.toggleFullscreen({ mouseEvent });
         }}
         className={clsx(
           "hidden text-green-900 opacity-0 [grid-area:stack] [@media(hover:hover)]:block",
