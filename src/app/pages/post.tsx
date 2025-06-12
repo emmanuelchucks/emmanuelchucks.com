@@ -6,7 +6,7 @@ import {
   postParamsSchema,
 } from "../helpers/post";
 
-export function Post() {
+export function PostPage() {
   const validParams = v.parse(postParamsSchema, requestInfo.params);
   const post = getPost(validParams.slug);
 

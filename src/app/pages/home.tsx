@@ -5,7 +5,7 @@ import { getPosts } from "~/app/helpers/post";
 import { SOCIALS } from "~/app/helpers/socials";
 import { link } from "../shared/links";
 
-export function Home() {
+export function HomePage() {
   const posts = getPosts();
 
   return (
