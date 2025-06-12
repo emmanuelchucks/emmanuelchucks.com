@@ -1,8 +1,13 @@
+import type { Post } from "content-collections";
 import clsx from "clsx";
 import { format } from "date-fns";
-import { getFormattedViewsCount, type Post } from "../helpers/post";
+import { getFormattedViewsCount } from "../helpers/post";
 
-export function PostMeta({ post }: { post: Post }) {
+interface PostMetaProps {
+  post: Post;
+}
+
+export function PostMeta({ post }: PostMetaProps) {
   return (
     <p
       className={clsx(
@@ -11,10 +16,13 @@ export function PostMeta({ post }: { post: Post }) {
         "text-neutral-600 dark:text-neutral-400",
       )}
     >
-      <time dateTime={post.publishedAt} className="sm:hidden">
+      <time dateTime={post.publishedAt.toISOString()} className="sm:hidden">
         {format(post.publishedAt, "EE, MMMM d, yyyy")}
       </time>
-      <time dateTime={post.publishedAt} className="hidden sm:block">
+      <time
+        dateTime={post.publishedAt.toISOString()}
+        className="hidden sm:block"
+      >
         {format(post.publishedAt, "EEEE, MMMM d, yyyy")}
       </time>
       <span>{post.readingTime}</span>
