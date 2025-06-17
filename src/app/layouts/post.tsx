@@ -1,5 +1,4 @@
 import type { LayoutProps } from "rwsdk/router";
-import clsx from "clsx";
 import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
 import { DockedWindows } from "~/app/components/docked-windows";
@@ -21,22 +20,27 @@ export function PostLayout({ children }: LayoutProps) {
         <nav>
           <A
             href="/"
-            className="font-medium text-neutral-800 dark:text-neutral-200"
+            className={`
+              font-medium text-neutral-800
+              dark:text-neutral-200
+            `}
           >
             <span aria-hidden="true">← </span>Home
           </A>
         </nav>
       </header>
       <main
-        className={clsx(
-          "mt-24",
-          "prose prose-neutral dark:prose-invert",
-          "prose-p:text-pretty",
-          "prose-pre:bg-white prose-pre:dark:!bg-neutral-900",
-          "prose-pre:outline-neutral-700 prose-pre:dark:outline-neutral-300",
-          "prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance",
-          "[&_.shiki_span]:dark:!text-[var(--shiki-dark)]",
-        )}
+        className={`
+          prose mt-24 prose-neutral
+          dark:prose-invert
+          prose-h1:text-balance
+          prose-h2:text-balance
+          prose-h3:text-balance
+          prose-p:text-pretty
+          prose-pre:bg-white prose-pre:outline-neutral-700
+          prose-pre:dark:!bg-neutral-900 prose-pre:dark:outline-neutral-300
+          [&_.shiki_span]:dark:!text-[var(--shiki-dark)]
+        `}
       >
         <article>
           <header>
