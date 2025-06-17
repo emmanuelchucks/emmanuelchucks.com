@@ -1,6 +1,5 @@
 "use client";
 
-import { clsx } from "clsx";
 import { useState } from "react";
 
 export function BackgroundGrid({
@@ -53,10 +52,10 @@ export function BackgroundGrid({
   return (
     <div
       ref={handleRef}
-      className={clsx(
-        "fixed inset-0 -z-10 grid",
-        "transition-transform duration-700 ease-out will-change-transform",
-      )}
+      className={`
+        fixed inset-0 -z-10 grid transition-transform duration-700 ease-out
+        will-change-transform
+      `}
       style={{
         gap: `${gap}px`,
         gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
@@ -67,11 +66,12 @@ export function BackgroundGrid({
         <div
           // eslint-disable-next-line react/no-array-index-key
           key={String(index)}
-          className={clsx(
-            "aspect-square rounded-[1px]",
-            "transition-colors duration-300",
-            "bg-black/1 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2",
-          )}
+          className={`
+            aspect-square rounded-[1px] bg-black/1 transition-colors
+            duration-300
+            hover:bg-black/2
+            dark:bg-white/1 dark:hover:bg-white/2
+          `}
         />
       ))}
     </div>

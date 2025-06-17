@@ -2,7 +2,6 @@
 
 import type { WindowStore } from "./window";
 import { useSelector } from "@xstate/store/react";
-import { clsx } from "clsx";
 import { windowManagerStore, zIndex } from "./window-manager";
 
 export function DockedWindows() {
@@ -18,12 +17,13 @@ export function DockedWindows() {
       <h2 className="sr-only">Docked Windows</h2>
       <ul
         style={{ zIndex }}
-        className={clsx(
-          "mx-auto list-none rounded-xl bg-neutral-200 dark:bg-neutral-800",
-          "border-neutral-300 not-empty:border dark:border-neutral-700",
-          "fixed bottom-2 left-[50%] -translate-x-[50%] not-empty:px-4 not-empty:py-2",
-          "grid grid-flow-col place-content-center gap-x-2",
-        )}
+        className={`
+          fixed bottom-2 left-[50%] mx-auto grid -translate-x-[50%] list-none
+          grid-flow-col place-content-center gap-x-2 rounded-xl
+          border-neutral-300 bg-neutral-200
+          not-empty:border not-empty:px-4 not-empty:py-2
+          dark:border-neutral-700 dark:bg-neutral-800
+        `}
       >
         {dockedWindowsArray.map((dockedWindow) => {
           const windowId = dockedWindow.getSnapshot().context.windowId;
@@ -57,11 +57,11 @@ function DockedWindow({ dockedWindow }: DockedWindowProps) {
             mouseEvent,
           })
         }
-        className={clsx(
-          "grid place-content-center",
-          "rounded-md bg-neutral-50 p-2 dark:bg-neutral-950",
-          "border border-neutral-300 dark:border-neutral-700",
-        )}
+        className={`
+          grid place-content-center rounded-md border border-neutral-300
+          bg-neutral-50 p-2
+          dark:border-neutral-700 dark:bg-neutral-950
+        `}
       >
         <span aria-hidden className="text-sm">
           {titleInitials}
