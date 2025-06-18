@@ -1,26 +1,33 @@
 import { env } from "cloudflare:workers";
 import { allPosts } from "content-collections";
 import { compareDesc } from "date-fns";
+import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
 
-export const postParamsSchema = v.object({
+const postsParamsSchema = v.object({
+  q: v.optional(v.string(), ""),
+});
+
+const postParamsSchema = v.object({
   slug: v.pipe(v.string(), v.nonEmpty("Slug is required")),
 });
 
-export function getPosts(filter = "") {
+export function getPosts() {
+  const validParams = v.parse(postsParamsSchema, requestInfo.params);
   return allPosts
     .filter(
       (post) =>
         !post.isDraft &&
-        (post.title.toLowerCase().includes(filter.toLowerCase()) ||
-          post.description.toLowerCase().includes(filter.toLowerCase())),
+        (post.title.toLowerCase().includes(validParams.q.toLowerCase()) ||
+          post.description.toLowerCase().includes(validParams.q.toLowerCase())),
     )
     .sort((a, b) => compareDesc(a.publishedAt, b.publishedAt));
 }
 
-export function getPost(slug: string) {
+export function getPost() {
   const posts = getPosts();
-  return posts.find((post) => post.id === slug.split("-").pop());
+  const validParams = v.parse(postParamsSchema, requestInfo.params);
+  return posts.find((post) => post.id === validParams.slug.split("-").pop());
 }
 
 export async function getViewsCount(id: string) {
