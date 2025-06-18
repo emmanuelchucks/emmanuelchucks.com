@@ -20,6 +20,13 @@ export default antfu(
         entryPoint: "./src/app/style.css",
       },
     },
+    rules: {
+      ...eslintPluginBetterTailwindcss.configs.recommended.rules,
+      "better-tailwindcss/no-unregistered-classes": [
+        "error",
+        { ignore: ["not-prose"] },
+      ],
+    },
   },
   reactCompiler.configs.recommended,
 );

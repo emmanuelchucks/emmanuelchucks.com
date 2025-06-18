@@ -63,8 +63,8 @@ importers:
         specifier: ^9.29.0
         version: 9.29.0(jiti@2.4.2)
       eslint-plugin-better-tailwindcss:
-        specifier: ^3.2.1
-        version: 3.2.1(eslint@9.29.0(jiti@2.4.2))(tailwindcss@4.1.10)
+        specifier: ^3.3.0
+        version: 3.3.0(eslint@9.29.0(jiti@2.4.2))(tailwindcss@4.1.10)
       eslint-plugin-react-compiler:
         specifier: 19.1.0-rc.2
         version: 19.1.0-rc.2(eslint@9.29.0(jiti@2.4.2))
@@ -3520,12 +3520,12 @@ packages:
     peerDependencies:
       eslint: "*"
 
-  eslint-plugin-better-tailwindcss@3.2.1:
+  eslint-plugin-better-tailwindcss@3.3.0:
     resolution:
       {
-        integrity: sha512-27nz5M810LJbMOX7LwV4jEe1JtRqSOvVw1K1SshodeA26DLUewXSEI0PSZI0cOWl9Pp3WI39qdmI0dMDpFe2Rg==,
+        integrity: sha512-klDtAVSEw7TSPMlx6BWBYZc6uOSeOz3f8uu0AyN7bqmAfQZ1QkY4eBHxkAwWoihDizPNeQMHjL3ZlOWZnn8kxg==,
       }
-    engines: { node: ">=v20.11.0" }
+    engines: { node: ^20.11.0 || >=21.2.0 }
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
       tailwindcss: ^3.3.0 || ^4.0.0
@@ -5667,10 +5667,10 @@ packages:
         integrity: sha512-3nW5RLmREmZ8Pm8MbPsO2RM+99RRjYd25ynj3NV0cFsN7CcEl4sDFzgoFmSyduFwxFQ2Qbu3y2UdCh6HlyUOeA==,
       }
 
-  postcss-import@16.1.0:
+  postcss-import@16.1.1:
     resolution:
       {
-        integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==,
+        integrity: sha512-2xVS1NCZAfjtVdvXiyegxzJ447GyqCeEI5V7ApgQVOWnros1p5lGNovJNapwPpMombyFBfqDwt7AD3n2l0KOfQ==,
       }
     engines: { node: ">=18.0.0" }
     peerDependencies:
@@ -6412,13 +6412,12 @@ packages:
       }
     engines: { node: ^14.18.0 || >=16.0.0 }
 
-  tailwind-csstree@0.1.0:
+  tailwind-csstree@0.1.1:
     resolution:
       {
-        integrity: sha512-NY8JaiEUqsUztFTX41I+LxNBOL/+TJJ767Acm7AibLoYBaIAKUWW/7rAlf2n6TcowTZJwt1nu4ImrE9EULjNSQ==,
+        integrity: sha512-Tv5IXRHtlb7LanNXjmGg0vu84Iu+/sKDqTLJBO0kP/rggfjJDKnS/HV+e0qn8yIrRByhGg+908rSOxT/7o1diw==,
       }
     engines: { node: ">=18.18" }
-    hasBin: true
 
   tailwindcss@4.1.10:
     resolution:
@@ -9178,16 +9177,16 @@ snapshots:
     dependencies:
       eslint: 9.29.0(jiti@2.4.2)
 
-  eslint-plugin-better-tailwindcss@3.2.1(eslint@9.29.0(jiti@2.4.2))(tailwindcss@4.1.10):
+  eslint-plugin-better-tailwindcss@3.3.0(eslint@9.29.0(jiti@2.4.2))(tailwindcss@4.1.10):
     dependencies:
       "@eslint/css-tree": 3.6.1
       enhanced-resolve: 5.18.1
       eslint: 9.29.0(jiti@2.4.2)
       jiti: 2.4.2
       postcss: 8.5.6
-      postcss-import: 16.1.0(postcss@8.5.6)
+      postcss-import: 16.1.1(postcss@8.5.6)
       synckit: 0.11.8
-      tailwind-csstree: 0.1.0
+      tailwind-csstree: 0.1.1
       tailwindcss: 4.1.10
 
   eslint-plugin-command@3.2.1(eslint@9.29.0(jiti@2.4.2)):
@@ -10869,7 +10868,7 @@ snapshots:
     dependencies:
       yaml: 2.8.0
 
-  postcss-import@16.1.0(postcss@8.5.6):
+  postcss-import@16.1.1(postcss@8.5.6):
     dependencies:
       postcss: 8.5.6
       postcss-value-parser: 4.2.0
@@ -11395,7 +11394,7 @@ snapshots:
     dependencies:
       "@pkgr/core": 0.2.7
 
-  tailwind-csstree@0.1.0: {}
+  tailwind-csstree@0.1.1: {}
 
   tailwindcss@4.1.10: {}
 
