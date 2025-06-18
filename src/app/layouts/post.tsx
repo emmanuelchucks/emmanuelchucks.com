@@ -1,17 +1,14 @@
 import type { LayoutProps } from "rwsdk/router";
-import { requestInfo } from "rwsdk/worker";
-import * as v from "valibot";
 import { DockedWindows } from "~/app/components/docked-windows";
 import { PostMeta } from "~/app/components/post";
 import { A } from "~/app/components/primitives";
-import { getPost, postParamsSchema } from "~/app/helpers/post";
 import { SOCIALS } from "~/app/helpers/socials";
+import { getPost } from "../helpers/post";
 
-export function PostLayout({ children }: LayoutProps) {
-  const validParams = v.parse(postParamsSchema, requestInfo.params);
-  const post = getPost(validParams.slug);
+export async function PostLayout({ children }: LayoutProps) {
+  const post = getPost();
 
-  if (!post) return;
+  if (!post) return children;
 
   return (
     <>

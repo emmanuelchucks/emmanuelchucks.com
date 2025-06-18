@@ -19,7 +19,7 @@
   "dependencies": {
     "@xstate/store": "^3.6.2",
     "date-fns": "^4.1.0",
-    "rwsdk": "^0.1.0-alpha.13",
+    "rwsdk": "^0.1.0-alpha.16",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "taze": "^19.1.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "wrangler": "^4.20.0"
+    "wrangler": "^4.20.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
