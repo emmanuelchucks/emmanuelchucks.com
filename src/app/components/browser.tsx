@@ -1,4 +1,3 @@
-/* eslint-disable better-tailwindcss/no-unregistered-classes */
 "use client";
 
 import { useSelector } from "@xstate/store/react";
@@ -144,10 +143,10 @@ function CloseButton() {
   return (
     <div
       className={`
-        "group-data-minimized/shell:hidden",
         grid size-3 rounded-full bg-red-500
         [grid-template-areas:'stack']
         group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300
+        group-data-minimized/shell:hidden
         dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700
       `}
     >
@@ -225,10 +224,10 @@ function FullscreenButton() {
   return (
     <div
       className={`
-        "group-data-minimized/shell:hidden",
         grid size-3 rounded-full bg-green-500
         [grid-template-areas:'stack']
         group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300
+        group-data-minimized/shell:hidden
         dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700
       `}
     >
@@ -267,9 +266,9 @@ function Content({ children }: React.PropsWithChildren) {
   return (
     <div
       className={`
-        dark:bg-neutrl-900
-        group-dta-minimized/shell:hidden
         h-full overflow-y-auto bg-neutral-100
+        group-data-minimized/shell:hidden
+        dark:bg-neutral-900
       `}
     >
       {children}
