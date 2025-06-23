@@ -19,7 +19,7 @@
   "dependencies": {
     "@xstate/store": "^3.6.2",
     "date-fns": "^4.1.0",
-    "rwsdk": "^0.1.0-alpha.16",
+    "rwsdk": "0.1.0-alpha.19",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
