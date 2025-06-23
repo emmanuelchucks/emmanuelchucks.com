@@ -1,3 +1,4 @@
+import { cloudflare } from "@cloudflare/vite-plugin";
 import contentCollections from "@content-collections/vite";
 import mdx from "@mdx-js/rollup";
 import rehypeShiki from "@shikijs/rehype";
@@ -12,6 +13,11 @@ export default defineConfig({
     redwood(),
     tailwindcss(),
     contentCollections(),
+    cloudflare({
+      viteEnvironment: {
+        name: "worker",
+      },
+    }),
     mdx({
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       rehypePlugins: [

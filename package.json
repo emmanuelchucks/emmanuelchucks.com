@@ -19,11 +19,12 @@
   "dependencies": {
     "@xstate/store": "^3.7.0",
     "date-fns": "^4.1.0",
-    "rwsdk": "0.1.0-alpha.19",
+    "rwsdk": "0.1.0",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.1",
+    "@cloudflare/vite-plugin": "^1.7.4",
     "@content-collections/core": "^0.9.1",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/vite": "^0.2.5",
