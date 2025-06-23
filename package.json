@@ -2,7 +2,7 @@
   "name": "emmanuelchucks.com",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.12.2",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -17,19 +17,19 @@
     "update:deps": "taze major"
   },
   "dependencies": {
-    "@xstate/store": "^3.6.2",
+    "@xstate/store": "^3.7.0",
     "date-fns": "^4.1.0",
     "rwsdk": "0.1.0-alpha.19",
     "valibot": "^1.1.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.14.1",
+    "@antfu/eslint-config": "^4.16.1",
     "@content-collections/core": "^0.9.1",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/vite": "^0.2.5",
     "@eslint-react/eslint-plugin": "^1.52.2",
     "@mdx-js/rollup": "^3.1.0",
-    "@shikijs/rehype": "^3.6.0",
+    "@shikijs/rehype": "^3.7.0",
     "@sindresorhus/slugify": "^2.2.1",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.10",
@@ -37,12 +37,11 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "eslint": "^9.29.0",
-    "eslint-plugin-better-tailwindcss": "^3.3.0",
+    "eslint-plugin-better-tailwindcss": "^3.4.0",
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "prettier": "^3.5.3",
-    "prettier-plugin-tailwindcss": "^0.6.12",
+    "prettier": "^3.6.0",
     "reading-time": "^1.5.0",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",
@@ -50,7 +49,7 @@
     "taze": "^19.1.0",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "wrangler": "^4.20.1"
+    "wrangler": "^4.20.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
