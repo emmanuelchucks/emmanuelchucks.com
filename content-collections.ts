@@ -1,5 +1,7 @@
 import type { MDXContent as DefaultMDXContent } from "@content-collections/mdx/react";
 import child_process from "node:child_process";
+import path from "node:path";
+import process from "node:process";
 import util from "node:util";
 import {
   createDefaultImport,
@@ -34,7 +36,7 @@ const posts = defineCollection({
   }),
   transform: async (document, context) => {
     const mdxContent = createDefaultImport<MDXContent>(
-      `${contentPath}${document._meta.filePath}`,
+      path.join(process.cwd(), contentPath, document._meta.filePath),
     );
 
     const updatedAt = await context.cache(
