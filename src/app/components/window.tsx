@@ -7,9 +7,8 @@ export type WindowStore = ReturnType<typeof useWindowStore>;
 export function useWindowStore(windowTitle: string) {
   const windowId = useId();
   const windowRef = useRef<HTMLElement>(null);
-  const windowScrollYRef = useRef(0);
-  const movementXRef = useRef(0);
-  const movementYRef = useRef(0);
+  const windowScrollRef = useRef({ y: 0 });
+  const movementRef = useRef({ x: 0, y: 0 });
 
   const windowStore = useStore({
     context: {
@@ -52,10 +51,13 @@ export function useWindowStore(windowTitle: string) {
 
         if (context.mode === "minimized") {
           enqueue.effect(() => {
-            if (!context.windowRef.current) return;
-            const scrollDelta = window.scrollY - windowScrollYRef.current;
-            windowScrollYRef.current = windowScrollYRef.current + scrollDelta;
-            context.windowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
+            const scrollDelta = window.scrollY - windowScrollRef.current.y;
+            movementRef.current.y = movementRef.current.y + scrollDelta;
+
+            requestAnimationFrame(() => {
+              if (!context.windowRef.current) return;
+              context.windowRef.current.style.transform = `translate3d(${movementRef.current.x}px, ${movementRef.current.y}px, 0)`;
+            });
           });
 
           return {
@@ -71,7 +73,7 @@ export function useWindowStore(windowTitle: string) {
             });
           }
 
-          windowScrollYRef.current = window.scrollY;
+          windowScrollRef.current.y = window.scrollY;
         });
 
         return {
@@ -135,10 +137,15 @@ export function useWindowStore(windowTitle: string) {
               | MouseEvent
               | React.MouseEvent<HTMLButtonElement, MouseEvent>,
           ) => {
-            if (!context.windowRef.current) return;
-            movementXRef.current = movementXRef.current + mouseEvent.movementX;
-            movementYRef.current = movementYRef.current + mouseEvent.movementY;
-            context.windowRef.current.style.transform = `translate(${movementXRef.current}px, ${movementYRef.current}px)`;
+            movementRef.current.x =
+              movementRef.current.x + mouseEvent.movementX;
+            movementRef.current.y =
+              movementRef.current.y + mouseEvent.movementY;
+
+            requestAnimationFrame(() => {
+              if (!context.windowRef.current) return;
+              context.windowRef.current.style.transform = `translate3d(${movementRef.current.x}px, ${movementRef.current.y}px, 0)`;
+            });
           };
 
           document.body.setAttribute("inert", "true");
