@@ -59,7 +59,7 @@ export function BackgroundGrid({
       style={{
         gap: `${gap}px`,
         gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
-        transform: `translate(${offsetX}px, ${offsetY}px)`,
+        transform: `translate3d(${offsetX}px, ${offsetY}px, 0)`,
       }}
     >
       {squares.map((_, index) => (
