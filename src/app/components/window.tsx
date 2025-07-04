@@ -1,6 +1,10 @@
 import { useStore } from "@xstate/store/react";
 import { createContext, useId, useRef } from "react";
-import { getIsFloatingWindow, windowManagerStore } from "./window-manager";
+import {
+  addDockedWindow,
+  addFloatingWindow,
+  getIsFloatingWindow,
+} from "./window-manager";
 
 export type WindowStore = ReturnType<typeof useWindowStore>;
 
@@ -68,9 +72,7 @@ export function useWindowStore(windowTitle: string) {
 
         enqueue.effect(() => {
           if (getIsFloatingWindow(windowStore)) {
-            windowManagerStore.trigger.addDockedWindow({
-              windowStore,
-            });
+            addDockedWindow(windowStore);
           }
 
           windowScrollRef.current.y = window.scrollY;
@@ -165,9 +167,7 @@ export function useWindowStore(windowTitle: string) {
           });
 
           if (!getIsFloatingWindow(windowStore)) {
-            windowManagerStore.trigger.addFloatingWindow({
-              windowStore,
-            });
+            addFloatingWindow(windowStore);
           }
         });
 

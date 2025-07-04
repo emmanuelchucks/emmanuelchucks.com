@@ -1,16 +1,16 @@
 "use client";
 
 import type { WindowStore } from "./window";
-import { useAtom, useSelector } from "@xstate/store/react";
-import { windowManagerStore, zIndexAtom } from "./window-manager";
+import { useAtom } from "@xstate/store/react";
+import {
+  dockedWindowsAtom,
+  removeDockedWindow,
+  zIndexAtom,
+} from "./window-manager";
 
 export function DockedWindows() {
   const zIndex = useAtom(zIndexAtom);
-
-  const dockedWindows = useSelector(
-    windowManagerStore,
-    (state) => state.context.dockedWindows,
-  );
+  const dockedWindows = useAtom(dockedWindowsAtom);
 
   const dockedWindowsArray = Array.from(dockedWindows);
 
@@ -54,10 +54,7 @@ function DockedWindow({ dockedWindow }: DockedWindowProps) {
       <button
         type="button"
         onMouseDown={(mouseEvent) =>
-          windowManagerStore.trigger.removeDockedWindow({
-            dockedWindow,
-            mouseEvent,
-          })
+          removeDockedWindow(mouseEvent, dockedWindow)
         }
         className={`
           grid place-content-center rounded-md border border-neutral-300
