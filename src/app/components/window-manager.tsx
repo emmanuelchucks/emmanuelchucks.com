@@ -18,7 +18,13 @@ export function addFloatingWindow(windowStore: WindowStore) {
 export function addDockedWindow(windowStore: WindowStore) {
   const currentFloatingWindows = floatingWindowsAtom.get();
   const currentDockedWindows = dockedWindowsAtom.get();
-  const nextFloatingWindow = Array.from(currentFloatingWindows).at(-2);
+
+  const floatingWindowsArray = Array.from(currentFloatingWindows);
+  const currentWindowIndex = floatingWindowsArray.indexOf(windowStore);
+  const remainingWindows = floatingWindowsArray.filter(
+    (_, index) => index !== currentWindowIndex,
+  );
+  const nextFloatingWindow = remainingWindows.at(-1);
 
   const updatedDockedWindows = new Set(currentDockedWindows);
   updatedDockedWindows.add(windowStore);
