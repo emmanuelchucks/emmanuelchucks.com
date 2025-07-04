@@ -9,8 +9,8 @@ export const activeWindowAtom = createAtom<WindowStore | undefined>(undefined);
 export function addFloatingWindow(windowStore: WindowStore) {
   const currentFloatingWindows = floatingWindowsAtom.get();
   const updatedFloatingWindows = new Set(currentFloatingWindows);
-  updatedFloatingWindows.add(windowStore);
 
+  updatedFloatingWindows.add(windowStore);
   floatingWindowsAtom.set(updatedFloatingWindows);
   activeWindowAtom.set(windowStore);
 }
@@ -18,17 +18,16 @@ export function addFloatingWindow(windowStore: WindowStore) {
 export function addDockedWindow(windowStore: WindowStore) {
   const currentFloatingWindows = floatingWindowsAtom.get();
   const currentDockedWindows = dockedWindowsAtom.get();
-
   const floatingWindowsArray = Array.from(currentFloatingWindows);
   const currentWindowIndex = floatingWindowsArray.indexOf(windowStore);
   const remainingWindows = floatingWindowsArray.filter(
     (_, index) => index !== currentWindowIndex,
   );
+
   const nextFloatingWindow = remainingWindows.at(-1);
-
   const updatedDockedWindows = new Set(currentDockedWindows);
-  updatedDockedWindows.add(windowStore);
 
+  updatedDockedWindows.add(windowStore);
   dockedWindowsAtom.set(updatedDockedWindows);
   activeWindowAtom.set(nextFloatingWindow);
 }
@@ -39,8 +38,8 @@ export function removeDockedWindow(
 ) {
   const currentDockedWindows = dockedWindowsAtom.get();
   const updatedDockedWindows = new Set(currentDockedWindows);
-  updatedDockedWindows.delete(dockedWindow);
 
+  updatedDockedWindows.delete(dockedWindow);
   dockedWindowsAtom.set(updatedDockedWindows);
   activeWindowAtom.set(dockedWindow);
 
@@ -51,16 +50,14 @@ export function activateWindow(windowStore: WindowStore) {
   const newActiveWindowSnapshot = windowStore.getSnapshot();
   const newActiveWindow = newActiveWindowSnapshot.context.windowRef.current;
 
-  if (!newActiveWindow) {
-    return;
-  }
+  if (!newActiveWindow) return;
 
   zIndexAtom.set((value) => value + 1);
   newActiveWindow.style.zIndex = String(zIndexAtom.get());
   activeWindowAtom.set(windowStore);
 }
 
-export function getIsFloatingWindow(WindowStore: WindowStore) {
+export function getIsFloatingWindow(windowStore: WindowStore) {
   const floatingWindows = floatingWindowsAtom.get();
-  return floatingWindows.has(WindowStore);
+  return floatingWindows.has(windowStore);
 }
