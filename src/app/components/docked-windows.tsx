@@ -1,10 +1,12 @@
 "use client";
 
 import type { WindowStore } from "./window";
-import { useSelector } from "@xstate/store/react";
-import { windowManagerStore, zIndex } from "./window-manager";
+import { useAtom, useSelector } from "@xstate/store/react";
+import { windowManagerStore, zIndexAtom } from "./window-manager";
 
 export function DockedWindows() {
+  const zIndex = useAtom(zIndexAtom);
+
   const dockedWindows = useSelector(
     windowManagerStore,
     (state) => state.context.dockedWindows,
