@@ -1,7 +1,7 @@
 import type { WindowStore } from "./window";
-import { createStore } from "@xstate/store";
+import { createAtom, createStore } from "@xstate/store";
 
-export let zIndex = 0;
+export const zIndexAtom = createAtom(0);
 
 export const windowManagerStore = createStore({
   context: {
@@ -74,8 +74,8 @@ export const windowManagerStore = createStore({
       const updatedFloatingWindows = new Set(context.floatingWindows);
 
       enqueue.effect(() => {
-        zIndex++;
-        newActiveWindow.style.zIndex = String(zIndex);
+        zIndexAtom.set((value) => value + 1);
+        newActiveWindow.style.zIndex = String(zIndexAtom.get());
       });
 
       return {
