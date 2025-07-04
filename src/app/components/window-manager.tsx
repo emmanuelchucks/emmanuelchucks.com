@@ -1,99 +1,60 @@
 import type { WindowStore } from "./window";
-import { createAtom, createStore } from "@xstate/store";
+import { createAtom } from "@xstate/store";
 
 export const zIndexAtom = createAtom(0);
+export const floatingWindowsAtom = createAtom(new Set<WindowStore>());
+export const dockedWindowsAtom = createAtom(new Set<WindowStore>());
+export const activeWindowAtom = createAtom<WindowStore | undefined>(undefined);
 
-export const windowManagerStore = createStore({
-  context: {
-    floatingWindows: new Set<WindowStore>(),
-    dockedWindows: new Set<WindowStore>(),
-    activeWindow: undefined as WindowStore | undefined,
-  },
-  on: {
-    addFloatingWindow(context, event: { windowStore: WindowStore }) {
-      const updatedFloatingWindows = new Set(context.floatingWindows);
+export function addFloatingWindow(windowStore: WindowStore) {
+  const currentFloatingWindows = floatingWindowsAtom.get();
+  const updatedFloatingWindows = new Set(currentFloatingWindows);
+  updatedFloatingWindows.add(windowStore);
 
-      updatedFloatingWindows.add(event.windowStore);
+  floatingWindowsAtom.set(updatedFloatingWindows);
+  activeWindowAtom.set(windowStore);
+}
 
-      return {
-        ...context,
-        floatingWindows: updatedFloatingWindows,
-        activeWindow: event.windowStore,
-      };
-    },
-    addDockedWindow(context, event: { windowStore: WindowStore }) {
-      const nextFloatingWindow = Array.from(context.floatingWindows).at(-2);
+export function addDockedWindow(windowStore: WindowStore) {
+  const currentFloatingWindows = floatingWindowsAtom.get();
+  const currentDockedWindows = dockedWindowsAtom.get();
+  const nextFloatingWindow = Array.from(currentFloatingWindows).at(-2);
 
-      const updatedDockedWindows = new Set(context.dockedWindows);
-      updatedDockedWindows.add(event.windowStore);
+  const updatedDockedWindows = new Set(currentDockedWindows);
+  updatedDockedWindows.add(windowStore);
 
-      return {
-        ...context,
-        dockedWindows: updatedDockedWindows,
-        activeWindow: nextFloatingWindow,
-      };
-    },
-    removeDockedWindow(
-      context,
-      event: {
-        mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent>;
-        dockedWindow: WindowStore;
-      },
-      enqueue,
-    ) {
-      const updatedDockedWindows = new Set(context.dockedWindows);
-      const updatedFloatingWindows = new Set(context.floatingWindows);
+  dockedWindowsAtom.set(updatedDockedWindows);
+  activeWindowAtom.set(nextFloatingWindow);
+}
 
-      updatedDockedWindows.delete(event.dockedWindow);
+export function removeDockedWindow(
+  mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  dockedWindow: WindowStore,
+) {
+  const currentDockedWindows = dockedWindowsAtom.get();
+  const updatedDockedWindows = new Set(currentDockedWindows);
+  updatedDockedWindows.delete(dockedWindow);
 
-      enqueue.effect(() => {
-        event.dockedWindow.trigger.toggleMinimize({
-          mouseEvent: event.mouseEvent,
-        });
-        windowManagerStore.trigger.activateWindow({
-          windowStore: event.dockedWindow,
-        });
-      });
+  dockedWindowsAtom.set(updatedDockedWindows);
+  activeWindowAtom.set(dockedWindow);
 
-      return {
-        ...context,
-        floatingWindows: updatedFloatingWindows,
-        dockedWindows: updatedDockedWindows,
-        activeWindow: event.dockedWindow,
-      };
-    },
-    activateWindow(context, event: { windowStore: WindowStore }, enqueue) {
-      const newActiveWindowSnapshot = event.windowStore.getSnapshot();
+  dockedWindow.trigger.toggleMinimize({ mouseEvent });
+}
 
-      const newActiveWindow = newActiveWindowSnapshot.context.windowRef.current;
+export function activateWindow(windowStore: WindowStore) {
+  const newActiveWindowSnapshot = windowStore.getSnapshot();
+  const newActiveWindow = newActiveWindowSnapshot.context.windowRef.current;
 
-      if (!newActiveWindow) {
-        return context;
-      }
-
-      const updatedFloatingWindows = new Set(context.floatingWindows);
-
-      enqueue.effect(() => {
-        zIndexAtom.set((value) => value + 1);
-        newActiveWindow.style.zIndex = String(zIndexAtom.get());
-      });
-
-      return {
-        ...context,
-        floatingWindows: updatedFloatingWindows,
-        activeWindow: event.windowStore,
-      };
-    },
-  },
-});
-
-windowManagerStore.inspect((event) => {
-  if (event.type === "@xstate.snapshot" && "context" in event.snapshot) {
-    // console.log(event.snapshot.context);
+  if (!newActiveWindow) {
+    return;
   }
-});
+
+  zIndexAtom.set((value) => value + 1);
+  newActiveWindow.style.zIndex = String(zIndexAtom.get());
+  activeWindowAtom.set(windowStore);
+}
 
 export function getIsFloatingWindow(WindowStore: WindowStore) {
-  const windowManagerSnapshot = windowManagerStore.getSnapshot();
-  return windowManagerSnapshot.context.floatingWindows.has(WindowStore);
+  const floatingWindows = floatingWindowsAtom.get();
+  return floatingWindows.has(WindowStore);
 }

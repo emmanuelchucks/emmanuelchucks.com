@@ -1,9 +1,13 @@
 "use client";
 
-import { useSelector } from "@xstate/store/react";
+import { useAtom, useSelector } from "@xstate/store/react";
 import { use } from "react";
 import { useWindowStore, WindowContext } from "./window";
-import { windowManagerStore } from "./window-manager";
+import {
+  activateWindow,
+  activeWindowAtom,
+  floatingWindowsAtom,
+} from "./window-manager";
 
 export function Browser({
   title,
@@ -49,23 +53,14 @@ function Placeholder({ children }: React.PropsWithChildren) {
 function Shell({ children }: React.PropsWithChildren) {
   const windowStore = use(WindowContext);
   const windowId = useSelector(windowStore, (state) => state.context.windowId);
-
+  const mode = useSelector(windowStore, (state) => state.context.mode);
   const windowRef = useSelector(
     windowStore,
     (state) => state.context.windowRef,
   );
 
-  const mode = useSelector(windowStore, (state) => state.context.mode);
-
-  const floatingWindows = useSelector(
-    windowManagerStore,
-    (state) => state.context.floatingWindows,
-  );
-
-  const activeWindow = useSelector(
-    windowManagerStore,
-    (state) => state.context.activeWindow,
-  );
+  const floatingWindows = useAtom(floatingWindowsAtom);
+  const activeWindow = useAtom(activeWindowAtom);
 
   const isFloatingWindow = floatingWindows.has(windowStore);
 
@@ -83,14 +78,10 @@ function Shell({ children }: React.PropsWithChildren) {
       data-floating={isFloatingWindow ? "true" : undefined}
       data-active={isActiveWindow ? "true" : undefined}
       onFocusCapture={() => {
-        windowManagerStore.trigger.activateWindow({
-          windowStore,
-        });
+        activateWindow(windowStore);
       }}
       onMouseDownCapture={() => {
-        windowManagerStore.trigger.activateWindow({
-          windowStore,
-        });
+        activateWindow(windowStore);
       }}
       className={`
         group/shell relative h-full overflow-clip rounded-md
