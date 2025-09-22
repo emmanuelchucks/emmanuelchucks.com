@@ -10,6 +10,7 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "check:all": "pnpm '/lint|format|typecheck/'",
+    "clean": "git clean -xdf dist node_modules pnpm-lock.yaml",
     "generate:types": "wrangler types",
     "update:deps": "pnpm dlx taze major -wrli"
   },
