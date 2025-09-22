@@ -54,7 +54,7 @@ export function BackgroundGrid({
   return (
     <div
       ref={handleRef}
-      className={`fixed inset-0 -z-10 grid transition-transform duration-700 ease-out will-change-transform`}
+      className="fixed inset-0 -z-10 grid transition-transform duration-700 ease-out will-change-transform"
       style={{
         gap: `${String(gap)}px`,
         gridTemplateColumns: `repeat(${String(gridSize.cols)}, ${String(squareSize)}px)`,
@@ -64,7 +64,7 @@ export function BackgroundGrid({
       {squares.map((id) => (
         <div
           key={id}
-          className={`aspect-square rounded-[1px] bg-black/1 transition-colors duration-300 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2`}
+          className="aspect-square rounded-[1px] bg-black/1 transition-colors duration-300 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2"
         />
       ))}
     </div>

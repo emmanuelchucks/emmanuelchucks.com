@@ -38,7 +38,7 @@ function Placeholder({ children }: React.PropsWithChildren) {
   return (
     <div
       id={`${windowId}-placeholder`}
-      className={`not-prose relative aspect-square not-has-data-floating:has-data-closed:hidden not-has-data-floating:has-data-minimized:aspect-auto sm:aspect-[4/3]`}
+      className="not-prose relative aspect-square not-has-data-floating:has-data-closed:hidden not-has-data-floating:has-data-minimized:aspect-auto sm:aspect-[4/3]"
     >
       {children}
     </div>
@@ -78,7 +78,7 @@ function Shell({ children }: React.PropsWithChildren) {
       onMouseDownCapture={() => {
         activateWindow(windowStore);
       }}
-      className={`group/shell relative h-full overflow-clip rounded-md will-change-transform data-closed:hidden data-floating:data-minimized:hidden`}
+      className="group/shell relative h-full overflow-clip rounded-md will-change-transform data-closed:hidden data-floating:data-minimized:hidden"
     >
       {children}
     </figure>
@@ -98,15 +98,13 @@ function TopBar({ children }: React.PropsWithChildren) {
       onMouseDown={(mouseEvent) => {
         windowStore.trigger.startDragging({ mouseEvent });
       }}
-      className={`flex flex-row-reverse items-center justify-end bg-neutral-200 dark:bg-neutral-800`}
+      className="flex flex-row-reverse items-center justify-end bg-neutral-200 dark:bg-neutral-800"
     >
       <figcaption className="group-not-data-minimized/shell:sr-only">
         <span className="sr-only">Demo for </span>
         {windowTitle}
       </figcaption>
-      <div
-        className={`group/top-bar-buttons flex gap-x-2 p-2 group-data-minimized/shell:p-4`}
-      >
+      <div className="group/top-bar-buttons flex gap-x-2 p-2 group-data-minimized/shell:p-4">
         {children}
       </div>
     </div>
@@ -117,15 +115,13 @@ function CloseButton() {
   const windowStore = use(WindowContext);
 
   return (
-    <div
-      className={`grid size-3 rounded-full bg-red-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-minimized/shell:hidden dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700`}
-    >
+    <div className="grid size-3 rounded-full bg-red-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-minimized/shell:hidden dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700">
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
           windowStore.trigger.close({ mouseEvent });
         }}
-        className={`hidden text-red-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 has-hover:block`}
+        className="hidden text-red-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 has-hover:block"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <title>Close</title>
@@ -144,16 +140,14 @@ function MinimizeButton() {
   const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (
-    <div
-      className={`grid size-3 rounded-full bg-yellow-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-fullscreen/shell:bg-neutral-300 dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700 dark:group-data-fullscreen/shell:bg-neutral-700`}
-    >
+    <div className="grid size-3 rounded-full bg-yellow-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-fullscreen/shell:bg-neutral-300 dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700 dark:group-data-fullscreen/shell:bg-neutral-700">
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
           windowStore.trigger.toggleMinimize({ mouseEvent });
         }}
         aria-disabled={mode === "fullscreen" ? "true" : undefined}
-        className={`peer hidden text-yellow-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 aria-disabled:hidden not-aria-disabled:[@media(hover:hover)]:block`}
+        className="peer hidden text-yellow-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 aria-disabled:hidden not-aria-disabled:[@media(hover:hover)]:block"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <title>{mode === "minimized" ? "Restore" : "Minimize"}</title>
@@ -172,15 +166,13 @@ function FullscreenButton() {
   const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (
-    <div
-      className={`grid size-3 rounded-full bg-green-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-minimized/shell:hidden dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700`}
-    >
+    <div className="grid size-3 rounded-full bg-green-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-minimized/shell:hidden dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700">
       <button
         type="button"
         onMouseDown={(mouseEvent) => {
           windowStore.trigger.toggleFullscreen({ mouseEvent });
         }}
-        className={`hidden text-green-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 has-hover:block`}
+        className="hidden text-green-900 opacity-0 [grid-area:stack] group-focus-within/top-bar-buttons:opacity-100 group-hover/top-bar-buttons:opacity-100 has-hover:block"
       >
         {mode === "fullscreen" ? (
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -202,9 +194,7 @@ function FullscreenButton() {
 
 function Content({ children }: React.PropsWithChildren) {
   return (
-    <div
-      className={`h-full overflow-y-auto bg-neutral-100 group-data-minimized/shell:hidden dark:bg-neutral-900`}
-    >
+    <div className="h-full overflow-y-auto bg-neutral-100 group-data-minimized/shell:hidden dark:bg-neutral-900">
       {children}
     </div>
   );
