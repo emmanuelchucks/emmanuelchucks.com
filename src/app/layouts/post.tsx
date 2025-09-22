@@ -17,15 +17,13 @@ export function PostLayout({ children }: LayoutProps): React.JSX.Element {
         <nav>
           <A
             href="/"
-            className={`font-medium text-neutral-800 dark:text-neutral-200`}
+            className="font-medium text-neutral-800 dark:text-neutral-200"
           >
             <span aria-hidden="true">← </span>Home
           </A>
         </nav>
       </header>
-      <main
-        className={`prose prose-neutral dark:prose-invert prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance prose-p:text-pretty prose-pre:bg-white prose-pre:outline-neutral-700 prose-pre:dark:!bg-neutral-900 prose-pre:dark:outline-neutral-300 mt-24 [&_.shiki_span]:dark:!text-[var(--shiki-dark)]`}
-      >
+      <main className="prose prose-neutral dark:prose-invert prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance prose-p:text-pretty prose-pre:bg-white prose-pre:outline-neutral-700 prose-pre:dark:!bg-neutral-900 prose-pre:dark:outline-neutral-300 mt-24 [&_.shiki_span]:dark:!text-[var(--shiki-dark)]">
         <article>
           <header>
             <PostMeta post={post} />
