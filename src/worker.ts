@@ -1,11 +1,11 @@
 import type { Post } from "content-collections";
 import { layout, render, route } from "rwsdk/router";
 import { defineApp, requestInfo } from "rwsdk/worker";
-import { Document } from "@/app/document";
-import { setCommonHeaders } from "@/app/headers";
-import { Home } from "@/app/pages/home";
+import { Document } from "./app/document";
+import { setCommonHeaders } from "./app/headers";
 import { MainLayout } from "./app/layouts/main";
 import { PostLayout } from "./app/layouts/post";
+import { Home } from "./app/pages/home";
 import { Post as PostPage } from "./app/pages/post";
 import { link } from "./app/shared/links";
 import { getPost } from "./app/utils/post";
