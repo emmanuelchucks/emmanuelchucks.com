@@ -10,7 +10,7 @@ export function BackgroundGrid({
   gap?: number;
   squareSize?: number;
   maxOffset?: number;
-}) {
+}): React.JSX.Element {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [gridSize, setGridSize] = useState({ rows: 0, cols: 0 });
 
@@ -36,42 +36,35 @@ export function BackgroundGrid({
       });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    globalThis.addEventListener("mousemove", handleMouseMove);
 
     return () => {
       resizeObserver.disconnect();
-      window.removeEventListener("mousemove", handleMouseMove);
+      globalThis.removeEventListener("mousemove", handleMouseMove);
     };
   };
 
   const offsetX = mousePosition.x * maxOffset;
   const offsetY = mousePosition.y * maxOffset;
 
-  const squares = Array.from({ length: gridSize.rows * gridSize.cols });
+  const squares = Array.from({ length: gridSize.rows * gridSize.cols }, () =>
+    crypto.randomUUID(),
+  );
 
   return (
     <div
       ref={handleRef}
-      className={`
-        fixed inset-0 -z-10 grid transition-transform duration-700 ease-out
-        will-change-transform
-      `}
+      className={`fixed inset-0 -z-10 grid transition-transform duration-700 ease-out will-change-transform`}
       style={{
-        gap: `${gap}px`,
-        gridTemplateColumns: `repeat(${gridSize.cols}, ${squareSize}px)`,
-        transform: `translate3d(${offsetX}px, ${offsetY}px, 0)`,
+        gap: `${String(gap)}px`,
+        gridTemplateColumns: `repeat(${String(gridSize.cols)}, ${String(squareSize)}px)`,
+        transform: `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`,
       }}
     >
-      {squares.map((_, index) => (
+      {squares.map((id) => (
         <div
-          // eslint-disable-next-line react/no-array-index-key
-          key={String(index)}
-          className={`
-            aspect-square rounded-[1px] bg-black/1 transition-colors
-            duration-300
-            hover:bg-black/2
-            dark:bg-white/1 dark:hover:bg-white/2
-          `}
+          key={id}
+          className={`aspect-square rounded-[1px] bg-black/1 transition-colors duration-300 hover:bg-black/2 dark:bg-white/1 dark:hover:bg-white/2`}
         />
       ))}
     </div>

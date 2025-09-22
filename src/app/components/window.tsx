@@ -8,6 +8,7 @@ import {
 
 export type WindowStore = ReturnType<typeof useWindowStore>;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useWindowStore(windowTitle: string) {
   const windowId = useId();
   const windowRef = useRef<HTMLElement>(null);
@@ -24,7 +25,7 @@ export function useWindowStore(windowTitle: string) {
     on: {
       close(
         context,
-        event: { mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent> },
+        event: { mouseEvent: React.MouseEvent<HTMLButtonElement> },
         enqueue,
       ) {
         enqueue.effect(() => {
@@ -42,7 +43,7 @@ export function useWindowStore(windowTitle: string) {
       },
       toggleMinimize(
         context,
-        event: { mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent> },
+        event: { mouseEvent: React.MouseEvent<HTMLButtonElement> },
         enqueue,
       ) {
         enqueue.effect(() => {
@@ -60,7 +61,7 @@ export function useWindowStore(windowTitle: string) {
 
             requestAnimationFrame(() => {
               if (!context.windowRef.current) return;
-              context.windowRef.current.style.transform = `translate3d(${movementRef.current.x}px, ${movementRef.current.y}px, 0)`;
+              context.windowRef.current.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
             });
           });
 
@@ -85,7 +86,7 @@ export function useWindowStore(windowTitle: string) {
       },
       toggleFullscreen(
         context,
-        event: { mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent> },
+        event: { mouseEvent: React.MouseEvent<HTMLButtonElement> },
         enqueue,
       ) {
         enqueue.effect(() => {
@@ -119,7 +120,7 @@ export function useWindowStore(windowTitle: string) {
       },
       startDragging(
         context,
-        event: { mouseEvent: React.MouseEvent<HTMLDivElement, MouseEvent> },
+        event: { mouseEvent: React.MouseEvent<HTMLDivElement> },
         enqueue,
       ) {
         enqueue.effect(() => {
@@ -133,23 +134,19 @@ export function useWindowStore(windowTitle: string) {
           return context;
         }
 
+        const onMouseMove = (
+          mouseEvent: MouseEvent | React.MouseEvent<HTMLButtonElement>,
+        ) => {
+          movementRef.current.x = movementRef.current.x + mouseEvent.movementX;
+          movementRef.current.y = movementRef.current.y + mouseEvent.movementY;
+
+          requestAnimationFrame(() => {
+            if (!context.windowRef.current) return;
+            context.windowRef.current.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
+          });
+        };
+
         enqueue.effect(() => {
-          const onMouseMove = (
-            mouseEvent:
-              | MouseEvent
-              | React.MouseEvent<HTMLButtonElement, MouseEvent>,
-          ) => {
-            movementRef.current.x =
-              movementRef.current.x + mouseEvent.movementX;
-            movementRef.current.y =
-              movementRef.current.y + mouseEvent.movementY;
-
-            requestAnimationFrame(() => {
-              if (!context.windowRef.current) return;
-              context.windowRef.current.style.transform = `translate3d(${movementRef.current.x}px, ${movementRef.current.y}px, 0)`;
-            });
-          };
-
           document.body.setAttribute("inert", "true");
           const controller = new AbortController();
 

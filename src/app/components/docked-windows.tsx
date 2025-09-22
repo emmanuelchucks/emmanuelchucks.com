@@ -8,24 +8,18 @@ import {
   zIndexAtom,
 } from "./window-manager";
 
-export function DockedWindows() {
+export function DockedWindows(): React.JSX.Element {
   const zIndex = useAtom(zIndexAtom);
   const dockedWindows = useAtom(dockedWindowsAtom);
 
-  const dockedWindowsArray = Array.from(dockedWindows);
+  const dockedWindowsArray = [...dockedWindows];
 
   return (
     <>
       <h2 className="sr-only">Docked Windows</h2>
       <ul
         style={{ zIndex }}
-        className={`
-          fixed bottom-2 left-[50%] mx-auto grid -translate-x-[50%] list-none
-          grid-flow-col place-content-center gap-x-2 rounded-xl
-          border-neutral-300 bg-neutral-200
-          not-empty:border not-empty:px-4 not-empty:py-2
-          dark:border-neutral-700 dark:bg-neutral-800
-        `}
+        className={`fixed bottom-2 left-[50%] mx-auto grid -translate-x-[50%] list-none grid-flow-col place-content-center gap-x-2 rounded-xl border-neutral-300 bg-neutral-200 not-empty:border not-empty:px-4 not-empty:py-2 dark:border-neutral-700 dark:bg-neutral-800`}
       >
         {dockedWindowsArray.map((dockedWindow) => {
           const windowId = dockedWindow.getSnapshot().context.windowId;
@@ -53,14 +47,10 @@ function DockedWindow({ dockedWindow }: DockedWindowProps) {
       <p className="sr-only">{dockedWindowSnapshot.context.windowTitle}</p>
       <button
         type="button"
-        onMouseDown={(mouseEvent) =>
-          removeDockedWindow(mouseEvent, dockedWindow)
-        }
-        className={`
-          grid place-content-center rounded-md border border-neutral-300
-          bg-neutral-50 p-2
-          dark:border-neutral-700 dark:bg-neutral-950
-        `}
+        onMouseDown={(mouseEvent) => {
+          removeDockedWindow(mouseEvent, dockedWindow);
+        }}
+        className={`grid place-content-center rounded-md border border-neutral-300 bg-neutral-50 p-2 dark:border-neutral-700 dark:bg-neutral-950`}
       >
         <span aria-hidden className="text-sm">
           {titleInitials}

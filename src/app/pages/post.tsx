@@ -1,7 +1,7 @@
 import { requestInfo } from "rwsdk/worker";
-import { incrementViewsCount } from "../helpers/post";
+import { incrementViewsCount } from "../utils/post";
 
-export function PostPage() {
+export function Post(): React.JSX.Element {
   const MDXContent = requestInfo.ctx.post.mdxContent;
   void incrementViewsCount(requestInfo.ctx.post.id);
 

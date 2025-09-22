@@ -2,7 +2,7 @@ import type { MDXContent as DefaultMDXContent } from "@content-collections/mdx/r
 import child_process from "node:child_process";
 import path from "node:path";
 import process from "node:process";
-import util from "node:util";
+import { promisify } from "node:util";
 import {
   createDefaultImport,
   defineCollection,
@@ -12,7 +12,7 @@ import slugify from "@sindresorhus/slugify";
 import readingTime from "reading-time";
 import * as v from "valibot";
 
-const exec = util.promisify(child_process.exec);
+const exec = promisify(child_process.exec);
 const contentPath = "./src/content/";
 
 type MDXContent = (
@@ -43,7 +43,7 @@ const posts = defineCollection({
       document._meta.filePath,
       async (filePath) => {
         const { stdout } = await exec(
-          `git log -1 --format=%ai -- ${filePath.split("/").pop()}`,
+          `git log -1 --format=%ai -- ${filePath.split("/").pop() ?? ""}`,
         );
 
         return stdout
