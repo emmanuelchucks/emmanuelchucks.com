@@ -1,4 +1,1 @@
-declare module "*?url" {
-  const result: string;
-  export default result;
-}
+/// <reference types="vite/client" />

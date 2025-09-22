@@ -4,9 +4,9 @@ import { createAtom } from "@xstate/store";
 export const zIndexAtom = createAtom(0);
 export const floatingWindowsAtom = createAtom(new Set<WindowStore>());
 export const dockedWindowsAtom = createAtom(new Set<WindowStore>());
-export const activeWindowAtom = createAtom<WindowStore | undefined>(undefined);
+export const activeWindowAtom = createAtom<WindowStore>({} as WindowStore);
 
-export function addFloatingWindow(windowStore: WindowStore) {
+export function addFloatingWindow(windowStore: WindowStore): void {
   const currentFloatingWindows = floatingWindowsAtom.get();
   const updatedFloatingWindows = new Set(currentFloatingWindows);
 
@@ -15,10 +15,10 @@ export function addFloatingWindow(windowStore: WindowStore) {
   activeWindowAtom.set(windowStore);
 }
 
-export function addDockedWindow(windowStore: WindowStore) {
+export function addDockedWindow(windowStore: WindowStore): void {
   const currentFloatingWindows = floatingWindowsAtom.get();
   const currentDockedWindows = dockedWindowsAtom.get();
-  const floatingWindowsArray = Array.from(currentFloatingWindows);
+  const floatingWindowsArray = [...currentFloatingWindows];
   const currentWindowIndex = floatingWindowsArray.indexOf(windowStore);
   const remainingWindows = floatingWindowsArray.filter(
     (_, index) => index !== currentWindowIndex,
@@ -29,13 +29,16 @@ export function addDockedWindow(windowStore: WindowStore) {
 
   updatedDockedWindows.add(windowStore);
   dockedWindowsAtom.set(updatedDockedWindows);
-  activeWindowAtom.set(nextFloatingWindow);
+
+  if (nextFloatingWindow) {
+    activeWindowAtom.set(nextFloatingWindow);
+  }
 }
 
 export function removeDockedWindow(
-  mouseEvent: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  mouseEvent: React.MouseEvent<HTMLButtonElement>,
   dockedWindow: WindowStore,
-) {
+): void {
   const currentDockedWindows = dockedWindowsAtom.get();
   const updatedDockedWindows = new Set(currentDockedWindows);
 
@@ -46,7 +49,7 @@ export function removeDockedWindow(
   dockedWindow.trigger.toggleMinimize({ mouseEvent });
 }
 
-export function activateWindow(windowStore: WindowStore) {
+export function activateWindow(windowStore: WindowStore): void {
   const newActiveWindowSnapshot = windowStore.getSnapshot();
   const newActiveWindow = newActiveWindowSnapshot.context.windowRef.current;
 
@@ -57,7 +60,7 @@ export function activateWindow(windowStore: WindowStore) {
   activeWindowAtom.set(windowStore);
 }
 
-export function getIsFloatingWindow(windowStore: WindowStore) {
+export function getIsFloatingWindow(windowStore: WindowStore): boolean {
   const floatingWindows = floatingWindowsAtom.get();
   return floatingWindows.has(windowStore);
 }
