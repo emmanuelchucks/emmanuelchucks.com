@@ -1,11 +1,11 @@
-# RedwoodSDK Minimal Starter
+# RedwoodSDK Starter
 
 This starter gives you a bare-bones RedwoodSDK project.
 
 Create your new project:
 
 ```shell
-npx create-rwsdk my-project-name
+pnpm create rwsdk@latest project-name -t minimal
 cd my-project-name
 pnpm install
 ```
@@ -13,7 +13,7 @@ pnpm install
 ## Running the dev server
 
 ```shell
-pnpm dev
+pnpm run dev
 ```
 
 Point your browser to the URL displayed in the terminal (e.g. `http://localhost:5173/`). You should see a "Hello World" message in your browser.
