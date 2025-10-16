@@ -18,7 +18,7 @@ export function getPosts(): Post[] {
   return allPosts
     .filter(
       (post) =>
-        !post.isDraft &&
+        !(import.meta.env.PROD && post.isDraft) &&
         (post.title.toLowerCase().includes(validParams.q.toLowerCase()) ||
           post.description.toLowerCase().includes(validParams.q.toLowerCase())),
     )

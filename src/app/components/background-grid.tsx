@@ -12,20 +12,8 @@ export function BackgroundGrid({
   maxOffset?: number;
 }): React.JSX.Element {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [gridSize, setGridSize] = useState({ rows: 0, cols: 0 });
 
   const handleRef = (node: HTMLDivElement) => {
-    const resizeObserver = new ResizeObserver(() => {
-      const dimensions = node.getBoundingClientRect();
-      const totalSize = squareSize + gap;
-      const cols = Math.ceil(dimensions.width / totalSize) + 2;
-      const rows = Math.ceil(dimensions.height / totalSize) + 2;
-
-      setGridSize({ rows, cols });
-    });
-
-    resizeObserver.observe(node);
-
     const handleMouseMove = (e: MouseEvent) => {
       const rect = node.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
@@ -39,7 +27,6 @@ export function BackgroundGrid({
     globalThis.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      resizeObserver.disconnect();
       globalThis.removeEventListener("mousemove", handleMouseMove);
     };
   };
@@ -47,9 +34,12 @@ export function BackgroundGrid({
   const offsetX = mousePosition.x * maxOffset;
   const offsetY = mousePosition.y * maxOffset;
 
-  const squares = Array.from({ length: gridSize.rows * gridSize.cols }, () =>
-    crypto.randomUUID(),
-  );
+  const maxWidth = 7680;
+  const maxHeight = 4320;
+  const totalSize = squareSize + gap;
+  const cols = Math.ceil(maxWidth / totalSize) + 2;
+  const rows = Math.ceil(maxHeight / totalSize) + 2;
+  const squares = Array.from({ length: rows * cols }, (_, i) => i);
 
   return (
     <div
@@ -57,7 +47,7 @@ export function BackgroundGrid({
       className="fixed inset-0 -z-10 grid transition-transform duration-700 ease-out will-change-transform"
       style={{
         gap: `${String(gap)}px`,
-        gridTemplateColumns: `repeat(${String(gridSize.cols)}, ${String(squareSize)}px)`,
+        gridTemplateColumns: `repeat(${String(cols)}, ${String(squareSize)}px)`,
         transform: `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`,
       }}
     >

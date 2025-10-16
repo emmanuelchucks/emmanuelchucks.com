@@ -60,7 +60,7 @@ function Shell({ children }: React.PropsWithChildren) {
   const isFloatingWindow = floatingWindows.has(windowStore);
 
   const isActiveWindow =
-    activeWindow.getSnapshot().context.windowId ===
+    activeWindow?.getSnapshot().context.windowId ===
     windowStore.getSnapshot().context.windowId;
 
   return (

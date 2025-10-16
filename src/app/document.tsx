@@ -15,6 +15,7 @@ export function Document({ children }: PropsWithChildren): React.JSX.Element {
       <body className="overflow-x-hidden bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50">
         <div id="root">{children}</div>
         <script>import("/src/client.tsx")</script>
+        <script>import("/src/egg.ts")</script>
       </body>
     </html>
   );
