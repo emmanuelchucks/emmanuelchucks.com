@@ -1,11 +1,12 @@
-import type { LayoutProps } from "rwsdk/router";
 import { DockedWindows } from "../components/docked-windows";
 import { PostMeta } from "../components/post";
 import { A } from "../components/primitives";
 import { getPost } from "../utils/post";
 import { SOCIALS } from "../utils/socials";
 
-export function PostLayout({ children }: LayoutProps): React.JSX.Element {
+export function PostLayout({
+  children,
+}: React.PropsWithChildren): React.JSX.Element {
   const post = getPost();
 
   if (!post) return <>{children}</>;

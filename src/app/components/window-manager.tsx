@@ -4,7 +4,8 @@ import { createAtom } from "@xstate/store";
 export const zIndexAtom = createAtom(0);
 export const floatingWindowsAtom = createAtom(new Set<WindowStore>());
 export const dockedWindowsAtom = createAtom(new Set<WindowStore>());
-export const activeWindowAtom = createAtom<WindowStore>({} as WindowStore);
+// eslint-disable-next-line unicorn-x/no-useless-undefined
+export const activeWindowAtom = createAtom<WindowStore | undefined>(undefined);
 
 export function addFloatingWindow(windowStore: WindowStore): void {
   const currentFloatingWindows = floatingWindowsAtom.get();
