@@ -16,7 +16,7 @@
     "types": ["./worker-configuration.d.ts", "./types/vite.d.ts"],
     "paths": {
       "@/*": ["./src/*"],
-      "content-collections": ["./.content-collections/generated"]
+      "content-collections": ["./.content-collections/generated/"]
     }
   }
 }
