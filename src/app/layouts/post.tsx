@@ -1,18 +1,16 @@
-import { DockedWindows } from "../components/docked-windows";
-import { PostMeta } from "../components/post";
-import { A } from "../components/primitives";
-import { getPost } from "../utils/post";
-import { SOCIALS } from "../utils/socials";
+import { DockedWindows } from "#components/docked-windows";
+import { PostMeta } from "#components/post";
+import { A } from "#components/primitives";
+import { getPost } from "#utils/post";
+import { SOCIALS } from "#utils/socials";
 
-export function PostLayout({
-  children,
-}: React.PropsWithChildren): React.JSX.Element {
+export function PostLayout({ children }: React.PropsWithChildren) {
   const post = getPost();
 
   if (!post) return <>{children}</>;
 
   return (
-    <>
+    <div className="col-start-2">
       <title>{`${post.title} - Emmanuel Chucks`}</title>
       <header>
         <nav>
@@ -24,11 +22,18 @@ export function PostLayout({
           </A>
         </nav>
       </header>
-      <main className="prose prose-neutral dark:prose-invert prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance prose-p:text-pretty prose-pre:bg-white prose-pre:outline-neutral-700 prose-pre:dark:!bg-neutral-900 prose-pre:dark:outline-neutral-300 mt-24 [&_.shiki_span]:dark:!text-[var(--shiki-dark)]">
+      <main className="prose prose-neutral dark:prose-invert prose-h1:text-balance prose-h2:text-balance prose-h3:text-balance prose-p:text-pretty prose-pre:bg-white prose-pre:outline-neutral-700 prose-pre:dark:bg-neutral-900! prose-pre:dark:outline-neutral-300 mt-24 [&_.shiki_span]:dark:text-(--shiki-dark)!">
         <article>
           <header>
             <PostMeta post={post} />
-            <h1>{post.title}</h1>
+            <h1>
+              {post.title}
+              {post.isDraft && (
+                <span className="ml-2 text-sm text-neutral-500 absolute italic">
+                  (Draft)
+                </span>
+              )}
+            </h1>
           </header>
           {children}
           <footer className="mt-16">
@@ -41,6 +46,6 @@ export function PostLayout({
           <DockedWindows />
         </aside>
       </main>
-    </>
+    </div>
   );
 }

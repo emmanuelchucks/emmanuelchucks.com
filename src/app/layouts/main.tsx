@@ -1,12 +1,12 @@
-import { BackgroundGrid } from "../components/background-grid";
+import { BackgroundGrid } from "#components/background-grid";
 
-export function MainLayout({
-  children,
-}: React.PropsWithChildren): React.JSX.Element {
+export function MainLayout({ children }: React.PropsWithChildren) {
   return (
-    <div className="mx-auto my-24 w-[min(100%-var(--spacing)*8,_var(--container-2xl))] sm:w-[min(100%-var(--spacing)*24,_var(--container-2xl))]">
-      {children}
+    <>
+      <div className="my-24 grid grid-cols-[1fr_min(100%-var(--page-padding),70ch)_1fr] overflow-clip [--page-padding:calc(var(--spacing)*10)]">
+        {children}
+      </div>
       <BackgroundGrid />
-    </div>
+    </>
   );
 }
