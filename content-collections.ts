@@ -26,17 +26,23 @@ const posts = defineCollection({
   schema: v.object({
     id: v.string(),
     title: v.string(),
-    description: v.string(),
     author: v.string(),
     isDraft: v.boolean(),
-    publishedAt: v.pipe(
-      v.string(),
-      v.transform((value) => new Date(value)),
-    ),
+    content: v.string(),
+    publishedAt: v.pipe(v.string(), v.isoDate()),
   }),
   transform: async (document, context) => {
     const mdxContent = createDefaultImport<MDXContent>(
       path.join(process.cwd(), contentPath, document._meta.filePath),
+    );
+
+    const demoContent = createDefaultImport<React.FunctionComponent>(
+      path.join(
+        process.cwd(),
+        contentPath,
+        document._meta.directory,
+        "demo.tsx",
+      ),
     );
 
     const updatedAt = await context.cache(
@@ -58,6 +64,7 @@ const posts = defineCollection({
       slug: `${slugify(document.title)}-${document.id}`,
       updatedAt,
       mdxContent,
+      demoContent,
     };
   },
 });
