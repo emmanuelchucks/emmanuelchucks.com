@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 export function BackgroundGrid({
   gap = 4,
   squareSize = 240,
@@ -10,17 +8,18 @@ export function BackgroundGrid({
   gap?: number;
   squareSize?: number;
   maxOffset?: number;
-}): React.JSX.Element {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
+}) {
   const handleRef = (node: HTMLDivElement) => {
     const handleMouseMove = (e: MouseEvent) => {
       const rect = node.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
 
+      const offsetX = x * maxOffset;
+      const offsetY = y * maxOffset;
+
       requestAnimationFrame(() => {
-        setMousePosition({ x, y });
+        node.style.transform = `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`;
       });
     };
 
@@ -31,11 +30,8 @@ export function BackgroundGrid({
     };
   };
 
-  const offsetX = mousePosition.x * maxOffset;
-  const offsetY = mousePosition.y * maxOffset;
-
-  const maxWidth = 7680;
-  const maxHeight = 4320;
+  const maxWidth = 2560;
+  const maxHeight = 1440;
   const totalSize = squareSize + gap;
   const cols = Math.ceil(maxWidth / totalSize) + 2;
   const rows = Math.ceil(maxHeight / totalSize) + 2;
@@ -48,7 +44,6 @@ export function BackgroundGrid({
       style={{
         gap: `${String(gap)}px`,
         gridTemplateColumns: `repeat(${String(cols)}, ${String(squareSize)}px)`,
-        transform: `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`,
       }}
     >
       {squares.map((id) => (

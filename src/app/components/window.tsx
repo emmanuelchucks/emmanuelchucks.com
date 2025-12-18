@@ -8,7 +8,6 @@ import {
 
 export type WindowStore = ReturnType<typeof useWindowStore>;
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function useWindowStore(windowTitle: string) {
   const windowId = useId();
   const windowRef = useRef<HTMLElement>(null);

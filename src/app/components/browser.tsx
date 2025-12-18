@@ -12,7 +12,7 @@ import {
 export function Browser({
   title,
   children,
-}: React.PropsWithChildren<{ title: string }>): React.JSX.Element {
+}: React.PropsWithChildren<{ title: string }>) {
   const windowStore = useWindowStore(title);
 
   return (
@@ -38,7 +38,7 @@ function Placeholder({ children }: React.PropsWithChildren) {
   return (
     <div
       id={`${windowId}-placeholder`}
-      className="not-prose relative aspect-square not-has-data-floating:has-data-closed:hidden not-has-data-floating:has-data-minimized:aspect-auto sm:aspect-[4/3]"
+      className="not-prose relative aspect-square not-has-data-floating:has-data-closed:hidden not-has-data-floating:has-data-minimized:aspect-auto sm:aspect-4/3"
     >
       {children}
     </div>

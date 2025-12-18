@@ -8,7 +8,7 @@ import {
   zIndexAtom,
 } from "./window-manager";
 
-export function DockedWindows(): React.JSX.Element {
+export function DockedWindows() {
   const zIndex = useAtom(zIndexAtom);
   const dockedWindows = useAtom(dockedWindowsAtom);
 

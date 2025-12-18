@@ -1,14 +1,14 @@
-import { PostMeta } from "../components/post";
-import { A } from "../components/primitives";
-import { link } from "../shared/links";
-import { getPosts } from "../utils/post";
-import { SOCIALS } from "../utils/socials";
+import { PostMeta } from "#components/post";
+import { A } from "#components/primitives";
+import { link } from "#shared/links";
+import { getPosts } from "#utils/post";
+import { SOCIALS } from "#utils/socials";
 
-export function Home(): React.JSX.Element {
+export function HomePage() {
   const posts = getPosts();
 
   return (
-    <div className="mx-auto my-24 w-[min(100%-var(--spacing)*8,_var(--container-2xl))] sm:w-[min(100%-var(--spacing)*24,_var(--container-2xl))]">
+    <div className="col-start-2">
       <title>Emmanuel Chucks - Ambitious software engineer</title>
       <meta
         name="description"
@@ -18,7 +18,7 @@ export function Home(): React.JSX.Element {
         data-has-posts={posts.length > 0}
         className="grid content-center data-has-posts:min-h-[50svh]"
       >
-        <div className="grid grid-flow-col grid-cols-[auto_max-content] grid-rows-[repeat(2,_max-content)] items-center gap-x-10 gap-y-1">
+        <div className="grid grid-flow-col grid-cols-[auto_max-content] grid-rows-[repeat(2,max-content)] items-center gap-x-10 gap-y-1">
           <h1 className="text-4xl font-bold">Emmanuel Chucks</h1>
           <p className="text-neutral-600 dark:text-neutral-400">
             Ambitious software engineer
@@ -50,12 +50,14 @@ export function Home(): React.JSX.Element {
                   <h3 className="text-2xl font-semibold">
                     <A href={link("/posts/:slug", { slug: post.slug })}>
                       {post.title}
+                      {post.isDraft && (
+                        <span className="ml-2 text-sm text-neutral-500 absolute italic">
+                          (Draft)
+                        </span>
+                      )}
                     </A>
                   </h3>
                   <PostMeta post={post} />
-                  <p className="line-clamp-3 text-neutral-700 dark:text-neutral-300">
-                    {post.description}
-                  </p>
                 </li>
               ))}
             </ul>
