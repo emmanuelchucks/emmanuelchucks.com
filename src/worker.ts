@@ -1,20 +1,29 @@
-import type { Post } from "content-collections";
+import type { Post } from "#content-collections";
 import { layout, render, route } from "rwsdk/router";
 import { defineApp, requestInfo } from "rwsdk/worker";
 import { Document } from "./app/document";
 import { setCommonHeaders } from "./app/headers";
 import { MainLayout } from "./app/layouts/main";
 import { PostLayout } from "./app/layouts/post";
-import { Home } from "./app/pages/home";
-import { Post as PostPage } from "./app/pages/post";
-import { link } from "./app/shared/links";
+import { DemoPage } from "./app/pages/demo";
+import { HomePage } from "./app/pages/home";
+import { PostPage } from "./app/pages/post";
 import { getPost } from "./app/utils/post";
 
-declare module "rwsdk/worker" {
-  interface DefaultAppContext {
-    post: Post;
-  }
+export interface AppContext {
+  post: Post;
 }
+
+export const app = defineApp([
+  setCommonHeaders(),
+  render(Document, [
+    layout(MainLayout, [
+      route("/", HomePage),
+      layout(PostLayout, [route("/posts/:slug", [findPost, PostPage])]),
+    ]),
+    route("/demos/:slug", [findPost, DemoPage]),
+  ]),
+]);
 
 function findPost() {
   const post = getPost();
@@ -28,12 +37,5 @@ function findPost() {
   requestInfo.ctx.post = post;
 }
 
-export default defineApp([
-  setCommonHeaders(),
-  render(Document, [
-    layout(MainLayout, [
-      route("/", Home),
-      layout(PostLayout, [route(link("/posts/:slug"), [findPost, PostPage])]),
-    ]),
-  ]),
-]);
+export type App = typeof app;
+export default app;

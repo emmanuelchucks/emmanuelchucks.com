@@ -1,3 +1,4 @@
-import { defineLinks } from "rwsdk/router";
+import type { App } from "rwsdk/worker";
+import { linkFor } from "rwsdk/router";
 
-export const link = defineLinks(["/", "/posts/:slug"]);
+export const link = linkFor<App>();
