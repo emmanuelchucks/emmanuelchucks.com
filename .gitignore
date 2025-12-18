@@ -68,3 +68,6 @@ coverage
 
 # Content collections
 .content-collections
+
+# Turbo
+.turbo

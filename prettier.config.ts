@@ -1,3 +1,1 @@
-export default {
-  plugins: ["prettier-plugin-tailwindcss"],
-};
+export { react } from "@kasoa/prettier-config/react";
