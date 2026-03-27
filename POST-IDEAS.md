@@ -1,0 +1,2 @@
+- You're not thinking agentically enough
+- I relunctantly ragecoded my own dictation app
