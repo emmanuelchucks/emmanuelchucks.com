@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  useEffect,
-  useEffectEvent,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } from "react";
+import { digitSymbols, separatorSymbols, symbols } from "./clock-data";
 import tickWavUrl from "./tick.wav?url";
 
 export default function ClockMadeOfClocks() {
@@ -35,12 +30,10 @@ export default function ClockMadeOfClocks() {
           const key = `${part}-${String(i)}`;
 
           if (isDigit(part)) {
-            return <Digit key={key} digit={Number.parseInt(part)} />;
+            return <Digit key={key} digit={Number.parseInt(part, 10)} />;
           }
 
-          if (isSeparator(part)) {
-            return <Separator key={key} />;
-          }
+          return isSeparator(part) ? <Separator key={key} /> : null;
         })}
       </div>
 
@@ -80,9 +73,7 @@ function MuteButton({ isMuted, toggleMute }: MuteButtonProps) {
       <span aria-hidden="true" className="[grid-area:1/1]">
         ♫
       </span>
-      <span className="hidden scale-150 rotate-12 [grid-area:1/1] group-data-muted:block">
-        /
-      </span>
+      <span className="hidden scale-150 rotate-12 [grid-area:1/1] group-data-muted:block">/</span>
     </button>
   );
 }
@@ -92,7 +83,10 @@ function isSeparator(char: string) {
 }
 
 function getSeparatorTransforms() {
-  return separator.map((symbol) => symbols[symbol]);
+  return separatorSymbols.map((symbol, index) => ({
+    id: `separator-${String(index)}`,
+    transform: symbols[symbol],
+  }));
 }
 
 function Separator() {
@@ -108,7 +102,10 @@ function isDigit(char: string) {
 }
 
 function getDigitTransforms(digit: number) {
-  return digits[digit].map((symbol) => symbols[symbol]);
+  return digitSymbols[digit].map((symbol, index) => ({
+    id: `${String(digit)}-${String(index)}`,
+    transform: symbols[symbol],
+  }));
 }
 
 interface DigitProps {
@@ -124,24 +121,33 @@ function Digit({ digit }: DigitProps) {
 }
 
 interface MiniClockProps {
-  transforms: Readonly<[number, number]>[];
+  transforms: readonly {
+    id: string;
+    transform: Readonly<[number, number]>;
+  }[];
 }
 
 function MiniClock({ transforms }: MiniClockProps) {
-  return transforms.map((transform, i) => (
+  return transforms.map(({ id, transform }) => (
     <div
-      key={`${String(transform)}-${String(i)}`}
+      key={id}
       className="grid size-(--size) justify-center rounded-full border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950"
     >
-      {transform.map((degree, i) => (
-        <ClockHand
-          key={`${String(degree)}-${String(i)}`}
-          rotation={degree}
-          isNeutral={isNeutralTransform(transform)}
-        />
-      ))}
+      <ClockHands transform={transform} />
     </div>
   ));
+}
+
+function ClockHands({ transform }: { transform: Readonly<[number, number]> }) {
+  const [startDegree, endDegree] = transform;
+  const isNeutral = isNeutralTransform(transform);
+
+  return (
+    <>
+      <ClockHand rotation={startDegree} isNeutral={isNeutral} />
+      <ClockHand rotation={endDegree} isNeutral={isNeutral} />
+    </>
+  );
 }
 
 interface ClockHandProps {
@@ -173,8 +179,7 @@ function getTimeParts(date: Date) {
         second: "2-digit",
       })
       .replaceAll(/[^\d:]/g, "")
-      // eslint-disable-next-line unicorn-x/prefer-spread
-      .split("")
+      .match(/./gu) ?? []
   );
 }
 
@@ -217,128 +222,22 @@ function useTickSound() {
 }
 
 function useWindowVisibility() {
-  const visibilityState = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const visibilityState = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   return visibilityState === "visible";
 }
 
 function subscribe(callback: () => void) {
-  document.addEventListener("visibilitychange", callback);
+  globalThis.document.addEventListener("visibilitychange", callback);
   return () => {
-    document.removeEventListener("visibilitychange", callback);
+    globalThis.document.removeEventListener("visibilitychange", callback);
   };
 }
 
 function getSnapshot() {
-  return document.visibilityState;
+  return globalThis.document.visibilityState;
 }
 
 function getServerSnapshot() {
   return "visible";
 }
-
-const symbols = {
-  "┌": [90, 180],
-  "─": [90, 270],
-  "┐": [180, 270],
-  "│": [0, 180],
-  "┘": [0, 270],
-  "└": [0, 90],
-  " ": [210, 210],
-} as const;
-
-// prettier-ignore
-const separator = [
-  "┌", "┐",
-  "└", "┘", 
-  "┌", "┐",
-  "└", "┘", 
-] as const;
-
-// prettier-ignore
-const digits  = [
-  [
-    "┌", "─", "─", "┐",
-    "│", "┌", "┐", "│",
-    "│", "│", "│", "│",
-    "│", "│", "│", "│",
-    "│", "└", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "┐", " ",
-    "└", "┐", "│", " ",
-    " ", "│", "│", " ",
-    " ", "│", "│", " ",
-    "┌", "┘", "└", "┐",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "└", "─", "┐", "│",
-    "┌", "─", "┘", "│",
-    "│", "┌", "─", "┘",
-    "│", "└", "─", "┐",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "└", "─", "┐", "│",
-    "┌", "─", "┘", "│",
-    "└", "─", "┐", "│",
-    "┌", "─", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "┐", "┌", "┐",
-    "│", "│", "│", "│",
-    "│", "└", "┘", "│",
-    "└", "─", "┐", "│",
-    " ", " ", "│", "│",
-    " ", " ", "└", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "│", "┌", "─", "┘",
-    "│", "└", "─", "┐",
-    "└", "─", "┐", "│",
-    "┌", "─", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "│", "┌", "─", "┘",
-    "│", "└", "─", "┐",
-    "│", "┌", "┐", "│",
-    "│", "└", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "└", "─", "┐", "│",
-    " ", " ", "│", "│",
-    " ", " ", "│", "│",
-    " ", " ", "│", "│",
-    " ", " ", "└", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "│", "┌", "┐", "│",
-    "│", "└", "┘", "│",
-    "│", "┌", "┐", "│",
-    "│", "└", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-  [
-    "┌", "─", "─", "┐",
-    "│", "┌", "┐", "│",
-    "│", "└", "┘", "│",
-    "└", "─", "┐", "│",
-    "┌", "─", "┘", "│",
-    "└", "─", "─", "┘",
-  ],
-] as const;

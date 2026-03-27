@@ -1,6 +1,6 @@
+import { format } from "date-fns";
 import type { Post } from "#content-collections";
 import { getFormattedViewsCount } from "#utils/post";
-import { format } from "date-fns";
 
 interface PostMetaProps {
   post: Post;

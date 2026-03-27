@@ -1,5 +1,5 @@
-import { incrementViewsCount } from "#utils/post";
 import { requestInfo } from "rwsdk/worker";
+import { incrementViewsCount } from "#utils/post";
 
 export function PostPage() {
   const MDXContent = requestInfo.ctx.post.mdxContent;

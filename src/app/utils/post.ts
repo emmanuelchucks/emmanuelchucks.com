@@ -1,9 +1,9 @@
-import type { Post } from "#content-collections";
-import { allPosts } from "#content-collections";
 import { env } from "cloudflare:workers";
 import { compareDesc } from "date-fns";
 import { requestInfo } from "rwsdk/worker";
 import * as v from "valibot";
+import type { Post } from "#content-collections";
+import { allPosts } from "#content-collections";
 
 const postsParamsSchema = v.object({
   q: v.optional(v.string(), ""),
@@ -21,7 +21,7 @@ export function getPosts(): Post[] {
         !(import.meta.env.PROD && post.isDraft) &&
         post.title.toLowerCase().includes(validParams.q.toLowerCase()),
     )
-    .sort((a, b) => compareDesc(a.publishedAt, b.publishedAt));
+    .toSorted((a, b) => compareDesc(a.publishedAt, b.publishedAt));
 }
 
 export function getPost(): Post | undefined {

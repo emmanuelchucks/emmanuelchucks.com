@@ -1,31 +1,17 @@
 import { cloudflare } from "@cloudflare/vite-plugin";
 import contentCollections from "@content-collections/vite";
-import mdx from "@mdx-js/rollup";
-import rehypeShiki from "@shikijs/rehype";
+import { react as reactConfig } from "@kasoa/vite-plus-config/react";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@vitejs/plugin-react";
-import remarkFrontmatter from "remark-frontmatter";
-import remarkMdxFrontmatter from "remark-mdx-frontmatter";
+import reactPlugin from "@vitejs/plugin-react";
 import { redwood } from "rwsdk/vite";
-import { defineConfig } from "vite";
+import { defineConfig } from "vite-plus";
+import { createMdxPlugin } from "./config/mdx.js";
 
 export default defineConfig({
+  ...reactConfig,
   plugins: [
-    mdx({
-      remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
-      rehypePlugins: [
-        [
-          rehypeShiki,
-          {
-            themes: {
-              light: "github-light",
-              dark: "github-dark",
-            },
-          },
-        ],
-      ],
-    }),
-    react({
+    createMdxPlugin(),
+    reactPlugin({
       babel: {
         plugins: ["babel-plugin-react-compiler"],
       },

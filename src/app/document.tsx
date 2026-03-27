@@ -14,8 +14,8 @@ export function Document({ children }: PropsWithChildren) {
       </head>
       <body className="bg-neutral-50 text-neutral-950 dark:bg-neutral-950 dark:text-neutral-50">
         <div id="root">{children}</div>
-        <script>import("/src/client.tsx")</script>
-        <script>import("/src/egg.ts")</script>
+        <script type="module" src="/src/client.tsx" />
+        <script type="module" src="/src/egg.ts" />
       </body>
     </html>
   );

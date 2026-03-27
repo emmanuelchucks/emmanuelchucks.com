@@ -1,4 +1,3 @@
-import type { Post } from "#content-collections";
 import { layout, render, route } from "rwsdk/router";
 import { defineApp, requestInfo } from "rwsdk/worker";
 import { Document } from "./app/document";
@@ -11,7 +10,7 @@ import { PostPage } from "./app/pages/post";
 import { getPost } from "./app/utils/post";
 
 export interface AppContext {
-  post: Post;
+  post: NonNullable<ReturnType<typeof getPost>>;
 }
 
 export const app = defineApp([
@@ -25,7 +24,7 @@ export const app = defineApp([
   ]),
 ]);
 
-function findPost() {
+function findPost(): Response | undefined {
   const post = getPost();
 
   if (!post) {
@@ -35,6 +34,7 @@ function findPost() {
   }
 
   requestInfo.ctx.post = post;
+  return undefined;
 }
 
 export type App = typeof app;

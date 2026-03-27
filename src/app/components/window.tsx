@@ -1,10 +1,6 @@
 import { useStore } from "@xstate/store/react";
-import { createContext, useId, useRef } from "react";
-import {
-  addDockedWindow,
-  addFloatingWindow,
-  getIsFloatingWindow,
-} from "./window-manager";
+import { createContext, use, useId, useRef } from "react";
+import { addDockedWindow, addFloatingWindow, getIsFloatingWindow } from "./window-manager";
 
 export type WindowStore = ReturnType<typeof useWindowStore>;
 
@@ -22,11 +18,7 @@ export function useWindowStore(windowTitle: string) {
       mode: "default" as "default" | "closed" | "minimized" | "fullscreen",
     },
     on: {
-      close(
-        context,
-        event: { mouseEvent: React.MouseEvent<HTMLButtonElement> },
-        enqueue,
-      ) {
+      close(context, event: { mouseEvent: React.MouseEvent<HTMLButtonElement> }, enqueue) {
         enqueue.effect(() => {
           event.mouseEvent.stopPropagation();
 
@@ -40,11 +32,7 @@ export function useWindowStore(windowTitle: string) {
           mode: "closed" as const,
         };
       },
-      toggleMinimize(
-        context,
-        event: { mouseEvent: React.MouseEvent<HTMLButtonElement> },
-        enqueue,
-      ) {
+      toggleMinimize(context, event: { mouseEvent: React.MouseEvent<HTMLButtonElement> }, enqueue) {
         enqueue.effect(() => {
           event.mouseEvent.stopPropagation();
         });
@@ -55,12 +43,15 @@ export function useWindowStore(windowTitle: string) {
 
         if (context.mode === "minimized") {
           enqueue.effect(() => {
-            const scrollDelta = window.scrollY - windowScrollRef.current.y;
-            movementRef.current.y = movementRef.current.y + scrollDelta;
+            const scrollDelta = globalThis.scrollY - windowScrollRef.current.y;
+            const windowElement = context.windowRef.current;
+            movementRef.current.y += scrollDelta;
 
-            requestAnimationFrame(() => {
-              if (!context.windowRef.current) return;
-              context.windowRef.current.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
+            globalThis.requestAnimationFrame(() => {
+              if (!windowElement) {
+                return;
+              }
+              windowElement.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
             });
           });
 
@@ -75,7 +66,7 @@ export function useWindowStore(windowTitle: string) {
             addDockedWindow(windowStore);
           }
 
-          windowScrollRef.current.y = window.scrollY;
+          windowScrollRef.current.y = globalThis.scrollY;
         });
 
         return {
@@ -108,7 +99,9 @@ export function useWindowStore(windowTitle: string) {
         }
 
         enqueue.effect(() => {
-          if (!context.windowRef.current) return;
+          if (!context.windowRef.current) {
+            return;
+          }
           requestFullscreen(context.windowRef.current);
         });
 
@@ -117,11 +110,7 @@ export function useWindowStore(windowTitle: string) {
           mode: "fullscreen" as const,
         };
       },
-      startDragging(
-        context,
-        event: { mouseEvent: React.MouseEvent<HTMLDivElement> },
-        enqueue,
-      ) {
+      startDragging(context, event: { mouseEvent: React.MouseEvent<HTMLDivElement> }, enqueue) {
         enqueue.effect(() => {
           event.mouseEvent.stopPropagation();
         });
@@ -133,32 +122,33 @@ export function useWindowStore(windowTitle: string) {
           return context;
         }
 
-        const onMouseMove = (
-          mouseEvent: MouseEvent | React.MouseEvent<HTMLButtonElement>,
-        ) => {
-          movementRef.current.x = movementRef.current.x + mouseEvent.movementX;
-          movementRef.current.y = movementRef.current.y + mouseEvent.movementY;
+        const onMouseMove = (mouseEvent: MouseEvent | React.MouseEvent<HTMLButtonElement>) => {
+          const windowElement = context.windowRef.current;
+          movementRef.current.x += mouseEvent.movementX;
+          movementRef.current.y += mouseEvent.movementY;
 
-          requestAnimationFrame(() => {
-            if (!context.windowRef.current) return;
-            context.windowRef.current.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
+          globalThis.requestAnimationFrame(() => {
+            if (!windowElement) {
+              return;
+            }
+            windowElement.style.transform = `translate3d(${String(movementRef.current.x)}px, ${String(movementRef.current.y)}px, 0)`;
           });
         };
 
         enqueue.effect(() => {
-          document.body.setAttribute("inert", "true");
-          const controller = new AbortController();
+          globalThis.document.body.setAttribute("inert", "true");
+          const controller = new globalThis.AbortController();
 
           const onMouseUp = () => {
-            document.body.removeAttribute("inert");
+            globalThis.document.body.removeAttribute("inert");
             controller.abort();
           };
 
-          document.addEventListener("mousemove", onMouseMove, {
+          globalThis.document.addEventListener("mousemove", onMouseMove, {
             signal: controller.signal,
           });
 
-          document.addEventListener("mouseup", onMouseUp, {
+          globalThis.document.addEventListener("mouseup", onMouseUp, {
             signal: controller.signal,
           });
 
@@ -175,14 +165,24 @@ export function useWindowStore(windowTitle: string) {
   return windowStore;
 }
 
-export const WindowContext = createContext({} as WindowStore);
+export const WindowContext = createContext<WindowStore | undefined>(undefined);
 
-function exitFullscreen() {
-  document.documentElement.classList.remove("[scrollbar-gutter:stable]");
-  void document.exitFullscreen();
+export function useWindowContext() {
+  const windowStore = use(WindowContext);
+
+  if (windowStore === undefined) {
+    throw new Error("WindowContext is missing");
+  }
+
+  return windowStore;
 }
 
-function requestFullscreen(element = document.documentElement) {
-  document.documentElement.classList.remove("[scrollbar-gutter:stable]");
+function exitFullscreen() {
+  globalThis.document.documentElement.classList.remove("[scrollbar-gutter:stable]");
+  void globalThis.document.exitFullscreen();
+}
+
+function requestFullscreen(element = globalThis.document.documentElement) {
+  globalThis.document.documentElement.classList.remove("[scrollbar-gutter:stable]");
   void element.requestFullscreen();
 }

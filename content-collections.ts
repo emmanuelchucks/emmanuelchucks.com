@@ -1,18 +1,12 @@
 import type { MDXContent as DefaultMDXContent } from "@content-collections/mdx/react";
+import { createDefaultImport, defineCollection, defineConfig } from "@content-collections/core";
+import slugify from "@sindresorhus/slugify";
 import child_process from "node:child_process";
 import path from "node:path";
 import process from "node:process";
-import { promisify } from "node:util";
-import {
-  createDefaultImport,
-  defineCollection,
-  defineConfig,
-} from "@content-collections/core";
-import slugify from "@sindresorhus/slugify";
 import readingTime from "reading-time";
 import * as v from "valibot";
 
-const exec = promisify(child_process.exec);
 const contentPath = "./src/content/";
 
 type MDXContent = (
@@ -37,26 +31,17 @@ const posts = defineCollection({
     );
 
     const demoContent = createDefaultImport<React.FunctionComponent>(
-      path.join(
-        process.cwd(),
-        contentPath,
-        document._meta.directory,
-        "demo.tsx",
-      ),
+      path.join(process.cwd(), contentPath, document._meta.directory, "demo.tsx"),
     );
 
-    const updatedAt = await context.cache(
-      document._meta.filePath,
-      async (filePath) => {
-        const { stdout } = await exec(
-          `git log -1 --format=%ai -- ${filePath.split("/").pop() ?? ""}`,
-        );
+    const updatedAt = await context.cache(document._meta.filePath, async (filePath) => {
+      const stdout = child_process.execSync(
+        `git log -1 --format=%ai -- ${filePath.split("/").pop() ?? ""}`,
+        { encoding: "utf8" },
+      );
 
-        return stdout
-          ? new Date(stdout.trim()).toISOString()
-          : new Date().toISOString();
-      },
-    );
+      return stdout ? new Date(stdout.trim()).toISOString() : new Date().toISOString();
+    });
 
     return {
       ...document,

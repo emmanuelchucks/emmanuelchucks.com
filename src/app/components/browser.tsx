@@ -1,18 +1,10 @@
 "use client";
 
 import { useAtom, useSelector } from "@xstate/store/react";
-import { use } from "react";
-import { useWindowStore, WindowContext } from "./window";
-import {
-  activateWindow,
-  activeWindowAtom,
-  floatingWindowsAtom,
-} from "./window-manager";
+import { useWindowStore, useWindowContext, WindowContext } from "./window";
+import { activateWindow, activeWindowAtom, floatingWindowsAtom } from "./window-manager";
 
-export function Browser({
-  title,
-  children,
-}: React.PropsWithChildren<{ title: string }>) {
+export function Browser({ title, children }: React.PropsWithChildren<{ title: string }>) {
   const windowStore = useWindowStore(title);
 
   return (
@@ -32,7 +24,7 @@ export function Browser({
 }
 
 function Placeholder({ children }: React.PropsWithChildren) {
-  const windowStore = use(WindowContext);
+  const windowStore = useWindowContext();
   const windowId = useSelector(windowStore, (state) => state.context.windowId);
 
   return (
@@ -46,13 +38,10 @@ function Placeholder({ children }: React.PropsWithChildren) {
 }
 
 function Shell({ children }: React.PropsWithChildren) {
-  const windowStore = use(WindowContext);
+  const windowStore = useWindowContext();
   const windowId = useSelector(windowStore, (state) => state.context.windowId);
   const mode = useSelector(windowStore, (state) => state.context.mode);
-  const windowRef = useSelector(
-    windowStore,
-    (state) => state.context.windowRef,
-  );
+  const windowRef = useSelector(windowStore, (state) => state.context.windowRef);
 
   const floatingWindows = useAtom(floatingWindowsAtom);
   const activeWindow = useAtom(activeWindowAtom);
@@ -60,8 +49,7 @@ function Shell({ children }: React.PropsWithChildren) {
   const isFloatingWindow = floatingWindows.has(windowStore);
 
   const isActiveWindow =
-    activeWindow?.getSnapshot().context.windowId ===
-    windowStore.getSnapshot().context.windowId;
+    activeWindow?.getSnapshot().context.windowId === windowStore.getSnapshot().context.windowId;
 
   return (
     <figure
@@ -86,11 +74,8 @@ function Shell({ children }: React.PropsWithChildren) {
 }
 
 function TopBar({ children }: React.PropsWithChildren) {
-  const windowStore = use(WindowContext);
-  const windowTitle = useSelector(
-    windowStore,
-    (state) => state.context.windowTitle,
-  );
+  const windowStore = useWindowContext();
+  const windowTitle = useSelector(windowStore, (state) => state.context.windowTitle);
 
   return (
     <div
@@ -112,7 +97,7 @@ function TopBar({ children }: React.PropsWithChildren) {
 }
 
 function CloseButton() {
-  const windowStore = use(WindowContext);
+  const windowStore = useWindowContext();
 
   return (
     <div className="grid size-3 rounded-full bg-red-500 [grid-template-areas:'stack'] group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-300 group-data-minimized/shell:hidden dark:group-data-floating/shell:group-not-data-active/shell:group-not-[:hover]/top-bar-buttons:bg-neutral-700">
@@ -136,7 +121,7 @@ function CloseButton() {
 }
 
 function MinimizeButton() {
-  const windowStore = use(WindowContext);
+  const windowStore = useWindowContext();
   const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (
@@ -151,10 +136,7 @@ function MinimizeButton() {
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <title>{mode === "minimized" ? "Restore" : "Minimize"}</title>
-          <path
-            fill="currentColor"
-            d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5z"
-          />
+          <path fill="currentColor" d="M3.75 7.25a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5z" />
         </svg>
       </button>
     </div>
@@ -162,7 +144,7 @@ function MinimizeButton() {
 }
 
 function FullscreenButton() {
-  const windowStore = use(WindowContext);
+  const windowStore = useWindowContext();
   const mode = useSelector(windowStore, (state) => state.context.mode);
 
   return (

@@ -1,6 +1,6 @@
+import slugify from "@sindresorhus/slugify";
 import type { Post } from "#content-collections";
 import { link } from "#shared/links";
-import slugify from "@sindresorhus/slugify";
 
 interface PostBannerProps extends React.PropsWithChildren {
   post: Post;

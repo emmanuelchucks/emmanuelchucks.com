@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 export function BackgroundGrid({
   gap = 4,
   squareSize = 240,
@@ -9,17 +11,25 @@ export function BackgroundGrid({
   squareSize?: number;
   maxOffset?: number;
 }) {
-  const handleRef = (node: HTMLDivElement) => {
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const element = gridRef.current;
+
+    if (element === null) {
+      return () => {};
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = node.getBoundingClientRect();
+      const rect = element.getBoundingClientRect();
       const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
       const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
 
       const offsetX = x * maxOffset;
       const offsetY = y * maxOffset;
 
-      requestAnimationFrame(() => {
-        node.style.transform = `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`;
+      globalThis.requestAnimationFrame(() => {
+        element.style.transform = `translate3d(${String(offsetX)}px, ${String(offsetY)}px, 0)`;
       });
     };
 
@@ -28,7 +38,7 @@ export function BackgroundGrid({
     return () => {
       globalThis.removeEventListener("mousemove", handleMouseMove);
     };
-  };
+  }, [maxOffset]);
 
   const maxWidth = 2560;
   const maxHeight = 1440;
@@ -39,7 +49,7 @@ export function BackgroundGrid({
 
   return (
     <div
-      ref={handleRef}
+      ref={gridRef}
       className="fixed inset-0 -z-10 grid transition-transform duration-700 ease-out will-change-transform"
       style={{
         gap: `${String(gap)}px`,
