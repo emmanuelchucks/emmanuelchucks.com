@@ -33,11 +33,6 @@ Posts live in [src/content](/Users/emmanuelchucks/projects/emmanuelchucks.com/sr
 - `demo.tsx` for an interactive embed
 - supporting assets like audio or helper modules
 
-Current posts:
-
-- [src/content/generating-link-previews-with-hono/post.mdx](/Users/emmanuelchucks/projects/emmanuelchucks.com/src/content/generating-link-previews-with-hono/post.mdx)
-- [src/content/a-clock-made-of-clocks/post.mdx](/Users/emmanuelchucks/projects/emmanuelchucks.com/src/content/a-clock-made-of-clocks/post.mdx)
-
 Idea capture for future writing lives in [POST-IDEAS.md](/Users/emmanuelchucks/projects/emmanuelchucks.com/POST-IDEAS.md).
 
 ## Structure
