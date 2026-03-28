@@ -4,7 +4,10 @@ import { useAtom, useSelector } from "@xstate/store/react";
 import { useWindowStore, useWindowContext, WindowContext } from "./window";
 import { activateWindow, activeWindowAtom, floatingWindowsAtom } from "./window-manager";
 
-export function Browser({ title, children }: React.PropsWithChildren<{ title: string }>) {
+export function Browser({
+  title,
+  children,
+}: React.PropsWithChildren<{ title: string }>): React.JSX.Element {
   const windowStore = useWindowStore(title);
 
   return (

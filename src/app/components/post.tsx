@@ -6,7 +6,7 @@ interface PostMetaProps {
   post: Post;
 }
 
-export function PostMeta({ post }: PostMetaProps) {
+export function PostMeta({ post }: PostMetaProps): React.JSX.Element {
   return (
     <p className="flex flex-row gap-x-4 text-sm font-semibold text-neutral-600 dark:text-neutral-400">
       <time dateTime={post.publishedAt} className="sm:hidden">

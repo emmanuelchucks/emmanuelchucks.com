@@ -5,7 +5,7 @@ import { link } from "#shared/links";
 import { getPosts } from "#utils/post";
 import { SOCIALS } from "#utils/socials";
 
-export function HomePage() {
+export function HomePage(): React.JSX.Element {
   const posts = getPosts();
   const hasPosts = posts.length > 0;
 

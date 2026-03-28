@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function Counter() {
+export function Counter(): React.JSX.Element {
   const [count, setCount] = useState(0);
 
   return (

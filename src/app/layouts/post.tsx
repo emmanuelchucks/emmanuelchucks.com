@@ -4,7 +4,7 @@ import { A } from "#components/primitives";
 import { getPost } from "#utils/post";
 import { SOCIALS } from "#utils/socials";
 
-export function PostLayout({ children }: React.PropsWithChildren) {
+export function PostLayout({ children }: React.PropsWithChildren): React.JSX.Element {
   const post = getPost();
 
   if (!post) {

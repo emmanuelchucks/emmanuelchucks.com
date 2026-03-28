@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import stylesUrl from "./styles.css?url";
 
-export function Document({ children }: PropsWithChildren) {
+export function Document({ children }: PropsWithChildren): React.JSX.Element {
   return (
     <html lang="en" className="scheme-light-dark [scrollbar-gutter:stable]">
       <head>

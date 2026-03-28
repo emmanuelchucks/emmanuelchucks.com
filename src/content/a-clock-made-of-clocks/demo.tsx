@@ -4,7 +4,7 @@ import { useEffect, useEffectEvent, useRef, useState, useSyncExternalStore } fro
 import { digitSymbols, separatorSymbols, symbols } from "./clock-data";
 import tickWavUrl from "./tick.wav?url";
 
-export default function ClockMadeOfClocks() {
+export default function ClockMadeOfClocks(): React.JSX.Element {
   const [currentTime, setCurrentTime] = useState(() => new Date());
   const { TickAudio, isMuted, playTick, muteTick, unmuteTick } = useTickSound();
 

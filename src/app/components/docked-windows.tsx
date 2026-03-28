@@ -4,7 +4,7 @@ import { useAtom } from "@xstate/store/react";
 import type { WindowStore } from "./window";
 import { dockedWindowsAtom, removeDockedWindow, zIndexAtom } from "./window-manager";
 
-export function DockedWindows() {
+export function DockedWindows(): React.JSX.Element {
   const zIndex = useAtom(zIndexAtom);
   const dockedWindows = useAtom(dockedWindowsAtom);
 

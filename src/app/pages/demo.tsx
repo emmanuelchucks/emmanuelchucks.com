@@ -1,6 +1,6 @@
 import { requestInfo } from "rwsdk/worker";
 
-export function DemoPage() {
+export function DemoPage(): React.JSX.Element {
   const Demo = requestInfo.ctx.post.demoContent;
 
   return (

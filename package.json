@@ -35,7 +35,7 @@
     "@content-collections/core": "^0.13.0",
     "@content-collections/mdx": "^0.2.2",
     "@content-collections/vite": "^0.2.8",
-    "@kasoa/vite-plus-config": "^0.0.5",
+    "@kasoa/vite-plus-config": "^0.0.8",
     "@mdx-js/rollup": "^3.1.1",
     "@shikijs/rehype": "^3.20.0",
     "@sindresorhus/slugify": "^3.0.0",

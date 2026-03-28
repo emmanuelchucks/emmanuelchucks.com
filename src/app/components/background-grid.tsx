@@ -10,7 +10,7 @@ export function BackgroundGrid({
   gap?: number;
   squareSize?: number;
   maxOffset?: number;
-}) {
+}): React.JSX.Element {
   const gridRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

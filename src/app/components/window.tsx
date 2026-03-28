@@ -2,9 +2,7 @@ import { useStore } from "@xstate/store/react";
 import { createContext, use, useId, useRef } from "react";
 import { addDockedWindow, addFloatingWindow, getIsFloatingWindow } from "./window-manager";
 
-export type WindowStore = ReturnType<typeof useWindowStore>;
-
-export function useWindowStore(windowTitle: string) {
+function useWindowStoreValue(windowTitle: string) {
   const windowId = useId();
   const windowRef = useRef<HTMLElement>(null);
   const windowScrollRef = useRef({ y: 0 });
@@ -165,9 +163,15 @@ export function useWindowStore(windowTitle: string) {
   return windowStore;
 }
 
+export type WindowStore = ReturnType<typeof useWindowStoreValue>;
+
+export function useWindowStore(windowTitle: string): WindowStore {
+  return useWindowStoreValue(windowTitle);
+}
+
 export const WindowContext = createContext<WindowStore | undefined>(undefined);
 
-export function useWindowContext() {
+export function useWindowContext(): WindowStore {
   const windowStore = use(WindowContext);
 
   if (windowStore === undefined) {
