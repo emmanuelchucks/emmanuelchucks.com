@@ -4,13 +4,11 @@ How the rebuild is put together, under the charter (`docs/CHARTER.md`). The char
 
 ## Pages
 
-| URL | Built from | JS |
-| --- | --- | --- |
-| `/` | `src/pages/index.astro` + `work` collection | none |
-| `/posts/<slug>` | `posts` collection (MDX) | window shell + that post's demos, on scroll |
-| `/rss.xml` | `@astrojs/rss` over `posts` | none |
-| `/og/<slug>.png` | Satori + resvg endpoint, prerendered | none |
-| `/404` | `src/pages/404.astro` | none |
+- `/`: `src/pages/index.astro` + `work` collection. JS: none.
+- `/posts/<slug>`: `posts` collection (MDX). JS: window shell + that post's demos, on scroll.
+- `/rss.xml`: `@astrojs/rss` over `posts`. JS: none.
+- `/og/<slug>.png`: Satori + resvg endpoint, prerendered. JS: none.
+- `/404`: `src/pages/404.astro`. JS: none.
 
 `/posts/<slug>` keeps the current site's URL shape, so nothing that links in today breaks. All routes are prerendered with `build.format: "file"`, so `/posts/<slug>` is served as is instead of redirecting to a trailing slash; Cloudflare Workers static assets serves them with no Worker code (`not_found_handling: "404-page"`).
 
@@ -28,16 +26,14 @@ How the rebuild is put together, under the charter (`docs/CHARTER.md`). The char
 
 A demo in a post sits in the text as a window: a title bar and the demo. Reading never needs anything more. Someone curious can:
 
-| They do | What happens | Demo state |
-| --- | --- | --- |
-| Drag the title bar | The window lifts off the page and follows the pointer. A dashed ghost of the same size holds its place in the text. | Kept |
-| Drag it near its ghost | The ghost lights up; letting go snaps the window back into the text. | Kept |
-| Click the ghost | The window flies back into the text. | Kept |
-| Minimise | The window shrinks into a dock item at the bottom of the screen. The ghost stays. | Kept, hidden |
-| Click the dock item | The window grows back to where it was on screen, at the current scroll position. | Kept |
-| Maximise / double-click title bar | Fills the visible screen; again to go back to its size. | Kept |
-| Drag a corner | Resizes (lifted windows only). | Kept |
-| Close | The window disappears; the ghost stays. Clicking the ghost brings it back. | See question 1 |
+- **Drag the title bar:** The window lifts off the page and follows the pointer. A dashed ghost of the same size holds its place in the text. _Demo:_ kept.
+- **Drag it near its ghost:** The ghost lights up; letting go snaps the window back into the text. _Demo:_ kept.
+- **Click the ghost:** The window flies back into the text. _Demo:_ kept.
+- **Minimise:** The window shrinks into a dock item at the bottom of the screen. The ghost stays. _Demo:_ kept, hidden.
+- **Click the dock item:** The window grows back to where it was on screen, at the current scroll position. _Demo:_ kept.
+- **Maximise / double-click title bar:** Fills the visible screen; again to go back to its size. _Demo:_ kept.
+- **Drag a corner:** Resizes (lifted windows only). _Demo:_ kept.
+- **Close:** The window disappears; the ghost stays. Clicking the ghost brings it back. _Demo:_ See question 1.
 
 Lifted windows are attached to the page: they scroll with it, can hang off any edge without widening the page, aren't pulled back when released, and come back from the dock at the same place on screen (decided 2026-09-06). On a phone, only a 44 px grip in the title bar drags, so a thumb scrolling past a demo never lifts it (the build you called "Perfect now", Codex `INTERACTION-REVISION.md`). Leaving the post ends everything.
 
@@ -54,24 +50,22 @@ Focus follows the window: minimise moves it to the dock item, close to the ghost
 
 ### Owners
 
-| Job | Owner | What we write |
-| --- | --- | --- |
-| Drag, resize, arrow-key moves, Escape cancelling a drag, which window is on top | Zag `floating-panel` via `@zag-js/vanilla` 1.47.0, `strategy: "absolute"`, `allowOverflow: true`. Pointer capture, `touch-action: none` on its handles and stacking (`--z-index`) are its own. | Props and event wiring |
-| Staying attached to the page | Zag, if spike 1 passes: given the page element as `getBoundaryEl`, it shifts windows with it on scroll (`trackBoundaryRect`). | Nothing, or see spike 1 |
-| The lift: a ghost, without moving the demo | The shell element stays in the text at its measured size and becomes the ghost; only the panel inside it switches to `position: absolute`. The demo's DOM never moves, so its island keeps its state. Zag subtracts the offset parent's origin (`getOffsetOrigin`). Zag's positioner and dialog props are only applied while lifted, so inline windows stay ordinary page content. | Swap `data-state` on Zag's first `DRAG`; no pointer code of our own |
-| Hanging off the side | `overflow-x: clip` on the post's positioned wrapper, never on `html`/`body` (there it behaves like `hidden` on the viewport) | One rule |
-| Snap to ghost | Zag's `onPositionChange` / `onPositionChangeEnd` | Distance from panel to ghost; one threshold |
-| Maximise | Zag's `maximize()` fills its boundary. With the page as boundary that's the whole page, so maximise sets the visible screen's rect with Zag's `setPosition`/`setSize` and keeps the old rect to go back to. | About 10 lines |
-| Minimise, restore, return motion | View Transitions API (same-document): the panel and its dock item (or ghost) share one `view-transition-name`. `:root { view-transition-name: none }` so the rest of the page stays live during the motion. A new transition skips the running one: the window jumps to the end and animates again, which is safe but visible (spike 3). | Set the name, swap state |
-| Reduced motion | `@media (prefers-reduced-motion: reduce)` turns the transitions off | One rule |
-| Dock above windows | One `<nav popover="manual">` in the post layout; top layer, so no window covers it. Windows create no stacking contexts, so Zag's z-index orders them. | Show it while it has items |
-| Hiding without losing the demo | `content-visibility: hidden` on the panel's content, not `hidden` (`display: none` restarts CSS animations, and on the panel it breaks Zag's offset). A demo running its own JS loop pauses it itself. | One rule; spike 4 |
-| Focus on minimise and close | Ours: Zag only restores focus on its own close, which we don't use. | `focus()` on the dock item or ghost |
-| Keyboard | Native `<button>`s for minimise, maximise, close and the ghost. Zag's arrow keys work when the window's content element has focus, so that element is focusable and labelled. | Labels, Home |
-| Without JS | Window chrome is plain HTML; its buttons are `visibility: hidden` until `<demo-window>` is defined, and it's defined only after Zag loads, so buttons never show while they'd do nothing and nothing shifts | One rule |
-| Loading the shell only when needed | A `<script>` in `DemoWindow.astro` (Astro bundles it once, only on pages that use it) that imports Zag and defines `<demo-window>` when the first window nears the viewport | An `IntersectionObserver` and `import()`, about 10 lines; the platform has no lazy element definition |
-| Demos | Solid islands, `client:visible`, inside `<DemoWindow>` in the MDX | The demo |
-| State shared by demos in one post | Nano Stores, one file in the post's folder | The store |
+- **Drag, resize, arrow-key moves, Escape cancelling a drag, which window is on top:** Zag `floating-panel` via `@zag-js/vanilla` 1.47.0, `strategy: "absolute"`, `allowOverflow: true`. Pointer capture, `touch-action: none` on its handles and stacking (`--z-index`) are its own. _We write:_ props and event wiring.
+- **Staying attached to the page:** Zag, if spike 1 passes: given the page element as `getBoundaryEl`, it shifts windows with it on scroll (`trackBoundaryRect`). _We write:_ nothing, or see spike 1.
+- **The lift: a ghost, without moving the demo:** The shell element stays in the text at its measured size and becomes the ghost; only the panel inside it switches to `position: absolute`. The demo's DOM never moves, so its island keeps its state. Zag subtracts the offset parent's origin (`getOffsetOrigin`). Zag's positioner and dialog props are only applied while lifted, so inline windows stay ordinary page content. _We write:_ swap `data-state` on Zag's first `DRAG`; no pointer code of our own.
+- **Hanging off the side:** `overflow-x: clip` on the post's positioned wrapper, never on `html`/`body` (there it behaves like `hidden` on the viewport). _We write:_ one rule.
+- **Snap to ghost:** Zag's `onPositionChange` / `onPositionChangeEnd`. _We write:_ distance from panel to ghost; one threshold.
+- **Maximise:** Zag's `maximize()` fills its boundary. With the page as boundary that's the whole page, so maximise sets the visible screen's rect with Zag's `setPosition`/`setSize` and keeps the old rect to go back to. _We write:_ about 10 lines.
+- **Minimise, restore, return motion:** View Transitions API (same-document): the panel and its dock item (or ghost) share one `view-transition-name`. `:root { view-transition-name: none }` so the rest of the page stays live during the motion. A new transition skips the running one: the window jumps to the end and animates again, which is safe but visible (spike 3). _We write:_ set the name, swap state.
+- **Reduced motion:** `@media (prefers-reduced-motion: reduce)` turns the transitions off. _We write:_ one rule.
+- **Dock above windows:** One `<nav popover="manual">` in the post layout; top layer, so no window covers it. Windows create no stacking contexts, so Zag's z-index orders them. _We write:_ show it while it has items.
+- **Hiding without losing the demo:** `content-visibility: hidden` on the panel's content, not `hidden` (`display: none` restarts CSS animations, and on the panel it breaks Zag's offset). A demo running its own JS loop pauses it itself. _We write:_ one rule; spike 4.
+- **Focus on minimise and close:** Our code, because Zag only restores focus on its own close, which we don't use. _We write:_ `focus()` on the dock item or ghost.
+- **Keyboard:** Native `<button>`s for minimise, maximise, close and the ghost. Zag's arrow keys work when the window's content element has focus, so that element is focusable and labelled. _We write:_ labels, Home.
+- **Without JS:** Window chrome is plain HTML; its buttons are `visibility: hidden` until `<demo-window>` is defined, and it's defined only after Zag loads, so buttons never show while they'd do nothing and nothing shifts. _We write:_ one rule.
+- **Loading the shell only when needed:** A `<script>` in `DemoWindow.astro` (Astro bundles it once, only on pages that use it) that imports Zag and defines `<demo-window>` when the first window nears the viewport. _We write:_ an `IntersectionObserver` and `import()`, about 10 lines; the platform has no lazy element definition.
+- **Demos:** Solid islands, `client:visible`, inside `<DemoWindow>` in the MDX. _We write:_ the demo.
+- **State shared by demos in one post:** Nano Stores, one file in the post's folder. _We write:_ the store.
 
 In MDX a demo looks like:
 
