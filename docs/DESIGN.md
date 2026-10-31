@@ -83,15 +83,16 @@ The shell knows nothing about Solid; any island, or plain HTML, works inside it.
 
 Budget: Zag measured 15.4 KB gzipped (2026-10-31, 1.47.0); the element should add under 4 KB, inside the 30 KB article budget.
 
-### Spike before the shell is built
+### Spike results (2026-10-31)
 
-Reading Zag's source (2026-10-31) showed places where it behaves against your decisions. Each item below is a short test against the real libraries in Chromium, Firefox, WebKit and iPhone Safari. If Zag fails one of your decisions and no setting fixes it, I bring you the choice (live with Zag's behaviour, or a different owner) before building on it.
+A scratch Astro page with two windows, run in Playwright 1.64.1 against Chromium 156, Firefox 157 and WebKit 27.2, once with Zag and once with neodrag 2.3.1 doing the dragging.
 
-1. **Page attachment and clamping.** Zag keeps windows on the page only while idle: scrolling during a drag makes the window slip from the pointer. When the page element changes size (rotating a phone, resizing the browser, the page getting taller) Zag pulls every window fully inside the page and can shrink it; you'd accepted only nudging the grip back into reach. With overflow allowed, it still stops windows at the top of the page. Test each, and compare the page element as boundary with no boundary.
-2. **Touch grip.** Zag's drag props on two elements, the whole title bar and a 44 px grip, with only the grip active on touch (`pointer: coarse`).
-3. **View transitions.** An absolutely positioned window morphing into an item in an open popover; fast repeated clicks; scrolling during a restore (it animates to where the window was when the motion began, so it may land with a jump). Codex once saw a lifted window go transparent in iPhone Safari, and headless WebKit painted blank snapshots during motion.
-4. **Demo state.** A Solid island with a running CSS animation and typed input keeps both through lift, dock, close and back with `content-visibility: hidden`.
-5. **Inline windows** stay plain page content (not focus traps, no Zag positioning) until lifted.
+- **Both:** lifting without a jump, staying on the page while scrolling, grabbing again after scrolling, hanging off the side without widening the page, demo state (count, typed text, animation) kept through minimise, close and back, focus moving to the dock item and ghost, restoring at the same screen place after scrolling, maximise filling the screen and going back, six fast minimise/restore clicks ending in a consistent state, snapping to the ghost.
+- **Zag broke your decisions in every setting:** with the page as boundary it pulled windows hanging off the edge back into view when the page grew or scrolled; with no boundary, a change in screen height (as when Safari's toolbar collapses) moved windows by the scroll distance. Its shell measured 16.8 KB gzipped.
+- **neodrag** moved no window on page growth, height change or scroll; windows follow their place in the article when the article reflows. It does dragging only (threshold, handle, cancel), so resize, arrow keys, stacking and maximise were about 60 lines of ours. Its shell measured 3.8 KB gzipped.
+- **Not yet checked:** iPhone Safari (the simulator didn't answer requests to open URLs that evening), touch dragging by the grip, and keeping the grip reachable after rotation.
+
+**Waiting on you:** keep Zag and accept its pulling windows into view, or swap the window owner to neodrag (my pick).
 
 ## How it's checked
 
