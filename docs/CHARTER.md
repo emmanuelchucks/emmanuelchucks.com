@@ -28,39 +28,42 @@ A personal site with low traffic: one author, a handful of pages and a few artic
 
 ## Owners
 
-| Job | Owner | Not |
-|---|---|---|
-| Pages, routing, build | Astro, static output | Rendering static content on each request in a Worker (today's RedwoodSDK setup) |
-| Articles | Astro content collections + MDX | A home-made content pipeline |
-| Code highlighting | Shiki at build time (Astro built-in) | Highlighting in the browser |
-| Demos in articles | Astro islands, `client:visible` | Hydrating the whole page |
-| State shared by demos in one article | Nano Stores (Astro's documented way to share state between islands) | One big island wrapped around the prose, or a framework context |
-| Window shell around a demo | One custom element, without a framework, that wraps any island | Window logic written separately for each framework or each demo |
-| Dragging windows | Pointer Events with pointer capture | A drag library |
-| Resizing windows | CSS `resize` | Custom resize handles, unless `resize` turns out not to work on phones (check this first) |
-| Minimise, restore, dock motion | View Transitions API (same-document) | Hand-written FLIP animations or JS-driven motion |
-| Dock above windows | Top layer (`popover`) | A z-index arms race |
-| Toy terminal | wterm + `@wterm/just-bash` (Vercel Labs) as the candidate; the library Emmanuel saw on X gets compared first | Our own terminal or shell |
-| Images | Astro image pipeline (AVIF/WebP, sizes set) | Images without fixed dimensions |
-| Fonts | One self-hosted variable font, subset, preloaded | Google Fonts, several families |
-| Link previews (OG images) | Generated at build time | Generated on request |
-| Hosting | Cloudflare Workers static assets, his personal account | A Worker handling requests for static pages |
-| Analytics | Cloudflare Web Analytics (cookieless) | The KV view counter, or a cookie banner |
-| Performance checks | Lighthouse CI + bundle size check in the build | Checking by eye |
+| Job                                  | Owner                                                                                                        | Not                                                                                       |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Pages, routing, build                | Astro, static output                                                                                         | Rendering static content on each request in a Worker (today's RedwoodSDK setup)           |
+| Articles                             | Astro content collections + MDX                                                                              | A home-made content pipeline                                                              |
+| Code highlighting                    | Shiki at build time (Astro built-in)                                                                         | Highlighting in the browser                                                               |
+| Demos in articles                    | Astro islands, `client:visible`                                                                              | Hydrating the whole page                                                                  |
+| State shared by demos in one article | Nano Stores (Astro's documented way to share state between islands)                                          | One big island wrapped around the prose, or a framework context                           |
+| Window shell around a demo           | One custom element, without a framework, that wraps any island                                               | Window logic written separately for each framework or each demo                           |
+| Dragging windows                     | Pointer Events with pointer capture                                                                          | A drag library                                                                            |
+| Resizing windows                     | CSS `resize`                                                                                                 | Custom resize handles, unless `resize` turns out not to work on phones (check this first) |
+| Minimise, restore, dock motion       | View Transitions API (same-document)                                                                         | Hand-written FLIP animations or JS-driven motion                                          |
+| Dock above windows                   | Top layer (`popover`)                                                                                        | A z-index arms race                                                                       |
+| Toy terminal                         | wterm + `@wterm/just-bash` (Vercel Labs) as the candidate; the library Emmanuel saw on X gets compared first | Our own terminal or shell                                                                 |
+| Images                               | Astro image pipeline (AVIF/WebP, sizes set)                                                                  | Images without fixed dimensions                                                           |
+| Fonts                                | One self-hosted variable font, subset, preloaded                                                             | Google Fonts, several families                                                            |
+| Link previews (OG images)            | Generated at build time                                                                                      | Generated on request                                                                      |
+| Hosting                              | Cloudflare Workers static assets, his personal account                                                       | A Worker handling requests for static pages                                               |
+| Analytics                            | Cloudflare Web Analytics (cookieless)                                                                        | The KV view counter, or a cookie banner                                                   |
+| Performance checks                   | Lighthouse CI + bundle size check in the build                                                               | Checking by eye                                                                           |
 
 ## In, deferred, out
 
 **In (first release)**
+
 - Homepage: a sharp opening in his own words, the portrait, three or four pieces of work each shown in its own way (Celedom, GroqDictate, Machigotchi, Patchmarks or similar), contact links.
 - One article: GroqDictate, the story of leaving Superwhisper and building his own app, with demos in windows. Windows can be lifted off the page, dragged, resized, minimised to the dock and restored. Close leaves a dashed ghost in the article that brings the window back, and dragging a window near its ghost snaps it into place.
 - RSS feed, OG images, light/dark mode, 404 page.
 
 **Deferred**
+
 - The toy terminal (unless the GroqDictate article has a natural place for it).
 - The "A Clock Made of Clocks" article (the original window-demo idea) and the Hono link-previews draft.
 - Machigotchi in depth, and the terminal Zoom project once it's past the idea stage.
 
 **Out**
+
 - Browser-like navigation, history or reload inside windows; they show demos and nothing else.
 - Saved window layouts, keeping windows between articles, the view counter, comments.
 
