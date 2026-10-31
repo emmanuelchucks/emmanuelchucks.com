@@ -12,7 +12,7 @@ A personal site with low traffic: one author, a handful of pages and a few artic
 
 ## Principles, in priority order
 
-1. **Everything is true.** Every claim is in his words, from his work, or linked to its source. No made-up taglines, motivations or numbers. Celedom work can be shown, but nothing confidential or that would give away how the business works.
+1. **Everything is true.** Every claim is in his words, from his work, or linked to its source. No made-up taglines, motivations or numbers. Celedom work can be shown, but nothing confidential or that would give away how the business works. Screens and recordings of Celedom apps use test accounts and made-up data, never real staff or customer content.
 2. **It reads as a normal page first.** Each page works fully as plain HTML and CSS. The windows, the dock and the terminal are extras that visitors find for themselves. Nothing points to them, and nothing depends on them.
 3. **Minimal and subtle, but specific.** Restraint lives in how things look and move. Character lives in the words and the work. A quiet page with nothing in it is a failure, not minimalism.
 4. **Fast enough to be part of the pitch.** The homepage ships no JavaScript. An article loads JavaScript only for its demos, and only when a demo scrolls into view. Layout never shifts. Every build is checked against budgets (below).
@@ -39,7 +39,7 @@ Each job has one owner. "Not" names the tempting wrong shape, so a reviewer can 
 - **Window shell around a demo:** One custom element that wraps any island and runs the Zag machine. It adds only what Zag lacks: lifted off the article, closed to a ghost, snapping back to the ghost. _Not:_ Window logic written separately for each framework or each demo.
 - **Minimise, restore, dock motion:** View Transitions API (same-document): the browser morphs the window into its dock item as one element. _Not:_ Hand-written FLIP animations or JS-driven motion.
 - **Dock above windows:** Top layer (`popover`). _Not:_ A z-index arms race.
-- **Toy terminal:** wterm + `@wterm/just-bash` (Vercel Labs) as the candidate; the library Emmanuel saw on X gets compared first. _Not:_ Our own terminal or shell.
+- **Toy terminal:** wterm + `@wterm/just-bash` (Vercel Labs). _Not:_ Our own terminal or shell.
 - **Images:** Astro image pipeline (AVIF/WebP, sizes set). _Not:_ Images without fixed dimensions.
 - **Fonts:** One self-hosted variable font, subset, preloaded. _Not:_ Google Fonts, several families.
 - **Link previews (OG images):** Satori + resvg in an Astro endpoint, rendered at build time. _Not:_ Generated on request (workers-og is the Workers port of the same engine; we don't need it at request time).
@@ -61,7 +61,7 @@ Nothing reaches him until it has been checked the way a demanding person would u
 
 **In (first release)**
 
-- Homepage: a sharp opening in his own words, the portrait, the work (Celedom and GroqDictate featured, each shown in its own way; older projects such as Patchmarks in a short list of earlier work), contact links.
+- Homepage: a sharp opening in his own words, the portrait, featured work in this order, each shown in its own way: Celedom's staff chat app with its assistant (the headline), Celedom's Celebrant and Vendors apps, GroqDictate (Mac and iOS), DataMeter, and the terminal calls project as one line about what he's building next. Older projects such as Patchmarks go in a short list of earlier work. Contact links.
 - One article: GroqDictate, the story of leaving Superwhisper and building his own app, with demos in windows. Windows can be lifted off the page, dragged, resized, minimised to the dock and restored. Close leaves a dashed ghost in the article that brings the window back, and dragging a window near its ghost snaps it into place.
 - A screen recording of GroqDictate in real use for the article, made in a clean macOS account so nothing private shows.
 - RSS feed, OG images, light/dark mode, 404 page.
@@ -70,12 +70,13 @@ Nothing reaches him until it has been checked the way a demanding person would u
 
 - The toy terminal (unless the GroqDictate article has a natural place for it).
 - The "A Clock Made of Clocks" article (the original window-demo idea) and the Hono link-previews draft.
-- The terminal calls project (calls and shared agent sessions inside the terminal) once it's past the idea stage.
+- The terminal calls project in depth (calls and shared agent sessions inside the terminal, built on Cloudflare) once it's past the idea stage.
+- A series of articles on the Celedom chat app's interactions and motion (reactions and the rest), once it's in staff hands.
 
 **Out**
 
 - Browser-like navigation, history or reload inside windows; they show demos and nothing else.
-- Machigotchi (dropped: the moment has passed).
+- Machigotchi (dropped: the moment has passed). Bareprose (a throwaway).
 - Saved window layouts, keeping windows between articles, the view counter, comments.
 
 ## Decisions
@@ -89,3 +90,6 @@ Nothing reaches him until it has been checked the way a demanding person would u
 - 2026-10-31: Astro replaces RedwoodSDK. Demos are written in Solid.
 - 2026-10-31: Machigotchi is dropped. Patchmarks moves to earlier work. The terminal calls idea will take Machigotchi's place once it's real.
 - 2026-10-31: The rebuild happens on a branch and is deployed to a preview beside production. It's merged and deployed once, when he's compared the two. (Checked: pushing `main` doesn't deploy, because the Worker has no Git build triggers and was last deployed 2025-10-17.)
+- 2026-10-31: Featured work, in order: the Celedom chat app, the Celebrant and Vendors apps, GroqDictate, DataMeter, the terminal calls project. Bareprose is left out.
+- 2026-10-31: The toy terminal is Vercel's wterm; no more hunting for the library he saw on X.
+- 2026-10-31: The GroqDictate recording uses his own voice, in one short take, in a clean macOS account.
