@@ -31,9 +31,9 @@ A demo in a post sits in the text as a window: a title bar and the demo. Reading
 - **Click the ghost:** The window flies back into the text. _Demo:_ kept.
 - **Minimise:** The window shrinks into a dock item at the bottom of the screen. The ghost stays. _Demo:_ kept, hidden.
 - **Click the dock item:** The window grows back to where it was on screen, at the current scroll position. _Demo:_ kept.
-- **Maximise / double-click title bar:** Fills the visible screen; again to go back to its size. _Demo:_ kept.
+- **Maximise / double-click title bar:** Fills the visible screen and scrolls with the page like any lifted window; again to go back to its size. _Demo:_ kept.
 - **Drag a corner:** Resizes (lifted windows only). _Demo:_ kept.
-- **Close:** The window disappears; the ghost stays. Clicking the ghost brings it back. _Demo:_ See question 1.
+- **Close:** The window disappears; the ghost stays. Clicking the ghost brings it back. _Demo:_ kept, hidden.
 
 Lifted windows are attached to the page: they scroll with it, can hang off any edge without widening the page, aren't pulled back when released, and come back from the dock at the same place on screen (decided 2026-09-06). On a phone, only a 44 px grip in the title bar drags, so a thumb scrolling past a demo never lifts it (the build you called "Perfect now", Codex `INTERACTION-REVISION.md`). Leaving the post ends everything.
 
@@ -117,7 +117,4 @@ The order for each feature stays as the charter says: scenarios written first, b
 
 ## Open, for you
 
-1. **Close.** Codex's notes record "close disposes, reopen is fresh" as the agreed direction. I'd rather keep the demo as you left it: simpler, one path for every demo, and nothing lost by a mis-tap. Keep or restart?
-2. **Minimise in the text.** Codex's notes had minimise on a window in the text collapse it to its title bar, with no dock item. I've made minimise always go to the dock, so it means one thing. OK?
-3. **Maximise.** Fill the visible screen and scroll with the page like any lifted window (my pick), or stay fixed on screen while maximised?
-4. **The look** (type, colour, spacing) comes next, as a separate page with options shown in your real content. Is there a site or app whose feel is close to what you want?
+1. **The look** (type, colour, spacing) comes next, as a separate page with options shown in your real content. Is there a site or app whose feel is close to what you want?

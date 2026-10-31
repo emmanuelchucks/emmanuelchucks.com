@@ -93,3 +93,6 @@ Nothing reaches him until it has been checked the way a demanding person would u
 - 2026-10-31: Featured work, in order: the Celedom chat app, the Celebrant and Vendors apps, GroqDictate, DataMeter, the terminal calls project. Bareprose is left out.
 - 2026-10-31: The toy terminal is Vercel's wterm; no more hunting for the library he saw on X.
 - 2026-10-31: The GroqDictate recording uses his own voice, in one short take, in a clean macOS account.
+- 2026-10-31: Closing a window keeps its demo as it was; bringing it back shows it unchanged.
+- 2026-10-31: Minimise always sends a window to the dock, whether it's in the article or lifted; there's no title-bar-only collapse.
+- 2026-10-31: A maximised window fills the visible screen and scrolls with the page like any lifted window.
