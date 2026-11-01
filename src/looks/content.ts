@@ -71,7 +71,7 @@ export const article = {
 };
 
 export const concepts = [
-  { slug: "wall", name: "Wall (combined)" },
+  { slug: "lit", name: "Lit wall" },
   { slug: "tiles", name: "Tiles" },
   { slug: "drafting", name: "Drafting table" },
   { slug: "sheet", name: "Sheet on a desk" },
