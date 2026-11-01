@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   // The preview Worker. Production ("emmanuelchucks") changes only when Emmanuel says so.
   "name": "emmanuelchucks-preview",
+  // Emmanuel's personal account, not Celedom.
+  "account_id": "c9621f2249079aa6f42886a8cbf6b073",
   "compatibility_date": "2026-10-31",
   "assets": {
     "directory": "./dist",
