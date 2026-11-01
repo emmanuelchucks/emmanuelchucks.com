@@ -1,0 +1,14 @@
+---
+import Page from "../../layouts/page.astro";
+import { looks } from "../../looks/content";
+---
+
+<Page title="Looks" description="Three looks for the homepage, for comparison.">
+  <main>
+    <h1>Three looks</h1>
+    <p>The same homepage in three type, colour and spacing directions. Each follows your phone's light or dark setting.</p>
+    <ul>
+      {looks.map((l) => <li><a href={`/looks/${l.slug}`}>{l.name}</a>, {l.font}</li>)}
+    </ul>
+  </main>
+</Page>
