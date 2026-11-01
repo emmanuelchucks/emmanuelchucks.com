@@ -1,0 +1,196 @@
+---
+import { getImage, Image } from "astro:assets";
+import font from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import portrait from "../../assets/portrait.webp";
+import Shell from "../../looks/shell.astro";
+import { article, contact, earlier, intro, work } from "../../looks/content";
+import celebrantIcon from "../../looks/media/celebrant-icon.png";
+import chatIconDark from "../../looks/media/chat-icon-dark.png";
+import chatIconLight from "../../looks/media/chat-icon-light.png";
+import datameterIcon from "../../looks/media/datameter-icon.png";
+import groqIcon from "../../looks/media/groqdictate-icon.png";
+import vendorsIcon from "../../looks/media/vendors-icon.png";
+
+const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as const;
+const chatIcon = {
+  light: await getImage({ src: chatIconLight, ...iconSize }),
+  dark: await getImage({ src: chatIconDark, ...iconSize }),
+};
+const [chat, celebrant, groq, datameter] = work;
+const tiles = Array.from({ length: 77 }, (_, i) => i);
+---
+
+<Shell slug="lit" font={font} family="Bricolage" axes="font-weight:200 800;">
+  <div class="wall" aria-hidden="true">{tiles.map(() => <i></i>)}</div>
+
+  <main class="page">
+    <header class="intro">
+      <Image src={portrait} alt="Emmanuel Chucks" width={64} height={64} densities={[1, 2]} class="face" />
+      <h1>{intro.name}</h1>
+      <p class="line">{intro.line}</p>
+      <ul class="contact">
+        {contact.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+        <li class="place">{intro.place}</li>
+      </ul>
+    </header>
+
+    <ol class="work" aria-label="Work">
+      <li>
+        <picture class="icon">
+          <source media="(prefers-color-scheme: dark)" srcset={chatIcon.dark.srcSet.attribute} />
+          <img src={chatIcon.light.src} srcset={chatIcon.light.srcSet.attribute} width="56" height="56" alt="" />
+        </picture>
+        <div>
+          <h2>{chat.title}</h2>
+          <p>{chat.text}</p>
+          <p class="kind">{chat.kind}</p>
+        </div>
+      </li>
+      <li>
+        <span class="icon pair">
+          <Image src={vendorsIcon} alt="" {...iconSize} />
+          <Image src={celebrantIcon} alt="" {...iconSize} />
+        </span>
+        <div>
+          <h2>{celebrant.title}</h2>
+          <p>{celebrant.text}</p>
+          <p class="kind">{celebrant.kind}</p>
+        </div>
+      </li>
+      <li>
+        <Image src={groqIcon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
+        <div>
+          <h2>{groq.title}</h2>
+          <p>{groq.text}</p>
+          <p class="kind">{groq.kind}</p>
+        </div>
+      </li>
+      <li>
+        <Image src={datameterIcon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
+        <div>
+          <h2>{datameter.title}</h2>
+          <p>{datameter.text}</p>
+          <p class="kind">{datameter.kind}</p>
+        </div>
+      </li>
+      <li class="next">
+        <span class="icon ghost" aria-hidden="true"></span>
+        <div>
+          <h2>Building next</h2>
+          <p>Calls and shared agent sessions, inside the terminal.</p>
+        </div>
+      </li>
+    </ol>
+
+    <section class="more">
+      <h2>Writing</h2>
+      <p><a href="#">{article.title}</a></p>
+      <h2>Earlier</h2>
+      <p>{earlier.map((e, i) => <>{i > 0 && ", "}<a href={e.href}>{e.title}</a></>)}</p>
+    </section>
+  </main>
+
+  <div class="window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+</Shell>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+    --bg: light-dark(#e5e2db, #0a0a0b);
+    --ink: light-dark(#191816, #e9e9e6);
+    --muted: light-dark(#6e6b64, #8b8b87);
+    --tile: light-dark(rgb(0 0 0 / 0.022), rgb(255 255 255 / 0.016));
+    --tile-lit: light-dark(rgb(0 0 0 / 0.045), rgb(255 255 255 / 0.035));
+    --sun: light-dark(rgb(255 250 236 / 0.9), rgb(170 190 230 / 0.14));
+    --shade: light-dark(rgb(40 30 10 / 0.22), rgb(0 0 0 / 0.7));
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Bricolage, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  body { margin: 0; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+  h1, h2, p, ol, ul { margin: 0; padding: 0; }
+  ol, ul { list-style: none; }
+
+  /* The wall from the current site: big squares, barely there, brightening under the pointer. */
+  .wall {
+    position: fixed; z-index: -1; top: 50%; left: 50%; translate: -50% -50%;
+    display: grid; grid-template-columns: repeat(11, 240px); grid-auto-rows: 240px; gap: 4px;
+  }
+  .wall i { background: var(--tile); border-radius: 1px; transition: background-color 600ms ease-out; }
+  .wall i:hover { background: var(--tile-lit); transition-duration: 120ms; }
+
+  /* Light through a four-pane window, drifting across the wall over a minute and a half. */
+  .window {
+    position: fixed; z-index: 0; top: -12vh; left: -14vw; width: min(70vw, 780px); height: min(92vh, 920px);
+    display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 26px; pointer-events: none;
+    transform: perspective(900px) rotateY(-22deg) rotateZ(-9deg) skewX(-8deg);
+    animation: drift 90s ease-in-out infinite alternate;
+  }
+  .window i { background: var(--sun); border-radius: 6px; }
+  @keyframes drift {
+    from { translate: 0 0; opacity: 0.85; }
+    to { translate: 60vw 22vh; opacity: 0.5; }
+  }
+  @media (prefers-color-scheme: light) { .window { mix-blend-mode: soft-light; filter: blur(22px); } }
+  @media (prefers-color-scheme: dark) { .window { mix-blend-mode: screen; filter: blur(28px); } }
+
+  .page { position: relative; z-index: 1; width: min(100% - 48px, 600px); margin: 0 auto; padding: 18vh 0 120px; }
+
+  .intro { display: grid; grid-template-columns: 1fr auto; column-gap: 32px; align-items: center; }
+  .face { grid-column: 2; grid-row: 1 / span 2; width: 64px; height: 64px; border-radius: 50%; }
+  .intro h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variation-settings: "opsz" 96; }
+  .line { margin-top: 8px; color: var(--muted); font-size: 17px; }
+  .contact { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 24px; font-weight: 600; }
+  .place { color: var(--muted); font-weight: 400; }
+
+  /* The work, each led by its app icon. The icons are the page's only colour. */
+  .work { margin-top: 88px; display: grid; gap: 36px; }
+  .work li { display: grid; grid-template-columns: 76px 1fr; column-gap: 20px; align-items: start; }
+  .work h2 { font-size: 20px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.2; }
+  .work p { margin-top: 4px; color: var(--muted); max-width: 44ch; }
+  .work .kind { margin-top: 6px; font-size: 13px; }
+
+  .icon { position: relative; display: block; width: 56px; height: 56px; }
+  .icon img { display: block; width: 56px; height: 56px; }
+  picture.icon img { border-radius: 22.5%; }
+  .icon, .pair img { filter: drop-shadow(0 1px 1px var(--shade)) drop-shadow(5px 8px 9px var(--shade)); animation: cast 90s ease-in-out infinite alternate; }
+  .pair { filter: none; animation: none; }
+  .pair img { position: absolute; }
+  .pair img { width: 40px; height: 40px; }
+  .pair img:first-child { left: 18px; top: 18px; }
+  .pair img:last-child { left: 0; top: 0; }
+  /* macOS icons carry their own margin; draw them larger so they match the iOS ones by eye. */
+  .icon.mac { width: 70px; height: 70px; margin: -7px 0 0 -7px; }
+  .ghost { border-radius: 22.5%; outline: 1.5px dashed light-dark(rgb(0 0 0 / 0.28), rgb(255 255 255 / 0.22)); outline-offset: -1.5px; filter: none; animation: none; }
+  .next h2 { color: var(--muted); font-weight: 500; }
+
+  /* Shadows move against the light as it crosses the wall. */
+  @keyframes cast {
+    from { filter: drop-shadow(0 1px 1px var(--shade)) drop-shadow(7px 8px 9px var(--shade)); }
+    to { filter: drop-shadow(0 1px 1px var(--shade)) drop-shadow(-5px 8px 9px var(--shade)); }
+  }
+
+  .more { margin-top: 80px; display: grid; grid-template-columns: 96px 1fr; gap: 10px 20px; }
+  .more h2 { font-size: 14px; font-weight: 400; color: var(--muted); padding-top: 1px; }
+
+  @media (max-width: 520px) {
+    .page { padding-top: 12vh; }
+    .intro h1 { font-size: 34px; }
+    .work li { grid-template-columns: 60px 1fr; column-gap: 16px; }
+    .icon, .icon img { width: 48px; height: 48px; }
+    .pair img { width: 34px; height: 34px; }
+    .pair img:first-child { left: 14px; top: 14px; }
+    .icon.mac { width: 60px; height: 60px; margin: -6px 0 0 -6px; }
+    .more { grid-template-columns: 1fr; gap: 4px; }
+    .more p { margin-bottom: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .window, .icon, .pair img { animation: none; }
+    .window { translate: 22vw 8vh; }
+    .wall i { transition: none; }
+  }
+</style>
