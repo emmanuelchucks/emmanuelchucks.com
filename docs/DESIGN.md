@@ -50,20 +50,20 @@ Focus follows the window: minimise moves it to the dock item, close to the ghost
 
 ### Owners
 
-- **Drag, resize, arrow-key moves, Escape cancelling a drag, which window is on top:** Zag `floating-panel` via `@zag-js/vanilla` 1.47.0, `strategy: "absolute"`, `allowOverflow: true`. Pointer capture, `touch-action: none` on its handles and stacking (`--z-index`) are its own. _We write:_ props and event wiring.
-- **Staying attached to the page:** Zag, if spike 1 passes: given the page element as `getBoundaryEl`, it shifts windows with it on scroll (`trackBoundaryRect`). _We write:_ nothing, or see spike 1.
-- **The lift: a ghost, without moving the demo:** The shell element stays in the text at its measured size and becomes the ghost; only the panel inside it switches to `position: absolute`. The demo's DOM never moves, so its island keeps its state. Zag subtracts the offset parent's origin (`getOffsetOrigin`). Zag's positioner and dialog props are only applied while lifted, so inline windows stay ordinary page content. _We write:_ swap `data-state` on Zag's first `DRAG`; no pointer code of our own.
+- **Dragging the window and its resize handle:** neodrag (`@neodrag/vanilla` 2.3.1): pointer capture, touch, a 4 px threshold before a drag starts, handle and cancel areas. It moves the panel by transform and never clamps. _We write:_ options and callbacks.
+- **Staying attached to the page:** CSS: the panel is `position: absolute` inside its own place in the article, so it scrolls with the page and follows the article when it reflows. _We write:_ nothing.
+- **The lift: a ghost, without moving the demo:** The shell element stays in the text at its measured size and becomes the ghost; only the panel inside it switches to `position: absolute`. The demo's DOM never moves, so its island keeps its state. _We write:_ swap `data-state` in neodrag's `onDragStart`.
 - **Hanging off the side:** `overflow-x: clip` on the post's positioned wrapper, never on `html`/`body` (there it behaves like `hidden` on the viewport). _We write:_ one rule.
-- **Snap to ghost:** Zag's `onPositionChange` / `onPositionChangeEnd`. _We write:_ distance from panel to ghost; one threshold.
-- **Maximise:** Zag's `maximize()` fills its boundary. With the page as boundary that's the whole page, so maximise sets the visible screen's rect with Zag's `setPosition`/`setSize` and keeps the old rect to go back to. _We write:_ about 10 lines.
+- **Snap to ghost:** neodrag's `onDrag` / `onDragEnd` give the offset from home. _We write:_ one distance check.
+- **Maximise:** Ours: set the panel to the visible screen's size and position, keep the old rect to go back to. _We write:_ about 10 lines.
 - **Minimise, restore, return motion:** View Transitions API (same-document): the panel and its dock item (or ghost) share one `view-transition-name`. `:root { view-transition-name: none }` so the rest of the page stays live during the motion. A new transition skips the running one: the window jumps to the end and animates again, which is safe but visible (spike 3). _We write:_ set the name, swap state.
 - **Reduced motion:** `@media (prefers-reduced-motion: reduce)` turns the transitions off. _We write:_ one rule.
-- **Dock above windows:** One `<nav popover="manual">` in the post layout; top layer, so no window covers it. Windows create no stacking contexts, so Zag's z-index orders them. _We write:_ show it while it has items.
-- **Hiding without losing the demo:** `content-visibility: hidden` on the panel's content, not `hidden` (`display: none` restarts CSS animations, and on the panel it breaks Zag's offset). A demo running its own JS loop pauses it itself. _We write:_ one rule; spike 4.
-- **Focus on minimise and close:** Our code, because Zag only restores focus on its own close, which we don't use. _We write:_ `focus()` on the dock item or ghost.
-- **Keyboard:** Native `<button>`s for minimise, maximise, close and the ghost. Zag's arrow keys work when the window's content element has focus, so that element is focusable and labelled. _We write:_ labels, Home.
-- **Without JS:** Window chrome is plain HTML; its buttons are `visibility: hidden` until `<demo-window>` is defined, and it's defined only after Zag loads, so buttons never show while they'd do nothing and nothing shifts. _We write:_ one rule.
-- **Loading the shell only when needed:** A `<script>` in `DemoWindow.astro` (Astro bundles it once, only on pages that use it) that imports Zag and defines `<demo-window>` when the first window nears the viewport. _We write:_ an `IntersectionObserver` and `import()`, about 10 lines; the platform has no lazy element definition.
+- **Dock above windows:** One `<nav popover="manual">` in the post layout; top layer, so no window covers it. _We write:_ show it while it has items.
+- **Hiding without losing the demo:** `content-visibility: hidden` on the panel's content and `visibility: hidden` on the panel, not `display: none` (which restarts CSS animations). Measured: count, typed text and animation all kept. A demo running its own JS loop pauses it itself. _We write:_ one rule.
+- **Focus on minimise and close:** Ours. _We write:_ `focus()` on the dock item, the ghost, or the window on restore.
+- **Keyboard:** Native `<button>`s for minimise, maximise, close and the ghost. The window's content is focusable and labelled; arrow keys move it (Shift for bigger steps), Home sends it back. _We write:_ about 10 lines; neodrag has no keyboard support.
+- **Without JS:** Window chrome is plain HTML; its buttons are `visibility: hidden` until `<demo-window>` is defined, so buttons never show while they'd do nothing and nothing shifts. _We write:_ one rule.
+- **Loading the shell only when needed:** A `<script>` in `DemoWindow.astro` (Astro bundles it once, only on pages that use it) that imports the element and defines `<demo-window>` when the first window nears the viewport. _We write:_ an `IntersectionObserver` and `import()`, about 10 lines; the platform has no lazy element definition.
 - **Demos:** Solid islands, `client:visible`, inside `<DemoWindow>` in the MDX. _We write:_ the demo.
 - **State shared by demos in one post:** Nano Stores, one file in the post's folder. _We write:_ the store.
 
@@ -79,9 +79,9 @@ The shell knows nothing about Solid; any island, or plain HTML, works inside it.
 
 ### What our code is
 
-`src/components/DemoWindow.astro` (markup and styles) and `src/components/demo-window.ts` (the element). It maps Zag's props and events to `data-state`, the ghost, the dock, maximise and focus, and starts view transitions. If it starts tracking pointers, scroll or z-index, an owner is being missed.
+`src/components/DemoWindow.astro` (markup and styles) and `src/components/demo-window.ts` (the element). It holds `data-state`, the ghost, the dock, maximise, keyboard moves, which window is on top (a z-index counter among windows; the dock is in the top layer) and focus, and starts view transitions. If it starts tracking pointers or scroll, an owner is being missed.
 
-Budget: Zag measured 15.4 KB gzipped (2026-10-31, 1.47.0); the element should add under 4 KB, inside the 30 KB article budget.
+Budget: the spike's whole shell with neodrag measured 3.8 KB gzipped (2026-10-31); the article budget is 30 KB.
 
 ### Spike results (2026-10-31)
 
@@ -90,9 +90,9 @@ A scratch Astro page with two windows, run in Playwright 1.64.1 against Chromium
 - **Both:** lifting without a jump, staying on the page while scrolling, grabbing again after scrolling, hanging off the side without widening the page, demo state (count, typed text, animation) kept through minimise, close and back, focus moving to the dock item and ghost, restoring at the same screen place after scrolling, maximise filling the screen and going back, six fast minimise/restore clicks ending in a consistent state, snapping to the ghost.
 - **Zag broke your decisions in every setting:** with the page as boundary it pulled windows hanging off the edge back into view when the page grew or scrolled; with no boundary, a change in screen height (as when Safari's toolbar collapses) moved windows by the scroll distance. Its shell measured 16.8 KB gzipped.
 - **neodrag** moved no window on page growth, height change or scroll; windows follow their place in the article when the article reflows. It does dragging only (threshold, handle, cancel), so resize, arrow keys, stacking and maximise were about 60 lines of ours. Its shell measured 3.8 KB gzipped.
-- **Not yet checked:** iPhone Safari (the simulator didn't answer requests to open URLs that evening), touch dragging by the grip, and keeping the grip reachable after rotation.
+- **Checked when the shell is built:** iPhone Safari (the simulator didn't answer requests to open URLs that evening), touch dragging by the grip, and keeping the grip reachable after rotation.
 
-**Waiting on you:** keep Zag and accept its pulling windows into view, or swap the window owner to neodrag (my pick).
+**Decided 2026-11-01:** neodrag replaces Zag.
 
 ## How it's checked
 
@@ -109,7 +109,7 @@ The order for each feature stays as the charter says: scenarios written first, b
 
 ## Build order
 
-1. Spike checks above, in a scratch folder.
+1. Spike: done (above).
 2. Astro project on a `rebuild` branch, replacing the RedwoodSDK app (deleted, not migrated); Playwright, Lighthouse CI and size checks wired to the build from the first commit.
 3. Homepage with real content, deployed to the preview Worker.
 4. The window shell, with its scenarios.

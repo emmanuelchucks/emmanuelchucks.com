@@ -35,8 +35,8 @@ Each job has one owner. "Not" names the tempting wrong shape, so a reviewer can 
 - **Code highlighting:** Shiki at build time (Astro built-in). _Not:_ Highlighting in the browser.
 - **Demos in articles:** Astro islands written in Solid, `client:visible`. _Not:_ Hydrating the whole page; React for demos.
 - **State shared by demos in one article:** Nano Stores (Astro's documented way to share state between islands). _Not:_ One big island wrapped around the prose, or a framework context.
-- **Window behaviour: drag, resize, minimise, maximise, keyboard, focus:** Zag.js `floating-panel` state machine through `@zag-js/vanilla`, page-attached (`strategy: "absolute"`, `allowOverflow: true`); 15.4 KB gzipped, measured 2026-10-31 on 1.47.0. _Not:_ Our own pointer, resize or keyboard code; XState or `@xstate/store` beside it; React Aria (React only).
-- **Window shell around a demo:** One custom element that wraps any island and runs the Zag machine. It adds only what Zag lacks: lifted off the article, closed to a ghost, snapping back to the ghost. _Not:_ Window logic written separately for each framework or each demo.
+- **Dragging windows and resize handles:** neodrag (`@neodrag/vanilla` 2.x): pointer capture, touch, drag threshold, handle and cancel areas, no clamping. Windows move by transform inside their place in the article, so they stay attached to the page with no scroll code. 3.8 KB gzipped for the whole shell, measured 2026-10-31. _Not:_ Our own pointer tracking; Zag `floating-panel` (pulls windows back into view on scroll, page growth and screen-height changes, against the 2026-09-06 decisions); XState beside it.
+- **Window shell around a demo:** One custom element that wraps any island. On top of neodrag it holds the window's state (in the article, lifted, docked, closed), the ghost, snapping back, maximise, arrow-key moves, which window is on top, and focus. _Not:_ Window logic written separately for each framework or each demo.
 - **Minimise, restore, dock motion:** View Transitions API (same-document): the browser morphs the window into its dock item as one element. _Not:_ Hand-written FLIP animations or JS-driven motion.
 - **Dock above windows:** Top layer (`popover`). _Not:_ A z-index arms race.
 - **Toy terminal:** wterm + `@wterm/just-bash` (Vercel Labs). _Not:_ Our own terminal or shell.
@@ -96,3 +96,4 @@ Nothing reaches him until it has been checked the way a demanding person would u
 - 2026-10-31: Closing a window keeps its demo as it was; bringing it back shows it unchanged.
 - 2026-10-31: Minimise always sends a window to the dock, whether it's in the article or lifted; there's no title-bar-only collapse.
 - 2026-10-31: A maximised window fills the visible screen and scrolls with the page like any lifted window.
+- 2026-11-01: neodrag replaces Zag for dragging windows: Zag pulled windows back into view against the page-attached decisions (spike results in `docs/DESIGN.md`).
