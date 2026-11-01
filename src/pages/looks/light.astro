@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import font from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import portrait from "../../assets/portrait.webp";
+import Shell from "../../looks/shell.astro";
+import { article, contact, earlier, intro, next, work } from "../../looks/content";
+---
+
+<Shell slug="light" font={font} family="Bricolage" axes="font-weight:200 800;">
+  <div class="window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <main class="page">
+    <header class="intro">
+      <div>
+        <h1>{intro.name}</h1>
+        <p>{intro.line}</p>
+      </div>
+      <Image src={portrait} alt="Emmanuel Chucks" width={128} height={128} class="face" />
+    </header>
+    <ul class="contact">{contact.map((c) => <li><a href={c.href}>{c.label}</a></li>)}<li class="place">{intro.place}</li></ul>
+
+    <ol class="work">
+      {
+        work.map((w) => (
+          <li>
+            <h2>{w.title}</h2>
+            <p>{w.text}</p>
+          </li>
+        ))
+      }
+      <li class="next"><p>{next}</p></li>
+    </ol>
+
+    <p class="end">
+      Writing: <a href="#">{article.title}</a><br />
+      Earlier: {earlier.map((e, i) => <>{i > 0 && ", "}<a href={e.href}>{e.title}</a></>)}
+    </p>
+  </main>
+</Shell>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+    --wall: light-dark(#dfdad0, #0b0c0e);
+    --grout: light-dark(#d9d4c9, #08090a);
+    --ink: light-dark(#191816, #e4e6ea);
+    --muted: light-dark(#6f6c65, #8a8e96);
+    --sun: light-dark(rgb(255 248 228 / 0.85), rgb(170 190 230 / 0.16));
+    background:
+      linear-gradient(90deg, var(--grout) 4px, transparent 4px) -2px 0 / 244px 244px,
+      linear-gradient(var(--grout) 4px, transparent 4px) 0 -2px / 244px 244px,
+      var(--wall);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: Bricolage, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  body { margin: 0; }
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  h1, h2, p, ol, ul { margin: 0; padding: 0; }
+  ol, ul { list-style: none; }
+
+  /* Light through a four-pane window, falling across the wall and drifting slowly. */
+  .window {
+    position: fixed; z-index: -1; top: -10vh; left: -10vw; width: min(70vw, 760px); height: min(90vh, 900px);
+    display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 26px; pointer-events: none;
+    transform: perspective(900px) rotateY(-22deg) rotateZ(-9deg) skewX(-8deg);
+    filter: blur(18px); mix-blend-mode: light-dark(soft-light, screen);
+    animation: drift 90s ease-in-out infinite alternate;
+  }
+  .window i { background: var(--sun); border-radius: 6px; }
+  @keyframes drift {
+    from { translate: 0 0; opacity: 0.9; }
+    to { translate: 55vw 25vh; opacity: 0.55; }
+  }
+  @media (prefers-color-scheme: light) { .window { mix-blend-mode: normal; filter: blur(22px); } }
+  @media (prefers-color-scheme: dark) { .window { mix-blend-mode: screen; filter: blur(26px); } }
+  body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: var(--grain); opacity: 0.05; }
+
+  .page { width: min(100% - 48px, 600px); margin: 0 auto; padding: 22vh 0 120px; }
+  .intro { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+  .intro h1 { font-size: 38px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variation-settings: "opsz" 96; }
+  .intro p { margin-top: 8px; color: var(--muted); font-size: 17px; max-width: 30ch; }
+  .face { width: 64px; height: 64px; border-radius: 50%; }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 22px; font-weight: 600; }
+  .contact .place { color: var(--muted); font-weight: 400; }
+
+  .work { margin-top: 96px; display: grid; gap: 28px; }
+  .work h2 { font-size: 22px; font-weight: 650; letter-spacing: -0.02em; }
+  .work p { color: var(--muted); max-width: 46ch; }
+  .next p { font-style: italic; }
+  .end { margin-top: 72px; color: var(--muted); line-height: 1.8; }
+  .end a { color: var(--ink); }
+
+  @media (prefers-reduced-motion: reduce) { .window { animation: none; translate: 20vw 10vh; } }
+</style>

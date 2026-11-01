@@ -1,0 +1,136 @@
+---
+import { Image } from "astro:assets";
+import font from "@fontsource-variable/recursive/files/recursive-latin-full-normal.woff2?url";
+import portrait from "../../assets/portrait.webp";
+import Shell from "../../looks/shell.astro";
+import { article, contact, earlier, intro, next, work } from "../../looks/content";
+---
+
+<Shell slug="sheet" font={font} family="Recursive" axes="font-weight:300 1000;">
+  <div class="desk">
+    <div class="stack">
+      <figure class="photo">
+        <Image src={portrait} alt="Emmanuel Chucks" width={128} height={128} />
+        <span class="tape" aria-hidden="true"></span>
+      </figure>
+    <main class="sheet">
+      <header class="intro">
+        <p class="label">emmanuelchucks.com</p>
+        <h1>{intro.name}</h1>
+        <p class="line">{intro.line}</p>
+        <p class="meta">{intro.place} · {contact.map((c, i) => <>{i > 0 && " · "}<a href={c.href}>{c.label}</a></>)}</p>
+      </header>
+
+      <section>
+        <h2 class="label">Work</h2>
+        <ol class="work">
+          {
+            work.map((w) => (
+              <li>
+                <h3>{w.title}</h3>
+                <p class="kind">{w.kind}</p>
+                <p class="text">{w.text}</p>
+              </li>
+            ))
+          }
+          <li class="next"><p>{next}</p></li>
+        </ol>
+      </section>
+
+      <section class="pair">
+        <div>
+          <h2 class="label">Writing</h2>
+          <p><a href="#">{article.title}</a></p>
+        </div>
+        <div>
+          <h2 class="label">Earlier</h2>
+          <ul>{earlier.map((e) => <li><a href={e.href}>{e.title}</a></li>)}</ul>
+        </div>
+      </section>
+    </main>
+    </div>
+  </div>
+</Shell>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+    --desk: light-dark(#d9d8d2, #0c0c0c);
+    --desk-tile: light-dark(rgb(0 0 0 / 0.025), rgb(255 255 255 / 0.02));
+    --paper: light-dark(#fbfaf6, #1a1a19);
+    --ink: light-dark(#1b1b1a, #e7e6e1);
+    --muted: light-dark(#7c7b75, #8a8984);
+    --rule: light-dark(#e5e3dc, #2a2a28);
+    --blue: light-dark(#2944c9, #8ea4ff);
+    background: var(--desk);
+    color: var(--ink);
+    font-family: Recursive, system-ui, sans-serif;
+    font-variation-settings: "MONO" 0, "CASL" 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  body { margin: 0; }
+  a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  h1, h2, h3, p, ol, ul, figure { margin: 0; padding: 0; }
+  ol, ul { list-style: none; }
+
+  /* The desk is the old tile field: big squares, barely there. */
+  .desk {
+    min-height: 100vh; padding: clamp(24px, 8vh, 96px) 12px 96px;
+    background:
+      linear-gradient(90deg, var(--desk) 4px, transparent 4px) -2px 0 / 244px 244px,
+      linear-gradient(var(--desk) 4px, transparent 4px) 0 -2px / 244px 244px,
+      linear-gradient(var(--desk-tile), var(--desk-tile));
+  }
+
+  /* One sheet, perforated top and bottom like paper torn off a pad. */
+  .sheet {
+    --hole: 5px;
+    position: relative; padding: 56px clamp(24px, 6vw, 64px) 64px;
+    background: var(--paper);
+    -webkit-mask:
+      radial-gradient(circle at 50% 0, transparent var(--hole), #000 calc(var(--hole) + 0.5px)) 0 0 / 16px 51% repeat-x,
+      radial-gradient(circle at 50% 100%, transparent var(--hole), #000 calc(var(--hole) + 0.5px)) 0 100% / 16px 51% repeat-x;
+    mask:
+      radial-gradient(circle at 50% 0, transparent var(--hole), #000 calc(var(--hole) + 0.5px)) 0 0 / 16px 51% repeat-x,
+      radial-gradient(circle at 50% 100%, transparent var(--hole), #000 calc(var(--hole) + 0.5px)) 0 100% / 16px 51% repeat-x;
+    filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.08)) drop-shadow(0 18px 30px rgb(0 0 0 / 0.12));
+  }
+  .sheet::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--grain); opacity: 0.05; }
+
+  .stack { position: relative; max-width: 640px; margin: 0 auto; }
+  .photo { position: absolute; z-index: 1; top: 40px; right: clamp(20px, 5vw, 56px); width: 88px; padding: 6px 6px 22px; background: light-dark(#fff, #e9e7e0); box-shadow: 0 1px 2px rgb(0 0 0 / 0.15), 0 8px 18px -6px rgb(0 0 0 / 0.25); rotate: 3deg; }
+  .photo img { display: block; width: 100%; height: auto; }
+  .tape { position: absolute; top: -10px; left: 50%; translate: -50%; rotate: -4deg; width: 54px; height: 18px; background: light-dark(rgb(222 205 150 / 0.75), rgb(200 190 150 / 0.5)); }
+
+  .label { font-size: 11px; font-variation-settings: "MONO" 1, "CASL" 0; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 400; }
+  .intro { padding-right: 112px; }
+  .intro h1 { margin-top: 28px; font-size: clamp(36px, 7vw, 54px); font-weight: 780; line-height: 0.98; letter-spacing: -0.03em; font-variation-settings: "MONO" 0, "CASL" 0.6; }
+  .line { margin-top: 16px; font-size: 19px; line-height: 1.35; }
+  .meta { margin-top: 14px; font-size: 13px; color: var(--muted); font-variation-settings: "MONO" 1; }
+
+  section { margin-top: 56px; }
+  .work { margin-top: 10px; }
+  .work li { padding: 16px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; column-gap: 16px; }
+  .work h3 {
+    font-size: 21px; font-weight: 650; letter-spacing: -0.015em;
+    font-variation-settings: "MONO" 0, "CASL" 0;
+    transition: font-variation-settings 600ms ease-out;
+  }
+  .work li:hover h3 { font-variation-settings: "MONO" 0, "CASL" 1; transition-duration: 300ms; }
+  .kind { font-size: 11px; color: var(--muted); font-variation-settings: "MONO" 1; padding-top: 6px; }
+  .text { grid-column: 1 / -1; color: var(--muted); font-size: 15px; max-width: 46ch; margin-top: 2px; }
+  .next { color: var(--muted); font-style: oblique 10deg; font-variation-settings: "MONO" 0, "CASL" 1; }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .pair p, .pair ul { margin-top: 10px; font-size: 15px; }
+  .pair p a { font-weight: 600; }
+
+  @media (max-width: 560px) {
+    .intro { padding-right: 84px; }
+    .photo { width: 64px; top: 36px; }
+    .pair { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .work h3 { transition: none; } }
+</style>

@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets";
+import font from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import portrait from "../../assets/portrait.webp";
+import Shell from "../../looks/shell.astro";
+import { article, contact, earlier, intro, next, work } from "../../looks/content";
+
+const fillers = Array.from({ length: 31 }, (_, i) => i);
+---
+
+<Shell slug="tiles" font={font} family="Bricolage" axes="font-weight:200 800;">
+  <main class="board">
+    <header class="tile intro">
+      <h1>{intro.name}</h1>
+      <p>{intro.line}</p>
+      <p class="meta">{intro.place} · {contact.map((c) => <a href={c.href}>{c.label}</a>)}</p>
+    </header>
+    <div class="tile face" aria-hidden="true">
+      <Image src={portrait} alt="" width={128} height={128} />
+    </div>
+    {
+      work.map((w, i) => (
+        <article class={`tile work w${i + 1}`}>
+          <p class="kind">{w.kind}</p>
+          <h2>{w.title}</h2>
+          <p>{w.text}</p>
+        </article>
+      ))
+    }
+    <p class="tile ghost">{next}</p>
+    <a class="tile post" href="#">
+      <span class="kind">Writing</span>
+      <span class="title">{article.title}</span>
+    </a>
+    <section class="tile earlier">
+      <h2 class="kind">Earlier</h2>
+      <ul>{earlier.map((e) => <li><a href={e.href}>{e.title}</a></li>)}</ul>
+    </section>
+    {fillers.map(() => <div class="tile filler" />)}
+  </main>
+</Shell>
+
+<style is:global>
+  :root {
+    color-scheme: light dark;
+    --tile: 236px;
+    --gap: 4px;
+    --bg: light-dark(#efefec, #0a0a0a);
+    --ink: light-dark(#161616, #ececea);
+    --muted: light-dark(#7a7a73, #7f7f79);
+    --field: light-dark(rgb(0 0 0 / 0.022), rgb(255 255 255 / 0.018));
+    --lit: light-dark(rgb(0 0 0 / 0.045), rgb(255 255 255 / 0.04));
+    --held: light-dark(rgb(255 255 255 / 0.55), rgb(255 255 255 / 0.028));
+    --shadow: light-dark(rgb(0 0 0 / 0.08), rgb(0 0 0 / 0.7));
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Bricolage, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  body { margin: 0; overflow-x: clip; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  h1, h2, p, ul { margin: 0; padding: 0; }
+  ul { list-style: none; }
+
+  /* The field is wider than any screen and clipped, so it bleeds off both edges. */
+  .board {
+    --cols: 9;
+    display: grid; gap: var(--gap); justify-content: center;
+    grid-template-columns: repeat(var(--cols), var(--tile));
+    grid-auto-rows: minmax(var(--tile), auto); grid-auto-flow: dense;
+    width: calc(var(--cols) * (var(--tile) + var(--gap)));
+    margin-left: 50%; translate: -50%;
+  }
+  .tile { border-radius: 2px; padding: 22px; transition: background-color 900ms ease-out, box-shadow 900ms ease-out, translate 900ms ease-out; }
+  .filler { background: var(--field); padding: 0; }
+  .filler:hover { background: var(--lit); transition-duration: 100ms; }
+
+  .intro, .work, .post, .earlier, .face {
+    position: relative; background: var(--held); display: flex; flex-direction: column;
+  }
+  :is(.intro, .work, .post, .earlier, .face)::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--grain); opacity: 0.07;
+  }
+  @media (prefers-color-scheme: dark) { :is(.intro, .work, .post, .earlier, .face)::after { filter: invert(1); opacity: 0.035; } }
+  .work:hover, .post:hover, .earlier:hover {
+    translate: 0 -3px; box-shadow: 0 1px 2px var(--shadow), 0 24px 40px -20px var(--shadow); transition-duration: 220ms;
+  }
+
+  .intro { justify-content: flex-end; gap: 10px; }
+  .intro h1 { font-size: clamp(44px, 5.4vw, 74px); font-weight: 700; font-variation-settings: "opsz" 96; line-height: 0.92; letter-spacing: -0.035em; }
+  .intro p { font-size: 19px; max-width: 26ch; line-height: 1.25; }
+  .intro .meta { font-size: 13px; color: var(--muted); max-width: none; }
+  .intro .meta a { margin-left: 10px; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+  .face { justify-content: flex-end; }
+  .face img { width: 64px; height: 64px; border-radius: 50%; }
+
+  .kind { font-size: 12px; color: var(--muted); }
+  .work { gap: 6px; }
+  .work h2 { margin-top: auto; font-size: 22px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.05; }
+  .work p:last-child { color: var(--muted); font-size: 14px; }
+  .w1 h2 { font-size: 44px; font-weight: 700; font-variation-settings: "opsz" 96; }
+  .w1 p:last-child { font-size: 17px; max-width: 24ch; }
+
+  .ghost { display: flex; align-items: flex-end; color: var(--muted); font-size: 14px; outline: 1px dashed light-dark(rgb(0 0 0 / 0.2), rgb(255 255 255 / 0.16)); outline-offset: -1px; }
+  .post { text-decoration: none; gap: 8px; }
+  .post .title { margin-top: auto; font-size: 21px; font-weight: 600; line-height: 1.1; letter-spacing: -0.015em; }
+  .earlier ul { margin-top: auto; font-size: 14px; display: grid; gap: 4px; }
+  .earlier a { text-decoration: none; }
+  .earlier a:hover { text-decoration: underline; }
+
+  .intro { grid-area: 2 / 3 / 3 / 6; }
+  .w2 { grid-area: 2 / 6; }
+  .face { grid-area: 2 / 7; }
+  .w1 { grid-area: 3 / 3 / 5 / 5; }
+  .w3 { grid-area: 3 / 5; }
+  .w4 { grid-area: 3 / 6; }
+  .ghost { grid-area: 3 / 7; }
+  .post { grid-area: 4 / 5; }
+  .earlier { grid-area: 4 / 6; }
+
+  @media (max-width: 700px) {
+    .board { --cols: 4; --tile: calc(50vw - 24px); }
+    .tile { padding: 14px; }
+    .intro { grid-area: 2 / 2 / 3 / 4; }
+    .face { grid-area: 3 / 2; }
+    .w2 { grid-area: 3 / 3; }
+    .w1 { grid-area: 4 / 2 / 5 / 4; }
+    .w3 { grid-area: 5 / 2; }
+    .w4 { grid-area: 5 / 3; }
+    .ghost { grid-area: 6 / 2; }
+    .post { grid-area: 6 / 3; }
+    .earlier { grid-area: 7 / 2; }
+    .intro h1 { font-size: 40px; }
+    .intro p { font-size: 17px; }
+    .w1 h2 { font-size: 30px; }
+    .work h2, .post .title { font-size: 18px; }
+    .work p:last-child, .earlier ul { font-size: 13px; }
+    .filler:nth-of-type(n + 23) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+</style>
