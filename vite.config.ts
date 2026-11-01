@@ -1,28 +1,19 @@
-import { cloudflare } from "@cloudflare/vite-plugin";
-import contentCollections from "@content-collections/vite";
-import { react as reactConfig } from "@kasoa/vite-plus-config/react";
-import tailwindcss from "@tailwindcss/vite";
-import reactPlugin from "@vitejs/plugin-react";
-import { redwood } from "rwsdk/vite";
-import { defineConfig } from "vite-plus";
-import { createMdxPlugin } from "./config/mdx.js";
+// Lint and format settings for `vp check`. Astro builds with its own Vite config (astro.config.mjs).
+import {
+  baseToolingConfig,
+  browserRuntimeConfig,
+  composeConfig,
+  nodeLint,
+  TEST_FILES,
+} from "@kasoa/vite-plus-config";
 
-export default defineConfig({
-  ...reactConfig,
-  plugins: [
-    createMdxPlugin(),
-    reactPlugin({
-      babel: {
-        plugins: ["babel-plugin-react-compiler"],
-      },
-    }),
-    cloudflare({
-      viteEnvironment: {
-        name: "worker",
-      },
-    }),
-    redwood(),
-    tailwindcss(),
-    contentCollections(),
-  ],
+export default composeConfig(baseToolingConfig, browserRuntimeConfig, {
+  lint: {
+    overrides: [
+      // Playwright tests run in Node, with page.evaluate callbacks in the browser;
+      // the shared test profiles assume Vitest.
+      { files: [...TEST_FILES], ...nodeLint, env: { ...nodeLint.env, browser: true } },
+      { files: ["**/*.astro"], globals: { Astro: "readonly" } },
+    ],
+  },
 });

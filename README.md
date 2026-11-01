@@ -1,51 +1,23 @@
 # emmanuelchucks.com
 
-Personal site and writing playground for Emmanuel Chucks, built on RedwoodSDK, React, Cloudflare, and MDX.
-
-## Stack
-
-- RedwoodSDK for routing, rendering, and Worker integration
-- React 19
-- Cloudflare Workers via `@cloudflare/vite-plugin`
-- MDX posts powered by `@content-collections/*`
-- Tailwind CSS
-- Vite for `dev` and `build`
-- Vite+ for `check` and `check:fix`
+Emmanuel Chucks's personal site: a static Astro site served by Cloudflare Workers static assets. What it is and why is in [docs/CHARTER.md](docs/CHARTER.md); how it's built is in [docs/DESIGN.md](docs/DESIGN.md).
 
 ## Scripts
 
 ```sh
-pnpm dev
-pnpm build
-pnpm preview
-pnpm check
-pnpm check:fix
-pnpm typegen
+pnpm dev             # Astro dev server
+pnpm build           # static site in dist/
+pnpm check           # Vite+ lint, format and TypeScript
+pnpm test            # Playwright, against the built site in Chromium, Firefox and WebKit
+pnpm lighthouse      # Lighthouse CI with the charter's budgets, against dist/
+pnpm deploy:preview  # build and deploy to the preview Worker
 ```
 
-`pnpm dev` and `pnpm build` stay on plain Vite for now. Static checks run through Vite+ so linting, formatting, and type checking stay unified under one command.
+CI runs `check`, `test` and `lighthouse` on every push.
 
-## Content
+## Notes
 
-Posts live in [src/content](/Users/emmanuelchucks/projects/emmanuelchucks.com/src/content). Each post folder can include:
-
-- `post.mdx` for the written post
-- `demo.tsx` for an interactive embed
-- supporting assets like audio or helper modules
-
-Idea capture for future writing lives in [POST-IDEAS.md](/Users/emmanuelchucks/projects/emmanuelchucks.com/POST-IDEAS.md).
-
-## Structure
-
-- [src/worker.ts](/Users/emmanuelchucks/projects/emmanuelchucks.com/src/worker.ts) wires routes and layouts
-- [src/app](/Users/emmanuelchucks/projects/emmanuelchucks.com/src/app) contains layouts, pages, components, and shared utilities
-- [content-collections.ts](/Users/emmanuelchucks/projects/emmanuelchucks.com/content-collections.ts) defines post metadata and generated content wiring
-- [vite.config.ts](/Users/emmanuelchucks/projects/emmanuelchucks.com/vite.config.ts) composes the site-specific Vite config with the shared `@kasoa/vite-plus-config` React preset
-
-## Local Dev
-
-1. `pnpm install`
-2. `pnpm typegen`
-3. `pnpm dev`
-
-Open the local URL Vite prints in the terminal.
+- Node and pnpm versions come from `devEngines` and `packageManager` in `package.json`; `.node-version` is for CI.
+- `wrangler.jsonc` names the preview Worker, `emmanuelchucks-preview`. The live site is the Worker `emmanuelchucks`, which only changes when Emmanuel says so.
+- `.astro` files are linted but not type-checked: `astro check` doesn't support TypeScript 7, and Astro's replacement (`@astrojs/ts-content-mapper`) needs TypeScript 7.1.
+- Playwright starts `astro preview --ignore-lock`, because Astro otherwise moves the preview server to the background when it detects an agent.

@@ -1,20 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "emmanuelchucks",
-  "main": "./src/worker.ts",
-  "compatibility_date": "2025-08-21",
-  "compatibility_flags": ["nodejs_compat"],
+  // The preview Worker. Production ("emmanuelchucks") changes only when Emmanuel says so.
+  "name": "emmanuelchucks-preview",
+  "compatibility_date": "2026-10-31",
   "assets": {
-    "binding": "ASSETS",
+    "directory": "./dist",
+    "not_found_handling": "404-page",
   },
-  "kv_namespaces": [
-    {
-      "binding": "VIEWS_COUNTER",
-      "id": "81c91b7abe6d4ea4b5276935b03cc075",
-    },
-  ],
-  "observability": {
-    "enabled": true,
-  },
-  "vars": {},
 }

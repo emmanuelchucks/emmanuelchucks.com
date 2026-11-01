@@ -71,3 +71,9 @@ coverage
 
 # Turbo
 .turbo
+
+# Tests and Lighthouse
+test-results
+playwright-report
+.lighthouseci
+.astro
