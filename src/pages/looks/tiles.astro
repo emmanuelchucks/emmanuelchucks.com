@@ -9,6 +9,7 @@ const fillers = Array.from({ length: 31 }, (_, i) => i);
 ---
 
 <Shell slug="tiles" font={font} family="Bricolage" axes="font-weight:200 800;">
+  <div class="field">
   <main class="board">
     <header class="tile intro">
       <h1>{intro.name}</h1>
@@ -38,6 +39,7 @@ const fillers = Array.from({ length: 31 }, (_, i) => i);
     </section>
     {fillers.map(() => <div class="tile filler" />)}
   </main>
+  </div>
 </Shell>
 
 <style is:global>
@@ -58,7 +60,8 @@ const fillers = Array.from({ length: 31 }, (_, i) => i);
     font-size: 15px;
     line-height: 1.4;
   }
-  body { margin: 0; overflow-x: clip; }
+  body { margin: 0; }
+  .field { overflow-x: clip; }
   a { color: inherit; }
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
   h1, h2, p, ul { margin: 0; padding: 0; }
