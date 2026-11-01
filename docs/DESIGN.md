@@ -116,6 +116,13 @@ The order for each feature stays as the charter says: scenarios written first, b
 5. The GroqDictate post and its demos.
 6. RSS, OG images, 404, analytics.
 
-## Open, for you
+## The look
 
-1. **The look** (type, colour, spacing) comes next, as a separate page with options shown in your real content. Is there a site or app whose feel is close to what you want?
+Being explored at `/looks` on the preview (noindex pages, removed once the homepage is built). Your reactions so far (2026-11-01):
+
+- **Keep:** the slow light drifting across the page (subtle enough to almost miss), the big tile field from the current site (the thing that makes someone stop and look), the drafting table's ruler and measurements (reads as a builder), the sheet on a desk with a photo taped to it.
+- **Drop:** the colour room (jarring, not your style). The first three looks (paper, instrument, console) read as bland and machine-made.
+- **Add:** pictures of the work, placed with care; how they sit in the design is part of the exploration.
+- **Current direction:** "Wall", which combines them: the tile field bleeding off every edge, slow window light over everything, a ruler and reading mark on the left, product pictures taped up as prints with their real sizes drawn beside them. One font (Bricolage Grotesque) plus the system mono for measurements.
+- **Pictures so far:** Celedom staff chat stills from the demo recording (simulator, made-up people), swapped for light and dark mode; GroqDictate and DataMeter app icons. Still needed: Mac screens of GroqDictate and DataMeter, and clean Celebrant and Vendors screens with test accounts (the App Store images are marketing collages).
+- **Budget:** at phone resolution the Wall page is about 110 KB, 77 KB of it the font; subsetting the font to the characters used brings it near the 50 KB homepage budget.

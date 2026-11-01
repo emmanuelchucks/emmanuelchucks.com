@@ -1,0 +1,276 @@
+---
+import { getImage, Image } from "astro:assets";
+import font from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
+import portrait from "../../assets/portrait.webp";
+import Shell from "../../looks/shell.astro";
+import { article, contact, earlier, intro, next, work } from "../../looks/content";
+import chatDark from "../../looks/media/chat-dark.png";
+import chatLight from "../../looks/media/chat-light.png";
+import datameterIcon from "../../looks/media/datameter-icon.png";
+import groqIcon from "../../looks/media/groqdictate-icon.png";
+
+const chatSize = { width: 201, height: 437 };
+const chatWidths = [201, 402];
+const chat = {
+  light: await getImage({ src: chatLight, ...chatSize, widths: chatWidths, format: "avif" }),
+  dark: await getImage({ src: chatDark, ...chatSize, widths: chatWidths, format: "avif" }),
+};
+const [chatWork, celebrant, groq, datameter] = work;
+const fillers = Array.from({ length: 40 }, (_, i) => i);
+---
+
+<Shell slug="wall" font={font} family="Bricolage" axes="font-weight:200 800;">
+  <div class="ruler" aria-hidden="true"></div>
+  <div class="mark" aria-hidden="true"><span></span></div>
+  <div class="field">
+    <main class="board">
+      <header class="tile held intro">
+        <h1>{intro.name}</h1>
+        <p class="line">{intro.line}</p>
+        <p class="meta">
+          <span>{intro.place}</span>
+          {contact.map((c) => <a href={c.href}>{c.label}</a>)}
+        </p>
+      </header>
+
+      <div class="tile held pin">
+        <figure class="print print-face">
+          <Image src={portrait} alt="Emmanuel Chucks" width={128} height={128} />
+          <span class="tape" aria-hidden="true"></span>
+        </figure>
+      </div>
+
+      <div class="tile held shot">
+        <figure class="print print-phone">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset={chat.dark.srcSet.attribute} sizes="201px" />
+            <img
+              src={chat.light.src}
+              srcset={chat.light.srcSet.attribute}
+              sizes="201px"
+              width={chatSize.width}
+              height={chatSize.height}
+              alt="The Celedom staff chat on an iPhone, with made-up people and messages."
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          <span class="tape" aria-hidden="true"></span>
+          <span class="dim dim-w" aria-hidden="true"><b>402 pt</b></span>
+          <span class="dim dim-h" aria-hidden="true"><b>874 pt</b></span>
+        </figure>
+      </div>
+
+      <article class="tile held work w1">
+        <p class="n">01</p>
+        <h2>{chatWork.title}</h2>
+        <p class="kind">{chatWork.kind}</p>
+        <p class="text">{chatWork.text}</p>
+      </article>
+
+      <article class="tile held work w2">
+        <p class="n">02</p>
+        <h2>{celebrant.title}</h2>
+        <p class="kind">{celebrant.kind}</p>
+        <p class="text">{celebrant.text}</p>
+      </article>
+
+      <article class="tile held work w3">
+        <Image src={groqIcon} alt="" width={72} height={72} densities={[1, 2]} class="icon" />
+        <p class="n">03</p>
+        <h2>{groq.title}</h2>
+        <p class="kind">{groq.kind}</p>
+      </article>
+
+      <article class="tile held work w4">
+        <Image src={datameterIcon} alt="" width={72} height={72} densities={[1, 2]} class="icon" />
+        <p class="n">04</p>
+        <h2>{datameter.title}</h2>
+        <p class="kind">{datameter.kind}</p>
+      </article>
+
+      <p class="tile ghost">{next}</p>
+
+      <a class="tile held post" href="#">
+        <span class="n">Writing</span>
+        <span class="title">{article.title}</span>
+      </a>
+
+      <section class="tile held earlier">
+        <h2 class="n">Earlier</h2>
+        <ul>{earlier.map((e) => <li><a href={e.href}>{e.title}</a></li>)}</ul>
+      </section>
+
+      {fillers.map(() => <div class="tile filler" />)}
+    </main>
+  </div>
+  <div class="window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+</Shell>
+
+<style is:global>
+  @property --y { syntax: "<integer>"; inherits: true; initial-value: 0; }
+  :root {
+    color-scheme: light dark;
+    --tile: clamp(150px, calc((100vw - 160px) / 5 - 4px), 236px);
+    --gap: 4px;
+    --bg: light-dark(#dcd8cf, #08080a);
+    --ink: light-dark(#151513, #ebebe8);
+    --muted: light-dark(#6d6a62, #8b8b86);
+    --field: light-dark(rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.018));
+    --lit: light-dark(rgb(255 255 255 / 0.32), rgb(255 255 255 / 0.04));
+    --held: light-dark(rgb(255 255 255 / 0.3), rgb(255 255 255 / 0.03));
+    --measure: light-dark(#b2462a, #f08a62);
+    --paper: light-dark(#fbfaf7, #d8d6cf);
+    --sun: light-dark(rgb(255 250 235 / 0.9), rgb(170 190 230 / 0.13));
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Bricolage, system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  body { margin: 0; }
+  a { color: inherit; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  h1, h2, p, ul, figure { margin: 0; padding: 0; }
+  ul { list-style: none; }
+  .mono, .n, .kind, .dim, .mark span { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+  /* The tile field: wider than any screen, clipped, so it runs off both edges. */
+  .field { overflow-x: clip; }
+  .board {
+    --cols: 9;
+    display: grid; gap: var(--gap); justify-content: center;
+    grid-template-columns: repeat(var(--cols), var(--tile));
+    grid-auto-rows: var(--tile); grid-auto-flow: dense;
+    width: calc(var(--cols) * (var(--tile) + var(--gap)));
+    margin-left: 50%; translate: -50%;
+  }
+  .tile { position: relative; border-radius: 2px; padding: 20px; transition: background-color 900ms ease-out; }
+  .filler { padding: 0; background: var(--field); }
+  .filler:hover { background: var(--lit); transition-duration: 100ms; }
+  .held { background: var(--held); display: flex; flex-direction: column; }
+  .held::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: var(--grain); opacity: 0.06; }
+  @media (prefers-color-scheme: dark) { .held::after { filter: invert(1); opacity: 0.03; } }
+
+  .intro { justify-content: flex-end; gap: 10px; }
+  .intro h1 { font-size: clamp(40px, 5vw, 68px); font-weight: 700; font-variation-settings: "opsz" 96; line-height: 0.92; letter-spacing: -0.035em; }
+  .line { font-size: 19px; line-height: 1.25; max-width: 26ch; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+  .meta a { color: var(--ink); }
+
+  .n { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+  .work h2 { margin-top: auto; font-size: 21px; font-weight: 650; letter-spacing: -0.02em; line-height: 1.05; }
+  .kind { margin-top: 6px; font-size: 11px; color: var(--muted); }
+  .text { margin-top: 10px; color: var(--muted); font-size: 14px; max-width: 30ch; }
+  .w1 h2 { font-size: 34px; font-weight: 700; font-variation-settings: "opsz" 96; }
+  .w1 .text { font-size: 16px; }
+  .w3, .w4 { padding-top: 20px; }
+  .icon { width: 72px; height: 72px; margin: 4px 0 0 -6px; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.2)) drop-shadow(0 10px 14px rgb(0 0 0 / 0.22)); }
+  .w3 .n, .w4 .n { margin-top: auto; }
+  .w3 h2, .w4 h2 { margin-top: 4px; }
+
+  .ghost { display: flex; align-items: flex-end; color: var(--muted); font-size: 14px; outline: 1px dashed light-dark(rgb(0 0 0 / 0.22), rgb(255 255 255 / 0.16)); outline-offset: -1px; }
+  .post { text-decoration: none; }
+  .post .title { margin-top: auto; font-size: 21px; font-weight: 600; line-height: 1.1; letter-spacing: -0.015em; }
+  .post:hover .title { text-decoration: underline; text-decoration-thickness: 1px; }
+  .earlier ul { margin-top: auto; font-size: 14px; display: grid; gap: 4px; }
+
+  /* Prints taped to the wall. */
+  .pin, .shot { overflow: visible; z-index: 2; }
+  .print { position: absolute; background: var(--paper); padding: 7px; box-shadow: 0 1px 1px rgb(0 0 0 / 0.12), 0 14px 24px -10px rgb(0 0 0 / 0.35); }
+  .print img { display: block; }
+  .tape { position: absolute; top: -11px; left: 50%; width: 58px; height: 20px; translate: -50%; rotate: -5deg; background: light-dark(rgb(214 196 140 / 0.7), rgb(190 175 130 / 0.55)); }
+  .print-face { right: 28px; bottom: 26px; padding-bottom: 24px; rotate: 3deg; }
+  .print-face img { width: 96px; height: 96px; }
+  .print-phone { left: 50%; top: 18px; translate: -50%; rotate: -1.5deg; }
+  .print-phone img { width: 201px; height: 437px; border-radius: 3px; }
+
+  /* Dimension lines: the screenshot's real size in points. */
+  .dim { position: absolute; color: var(--measure); font-size: 10px; }
+  .dim::before, .dim::after { content: ""; position: absolute; background: currentColor; }
+  .dim b { position: absolute; font-weight: 400; background: var(--bg); padding: 0 4px; white-space: nowrap; }
+  .dim-w { left: 7px; right: 7px; bottom: -22px; height: 9px; border-inline: 1px solid; }
+  .dim-w::before { left: 0; right: 0; top: 4px; height: 1px; }
+  .dim-w b { left: 50%; top: -3px; translate: -50%; }
+  .dim-h { top: 7px; bottom: 7px; right: -24px; width: 9px; border-block: 1px solid; }
+  .dim-h::before { top: 0; bottom: 0; left: 4px; width: 1px; }
+  .dim-h b { top: 50%; left: 50%; translate: -50% -50%; rotate: 90deg; }
+
+  /* Ruler down the left edge, and a mark that reads how far down the page you are. */
+  .ruler {
+    position: fixed; z-index: 3; inset: 0 auto 0 0; width: 26px; pointer-events: none;
+    background:
+      linear-gradient(var(--ink) 1px, transparent 1px) right 0 top 0 / 20px 240px repeat-y,
+      linear-gradient(var(--muted) 1px, transparent 1px) right 0 top 0 / 12px 40px repeat-y,
+      linear-gradient(var(--muted) 1px, transparent 1px) right 0 top 0 / 6px 8px repeat-y;
+    opacity: 0.45;
+  }
+  .mark { position: fixed; z-index: 3; top: 38vh; left: 0; width: 44px; height: 1px; background: var(--measure); pointer-events: none; }
+  .mark::before { content: ""; position: absolute; left: 22px; top: -4px; width: 9px; height: 9px; border-radius: 50%; background: var(--measure); }
+  .mark span { position: absolute; left: 8px; top: -18px; font-size: 10px; color: var(--measure); font-variant-numeric: tabular-nums; }
+  /* Kept apart from the animation shorthand: the CSS minifier merges them, and browsers reject a timeline inside the shorthand. */
+  .mark > span { animation-name: depth; animation-timing-function: linear; animation-fill-mode: both; }
+  .mark span:not(:empty), .mark span:empty { animation-timeline: scroll(root); }
+  .mark span::after { counter-reset: y var(--y); content: counter(y); }
+  @keyframes depth { to { --y: 100; } }
+
+  /* Light through a four-pane window, drifting across everything over a minute and a half. */
+  .window {
+    position: fixed; z-index: 4; top: -12vh; left: -14vw; width: min(70vw, 780px); height: min(92vh, 920px);
+    display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 26px; pointer-events: none;
+    transform: perspective(900px) rotateY(-22deg) rotateZ(-9deg) skewX(-8deg);
+    animation: drift 90s ease-in-out infinite alternate;
+  }
+  .window i { background: var(--sun); border-radius: 6px; }
+  @keyframes drift {
+    from { translate: 0 0; opacity: 0.85; }
+    to { translate: 60vw 22vh; opacity: 0.5; }
+  }
+  @media (prefers-color-scheme: light) { .window { mix-blend-mode: soft-light; filter: blur(22px); } }
+  @media (prefers-color-scheme: dark) { .window { mix-blend-mode: screen; filter: blur(28px); } }
+
+  /* Desktop placement: content in the middle five columns. */
+  .intro { grid-area: 2 / 3 / 3 / 6; }
+  .pin { grid-area: 2 / 7; }
+  .shot { grid-area: 3 / 3 / 5 / 4; }
+  .w1 { grid-area: 3 / 4 / 5 / 5; }
+  .w2 { grid-area: 3 / 5; }
+  .w3 { grid-area: 3 / 6; }
+  .w4 { grid-area: 4 / 5; }
+  .ghost { grid-area: 4 / 6; }
+  .post { grid-area: 3 / 7; }
+  .earlier { grid-area: 4 / 7; }
+
+  @media (max-width: 760px) {
+    .board { --cols: 4; --tile: calc(50vw - 26px); }
+    .tile { padding: 14px; }
+    .intro { grid-area: 2 / 2 / 3 / 4; }
+    .pin { grid-area: 3 / 2; }
+    .w1 { grid-area: 3 / 3; }
+    .shot { grid-area: 4 / 2 / 6 / 3; }
+    .w2 { grid-area: 4 / 3; }
+    .w3 { grid-area: 5 / 3; }
+    .w4 { grid-area: 6 / 2; }
+    .ghost { grid-area: 6 / 3; }
+    .post { grid-area: 7 / 2; }
+    .earlier { grid-area: 7 / 3; }
+    .intro h1 { font-size: 40px; }
+    .line { font-size: 17px; }
+    .w1 h2 { font-size: 22px; }
+    .w1 .text { font-size: 13px; margin-top: 6px; }
+    .work h2, .post .title { font-size: 18px; }
+    .text, .earlier ul { font-size: 13px; }
+    .print-phone { top: 16px; }
+    .print-phone img { width: 128px; height: 278px; }
+    .dim-h { right: auto; left: -24px; }
+    .print-face { right: auto; left: 18px; }
+    .print-face img { width: 84px; height: 84px; }
+    .icon { width: 56px; height: 56px; }
+    .ruler, .mark { display: none; }
+    .filler:nth-of-type(n + 23) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tile { transition: none; }
+    .window { animation: none; translate: 22vw 8vh; }
+  }
+</style>

@@ -169,9 +169,6 @@ importers:
       '@fontsource-variable/bricolage-grotesque':
         specifier: ^5.3.0
         version: 5.3.0
-      '@fontsource-variable/fraunces':
-        specifier: ^5.3.0
-        version: 5.3.0
       '@fontsource-variable/martian-mono':
         specifier: ^5.3.0
         version: 5.3.0
@@ -603,9 +600,6 @@ packages:
 
   '@fontsource-variable/bricolage-grotesque@5.3.0':
     resolution: {integrity: sha512-TLi9Q4hJjS2UvoTMRSS2nHu6c4R56lAw60NR9QYtVRCHn0XtsFpiEhNffZ8Glsoxu6wEEwLKBP8lb94J52PNBA==}
-
-  '@fontsource-variable/fraunces@5.3.0':
-    resolution: {integrity: sha512-9BYGySn4AHEJdgp9Z28tQ3X+laJMEOITXkQarZXeloWQZDq5oOvXJ3kDA8c7MGIfpogIaZfjrQBqmda8POOCKA==}
 
   '@fontsource-variable/martian-mono@5.3.0':
     resolution: {integrity: sha512-0wVODx9ILwNnaYC4XCuSaFRYtj1Prd89MRVaSuv2ng6zLiQkS4SepaWEPefs7vqCZS8sbEOA8jb/4F5KNMnGdg==}
@@ -4153,8 +4147,6 @@ snapshots:
     optional: true
 
   '@fontsource-variable/bricolage-grotesque@5.3.0': {}
-
-  '@fontsource-variable/fraunces@5.3.0': {}
 
   '@fontsource-variable/martian-mono@5.3.0': {}
 
