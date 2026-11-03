@@ -41,4 +41,9 @@ export const earlier = [
     text: "Git review notes in Neovim",
     href: "https://github.com/emmanuelchucks/patchmarks.nvim",
   },
+  {
+    title: "drizzle-expo-sqlite",
+    text: "Local-first data in Expo with Drizzle and SQLite",
+    href: "https://github.com/emmanuelchucks/drizzle-expo-sqlite",
+  },
 ];
