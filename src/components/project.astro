@@ -95,9 +95,9 @@ const screens = await Promise.all(
   .shots figure { flex: none; width: 280px; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
   .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
-  /* A Mac window: wider, with the window's own corners (the capture fills them in). */
+  /* A Mac window: wider, with the window's own corners, cut out of the capture at its radius (32 of 1800 px). */
   .shots figure.mac { width: min(100%, 720px); }
-  .mac .screen img { border-radius: 1.4% / 2.3%; }
+  .mac .screen img { border-radius: 1.78% / 2.92%; }
   .head .icon.mac { width: 70px; height: 70px; margin: -7px; }
   .head .icon.mac img, .head img.icon.mac { width: 70px; height: 70px; border-radius: 0; }
   figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
