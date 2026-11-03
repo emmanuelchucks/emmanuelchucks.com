@@ -1,8 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import icon from "../../assets/work/groqdictate-icon.png";
-import stillDark from "../../assets/work/groqdictate-still-dark.png";
-import stillLight from "../../assets/work/groqdictate-still-light.png";
+import Dictation from "../../components/dictation.astro";
 import Project from "../../components/project.astro";
 import { groqDictate } from "../../site";
 ---
@@ -10,17 +9,12 @@ import { groqDictate } from "../../site";
 <Project
   {...groqDictate}
   description="GroqDictate: press Right ⌘, speak, and the text lands where you were working, on macOS and iPhone. Built by Emmanuel Chucks."
-  note="A real dictation into a note in Safari, with the talking sped up."
-  shots={[
-    {
-      light: stillLight,
-      dark: stillDark,
-      frame: "clip",
-      video: { light: "/work/groqdictate-light", dark: "/work/groqdictate-dark" },
-      alt: "Dictating into an empty note: GroqDictate's panel shows a live waveform while recording, then Transcribing, and the sentence appears below it.",
-      caption: "Right ⌘, speak, Right ⌘ again. The text lands where the cursor was.",
-    },
-  ]}
+  note="The panel is a real dictation, with the talking sped up; the sentence is what came back."
 >
   <Image slot="icon" src={icon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
+  <Dictation
+    slot="demo"
+    sentence="Can you find out why the build fails on Node 26 without changing any dependencies?"
+    caption="Right ⌘, speak, Right ⌘ again. The text lands where the cursor was."
+  />
 </Project>

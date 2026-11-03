@@ -23,10 +23,10 @@ interface Props {
   kind: string;
   text: string;
   description: string;
-  shots: Shot[];
+  shots?: Shot[];
   note: string;
 }
-const { title, kind, text, description, shots, note } = Astro.props;
+const { title, kind, text, description, shots = [], note } = Astro.props;
 const size = { width: 280, densities: [1, 2], format: "webp", quality: 72 } as const;
 const widths = { phone: 280, window: 720, panel: 320, clip: 640 } as const;
 const screens = await Promise.all(
@@ -58,6 +58,7 @@ const screens = await Promise.all(
   </main>
 
   <section class="shots" aria-label="Screens">
+    <slot name="demo" />
     {
       screens.map((s) => (
         <figure class={s.frame}>

@@ -1,0 +1,99 @@
+---
+// GroqDictate's demo: the real recording panel from one take, over a note drawn by the page, so the
+// note follows the reader's light or dark mode live. The panel itself is always dark, as macOS draws it.
+// The sentence is what Whisper returned in that take, revealed when the clip ends, as it was pasted.
+import { Image } from "astro:assets";
+import still from "../assets/work/groqdictate-panel-still.png";
+
+interface Props {
+  sentence: string;
+  caption: string;
+}
+const { sentence, caption } = Astro.props;
+---
+
+<figure class="dictation">
+  <div class="stage casts" data-state="idle">
+    <video class="panel" muted playsinline preload="auto" width="640" height="200" aria-hidden="true">
+      <source src="/work/groqdictate-panel.mp4" type="video/mp4" />
+      <source src="/work/groqdictate-panel.webm" type="video/webm" />
+    </video>
+    <Image class="panel still" src={still} alt="" width={320} densities={[1, 2]} />
+    <p class="field"><span class="words">{sentence}</span><span class="caret"></span></p>
+  </div>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<script>
+  // Plays the panel clip, then "pastes" the sentence the moment the panel goes, holds it, and starts over.
+  const wait = (ms: number) =>
+    new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  for (const stage of document.querySelectorAll<HTMLElement>(".dictation .stage")) {
+    const video = stage.querySelector("video");
+    if (!video) continue;
+    const set = (state: string) => {
+      stage.dataset.state = state;
+    };
+    const run = async () => {
+      set("idle");
+      await wait(900);
+      video.currentTime = 0;
+      try {
+        await video.play();
+        set("recording");
+      } catch {
+        set("still");
+      }
+    };
+    video.addEventListener("ended", async () => {
+      set("gone");
+      await wait(550);
+      set("pasted");
+      await wait(3200);
+      set("clearing");
+      await wait(450);
+      void run();
+    });
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) set("still");
+    else void run();
+  }
+</script>
+
+<style>
+  /* Positions are the recording's own: a 1280x768 crop of the screen, with the panel 640x200 at its top
+     center and the note's 34pt text in a centered 560pt column. */
+  /* Above the drifting light, so the note and panel look exactly as they do on screen. */
+  .dictation { position: relative; z-index: 2; width: min(100%, 640px); }
+  .stage {
+    position: relative; container-type: inline-size; aspect-ratio: 1280 / 768; overflow: hidden;
+    border-radius: 12px; outline: 1px solid var(--edge); outline-offset: -1px;
+    background: light-dark(#ffffff, #1a1a1a); color: light-dark(#1d1d1f, #f2f2f2);
+  }
+  .panel {
+    position: absolute; left: 25%; top: 4.7%; width: 50%; height: auto; display: block;
+    border-radius: 1.9cqw; box-shadow: 0 1.4cqw 3.6cqw rgb(0 0 0 / 0.32), 0 0 0 0.5px rgb(0 0 0 / 0.5);
+    opacity: 0; transform: scale(0.98); transition: opacity 180ms ease-out, transform 180ms ease-out;
+  }
+  .still { display: none; }
+  .stage[data-state="recording"] video.panel { opacity: 1; transform: none; }
+  .field {
+    position: absolute; left: 6.25%; right: 6.25%; top: 38.5%; margin: 0;
+    font: 500 5.3cqw/1.3 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; letter-spacing: -0.01em;
+  }
+  .words { display: none; transition: opacity 400ms ease-out; }
+  .stage:is([data-state="pasted"], [data-state="clearing"], [data-state="still"]) .words { display: inline; }
+  .stage[data-state="clearing"] .words { opacity: 0; }
+  .caret {
+    display: inline-block; width: 0.08em; height: 1.05em; margin-left: 0.04em; vertical-align: -0.2em;
+    background: #0a84ff; animation: blink 1.06s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
+
+  /* Reduced motion, or a browser that won't autoplay: the panel mid-recording and the sentence, still. */
+  .stage[data-state="still"] video.panel { display: none; }
+  .stage[data-state="still"] .still { display: block; opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
+</style>
