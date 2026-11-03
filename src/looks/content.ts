@@ -58,11 +58,6 @@ export const earlier = [
     text: "Git review notes in Neovim",
     href: "https://github.com/emmanuelchucks/patchmarks.nvim",
   },
-  {
-    title: "react-native-zoom-toolkit",
-    text: "Pinch to zoom for React Native",
-    href: "https://github.com/emmanuelchucks/react-native-zoom-toolkit",
-  },
 ];
 
 export const article = {
