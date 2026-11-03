@@ -32,6 +32,7 @@ const [chat, celebrant, groq, datameter] = work;
         {contact.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
         <li class="place">{intro.place}</li>
       </ul>
+      <p class="open">Taking on new work.</p>
     </header>
 
     <ol class="work" aria-label="Work">
@@ -101,6 +102,7 @@ const [chat, celebrant, groq, datameter] = work;
   .line { margin-top: 8px; color: var(--muted); font-size: 17px; }
   .contact { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px 22px; margin-top: 24px; font-weight: 600; }
   .place { color: var(--muted); font-weight: 400; }
+  .open { grid-column: 1 / -1; margin-top: 10px; color: var(--muted); font-size: 15px; }
 
   /* The work, each led by its app icon. The icons are the page's only colour. */
   .work { margin-top: 88px; display: grid; gap: 36px; }
