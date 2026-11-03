@@ -1,9 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import celebrantIcon from "../../assets/work/celebrant-icon.png";
-import explore from "../../assets/work/celebrant-explore.png";
+import exploreDark from "../../assets/work/celebrant-explore-dark.png";
+import exploreLight from "../../assets/work/celebrant-explore-light.png";
 import vendorsIcon from "../../assets/work/vendors-icon.png";
-import onboarding from "../../assets/work/vendors-onboarding.png";
+import chatDark from "../../assets/work/vendors-chat-dark.png";
+import chatLight from "../../assets/work/vendors-chat-light.png";
 import Project from "../../components/project.astro";
 import { work } from "../../site";
 
@@ -14,10 +16,10 @@ const [, apps] = work;
 <Project
   {...apps}
   description="Celedom's events marketplace, as two mobile apps: Celebrant for people planning an event, Vendors for the businesses they book. Built by Emmanuel Chucks for iOS and Android."
-  note="Test accounts and made-up vendors."
+  note="Test accounts, made-up people and made-up vendors."
   shots={[
-    { light: explore, alt: "Celebrant's Explore screen, with top rated vendors and event types to filter by.", caption: "Celebrant: finding vendors for an event." },
-    { light: onboarding, alt: "The Vendors app's first onboarding screen: Show off your craft and get clients you deserve.", caption: "Vendors: the first screen a new vendor sees." },
+    { light: exploreLight, dark: exploreDark, alt: "Celebrant's Explore screen, with top rated vendors and categories to filter by.", caption: "Celebrant: finding vendors for an event." },
+    { light: chatLight, dark: chatDark, alt: "A conversation in the Vendors app between a decorator and a client planning a tropical-themed company celebration.", caption: "Vendors: planning the details with a client." },
   ]}
 >
   <span class="icon pair casts" slot="icon">
