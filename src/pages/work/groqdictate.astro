@@ -1,7 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import icon from "../../assets/work/groqdictate-icon.png";
-import panel from "../../assets/work/groqdictate-panel.png";
+import stillDark from "../../assets/work/groqdictate-still-dark.png";
+import stillLight from "../../assets/work/groqdictate-still-light.png";
 import Project from "../../components/project.astro";
 import { groqDictate } from "../../site";
 ---
@@ -9,13 +10,15 @@ import { groqDictate } from "../../site";
 <Project
   {...groqDictate}
   description="GroqDictate: press Right ⌘, speak, and the text lands where you were working, on macOS and iPhone. Built by Emmanuel Chucks."
-  note="Captured from a real recording."
+  note="A real dictation into TextEdit, with the talking sped up."
   shots={[
     {
-      light: panel,
-      frame: "panel",
-      alt: "GroqDictate's recording panel: a live waveform, a red Recording label, and a hint to press Esc to cancel.",
-      caption: "Recording. Right ⌘ again to stop, Esc to cancel.",
+      light: stillLight,
+      dark: stillDark,
+      frame: "clip",
+      video: { light: "/work/groqdictate-light", dark: "/work/groqdictate-dark" },
+      alt: "Dictating into an empty note: GroqDictate's panel shows a live waveform while recording, then Transcribing, and the sentence appears in the note.",
+      caption: "Right ⌘, speak, Right ⌘ again. The text lands where the cursor was.",
     },
   ]}
 >
