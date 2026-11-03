@@ -1,0 +1,100 @@
+---
+// A project's own page: its icon and words, then its screens standing on the wall in the light.
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import Page from "../layouts/page.astro";
+import { intro } from "../site";
+
+interface Shot {
+  light: ImageMetadata;
+  /** The same screen in dark mode, when the app has one. */
+  dark?: ImageMetadata;
+  alt: string;
+  caption: string;
+}
+interface Props {
+  title: string;
+  kind: string;
+  text: string;
+  description: string;
+  shots: Shot[];
+  note: string;
+}
+const { title, kind, text, description, shots, note } = Astro.props;
+const size = { width: 280, densities: [1, 2], format: "webp", quality: 72 } as const;
+const screens = await Promise.all(
+  shots.map(async ({ light, dark, alt, caption }) => ({
+    alt,
+    caption,
+    light: await getImage({ src: light, ...size }),
+    dark: dark && (await getImage({ src: dark, ...size })),
+  })),
+);
+---
+
+<Page title={`${title} · ${intro.name}`} description={description}>
+  <main class="page">
+    <a class="back" href="/">{intro.name}</a>
+    <header class="head">
+      <slot name="icon" />
+      <div>
+        <h1>{title}</h1>
+        <p class="kind">{kind}</p>
+      </div>
+    </header>
+    <p class="text">{text}</p>
+  </main>
+
+  <section class="shots" aria-label="Screens">
+    {
+      screens.map((s) => (
+        <figure>
+          <picture class="screen casts">
+            {s.dark && <source media="(prefers-color-scheme: dark)" srcset={s.dark.srcSet.attribute} />}
+            <img src={s.light.src} srcset={s.light.srcSet.attribute} width={s.light.attributes.width} height={s.light.attributes.height} alt={s.alt} />
+          </picture>
+          <figcaption>{s.caption}</figcaption>
+        </figure>
+      ))
+    }
+  </section>
+
+  <p class="note">{note}</p>
+</Page>
+
+<style is:global>
+  /* Here the light falls on the screens too, so it sits above them and below the words. */
+  .window { z-index: 1; }
+  .page, .note { position: relative; z-index: 2; }
+  .page { width: min(100% - 48px, 600px); margin: 0 auto; padding: 14vh 0 0; }
+
+  .back { color: var(--muted); font-size: 15px; text-decoration: none; }
+  .back::before { content: "← "; }
+  .back:hover { color: var(--ink); }
+
+  .head { display: flex; gap: 20px; align-items: center; margin-top: 48px; }
+  .head h1 { font-size: 34px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; font-variation-settings: "opsz" 96; }
+  .kind { margin-top: 4px; color: var(--muted); font-size: 14px; }
+  .text { margin-top: 24px; max-width: 44ch; font-size: 18px; }
+
+  .icon { position: relative; display: block; width: 56px; height: 56px; flex: none; }
+  .icon img { display: block; width: 56px; height: 56px; border-radius: 22.5%; }
+  .pair img { position: absolute; width: 40px; height: 40px; border-radius: 0; }
+  .pair img:first-child { left: 18px; top: 18px; }
+  .pair img:last-child { left: 0; top: 0; }
+
+  /* Screens stand on the wall like prints, at a phone's own proportions and corners. */
+  .shots { display: flex; justify-content: center; gap: 48px; padding: 72px 24px 0; }
+  .shots figure { flex: none; width: 280px; }
+  .screen, .screen img { display: block; width: 100%; height: auto; }
+  .screen img { border-radius: 40px; }
+  figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
+  .note { width: min(100% - 48px, 600px); margin: 64px auto 0; padding-bottom: 120px; color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 680px) {
+    .head h1 { font-size: 28px; }
+    .shots { justify-content: flex-start; gap: 20px; padding: 56px 24px 24px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding: 0 24px; }
+    .shots figure { width: 72vw; scroll-snap-align: start; }
+    .screen img { border-radius: 10.5vw; }
+  }
+</style>

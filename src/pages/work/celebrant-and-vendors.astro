@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+import celebrantIcon from "../../assets/work/celebrant-icon.png";
+import explore from "../../assets/work/celebrant-explore.png";
+import vendorsIcon from "../../assets/work/vendors-icon.png";
+import onboarding from "../../assets/work/vendors-onboarding.png";
+import Project from "../../components/project.astro";
+import { work } from "../../site";
+
+const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as const;
+const [, apps] = work;
+---
+
+<Project
+  {...apps}
+  description="Celedom's events marketplace, as two mobile apps: Celebrant for people planning an event, Vendors for the businesses they book. Built by Emmanuel Chucks for iOS and Android."
+  note="Test accounts and made-up vendors."
+  shots={[
+    { light: explore, alt: "Celebrant's Explore screen, with top rated vendors and event types to filter by.", caption: "Celebrant: finding vendors for an event." },
+    { light: onboarding, alt: "The Vendors app's first onboarding screen: Show off your craft and get clients you deserve.", caption: "Vendors: the first screen a new vendor sees." },
+  ]}
+>
+  <span class="icon pair casts" slot="icon">
+    <Image src={vendorsIcon} alt="" {...iconSize} />
+    <Image src={celebrantIcon} alt="" {...iconSize} />
+  </span>
+</Project>
