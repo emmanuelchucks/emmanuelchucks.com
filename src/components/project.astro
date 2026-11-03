@@ -28,7 +28,7 @@ interface Props {
 }
 const { title, kind, text, description, shots, note } = Astro.props;
 const size = { width: 280, densities: [1, 2], format: "webp", quality: 72 } as const;
-const widths = { phone: 280, window: 720, panel: 320, clip: 720 } as const;
+const widths = { phone: 280, window: 720, panel: 320, clip: 640 } as const;
 const screens = await Promise.all(
   shots.map(async ({ light, dark, alt, caption, frame = "phone", video }) => {
     const options = { ...size, width: widths[frame], quality: frame === "phone" ? 72 : 80 };
@@ -62,12 +62,18 @@ const screens = await Promise.all(
       screens.map((s) => (
         <figure class={s.frame}>
           {s.video && (
-            <video class="screen casts motion" autoplay muted loop playsinline width={s.light.attributes.width} height={s.light.attributes.height} aria-label={s.alt}>
-              {s.video.dark && <source media="(prefers-color-scheme: dark)" src={`${s.video.dark}.mp4`} type="video/mp4" />}
-              {s.video.dark && <source media="(prefers-color-scheme: dark)" src={`${s.video.dark}.webm`} type="video/webm" />}
-              <source src={`${s.video.light}.mp4`} type="video/mp4" />
-              <source src={`${s.video.light}.webm`} type="video/webm" />
-            </video>
+            <>
+              <video class:list={["screen casts motion", { "for-light": s.video.dark }]} autoplay muted loop playsinline width={s.light.attributes.width} height={s.light.attributes.height} aria-label={s.alt}>
+                <source src={`${s.video.light}.mp4`} type="video/mp4" />
+                <source src={`${s.video.light}.webm`} type="video/webm" />
+              </video>
+              {s.video.dark && (
+                <video class="screen casts motion for-dark" autoplay muted loop playsinline width={s.light.attributes.width} height={s.light.attributes.height} aria-label={s.alt}>
+                  <source src={`${s.video.dark}.mp4`} type="video/mp4" />
+                  <source src={`${s.video.dark}.webm`} type="video/webm" />
+                </video>
+              )}
+            </>
           )}
           <picture class:list={["screen casts", { still: s.video }]}>
             {s.dark && <source media="(prefers-color-scheme: dark)" srcset={s.dark.srcSet.attribute} />}
@@ -115,10 +121,14 @@ const screens = await Promise.all(
   .window .screen img { border-radius: 1.45% / 2.39%; }
   .panel .screen img { border-radius: 3.8% / 12.5%; }
   /* A clip plays on its own; with reduced motion its last frame stands in for it. */
-  .shots figure.clip { width: min(100%, 720px); }
+  .shots figure.clip { width: min(100%, 640px); }
   .clip .screen, .clip .screen img { border-radius: 12px; }
   video.screen { display: block; width: 100%; height: auto; outline: 1px solid var(--edge); outline-offset: -1px; }
   .still { display: none; }
+  /* <source media> is only read when a video loads, so each mode gets its own video and CSS shows one;
+     a muted autoplaying video that's hidden waits and starts when it's shown. */
+  @media (prefers-color-scheme: dark) { video.for-light { display: none; } }
+  @media (prefers-color-scheme: light) { video.for-dark { display: none; } }
   @media (prefers-reduced-motion: reduce) {
     .motion { display: none; }
     .still { display: block; }
