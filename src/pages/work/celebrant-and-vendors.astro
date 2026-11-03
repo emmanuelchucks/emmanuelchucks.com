@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import celebrantIcon from "../../assets/work/celebrant-icon.png";
 import exploreDark from "../../assets/work/celebrant-explore-dark.png";
 import exploreLight from "../../assets/work/celebrant-explore-light.png";
+import requestDark from "../../assets/work/celebrant-request-dark.png";
+import requestLight from "../../assets/work/celebrant-request-light.png";
 import vendorsIcon from "../../assets/work/vendors-icon.png";
 import chatDark from "../../assets/work/vendors-chat-dark.png";
 import chatLight from "../../assets/work/vendors-chat-light.png";
@@ -18,7 +20,8 @@ const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as
   note="Test accounts, made-up people and made-up vendors."
   shots={[
     { light: exploreLight, dark: exploreDark, alt: "Celebrant's Explore screen, with top rated vendors and categories to filter by.", caption: "Celebrants find vendors for their event." },
-    { light: chatLight, dark: chatDark, alt: "A conversation in the Vendors app between a decorator and a client planning a tropical-themed company celebration.", caption: "Vendors work out the details with them." },
+    { light: requestLight, dark: requestDark, alt: "Celebrant's request form to Adaeze Events & Decor, filled in for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables.", caption: "They send a vendor what they're planning, and the vendor accepts or declines." },
+    { light: chatLight, dark: chatDark, alt: "A conversation in the Vendors app between a decorator and a client planning a tropical-themed company celebration.", caption: "Vendors work out the details with them in their own app." },
   ]}
 >
   <span class="icon pair casts" slot="icon">

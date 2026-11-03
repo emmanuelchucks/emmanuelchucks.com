@@ -2,8 +2,10 @@
 import { getImage } from "astro:assets";
 import chatIconDark from "../../assets/work/chat-icon-dark.png";
 import chatIconLight from "../../assets/work/chat-icon-light.png";
-import listDark from "../../assets/work/chat-list-dark.png";
-import listLight from "../../assets/work/chat-list-light.png";
+import dmDark from "../../assets/work/chat-assistant-dm-dark.png";
+import dmLight from "../../assets/work/chat-assistant-dm-light.png";
+import groupDark from "../../assets/work/chat-assistant-group-dark.png";
+import groupLight from "../../assets/work/chat-assistant-group-light.png";
 import threadDark from "../../assets/work/chat-thread-dark.png";
 import threadLight from "../../assets/work/chat-thread-light.png";
 import Project from "../../components/project.astro";
@@ -19,10 +21,11 @@ const icon = {
 <Project
   {...staffChat}
   description="Celedom's internal chat for its staff, with an assistant built in. Built by Emmanuel Chucks for iOS and Android."
-  note="Made-up people and test data."
+  note="Made-up people and a year of made-up chat history on a test server. The assistant's answers are real."
   shots={[
-    { light: threadLight, dark: threadDark, alt: "A conversation in the Celedom Staff chat, with quoted replies and a reaction.", caption: "Threads, with replies and reactions." },
-    { light: listLight, dark: listDark, alt: "The chat list, with Celedom Assistant among the chats.", caption: "The assistant is a chat like any other." },
+    { light: groupLight, dark: groupDark, alt: "In the Ops Lagos group, Ada asks Celedom Assistant what happened with the Osu birthday refund. It replies that it will read the chat around Kwame's message, then answers: on 18 October Kwame said a customer asked for a refund, Ben gave it a thumbs up, and there's no follow-up, so Kwame would know where it stands.", caption: "In a group, @mention the assistant and it reads back through the chat to answer." },
+    { light: dmLight, dark: dmDark, alt: "In a direct chat, Ada asks Celedom Assistant what's still open in Ops Lagos this week. It lists the one open item and two things it can't confirm from the chat.", caption: "It says what the chat doesn't show, rather than guessing." },
+    { light: threadLight, dark: threadDark, alt: "The Celedom Staff group: Ada replies to Tunde's message about the product launch contract, quoting it, and Tunde reacts with a thumbs up.", caption: "Around it, the chat itself: replies, reactions and mentions." },
   ]}
 >
   <picture class="icon casts" slot="icon">

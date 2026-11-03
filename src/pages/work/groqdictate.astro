@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import icon from "../../assets/work/groqdictate-icon.png";
+import partsDark from "../../assets/work/groqdictate-iphone-parts-dark.png";
+import partsLight from "../../assets/work/groqdictate-iphone-parts-light.png";
+import retryDark from "../../assets/work/groqdictate-iphone-retry-dark.png";
+import retryLight from "../../assets/work/groqdictate-iphone-retry-light.png";
 import Dictation from "../../components/dictation.astro";
 import Project from "../../components/project.astro";
 import { groqDictate } from "../../site";
@@ -9,7 +13,11 @@ import { groqDictate } from "../../site";
 <Project
   {...groqDictate}
   description="GroqDictate: press Right ⌘, speak, and the text lands where you were working, on macOS and iPhone. Built by Emmanuel Chucks."
-  note="The panel is a real dictation, with the talking sped up; the sentence is what came back."
+  note="The panel is a real dictation, with the talking sped up; the sentence is what came back. The iPhone recordings are made up."
+  shots={[
+    { light: partsLight, dark: partsDark, alt: "A 21-minute recording in GroqDictate on iPhone: the end of its transcript, a Copy transcript button, and its audio in five parts.", caption: "On iPhone, a long recording is saved in five-minute parts as it goes." },
+    { light: retryLight, dark: retryDark, alt: "A recording whose third part shows Retry needed and Check connection, with a Retry transcription button. The first two parts are already transcribed.", caption: "If the connection drops, the audio stays on the phone and waits to be retried." },
+  ]}
 >
   <Image slot="icon" src={icon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
   <Dictation
