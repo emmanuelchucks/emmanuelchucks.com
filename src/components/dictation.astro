@@ -73,7 +73,9 @@ const { sentence, caption } = Astro.props;
   }
   .panel {
     position: absolute; left: 25%; top: 4.7%; width: 50%; height: auto; display: block;
-    border-radius: 1.9cqw; box-shadow: 0 1.4cqw 3.6cqw rgb(0 0 0 / 0.32), 0 0 0 0.5px rgb(0 0 0 / 0.5);
+    /* Quiet, like every other shadow on the site: an edge, and a faint shadow close underneath. */
+    border-radius: 1.9cqw;
+    box-shadow: 0 0 0 0.5px light-dark(rgb(0 0 0 / 0.3), rgb(255 255 255 / 0.1)), 0 0.3cqw 1cqw light-dark(rgb(0 0 0 / 0.1), rgb(0 0 0 / 0.35));
     opacity: 0; transform: scale(0.98); transition: opacity 180ms ease-out, transform 180ms ease-out;
   }
   .still { display: none; }
