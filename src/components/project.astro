@@ -96,10 +96,12 @@ const screens = await Promise.all(
   .shots figure { flex: none; width: 280px; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
   .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
-  /* Mac windows and panels keep their own corners, cut out of the capture, so they get no edge of ours. */
+  /* Mac windows and panels have their own border trimmed off and corners cut out of the capture
+     (computer use returns JPEGs); the radius here matches that cut so our hairline follows it. */
   .shots figure.window { width: min(100%, 720px); }
   .shots figure.panel { width: 320px; }
-  :is(.window, .panel) .screen img { border-radius: 0; outline: none; }
+  .window .screen img { border-radius: 1.45% / 2.39%; }
+  .panel .screen img { border-radius: 3.8% / 12.5%; }
   .head .icon.mac { width: 70px; height: 70px; margin: -7px; }
   .head .icon.mac img, .head img.icon.mac { width: 70px; height: 70px; border-radius: 0; }
   figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
