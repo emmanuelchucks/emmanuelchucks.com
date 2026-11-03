@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+import icon from "../../assets/work/groqdictate-icon.png";
+import panel from "../../assets/work/groqdictate-panel.png";
+import Project from "../../components/project.astro";
+import { groqDictate } from "../../site";
+---
+
+<Project
+  {...groqDictate}
+  description="GroqDictate: press Right ⌘, speak, and the text lands where you were working, on macOS and iPhone. Built by Emmanuel Chucks."
+  note="Captured from a real recording."
+  shots={[
+    {
+      light: panel,
+      frame: "panel",
+      alt: "GroqDictate's recording panel: a live waveform, a red Recording label, and a hint to press Esc to cancel.",
+      caption: "Recording. Right ⌘ again to stop, Esc to cancel.",
+    },
+  ]}
+>
+  <Image slot="icon" src={icon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
+</Project>

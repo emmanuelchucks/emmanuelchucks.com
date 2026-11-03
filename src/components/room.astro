@@ -4,7 +4,7 @@ const tiles = Array.from({ length: 77 }, (_, i) => i);
 ---
 
 <div class="wall" aria-hidden="true">{tiles.map(() => <i></i>)}</div>
-<div class="window" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="daylight" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <style is:global>
   :root {
@@ -39,19 +39,19 @@ const tiles = Array.from({ length: 77 }, (_, i) => i);
   .wall i:hover { background: var(--tile-lit); transition-duration: 120ms; }
 
   /* Light through a four-pane window, drifting across the wall over a minute and a half. */
-  .window {
+  .daylight {
     position: fixed; z-index: 0; top: -12vh; left: -14vw; width: min(70vw, 780px); height: min(92vh, 920px);
     display: grid; grid-template: 1fr 1fr / 1fr 1fr; gap: 26px; pointer-events: none;
     transform: perspective(900px) rotateY(-22deg) rotateZ(-9deg) skewX(-8deg);
     animation: drift 90s ease-in-out infinite alternate;
   }
-  .window i { background: var(--sun); border-radius: 6px; }
+  .daylight i { background: var(--sun); border-radius: 6px; }
   @keyframes drift {
     from { translate: 0 0; opacity: 0.85; }
     to { translate: 60vw 22vh; opacity: 0.5; }
   }
-  @media (prefers-color-scheme: light) { .window { mix-blend-mode: soft-light; filter: blur(22px); } }
-  @media (prefers-color-scheme: dark) { .window { mix-blend-mode: screen; filter: blur(28px); } }
+  @media (prefers-color-scheme: light) { .daylight { mix-blend-mode: soft-light; filter: blur(22px); } }
+  @media (prefers-color-scheme: dark) { .daylight { mix-blend-mode: screen; filter: blur(28px); } }
 
   /* Things on the wall sit close to it: a tight contact shadow, and a faint soft one that drifts a
      couple of pixels against the light as it crosses. */
@@ -62,8 +62,8 @@ const tiles = Array.from({ length: 77 }, (_, i) => i);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .window, .casts { animation: none; }
-    .window { translate: 22vw 8vh; }
+    .daylight, .casts { animation: none; }
+    .daylight { translate: 22vw 8vh; }
     .wall i { transition: none; }
   }
 </style>

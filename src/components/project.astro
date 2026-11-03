@@ -11,8 +11,9 @@ interface Shot {
   dark?: ImageMetadata;
   alt: string;
   caption: string;
-  /** A Mac window rather than a phone screen. */
-  mac?: boolean;
+  /** What the capture is: a phone screen (the default), a Mac window, or a small floating panel.
+   *  Windows and panels come with their own corners cut out of the image. */
+  frame?: "phone" | "window" | "panel";
 }
 interface Props {
   title: string;
@@ -24,14 +25,14 @@ interface Props {
 }
 const { title, kind, text, description, shots, note } = Astro.props;
 const size = { width: 280, densities: [1, 2], format: "webp", quality: 72 } as const;
-const macSize = { width: 720, densities: [1, 2], format: "webp", quality: 80 } as const;
+const widths = { phone: 280, window: 720, panel: 320 } as const;
 const screens = await Promise.all(
-  shots.map(async ({ light, dark, alt, caption, mac }) => {
-    const options = mac ? macSize : size;
+  shots.map(async ({ light, dark, alt, caption, frame = "phone" }) => {
+    const options = { ...size, width: widths[frame], quality: frame === "phone" ? 72 : 80 };
     return {
       alt,
       caption,
-      mac,
+      frame,
       light: await getImage({ src: light, ...options }),
       dark: dark && (await getImage({ src: dark, ...options })),
     };
@@ -55,7 +56,7 @@ const screens = await Promise.all(
   <section class="shots" aria-label="Screens">
     {
       screens.map((s) => (
-        <figure class:list={{ mac: s.mac }}>
+        <figure class={s.frame}>
           <picture class="screen casts">
             {s.dark && <source media="(prefers-color-scheme: dark)" srcset={s.dark.srcSet.attribute} />}
             <img src={s.light.src} srcset={s.light.srcSet.attribute} width={s.light.attributes.width} height={s.light.attributes.height} alt={s.alt} />
@@ -71,7 +72,7 @@ const screens = await Promise.all(
 
 <style is:global>
   /* Here the light falls on the screens too, so it sits above them and below the words. */
-  .window { z-index: 1; }
+  .daylight { z-index: 1; }
   .page, .note { position: relative; z-index: 2; }
   .page { width: min(100% - 48px, 600px); margin: 0 auto; padding: 14vh 0 0; }
 
@@ -95,9 +96,10 @@ const screens = await Promise.all(
   .shots figure { flex: none; width: 280px; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
   .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
-  /* A Mac window: wider, with the window's own corners, cut out of the capture at its radius (32 of 1800 px). */
-  .shots figure.mac { width: min(100%, 720px); }
-  .mac .screen img { border-radius: 1.78% / 2.92%; }
+  /* Mac windows and panels keep their own corners, cut out of the capture, so they get no edge of ours. */
+  .shots figure.window { width: min(100%, 720px); }
+  .shots figure.panel { width: 320px; }
+  :is(.window, .panel) .screen img { border-radius: 0; outline: none; }
   .head .icon.mac { width: 70px; height: 70px; margin: -7px; }
   .head .icon.mac img, .head img.icon.mac { width: 70px; height: 70px; border-radius: 0; }
   figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
@@ -108,6 +110,6 @@ const screens = await Promise.all(
     .shots { justify-content: flex-start; gap: 20px; padding: 56px 24px 24px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding: 0 24px; }
     .shots figure { width: 72vw; scroll-snap-align: start; }
     .screen img { border-radius: 10.5vw; }
-    .shots figure.mac { width: calc(100vw - 48px); }
+    .shots figure.window { width: calc(100vw - 48px); }
   }
 </style>
