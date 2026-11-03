@@ -112,8 +112,8 @@ const [chat, celebrant, groq, datameter] = work;
   .pair img { position: absolute; width: 40px; height: 40px; }
   .pair img:first-child { left: 18px; top: 18px; }
   .pair img:last-child { left: 0; top: 0; }
-  /* macOS icons carry their own margin and a baked-in shadow; draw them larger and cast less. */
-  .icon.mac { width: 70px; height: 70px; margin: -7px 0 0 -7px; --shade: light-dark(rgb(80 64 36 / 0.07), rgb(0 0 0 / 0.55)); }
+  /* macOS icons carry their own margin and a baked-in shadow; draw them larger and add none. */
+  .icon.mac { width: 70px; height: 70px; margin: -7px 0 0 -7px; filter: none; animation: none; }
   .ghost { border-radius: 22.5%; outline: 1.5px dashed light-dark(rgb(0 0 0 / 0.28), rgb(255 255 255 / 0.22)); outline-offset: -1.5px; }
   .next h2 { color: var(--muted); font-weight: 500; }
 

@@ -16,7 +16,9 @@ const tiles = Array.from({ length: 77 }, (_, i) => i);
     --tile: light-dark(rgb(0 0 0 / 0.022), rgb(255 255 255 / 0.016));
     --tile-lit: light-dark(rgb(0 0 0 / 0.045), rgb(255 255 255 / 0.035));
     --sun: light-dark(rgb(255 250 236 / 0.9), rgb(170 190 230 / 0.14));
-    --shade: light-dark(rgb(80 64 36 / 0.16), rgb(0 0 0 / 0.7));
+    --contact: light-dark(rgb(60 48 28 / 0.14), rgb(0 0 0 / 0.5));
+    --shade: light-dark(rgb(60 48 28 / 0.06), rgb(0 0 0 / 0.25));
+    --edge: light-dark(rgb(0 0 0 / 0.06), rgb(255 255 255 / 0.09));
     background: var(--bg);
     color: var(--ink);
     font-family: Bricolage, system-ui, sans-serif;
@@ -51,11 +53,12 @@ const tiles = Array.from({ length: 77 }, (_, i) => i);
   @media (prefers-color-scheme: light) { .window { mix-blend-mode: soft-light; filter: blur(22px); } }
   @media (prefers-color-scheme: dark) { .window { mix-blend-mode: screen; filter: blur(28px); } }
 
-  /* Anything standing in the room casts a shadow that swings against the light as it crosses. */
-  .casts { filter: drop-shadow(0 0.5px 1px var(--shade)) drop-shadow(6px 7px 10px var(--shade)); animation: cast 90s ease-in-out infinite alternate; }
+  /* Things on the wall sit close to it: a tight contact shadow, and a faint soft one that drifts a
+     couple of pixels against the light as it crosses. */
+  .casts { filter: drop-shadow(0 0.5px 0.75px var(--contact)) drop-shadow(2px 3px 8px var(--shade)); animation: cast 90s ease-in-out infinite alternate; }
   @keyframes cast {
-    from { filter: drop-shadow(0 0.5px 1px var(--shade)) drop-shadow(6px 7px 10px var(--shade)); }
-    to { filter: drop-shadow(0 0.5px 1px var(--shade)) drop-shadow(-4px 7px 10px var(--shade)); }
+    from { filter: drop-shadow(0 0.5px 0.75px var(--contact)) drop-shadow(2px 3px 8px var(--shade)); }
+    to { filter: drop-shadow(0 0.5px 0.75px var(--contact)) drop-shadow(-2px 3px 8px var(--shade)); }
   }
 
   @media (prefers-reduced-motion: reduce) {

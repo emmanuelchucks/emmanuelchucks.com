@@ -87,7 +87,7 @@ const screens = await Promise.all(
   .shots { display: flex; justify-content: center; gap: 48px; padding: 72px 24px 0; }
   .shots figure { flex: none; width: 280px; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
-  .screen img { border-radius: 40px; }
+  .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
   figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
   .note { width: min(100% - 48px, 600px); margin: 64px auto 0; padding-bottom: 120px; color: var(--muted); font-size: 13px; }
 
