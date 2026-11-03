@@ -62,6 +62,7 @@ const screens = await Promise.all(
     {
       screens.map((s) => (
         <figure class={s.frame}>
+          <figcaption>{s.caption}</figcaption>
           {s.video && (
             <>
               <video class:list={["screen casts motion", { "for-light": s.video.dark }]} autoplay muted loop playsinline width={s.light.attributes.width} height={s.light.attributes.height} aria-label={s.alt}>
@@ -80,7 +81,6 @@ const screens = await Promise.all(
             {s.dark && <source media="(prefers-color-scheme: dark)" srcset={s.dark.srcSet.attribute} />}
             <img src={s.light.src} srcset={s.light.srcSet.attribute} width={s.light.attributes.width} height={s.light.attributes.height} alt={s.alt} />
           </picture>
-          <figcaption>{s.caption}</figcaption>
         </figure>
       ))
     }
@@ -110,19 +110,23 @@ const screens = await Promise.all(
   .pair img:first-child { left: 18px; top: 18px; }
   .pair img:last-child { left: 0; top: 0; }
 
-  /* Screens stand on the wall like prints, at a phone's own proportions and corners. */
-  .shots { display: flex; justify-content: center; gap: 48px; padding: 72px 24px 0; }
-  .shots figure { flex: none; width: 280px; }
+  /* Each screen is one step of the story: its sentence, then the screen. On wide screens a phone screen
+     sits beside its sentence, alternating sides; wide captures keep the sentence above. */
+  .shots { display: grid; justify-items: center; gap: 96px; padding: 88px 24px 0; }
+  .shots figure { margin: 0; display: grid; gap: 22px; width: min(100%, 720px); }
+  .shots figcaption { max-width: 22em; color: var(--ink); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+  .shots figure.phone { width: min(100%, 680px); grid-template-columns: 280px 1fr; grid-template-areas: "screen words"; align-items: center; column-gap: 64px; }
+  .shots figure.phone:nth-of-type(even) { grid-template-columns: 1fr 280px; grid-template-areas: "words screen"; }
+  .shots figure.phone > figcaption { grid-area: words; }
+  .shots figure.phone > :not(figcaption) { grid-area: screen; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
   .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
   /* Mac windows and panels have their own border trimmed off and corners cut out of the capture
      (computer use returns JPEGs); the radius here matches that cut so our hairline follows it. */
-  .shots figure.window { width: min(100%, 720px); }
-  .shots figure.panel { width: 320px; }
+  .shots figure.panel { width: min(100%, 320px); }
   .window .screen img { border-radius: 1.45% / 2.39%; }
   .panel .screen img { border-radius: 3.8% / 12.5%; }
   /* A clip plays on its own; with reduced motion its last frame stands in for it. */
-  .shots figure.clip { width: min(100%, 640px); }
   .clip .screen, .clip .screen img { border-radius: 12px; }
   video.screen { display: block; width: 100%; height: auto; outline: 1px solid var(--edge); outline-offset: -1px; }
   .still { display: none; }
@@ -136,14 +140,14 @@ const screens = await Promise.all(
   }
   .head .icon.mac { width: 70px; height: 70px; margin: -7px; }
   .head .icon.mac img, .head img.icon.mac { width: 70px; height: 70px; border-radius: 0; }
-  figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
   .note { width: min(100% - 48px, 600px); margin: 64px auto 0; padding-bottom: 120px; color: var(--muted); font-size: 13px; }
 
   @media (max-width: 680px) {
     .head h1 { font-size: 28px; }
-    .shots { justify-content: flex-start; gap: 20px; padding: 56px 24px 24px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding: 0 24px; }
-    .shots figure { width: 72vw; scroll-snap-align: start; }
-    .screen img { border-radius: 10.5vw; }
-    .shots figure:is(.window, .clip) { width: calc(100vw - 48px); }
+    .shots { gap: 72px; padding-top: 64px; }
+    .shots figcaption { font-size: 19px; }
+    .shots figure.phone, .shots figure.phone:nth-of-type(even) { grid-template-columns: 1fr; grid-template-areas: "words" "screen"; justify-items: start; }
+    .shots figure.phone > :not(figcaption) { width: 78vw; max-width: 300px; }
+    .screen img { border-radius: min(10.5vw, 40px); }
   }
 </style>

@@ -126,3 +126,14 @@ The order for each feature stays as the charter says: scenarios written first, b
 - **Words:** no tagline. You found every drafted one machine-sounding; the line under the name is your own GitHub bio until you have one of your own. "Taking on new work." sits under the links, as plain text with no badge.
 - **Type and grey:** one font, Bricolage Grotesque, with the name at optical size 96. Three levels of ink (`--ink`, `--text`, `--muted`), each at least 4.5:1 against the wall where the light is brightest; a Playwright axe test checks contrast in light and dark.
 - **Font size:** `scripts/subset-font.sh` builds `src/assets/fonts/bricolage.woff2` (18 KB, from 77 KB): Basic Latin and typographic punctuation, weights 400 to 700, the full optical-size axis, and no kerning (23 KB of the subset across both axes, with almost no visible difference in this face). Homepage: 43.7 KB on Lighthouse's phone run, 2026-11-03.
+
+### Project pages: where they stand (2026-11-03)
+
+Each page is a short story: a sentence per screen. On wide screens a phone screen sits beside its sentence, alternating sides; Mac windows and the GroqDictate demo keep the sentence above. On phones it's sentence, then screen. Iterate on the tailnet dev server; deploy at agreed milestones.
+
+Next, in order:
+1. **Staff chat:** its screens are frames from the demo video, so they're soft, and the assistant (its headline) isn't shown. The Celedom demo-video work has the seeded demo server (`demo-video-server`, port 8890) and the steps to rebuild the simulator app (`~/.cache/devbox/tmp/demo-video/HANDOFF.md`, `~/work/clients/celedom/demo-video/PLAN.md`); its assistant scenes were never recorded either, so one session can do both.
+2. **DataMeter on phones:** the whole window is too small to read at phone width. Its menu bar view is the phone-sized one; capture it on made-up data (the swap-and-restore steps above) when the Mac is free, or render it offscreen from the app's code.
+3. **Celebrant and Vendors:** one request seen from both sides (sent in Celebrant, received and accepted in Vendors), from the same simulator builds and review accounts.
+4. **GroqDictate on iPhone:** its recordings list, from a simulator build of the iOS app.
+

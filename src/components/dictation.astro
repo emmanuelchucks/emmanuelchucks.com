@@ -13,6 +13,7 @@ const { sentence, caption } = Astro.props;
 ---
 
 <figure class="dictation">
+  <figcaption>{caption}</figcaption>
   <div class="stage casts" data-state="idle">
     <video class="panel" muted playsinline preload="auto" width="640" height="200" aria-hidden="true">
       <source src="/work/groqdictate-panel.mp4" type="video/mp4" />
@@ -21,7 +22,6 @@ const { sentence, caption } = Astro.props;
     <Image class="panel still" src={still} alt="" width={320} densities={[1, 2]} />
     <p class="field"><span class="words">{sentence}</span><span class="caret"></span></p>
   </div>
-  <figcaption>{caption}</figcaption>
 </figure>
 
 <script>
@@ -66,6 +66,7 @@ const { sentence, caption } = Astro.props;
      center and the note's 34pt text in a centered 560pt column. */
   /* Above the drifting light, so the note and panel look exactly as they do on screen. */
   .dictation { position: relative; z-index: 2; width: min(100%, 640px); }
+  .stage { width: 100%; }
   .stage {
     position: relative; container-type: inline-size; aspect-ratio: 1280 / 768; overflow: hidden;
     border-radius: 12px; outline: 1px solid var(--edge); outline-offset: -1px;
@@ -92,7 +93,6 @@ const { sentence, caption } = Astro.props;
     background: #0a84ff; animation: blink 1.06s steps(1) infinite;
   }
   @keyframes blink { 50% { opacity: 0; } }
-  figcaption { margin-top: 18px; color: var(--muted); font-size: 14px; }
 
   /* Reduced motion, or a browser that won't autoplay: the panel mid-recording and the sentence, still. */
   .stage[data-state="still"] video.panel { display: none; }
