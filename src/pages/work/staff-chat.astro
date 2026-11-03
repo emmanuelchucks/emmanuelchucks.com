@@ -7,18 +7,17 @@ import listLight from "../../assets/work/chat-list-light.png";
 import threadDark from "../../assets/work/chat-thread-dark.png";
 import threadLight from "../../assets/work/chat-thread-light.png";
 import Project from "../../components/project.astro";
-import { work } from "../../site";
+import { staffChat } from "../../site";
 
 const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as const;
 const icon = {
   light: await getImage({ src: chatIconLight, ...iconSize }),
   dark: await getImage({ src: chatIconDark, ...iconSize }),
 };
-const [chat] = work;
 ---
 
 <Project
-  {...chat}
+  {...staffChat}
   description="Celedom's internal chat for its staff, with an assistant built in. Built by Emmanuel Chucks for iOS and Android."
   note="Made-up people and test data."
   shots={[

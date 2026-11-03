@@ -10,28 +10,31 @@ export const contact = [
   { label: "X", href: "https://x.com/emmanuelchucks" },
 ];
 
-export const work = [
-  {
-    title: "Celedom staff chat",
-    kind: "iOS, Android · Cloudflare",
-    text: "Celedom's internal chat for its staff, with an assistant built in.",
-  },
-  {
-    title: "Celebrant and Vendors",
-    kind: "iOS, Android",
-    text: "Celedom's events marketplace, as two mobile apps.",
-  },
-  {
-    title: "GroqDictate",
-    kind: "macOS, iPhone",
-    text: "Press Right ⌘, speak, and the text lands where you were working. On iPhone, recordings are kept in five-minute pieces so nothing is lost before it's transcribed.",
-  },
-  {
-    title: "DataMeter",
-    kind: "macOS",
-    text: "Shows how much network data each app on your Mac uses, kept locally.",
-  },
-];
+export const staffChat = {
+  title: "Celedom staff chat",
+  kind: "iOS, Android · Cloudflare",
+  text: "Celedom's internal chat for its staff, with an assistant built in.",
+};
+
+export const marketplace = {
+  title: "Celebrant and Vendors",
+  kind: "iOS, Android",
+  text: "Celedom's events marketplace, as two mobile apps.",
+};
+
+export const groqDictate = {
+  title: "GroqDictate",
+  kind: "macOS, iPhone",
+  text: "Press Right ⌘, speak, and the text lands where you were working. On iPhone, recordings are kept in five-minute pieces so nothing is lost before it's transcribed.",
+};
+
+export const dataMeter = {
+  title: "DataMeter",
+  kind: "macOS",
+  text: "Shows how much network data each app on your Mac uses, kept locally.",
+};
+
+export const work = [staffChat, marketplace, groqDictate, dataMeter];
 
 export const next = "Calls and shared agent sessions, inside the terminal.";
 
