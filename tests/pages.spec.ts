@@ -29,6 +29,7 @@ for (const path of [
   "/work/staff-chat",
   "/work/celebrant-and-vendors",
   "/work/datameter",
+  "/work/groqdictate",
   "/no-such-page",
 ]) {
   test(`text on ${path} meets WCAG AA contrast`, async ({ page }) => {
