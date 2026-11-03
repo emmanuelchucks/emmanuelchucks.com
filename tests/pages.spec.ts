@@ -1,3 +1,4 @@
+import { AxeBuilder } from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test("the homepage ships no JavaScript", async ({ page }) => {
@@ -22,3 +23,11 @@ test("the page never scrolls sideways", async ({ page }) => {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
   expect(overflow).toBeLessThanOrEqual(0);
 });
+
+for (const path of ["/", "/looks/lit", "/looks/lit-chat"]) {
+  test(`text on ${path} meets WCAG AA contrast`, async ({ page }) => {
+    await page.goto(path);
+    const { violations } = await new AxeBuilder({ page }).withRules(["color-contrast"]).analyze();
+    expect(violations.flatMap((v) => v.nodes.map((n) => n.failureSummary))).toEqual([]);
+  });
+}

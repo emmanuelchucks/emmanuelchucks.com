@@ -19,6 +19,7 @@
     "astro": "^7.4.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@kasoa/vite-plus-config": "^0.6.1",
     "@lhci/cli": "^0.15.1",
     "@playwright/test": "^1.64.1",
