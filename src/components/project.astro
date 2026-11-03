@@ -11,9 +11,9 @@ interface Shot {
   dark?: ImageMetadata;
   alt: string;
   caption: string;
-  /** What the capture is: a phone screen (the default), a Mac window, or a small floating panel.
-   *  Windows and panels come with their own corners cut out of the image. */
-  frame?: "phone" | "window" | "panel" | "clip";
+  /** What the capture is: a phone screen (the default), a Mac window, a menu bar panel,
+   *  or a clip. Mac captures are square-cornered; the page rounds them as macOS does. */
+  frame?: "phone" | "window" | "menu" | "clip";
   /** A short silent loop to play instead of the image, which stays as its still for reduced motion.
    *  Paths without extension: each is served as .mp4 (H.264) and .webm (VP9). */
   video?: { light: string; dark?: string };
@@ -28,7 +28,7 @@ interface Props {
 }
 const { title, kind, text, description, shots = [], note } = Astro.props;
 const size = { width: 280, densities: [1, 2], format: "webp", quality: 72 } as const;
-const widths = { phone: 280, window: 720, panel: 320, clip: 640 } as const;
+const widths = { phone: 280, window: 720, menu: 280, clip: 640 } as const;
 const screens = await Promise.all(
   shots.map(async ({ light, dark, alt, caption, frame = "phone", video }) => {
     const options = { ...size, width: widths[frame], quality: frame === "phone" ? 72 : 80 };
@@ -115,17 +115,16 @@ const screens = await Promise.all(
   .shots { display: grid; justify-items: center; gap: 96px; padding: 88px 24px 0; }
   .shots figure { margin: 0; display: grid; gap: 22px; width: min(100%, 720px); }
   .shots figcaption { max-width: 22em; color: var(--ink); font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
-  .shots figure.phone { width: min(100%, 680px); grid-template-columns: 280px 1fr; grid-template-areas: "screen words"; align-items: center; column-gap: 64px; }
-  .shots figure.phone:nth-of-type(even) { grid-template-columns: 1fr 280px; grid-template-areas: "words screen"; }
-  .shots figure.phone > figcaption { grid-area: words; }
-  .shots figure.phone > :not(figcaption) { grid-area: screen; }
+  .shots figure:is(.phone, .menu) { width: min(100%, 680px); grid-template-columns: 280px 1fr; grid-template-areas: "screen words"; align-items: center; column-gap: 64px; }
+  .shots figure:is(.phone, .menu):nth-of-type(even) { grid-template-columns: 1fr 280px; grid-template-areas: "words screen"; }
+  .shots figure:is(.phone, .menu) > figcaption { grid-area: words; }
+  .shots figure:is(.phone, .menu) > :not(figcaption) { grid-area: screen; }
   .screen, .screen img { display: block; width: 100%; height: auto; }
   .screen img { border-radius: 40px; outline: 1px solid var(--edge); outline-offset: -1px; }
-  /* Mac windows and panels have their own border trimmed off and corners cut out of the capture
-     (computer use returns JPEGs); the radius here matches that cut so our hairline follows it. */
-  .shots figure.panel { width: min(100%, 320px); }
-  .window .screen img { border-radius: 1.45% / 2.39%; }
-  .panel .screen img { border-radius: 3.8% / 12.5%; }
+  /* Mac windows and menu bar panels are drawn offscreen from the app's own views, square-cornered;
+     the radius here is macOS 26's (about 16 pt for windows, 12 pt for menu bar panels). */
+  .window .screen img { border-radius: 2.1% / 3.15%; }
+  .menu .screen img { border-radius: 4.3% / 3.75%; }
   /* A clip plays on its own; with reduced motion its last frame stands in for it. */
   .clip .screen, .clip .screen img { border-radius: 12px; }
   video.screen { display: block; width: 100%; height: auto; outline: 1px solid var(--edge); outline-offset: -1px; }
@@ -146,8 +145,8 @@ const screens = await Promise.all(
     .head h1 { font-size: 28px; }
     .shots { gap: 72px; padding-top: 64px; }
     .shots figcaption { font-size: 19px; }
-    .shots figure.phone, .shots figure.phone:nth-of-type(even) { grid-template-columns: 1fr; grid-template-areas: "words" "screen"; justify-items: start; }
-    .shots figure.phone > :not(figcaption) { width: 78vw; max-width: 300px; }
-    .screen img { border-radius: min(10.5vw, 40px); }
+    .shots figure:is(.phone, .menu), .shots figure:is(.phone, .menu):nth-of-type(even) { grid-template-columns: 1fr; grid-template-areas: "words" "screen"; justify-items: start; }
+    .shots figure:is(.phone, .menu) > :not(figcaption) { width: 78vw; max-width: 300px; }
+    .phone .screen img { border-radius: min(10.5vw, 40px); }
   }
 </style>

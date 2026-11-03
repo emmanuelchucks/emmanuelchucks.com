@@ -3,6 +3,8 @@ import { Image } from "astro:assets";
 import dark from "../../assets/work/datameter-dark.png";
 import icon from "../../assets/work/datameter-icon.png";
 import light from "../../assets/work/datameter-light.png";
+import menuDark from "../../assets/work/datameter-menu-dark.png";
+import menuLight from "../../assets/work/datameter-menu-light.png";
 import Project from "../../components/project.astro";
 import { dataMeter } from "../../site";
 ---
@@ -10,8 +12,11 @@ import { dataMeter } from "../../site";
 <Project
   {...dataMeter}
   description="DataMeter shows how much network data each app on your Mac uses, kept locally. Built by Emmanuel Chucks."
-  note="Made-up usage."
-  shots={[{ light, dark, frame: "window", alt: "DataMeter's window: today's total of 5.3 GB on Wi-Fi, and each app's downloads and uploads, led by Xcode, Safari and Chrome.", caption: "Each app's data, by day and by network." }]}
+  note="Made-up usage, drawn from DataMeter's own views."
+  shots={[
+    { light, dark, frame: "window", alt: "DataMeter's window: 5.3 GB used today on Wi-Fi, with each app's downloads, uploads and total, led by Xcode, Safari and Google Chrome. Range and network pickers sit above the table.", caption: "Which apps used your data, today or this month, and on which network." },
+    { light: menuLight, dark: menuDark, frame: "menu", alt: "DataMeter's menu bar panel: 5.3 GB today, 4.74 GB down and 560 MB up, and the six apps that used the most.", caption: "The day's total sits in the menu bar, one click away." },
+  ]}
 >
   <Image slot="icon" src={icon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
 </Project>
