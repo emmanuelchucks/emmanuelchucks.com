@@ -111,20 +111,18 @@ The order for each feature stays as the charter says: scenarios written first, b
 
 1. Spike: done (above).
 2. Astro project on a `rebuild` branch, replacing the RedwoodSDK app (deleted, not migrated); Playwright, Lighthouse CI and size checks wired to the build from the first commit.
-3. Homepage with real content, deployed to the preview Worker.
+3. Homepage with real content, deployed to the preview Worker: done 2026-11-03, apart from the screens still needed (above).
 4. The window shell, with its scenarios.
 5. The GroqDictate post and its demos.
 6. RSS, OG images, 404, analytics.
 
 ## The look
 
-Being explored at `/looks` on the preview (noindex pages, removed once the homepage is built). Your reactions so far (2026-11-01):
+"Lit wall", chosen 2026-11-03 after rounds of trial looks (in git history, tag `look-lit-1` for the first Lit wall you liked).
 
-- **Keep:** the slow light drifting across the page (subtle enough to almost miss), the big tile field from the current site (the thing that makes someone stop and look), the drafting table's ruler and measurements (reads as a builder), the sheet on a desk with a photo taped to it.
-- **Drop:** the colour room (jarring, not your style). The first three looks (paper, instrument, console) read as bland and machine-made.
-- **Add:** pictures of the work, placed with care; how they sit in the design is part of the exploration.
-- **"Wall" (2026-11-01) was rejected** as a patchwork of every liked element at once. Lesson: one idea leads, and other elements earn a place by serving it.
-- **Current direction: "Lit wall".** One idea: the current site's tile wall in a room, with the slow window light crossing it. The app icons are the page's only colour (you liked them: colour that isn't forced), and their shadows shift as the light crosses. The next project is an empty dashed app icon. No ruler, tape or measurements for now. One font (Bricolage Grotesque).
-- **Saved:** you liked the first Lit wall, so it is kept as it was at `/looks/lit-1` (git tag `look-lit-1`) in case later rounds go wrong. Since then the icon shadows in light mode are about a third as strong, and lighter still on the macOS icons, which have a shadow of their own.
-- **Pictures so far:** the real app icons of all five apps (the staff chat's swaps for light and dark mode); The homepage stays icons only. Each project gets its own page where its screens stand on the same wall in the light, shown in the reader's light or dark mode; the staff chat's is the first (`/looks/lit-chat`, a thread and the chat list from the demo recording: simulator, made-up people). Still needed: Mac screens of GroqDictate and DataMeter, and clean Celebrant and Vendors screens with test accounts (the App Store images are marketing collages).
-- **Budget:** at phone resolution the Wall page is about 110 KB, 77 KB of it the font; subsetting the font to the characters used brings it near the 50 KB homepage budget.
+- **One idea:** the earlier site's tile wall in a room, with window light drifting across it over 90 seconds (`src/components/room.astro`, on every page). Other elements earn a place by serving it; a page combining every liked element ("Wall") read as a patchwork.
+- **Colour:** the real app icons are the only colour. Their shadows swing against the light as it crosses (`.casts`). The next project is an empty dashed icon.
+- **Pictures:** the homepage shows icons only. Each project has its own page where its screens stand on the wall in the light, in the reader's light or dark mode; the staff chat's is first (`/work/staff-chat`: a thread and the chat list from the demo recording, simulator, made-up people). Still needed: Mac screens of GroqDictate and DataMeter, and Celebrant and Vendors screens on test accounts (the App Store images are marketing collages).
+- **Words:** no tagline. You found every drafted one machine-sounding; the line under the name is your own GitHub bio until you have one of your own. "Taking on new work." sits under the links, as plain text with no badge.
+- **Type and grey:** one font, Bricolage Grotesque, with the name at optical size 96. Three levels of ink (`--ink`, `--text`, `--muted`), each at least 4.5:1 against the wall where the light is brightest; a Playwright axe test checks contrast in light and dark.
+- **Font size:** `scripts/subset-font.sh` builds `src/assets/fonts/bricolage.woff2` (18 KB, from 77 KB): Basic Latin and typographic punctuation, weights 400 to 700, the full optical-size axis, and no kerning (23 KB of the subset across both axes, with almost no visible difference in this face). Homepage: 43.7 KB on Lighthouse's phone run, 2026-11-03.

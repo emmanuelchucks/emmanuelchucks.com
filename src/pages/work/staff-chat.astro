@@ -1,15 +1,13 @@
 ---
 import { getImage } from "astro:assets";
-import font from "@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url";
-import Room from "../../looks/room.astro";
-import Shell from "../../looks/shell.astro";
-import { intro, work } from "../../looks/content";
-import chatIconDark from "../../looks/media/chat-icon-dark.png";
-import chatIconLight from "../../looks/media/chat-icon-light.png";
-import listDark from "../../looks/media/chat-list-dark.png";
-import listLight from "../../looks/media/chat-list-light.png";
-import threadDark from "../../looks/media/chat-thread-dark.png";
-import threadLight from "../../looks/media/chat-thread-light.png";
+import chatIconDark from "../../assets/work/chat-icon-dark.png";
+import chatIconLight from "../../assets/work/chat-icon-light.png";
+import listDark from "../../assets/work/chat-list-dark.png";
+import listLight from "../../assets/work/chat-list-light.png";
+import threadDark from "../../assets/work/chat-thread-dark.png";
+import threadLight from "../../assets/work/chat-thread-light.png";
+import Page from "../../layouts/page.astro";
+import { intro, work } from "../../site";
 
 const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as const;
 const icon = {
@@ -27,11 +25,9 @@ const shots = await Promise.all(
 );
 ---
 
-<Shell slug="lit" font={font} family="Bricolage" axes="font-weight:200 800;">
-  <Room />
-
+<Page title="Celedom staff chat · Emmanuel Chucks" description="Celedom's internal chat for its staff, with an assistant built in. Built by Emmanuel Chucks for iOS and Android.">
   <main class="page">
-    <a class="back" href="/looks/lit">{intro.name}</a>
+    <a class="back" href="/">{intro.name}</a>
     <header class="head">
       <picture class="icon casts">
         <source media="(prefers-color-scheme: dark)" srcset={icon.dark.srcSet.attribute} />
@@ -60,7 +56,7 @@ const shots = await Promise.all(
   </section>
 
   <p class="note">Made-up people and test data.</p>
-</Shell>
+</Page>
 
 <style is:global>
   /* Here the light falls on the screens too, so it sits above them and below the words. */

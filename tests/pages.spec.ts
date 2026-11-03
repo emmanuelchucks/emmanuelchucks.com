@@ -24,7 +24,7 @@ test("the page never scrolls sideways", async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
-for (const path of ["/", "/looks/lit", "/looks/lit-chat"]) {
+for (const path of ["/", "/work/staff-chat", "/no-such-page"]) {
   test(`text on ${path} meets WCAG AA contrast`, async ({ page }) => {
     await page.goto(path);
     const { violations } = await new AxeBuilder({ page }).withRules(["color-contrast"]).analyze();

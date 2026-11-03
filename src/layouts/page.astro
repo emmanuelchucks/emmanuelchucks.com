@@ -1,9 +1,13 @@
 ---
+import font from "../assets/fonts/bricolage.woff2?url";
+import Room from "../components/room.astro";
+
 interface Props {
   title: string;
   description: string;
 }
 const { title, description } = Astro.props;
+const fontFace = `@font-face{font-family:"Bricolage";src:url(${font}) format("woff2");font-weight:400 700;font-display:swap}`;
 ---
 
 <!doctype html>
@@ -15,21 +19,11 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.png" />
+    <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFace} />
   </head>
   <body>
+    <Room />
     <slot />
   </body>
 </html>
-
-<style is:global>
-  :root {
-    color-scheme: light dark;
-    font-family: system-ui, sans-serif;
-    line-height: 1.6;
-  }
-  body {
-    margin: 0 auto;
-    padding: 2rem 1.25rem;
-    max-width: 40rem;
-  }
-</style>

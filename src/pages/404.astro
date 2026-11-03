@@ -3,8 +3,14 @@ import Page from "../layouts/page.astro";
 ---
 
 <Page title="Not found · Emmanuel Chucks" description="This page doesn't exist.">
-  <main>
+  <main class="lost">
     <h1>Not found</h1>
     <p>There's nothing at this address. <a href="/">Go to the homepage</a>.</p>
   </main>
 </Page>
+
+<style>
+  .lost { position: relative; z-index: 1; width: min(100% - 48px, 600px); margin: 0 auto; padding: 18vh 0 120px; }
+  h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variation-settings: "opsz" 96; }
+  p { margin-top: 16px; color: var(--text); }
+</style>
