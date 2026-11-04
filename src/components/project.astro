@@ -136,9 +136,9 @@ const shown = await Promise.all(
   /* Each step is one moment: its heading and words, then its screens. On wide screens the words sit beside
      the screens, alternating sides; a Mac window or a clip is too wide for that and keeps its words above. */
   .steps { display: grid; justify-items: center; gap: 128px; padding: 112px 24px 0; }
-  .step { display: grid; width: min(100%, 980px); align-items: center; column-gap: 80px; row-gap: 28px;
-    grid-template-columns: 1fr auto; grid-template-areas: "words screens"; }
-  .step:nth-child(even of .step:not(.wide)) { grid-template-columns: auto 1fr; grid-template-areas: "screens words"; }
+  .step { display: grid; width: min(100%, 980px); align-items: center; justify-content: center; column-gap: 88px; row-gap: 28px;
+    grid-template-columns: auto auto; grid-template-areas: "words screens"; }
+  .step:nth-child(even of .step:not(.wide)) { grid-template-areas: "screens words"; }
   .step.wide { grid-template-columns: 1fr; grid-template-areas: "words" "screens"; width: min(100%, 760px); }
   .step > .words { grid-area: words; max-width: 30ch; }
   .wide > .words { max-width: 40ch; }
@@ -180,10 +180,17 @@ const shown = await Promise.all(
   }
   .note { width: min(100% - 48px, 600px); margin: 96px auto 0; padding-bottom: 120px; color: var(--muted); font-size: 13px; }
 
+  /* Too narrow for words beside two phones: the words go above, everything left-aligned in one column. */
+  @media (max-width: 1040px) {
+    .step, .step:nth-child(even of .step:not(.wide)) { width: min(100%, 600px); grid-template-columns: 1fr; grid-template-areas: "words" "screens"; }
+    .step > .words { max-width: 40ch; }
+    .screens { justify-content: flex-start; }
+    .stacked .screens { align-items: flex-start; }
+    .two .screens figure { width: calc(50% - 16px); }
+  }
   @media (max-width: 760px) {
     .head h1 { font-size: 28px; }
     .steps { gap: 88px; padding-top: 72px; }
-    .step, .step:nth-child(even of .step:not(.wide)) { grid-template-columns: 1fr; grid-template-areas: "words" "screens"; }
     .step > .words h2 { font-size: 23px; }
     .step > .words p { font-size: 17px; }
     .step > .words p:only-child, .steps > .dictation > figcaption { font-size: 19px; }
