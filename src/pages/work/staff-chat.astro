@@ -1,13 +1,21 @@
 ---
 import { getImage } from "astro:assets";
-import chatIconDark from "../../assets/work/chat-icon-dark.png";
-import chatIconLight from "../../assets/work/chat-icon-light.png";
 import dmDark from "../../assets/work/chat-assistant-dm-dark.png";
 import dmLight from "../../assets/work/chat-assistant-dm-light.png";
 import groupDark from "../../assets/work/chat-assistant-group-dark.png";
 import groupLight from "../../assets/work/chat-assistant-group-light.png";
-import threadDark from "../../assets/work/chat-thread-dark.png";
-import threadLight from "../../assets/work/chat-thread-light.png";
+import heartsDark from "../../assets/work/chat-hearts-dark.png";
+import heartsLight from "../../assets/work/chat-hearts-light.png";
+import chatIconDark from "../../assets/work/chat-icon-dark.png";
+import chatIconLight from "../../assets/work/chat-icon-light.png";
+import menuDark from "../../assets/work/chat-menu-dark.png";
+import menuLight from "../../assets/work/chat-menu-light.png";
+import popperDark from "../../assets/work/chat-popper-dark.png";
+import popperLight from "../../assets/work/chat-popper-light.png";
+import sentDark from "../../assets/work/chat-sent-dark.png";
+import sentLight from "../../assets/work/chat-sent-light.png";
+import waitingDark from "../../assets/work/chat-waiting-dark.png";
+import waitingLight from "../../assets/work/chat-waiting-light.png";
 import Project from "../../components/project.astro";
 import { staffChat } from "../../site";
 
@@ -16,16 +24,44 @@ const icon = {
   light: await getImage({ src: chatIconLight, ...iconSize }),
   dark: await getImage({ src: chatIconDark, ...iconSize }),
 };
+const clip = (name: string) => ({ light: `/work/chat-${name}-light`, dark: `/work/chat-${name}-dark` });
 ---
 
 <Project
   {...staffChat}
-  description="Celedom's internal chat for its staff, with an assistant built in. Built by Emmanuel Chucks for iOS and Android."
-  note="Made-up people and a year of made-up chat history on a test server. The assistant's answers are real."
-  shots={[
-    { light: groupLight, dark: groupDark, alt: "In the Ops Lagos group, Ada asks Celedom Assistant what happened with the Osu birthday refund. It replies that it will read the chat around Kwame's message, then answers: on 18 October Kwame said a customer asked for a refund, Ben gave it a thumbs up, and there's no follow-up, so Kwame would know where it stands.", caption: "In a group, @mention the assistant and it reads back through the chat to answer." },
-    { light: dmLight, dark: dmDark, alt: "In a direct chat, Ada asks Celedom Assistant what's still open in Ops Lagos this week. It lists the one open item and two things it can't confirm from the chat.", caption: "It says what the chat doesn't show, rather than guessing." },
-    { light: threadLight, dark: threadDark, alt: "The Celedom Staff group: Ada replies to Tunde's message about the product launch contract, quoting it, and Tunde reacts with a thumbs up.", caption: "Around it, the chat itself: replies, reactions and mentions." },
+  text="Celedom's new chat for its staff, built from first principles. The whole chat is kept on the phone, so it opens at once and keeps working on a weak connection, and an assistant inside it answers from the chat itself."
+  description="Celedom's new chat for its staff, with an assistant built in. Built by Emmanuel Chucks for iOS and Android."
+  note="Made-up people and chat history on a test server. The assistant's answers are real."
+  steps={[
+    {
+      title: "Hold a message",
+      text: "It lifts out of the chat over a blur, with a bar of emoji above it. Pick one and the copy flies back to its place. Apple's own menu can't carry that bar without private API, so the app draws its own, the way Signal and Telegram do.",
+      screens: [{ light: menuLight, dark: menuDark, video: clip("hold"), alt: "Holding Tunde's message in the Celedom Staff group lifts it over the blurred chat, with a row of emoji above it and Reply, Forward, Copy, Pin and Report below. A heart is picked, the menu closes and the heart lands under the message." }],
+    },
+    {
+      title: "Small celebrations",
+      text: "A message that's just 🎉 becomes a party popper that lifts, turns and fires confetti from where it sits. Tap a big ❤️ and hearts float up from it.",
+      screens: [
+        { light: popperLight, dark: popperDark, video: clip("popper"), alt: "Ben sends a party popper emoji; it fires and confetti falls across the chat." },
+        { light: heartsLight, dark: heartsDark, video: clip("hearts"), frame: "detail", alt: "A big red heart is tapped and small hearts float up from it." },
+      ],
+    },
+    {
+      title: "Nothing lost on a bad connection",
+      text: "Until the server has a message, it waits on the phone with a clock, even through a force-quit, and goes out as soon as it can.",
+      screens: [
+        { light: waitingLight, dark: waitingDark, frame: "detail", alt: "Ada's message, Sending the run sheet to the decorator now, with a small clock beside its time." },
+        { light: sentLight, dark: sentDark, frame: "detail", alt: "The same message a moment later, with a tick where the clock was." },
+      ],
+    },
+    {
+      title: "An assistant that reads the chat",
+      text: "@mention it in a group and it reads back through the conversation to answer. Where the chat doesn't say, it says so instead of guessing.",
+      screens: [
+        { light: groupLight, dark: groupDark, alt: "In the Ops Lagos group, Ada asks Celedom Assistant what happened with the Osu birthday refund. It reads the chat around Kwame's message, then answers: on 18 October Kwame said a customer asked for a refund, Ben gave it a thumbs up, and there's no follow-up, so Kwame would know where it stands." },
+        { light: dmLight, dark: dmDark, alt: "In a direct chat, Ada asks Celedom Assistant what's still open in Ops Lagos this week. It lists the one open item and two things it can't confirm from the chat." },
+      ],
+    },
   ]}
 >
   <picture class="icon casts" slot="icon">
