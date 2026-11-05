@@ -1,8 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import celebrantIcon from "../../assets/work/celebrant-icon.png";
-import exploreDark from "../../assets/work/celebrant-explore-dark.png";
-import exploreLight from "../../assets/work/celebrant-explore-light.png";
 import requestDark from "../../assets/work/celebrant-request-dark.png";
 import requestLight from "../../assets/work/celebrant-request-light.png";
 import vendorDark from "../../assets/work/celebrant-vendor-dark.png";
@@ -14,6 +12,7 @@ import Project from "../../components/project.astro";
 import { marketplace } from "../../site";
 
 const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as const;
+const clip = (name: string) => ({ light: `/work/celebrant-${name}-light`, dark: `/work/celebrant-${name}-dark` });
 ---
 
 <Project
@@ -25,15 +24,12 @@ const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as
     {
       title: "Find the people for the day",
       text: "Celebrants browse vendors by what they do, how they're rated and how near they are. A vendor's contact details stay hidden until they accept a request.",
-      screens: [
-        { light: exploreLight, dark: exploreDark, alt: "Celebrant's Explore screen, with top rated vendors and categories to filter by." },
-        { light: vendorLight, dark: vendorDark, alt: "Adaeze Events & Decor's page in Celebrant, with its location masked and a note that the vendor's full details show once they accept a request." },
-      ],
+      screens: [{ light: vendorLight, dark: vendorDark, video: clip("find"), alt: "In Celebrant's Explore, Adaeze Events & Decor is tapped from the top rated vendors. Its page opens with a note that the vendor's full details show once they accept a request, and further down its email and phone number are masked." }],
     },
     {
       title: "Ask for what you need",
       text: "A request tells one vendor the occasion, the place and what's wanted, and the vendor accepts or declines. Leave it halfway and it's still there when you come back.",
-      screens: [{ light: requestLight, dark: requestDark, alt: "Celebrant's request form to Adaeze Events & Decor, filled in for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables." }],
+      screens: [{ light: requestLight, dark: requestDark, video: clip("ask"), alt: "After the app was closed, Celebrant's request form to Adaeze Events & Decor opens still filled in to Adaeze Events & Decor, for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables, and a price range of $101 to $200. It scrolls down to Send request." }],
     },
     {
       title: "Then talk it through",
