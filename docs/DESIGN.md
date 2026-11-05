@@ -139,3 +139,10 @@ How each page's screens were made, so they can be made again:
 - **GroqDictate on iPhone:** a Debug simulator build of `GroqDictateIOS`, with made-up recordings written straight into the app's `Application Support/GroqDictate/Sessions` (one `session.json` per recording plus silent `segment-000N.m4a` files): a 21-minute one in five parts, and one whose third part failed with "Check connection".
 
 Still open: the vendor's side of the same request (needs the decision above), and the chat list (the seeded server's list shows test-fixture chats like "Inline cards").
+
+To come back to, without holding the other pages up (noted 2026-11-05):
+
+- **Staff chat, hold clip:** the reaction effect in the chat app is broken and another session is fixing it. Once that lands, rebuild the app and re-record the hold clip (`chat-hold-*`, still `chat-menu-*`), light and dark.
+- **Staff chat, hold as a pair:** with that re-recording, also record a close-up of the reaction landing under the message, and show the hold step as a pair (full-phone clip beside the close-up), like the celebrations step.
+- **Captions:** Emmanuel finds them acceptable but wants another pass on the wording of every page later.
+- **Test server:** `website-shots-server` stays running for the re-recording; stop it (`systemctl --user stop website-shots-server`) once the staff chat clips are final.
