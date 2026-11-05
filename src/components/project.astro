@@ -42,8 +42,8 @@ const shown = await Promise.all(
     stacked: step.screens.every((s) => s.frame === "detail"),
     screens: await Promise.all(
       step.screens.map(async ({ light, dark, alt, frame = "phone", video }) => {
-        // Phones read these on 3x screens; the captures are 1206 px wide, enough for 340 px at 3x.
-        const options = { width: widths[frame], densities: frame === "phone" ? [1, 2, 3] : [1, 2], format: "webp", quality: frame === "phone" ? 74 : 80 } as const;
+        // Phones read these on 3x screens; phone and menu bar captures are made wide enough for it.
+        const options = { width: widths[frame], densities: frame === "phone" || frame === "menu" ? [1, 2, 3] : [1, 2], format: "webp", quality: frame === "phone" ? 74 : 80 } as const;
         return {
           alt,
           frame,
@@ -165,7 +165,7 @@ const shown = await Promise.all(
      the radius here is macOS 26's (about 16 pt for windows, 12 pt for menu bar panels). */
   .detail .screen img, .detail video.screen { border-radius: 24px; }
   .window .screen img { border-radius: 2.1% / 3.15%; }
-  .menu .screen img { border-radius: 4.3% / 3.75%; }
+  .menu .screen img, .menu video.screen { border-radius: 4.3% / 3.75%; }
   /* A clip plays on its own; with reduced motion its last frame stands in for it. */
   .clip .screen, .clip .screen img { border-radius: 12px; }
   video.screen { display: block; width: 100%; height: auto; outline: 1px solid var(--edge); outline-offset: -1px; }

@@ -21,8 +21,16 @@ import { dataMeter } from "../../site";
     },
     {
       title: "One click away",
-      text: "The day's total and the apps that used the most sit in the menu bar.",
-      screens: [{ light: menuLight, dark: menuDark, frame: "menu", alt: "DataMeter's menu bar panel: 5.3 GB today, 4.74 GB down and 560 MB up, and the six apps that used the most." }],
+      text: "The day's total and the apps that used the most sit in the menu bar. While it's open it refreshes every two seconds, so a download running in the background climbs the list in front of you.",
+      screens: [
+        {
+          light: menuLight,
+          dark: menuDark,
+          frame: "menu",
+          video: { light: "/work/datameter-menu-light", dark: "/work/datameter-menu-dark" },
+          alt: "DataMeter's menu bar panel refreshing: today's total climbs from 5.24 GB to 5.44 GB as an App Store download passes FaceTime, Music and Google Chrome.",
+        },
+      ],
     },
   ]}
 >
