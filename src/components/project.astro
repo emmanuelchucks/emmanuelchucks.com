@@ -141,14 +141,13 @@ const shown = await Promise.all(
   .step:nth-child(even of .step:not(.wide)) { grid-template-areas: "screens words"; }
   .step.wide { grid-template-columns: 1fr; grid-template-areas: "words" "screens"; width: min(100%, 760px); }
   .step > .words { grid-area: words; max-width: 36ch; }
-  .wide > .words { max-width: 40ch; }
-  .step > .words h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
-  .step > .words p { color: var(--text); font-size: 18px; line-height: 1.5; }
-  .step > .words h2 + p { margin-top: 12px; }
+  .wide > .words, .dictation > .words { max-width: 40ch; }
+  :is(.step, .dictation) > .words h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; }
+  :is(.step, .dictation) > .words p { color: var(--text); font-size: 18px; line-height: 1.5; }
+  :is(.step, .dictation) > .words h2 + p { margin-top: 12px; }
   .step > .words p:only-child { color: var(--ink); font-size: 22px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
-  /* A demo in the slot takes the steps' place and its caption reads like a step's words. */
+  /* A demo in the slot comes before the steps, with a heading and words like theirs. */
   .steps > .dictation { display: grid; gap: 28px; width: min(100%, 760px); }
-  .steps > .dictation > figcaption { max-width: 40ch; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
   .screens { grid-area: screens; display: flex; gap: 32px; justify-content: center; align-items: center; }
   .stacked .screens { flex-direction: column; gap: 20px; }
   .screens figure { margin: 0; width: 340px; }
@@ -191,9 +190,9 @@ const shown = await Promise.all(
   @media (max-width: 760px) {
     .head h1 { font-size: 28px; }
     .steps { gap: 88px; padding-top: 72px; }
-    .step > .words h2 { font-size: 23px; }
-    .step > .words p { font-size: 17px; }
-    .step > .words p:only-child, .steps > .dictation > figcaption { font-size: 19px; }
+    :is(.step, .dictation) > .words h2 { font-size: 23px; }
+    :is(.step, .dictation) > .words p { font-size: 17px; }
+    .step > .words p:only-child { font-size: 19px; }
     .screens { justify-content: flex-start; gap: 14px; }
     .screens figure { width: min(80vw, 340px); }
     /* Two phones side by side would each be half a phone's width, too small to read, so they stack. */

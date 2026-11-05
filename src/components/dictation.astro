@@ -7,20 +7,24 @@ import still from "../assets/work/groqdictate-panel-still.png";
 
 interface Props {
   sentence: string;
-  caption: string;
+  title: string;
+  text: string;
 }
-const { sentence, caption } = Astro.props;
+const { sentence, title, text } = Astro.props;
 ---
 
 <figure class="dictation">
-  <figcaption>{caption}</figcaption>
+  <figcaption class="words">
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </figcaption>
   <div class="stage casts" data-state="idle">
     <video class="panel" muted playsinline preload="auto" width="640" height="200" aria-hidden="true">
       <source src="/work/groqdictate-panel.mp4" type="video/mp4" />
       <source src="/work/groqdictate-panel.webm" type="video/webm" />
     </video>
     <Image class="panel still" src={still} alt="" width={320} densities={[1, 2]} />
-    <p class="field"><span class="words">{sentence}</span><span class="caret"></span></p>
+    <p class="field"><span class="sentence">{sentence}</span><span class="caret"></span></p>
   </div>
 </figure>
 
@@ -85,9 +89,9 @@ const { sentence, caption } = Astro.props;
     position: absolute; left: 6.25%; right: 6.25%; top: 38.5%; margin: 0;
     font: 500 5.3cqw/1.3 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; letter-spacing: -0.01em;
   }
-  .words { display: none; transition: opacity 400ms ease-out; }
-  .stage:is([data-state="pasted"], [data-state="clearing"], [data-state="still"]) .words { display: inline; }
-  .stage[data-state="clearing"] .words { opacity: 0; }
+  .sentence { display: none; transition: opacity 400ms ease-out; }
+  .stage:is([data-state="pasted"], [data-state="clearing"], [data-state="still"]) .sentence { display: inline; }
+  .stage[data-state="clearing"] .sentence { opacity: 0; }
   .caret {
     display: inline-block; width: 0.08em; height: 1.05em; margin-left: 0.04em; vertical-align: -0.2em;
     background: #0a84ff; animation: blink 1.06s steps(1) infinite;

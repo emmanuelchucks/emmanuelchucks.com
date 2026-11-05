@@ -5,6 +5,8 @@ import exploreDark from "../../assets/work/celebrant-explore-dark.png";
 import exploreLight from "../../assets/work/celebrant-explore-light.png";
 import requestDark from "../../assets/work/celebrant-request-dark.png";
 import requestLight from "../../assets/work/celebrant-request-light.png";
+import vendorDark from "../../assets/work/celebrant-vendor-dark.png";
+import vendorLight from "../../assets/work/celebrant-vendor-light.png";
 import vendorsIcon from "../../assets/work/vendors-icon.png";
 import chatDark from "../../assets/work/vendors-chat-dark.png";
 import chatLight from "../../assets/work/vendors-chat-light.png";
@@ -16,12 +18,28 @@ const iconSize = { width: 56, height: 56, densities: [1, 2], format: "webp" } as
 
 <Project
   {...marketplace}
+  text="Celedom's events marketplace, as two apps: Celebrant for people planning a celebration, Vendors for the businesses they book. Both open straight away instead of waiting on an update check, keep what they've loaded when the connection drops, and hold on to a half-written request until it's sent."
   description="Celedom's events marketplace, as two mobile apps: Celebrant for people planning an event, Vendors for the businesses they book. Built by Emmanuel Chucks for iOS and Android."
   note="Test accounts, made-up people and made-up vendors."
   steps={[
-    { text: "Celebrants find vendors for their event.", screens: [{ light: exploreLight, dark: exploreDark, alt: "Celebrant's Explore screen, with top rated vendors and categories to filter by." }] },
-    { text: "They send a vendor what they're planning, and the vendor accepts or declines.", screens: [{ light: requestLight, dark: requestDark, alt: "Celebrant's request form to Adaeze Events & Decor, filled in for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables." }] },
-    { text: "Vendors work out the details with them in their own app.", screens: [{ light: chatLight, dark: chatDark, alt: "A conversation in the Vendors app between a decorator and a client planning a tropical-themed company celebration." }] },
+    {
+      title: "Find the people for the day",
+      text: "Celebrants browse vendors by what they do, how they're rated and how near they are. A vendor's contact details stay hidden until they accept a request.",
+      screens: [
+        { light: exploreLight, dark: exploreDark, alt: "Celebrant's Explore screen, with top rated vendors and categories to filter by." },
+        { light: vendorLight, dark: vendorDark, alt: "Adaeze Events & Decor's page in Celebrant, with its location masked and a note that the vendor's full details show once they accept a request." },
+      ],
+    },
+    {
+      title: "Ask for what you need",
+      text: "A request tells one vendor the occasion, the place and what's wanted, and the vendor accepts or declines. Leave it halfway and it's still there when you come back.",
+      screens: [{ light: requestLight, dark: requestDark, alt: "Celebrant's request form to Adaeze Events & Decor, filled in for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables." }],
+    },
+    {
+      title: "Then talk it through",
+      text: "Once a vendor accepts, the two sides work out the details in a chat, each from their own app.",
+      screens: [{ light: chatLight, dark: chatDark, alt: "A conversation in the Vendors app between a decorator and a client planning a tropical-themed company celebration." }],
+    },
   ]}
 >
   <span class="icon pair casts" slot="icon">

@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import icon from "../../assets/work/groqdictate-icon.png";
-import partsDark from "../../assets/work/groqdictate-iphone-parts-dark.png";
-import partsLight from "../../assets/work/groqdictate-iphone-parts-light.png";
+import listDark from "../../assets/work/groqdictate-iphone-list-dark.png";
+import listLight from "../../assets/work/groqdictate-iphone-list-light.png";
 import retryDark from "../../assets/work/groqdictate-iphone-retry-dark.png";
 import retryLight from "../../assets/work/groqdictate-iphone-retry-light.png";
 import Dictation from "../../components/dictation.astro";
@@ -12,17 +12,27 @@ import { groqDictate } from "../../site";
 
 <Project
   {...groqDictate}
+  text="Dictation for the Mac and iPhone, transcribed by Whisper on Groq. Press Right ⌘, speak, and the text lands where you were working. Plain Swift with no third-party packages; the Mac app is 3 MB."
   description="GroqDictate: press Right ⌘, speak, and the text lands where you were working, on macOS and iPhone. Built by Emmanuel Chucks."
-  note="The panel is a real dictation, with the talking sped up; the sentence is what came back. The iPhone recordings are made up."
+  note="The panel is a real dictation, with the talking sped up; the sentence is what came back. Timings are from nine dictations on 3 November 2026. The iPhone recordings are made up."
   steps={[
-    { text: "On iPhone, a long recording is saved in five-minute parts as it goes.", screens: [{ light: partsLight, dark: partsDark, alt: "A 21-minute recording in GroqDictate on iPhone: the end of its transcript, a Copy transcript button, and its audio in five parts." }] },
-    { text: "If the connection drops, the audio stays on the phone and waits to be retried.", screens: [{ light: retryLight, dark: retryDark, alt: "A recording whose third part shows Retry needed and Check connection, with a Retry transcription button. The first two parts are already transcribed." }] },
+    {
+      title: "Long recordings, kept in parts",
+      text: "On iPhone, a recording is saved in five-minute parts as it goes, and each part is transcribed on its own. A call or an alarm closes the current part, and Resume carries on in a new one.",
+      screens: [{ light: listLight, dark: listDark, alt: "GroqDictate on iPhone: a large microphone button marked Ready, and five recordings below it, from 44 seconds to 21 minutes, one marked 1 part ready to retry." }],
+    },
+    {
+      title: "Nothing lost to a bad connection",
+      text: "If a part can't be sent, its audio stays on the phone until it's retried, and every part can still be shared as audio.",
+      screens: [{ light: retryLight, dark: retryDark, alt: "The recording marked for retry: the transcript of its first two parts, a plan for the week, then Part 3 marked Retry needed and Check connection, and a Retry transcription button." }],
+    },
   ]}
 >
   <Image slot="icon" src={icon} alt="" width={70} height={70} densities={[1, 2]} class="icon mac" />
   <Dictation
     slot="demo"
     sentence="Can you find out why the build fails on Node 26 without changing any dependencies?"
-    caption="Right ⌘, speak, Right ⌘ again. The text lands where the cursor was."
+    title="Right ⌘, speak, Right ⌘"
+    text="The text lands where the cursor was. Over a phone hotspot, the transcript comes back in 1.1 to 2.6 seconds, most often under 1.6. Between dictations the microphone is closed, so macOS's orange dot isn't on all day."
   />
 </Project>
