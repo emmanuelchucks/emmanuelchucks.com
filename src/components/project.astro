@@ -43,7 +43,7 @@ const shown = await Promise.all(
     screens: await Promise.all(
       step.screens.map(async ({ light, dark, alt, frame = "phone", video }) => {
         // Phones read these on 3x screens; phone and menu bar captures are made wide enough for it.
-        const options = { width: widths[frame], densities: frame === "phone" || frame === "menu" ? [1, 2, 3] : [1, 2], format: "webp", quality: frame === "phone" ? 74 : 80 } as const;
+        const options = { width: widths[frame], densities: frame === "phone" || frame === "menu" ? [1, 2, 3] : [1, 2], format: "webp", quality: 90 } as const;
         return {
           alt,
           frame,
