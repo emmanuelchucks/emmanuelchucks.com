@@ -42,7 +42,8 @@ const shown = await Promise.all(
     stacked: step.screens.every((s) => s.frame === "detail"),
     screens: await Promise.all(
       step.screens.map(async ({ light, dark, alt, frame = "phone", video }) => {
-        const options = { width: widths[frame], densities: [1, 2], format: "webp", quality: frame === "phone" ? 74 : 80 } as const;
+        // Phones read these on 3x screens; the captures are 1206 px wide, enough for 340 px at 3x.
+        const options = { width: widths[frame], densities: frame === "phone" ? [1, 2, 3] : [1, 2], format: "webp", quality: frame === "phone" ? 74 : 80 } as const;
         return {
           alt,
           frame,
