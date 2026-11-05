@@ -9,7 +9,9 @@ export default defineConfig({
   build: { format: "file" },
   trailingSlash: "never",
   // Screens are mostly small text on flat colour: WebP's default halves colour detail, which smears it.
-  image: { service: sharpImageService({ webp: { smartSubsample: true } }) },
+  // AVIF at effort 2 encodes in about a second (5 s at the default 4) for 12% more bytes; the dev server
+  // encodes on every request, so the default left phone screens blank for seconds.
+  image: { service: sharpImageService({ webp: { smartSubsample: true }, avif: { effort: 2 } }) },
   vite: {
     server: { allowedHosts: [tailnetHost, "devbox-01"] },
     preview: { allowedHosts: [tailnetHost, "devbox-01"] },

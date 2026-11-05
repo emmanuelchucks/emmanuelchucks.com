@@ -20,8 +20,8 @@ const { sentence, title, text } = Astro.props;
   </figcaption>
   <div class="stage casts" data-state="idle">
     <video class="panel" muted playsinline preload="auto" width="640" height="200" aria-hidden="true">
+      <source src="/work/groqdictate-panel.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' />
       <source src="/work/groqdictate-panel.mp4" type="video/mp4" />
-      <source src="/work/groqdictate-panel.webm" type="video/webm" />
     </video>
     <Image class="panel still" src={still} alt="" width={320} densities={[1, 2]} />
     <p class="field"><span class="sentence">{sentence}</span><span class="caret"></span></p>
