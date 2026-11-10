@@ -97,3 +97,6 @@ Nothing reaches him until it has been checked the way a demanding person would u
 - 2026-10-31: Minimise always sends a window to the dock, whether it's in the article or lifted; there's no title-bar-only collapse.
 - 2026-10-31: A maximised window fills the visible screen and scrolls with the page like any lifted window.
 - 2026-11-01: neodrag replaces Zag for dragging windows: Zag pulled windows back into view against the page-attached decisions (spike results in `docs/DESIGN.md`).
+- 2026-11-10: No named credits for teammates on the Celedom pages: it's his portfolio, and working in a company already implies others contributed.
+- 2026-11-10: The project pages may change staging data to get their moments (such as giving a review vendor a USD or GHS service), and the preview Worker is deployed whenever the work is ready to look at.
+- 2026-11-10: The GroqDictate article starts from evidence (his past sessions, the repos, the Mac), then an interview with him, then drafts revised until they're in his voice.
