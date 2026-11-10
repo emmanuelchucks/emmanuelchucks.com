@@ -3,9 +3,13 @@ import { Image } from "astro:assets";
 import celebrantIcon from "../../assets/work/celebrant-icon.png";
 import requestDark from "../../assets/work/celebrant-request-dark.png";
 import requestLight from "../../assets/work/celebrant-request-light.png";
+import sendDark from "../../assets/work/celebrant-send-dark.png";
+import sendLight from "../../assets/work/celebrant-send-light.png";
 import vendorDark from "../../assets/work/celebrant-vendor-dark.png";
 import vendorLight from "../../assets/work/celebrant-vendor-light.png";
 import vendorsIcon from "../../assets/work/vendors-icon.png";
+import acceptDark from "../../assets/work/celebrant-accept-dark.png";
+import acceptLight from "../../assets/work/celebrant-accept-light.png";
 import chatDark from "../../assets/work/vendors-chat-dark.png";
 import chatLight from "../../assets/work/vendors-chat-light.png";
 import Project from "../../components/project.astro";
@@ -30,6 +34,14 @@ const clip = (name: string) => ({ light: `/work/celebrant-${name}-light`, dark: 
       title: "Ask for what you need",
       text: "A request tells one vendor the occasion, the place and what's wanted, and the vendor accepts or declines. Leave it halfway and it's still there when you come back.",
       screens: [{ light: requestLight, dark: requestDark, video: clip("ask"), alt: "After the app was closed, Celebrant's request form to Adaeze Events & Decor opens still filled in to Adaeze Events & Decor, for Ama's 30th birthday in Lagos: decorations for about 60 guests, gold and green, with a balloon arch and flowers for eight tables, and a price range of $101 to $200. It scrolls down to Send request." }],
+    },
+    {
+      title: "From one app to the other",
+      text: "Add a vendor to one of your events and the request goes straight to them. It waits on their Vendors dashboard, and when they accept, the chat opens with the request pinned at the top.",
+      screens: [
+        { light: sendLight, dark: sendDark, video: clip("send"), alt: "In Celebrant, Send Request on Adaeze Events & Decor's page asks whether it's for one of your events. Ama's 30th birthday is picked, and the event opens with Adaeze Events & Decor under Vendor requests, pending." },
+        { light: acceptLight, dark: acceptDark, video: clip("accept"), alt: "In the Vendors app, Adaeze's dashboard shows one new request, from Chioma Adeyemi for 21 November. Accept is tapped and the chat with Chioma opens with the request pinned at the top: Ama's 30th birthday, a birthday party on 21 Nov 2026 in East Legon, Accra, for GHS 2,001 to 3,000, dinner and dancing for about 60 guests." },
+      ],
     },
     {
       title: "Then talk it through",
