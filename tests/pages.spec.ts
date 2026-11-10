@@ -24,6 +24,37 @@ test("the page never scrolls sideways", async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
+// Safari plays a video only from a server that answers a byte range with just those bytes.
+for (const path of [
+  "/work/staff-chat",
+  "/work/celebrant-and-vendors",
+  "/work/datameter",
+  "/work/groqdictate",
+]) {
+  test(`clips on ${path} answer a range request with those bytes`, async ({ page, request }) => {
+    await page.goto(path);
+    const clips = await page
+      .locator("video source")
+      .evaluateAll((sources) => sources.map((s) => s.getAttribute("src") ?? ""));
+    expect(clips.length).toBeGreaterThan(0);
+    const answers = await Promise.all(
+      clips.map(async (clip) => {
+        const response = await request.get(clip, { headers: { Range: "bytes=0-1" } });
+        return {
+          clip,
+          status: response.status(),
+          range: response.headers()["content-range"],
+          length: (await response.body()).length,
+        };
+      }),
+    );
+    for (const { clip, status, range, length } of answers) {
+      expect({ status, length }, clip).toEqual({ status: 206, length: 2 });
+      expect(range, clip).toMatch(/^bytes 0-1\/\d+$/u);
+    }
+  });
+}
+
 for (const path of [
   "/",
   "/work/staff-chat",

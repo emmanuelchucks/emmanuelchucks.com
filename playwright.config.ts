@@ -21,8 +21,8 @@ export default defineConfig({
     { name: "reduced-motion", use: { ...devices["Desktop Chrome"], reducedMotion: "reduce" } },
   ],
   webServer: {
-    // --ignore-lock keeps Astro from moving the server to the background when it detects an agent.
-    command: "pnpm build && pnpm exec astro preview --port 4321 --ignore-lock",
+    // The built site served the way Cloudflare serves it, Worker included.
+    command: "pnpm build && pnpm exec wrangler dev --port 4321 --ip 127.0.0.1",
     url: "http://localhost:4321",
     reuseExistingServer: !isCI,
   },

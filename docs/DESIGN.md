@@ -10,7 +10,7 @@ How the rebuild is put together, under the charter (`docs/CHARTER.md`). The char
 - `/og/<slug>.png`: Satori + resvg endpoint, prerendered. JS: none.
 - `/404`: `src/pages/404.astro`. JS: none.
 
-`/posts/<slug>` keeps the current site's URL shape, so nothing that links in today breaks. All routes are prerendered with `build.format: "file"`, so `/posts/<slug>` is served as is instead of redirecting to a trailing slash; Cloudflare Workers static assets serves them with no Worker code (`not_found_handling: "404-page"`).
+`/posts/<slug>` keeps the current site's URL shape, so nothing that links in today breaks. All routes are prerendered with `build.format: "file"`, so `/posts/<slug>` is served as is instead of redirecting to a trailing slash; Cloudflare Workers static assets serves them with no Worker code (`not_found_handling: "404-page"`). The one exception is clips (`/work/*.mp4`): static assets answer a byte range with the whole file, and Safari then won't play a video, so those requests run `worker/index.ts` first, which returns just the bytes asked for. Playwright runs against `wrangler dev`, so its tests see the site as Cloudflare serves it, and a test asks every clip for two bytes.
 
 ## Where each fact lives
 

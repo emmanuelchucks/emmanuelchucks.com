@@ -5,8 +5,12 @@
   // Emmanuel's personal account, not Celedom.
   "account_id": "c9621f2249079aa6f42886a8cbf6b073",
   "compatibility_date": "2026-10-31",
+  // Only clips run the Worker, to answer Safari's range requests; everything else is served as a file.
+  "main": "./worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
+    "run_worker_first": ["/work/*.mp4"],
   },
 }
