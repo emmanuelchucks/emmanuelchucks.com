@@ -3,6 +3,7 @@
 // and the screens or clips that show it, standing on the wall in the light.
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
+import { existsSync } from "node:fs";
 import Page from "../layouts/page.astro";
 import { intro } from "../site";
 
@@ -15,7 +16,7 @@ export interface Screen {
    *  a menu bar panel, or a clip. Mac captures are square-cornered; the page rounds them as macOS does. */
   frame?: "phone" | "detail" | "window" | "menu" | "clip";
   /** A short silent loop to play instead of the image, which stays as its still for reduced motion.
-   *  Paths without extension: each is served as .av1.mp4 and, for browsers without AV1, .mp4 (H.264). */
+   *  Paths without extension: each is served as .mp4 (H.264), and first as .av1.mp4 where that file exists. */
   video?: { light: string; dark?: string };
 }
 export interface Step {
@@ -36,6 +37,8 @@ const { title, kind, text, description, steps = [], note } = Astro.props;
 const widths = { phone: 340, detail: 460, window: 760, menu: 300, clip: 640 } as const;
 // Main profile, 8-bit, up to level 5.0 (the 1206 × 2622 phone clips); a browser that can't decode it gets the H.264 file.
 const av1 = 'video/mp4; codecs="av01.0.12M.08"';
+// A clip that's mostly a still screen can come out no smaller in AV1; it has no .av1.mp4 and plays as H.264.
+const hasAv1 = (path: string) => existsSync(`public${path}.av1.mp4`);
 const shown = await Promise.all(
   steps.map(async (step) => ({
     title: step.title,
@@ -86,12 +89,12 @@ const shown = await Promise.all(
                 {s.video && (
                   <>
                     <video class:list={["screen casts motion", { "for-light": s.video.dark }]} preload="none" muted loop playsinline width={s.light.webp.attributes.width} height={s.light.webp.attributes.height} aria-label={s.alt}>
-                      <source src={`${s.video.light}.av1.mp4`} type={av1} />
+                      {hasAv1(s.video.light) && <source src={`${s.video.light}.av1.mp4`} type={av1} />}
                       <source src={`${s.video.light}.mp4`} type="video/mp4" />
                     </video>
                     {s.video.dark && (
                       <video class="screen casts motion for-dark" preload="none" muted loop playsinline width={s.light.webp.attributes.width} height={s.light.webp.attributes.height} aria-label={s.alt}>
-                        <source src={`${s.video.dark}.av1.mp4`} type={av1} />
+                        {hasAv1(s.video.dark) && <source src={`${s.video.dark}.av1.mp4`} type={av1} />}
                         <source src={`${s.video.dark}.mp4`} type="video/mp4" />
                       </video>
                     )}

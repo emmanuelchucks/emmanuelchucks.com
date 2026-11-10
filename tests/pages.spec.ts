@@ -36,7 +36,10 @@ for (const path of [
     const clips = await page
       .locator("video source")
       .evaluateAll((sources) => sources.map((s) => s.getAttribute("src") ?? ""));
-    expect(clips.length).toBeGreaterThan(0);
+    expect(
+      clips.some((clip) => clip.endsWith(".av1.mp4")),
+      "lists its AV1 clips",
+    ).toBe(true);
     const answers = await Promise.all(
       clips.map(async (clip) => {
         const response = await request.get(clip, { headers: { Range: "bytes=0-1" } });
