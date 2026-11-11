@@ -6,12 +6,14 @@ import groupDark from "../../assets/work/chat-assistant-group-dark.png";
 import groupLight from "../../assets/work/chat-assistant-group-light.png";
 import heartsDark from "../../assets/work/chat-hearts-dark.png";
 import heartsLight from "../../assets/work/chat-hearts-light.png";
+import holdDark from "../../assets/work/chat-hold-dark.png";
+import holdLight from "../../assets/work/chat-hold-light.png";
 import chatIconDark from "../../assets/work/chat-icon-dark.png";
 import chatIconLight from "../../assets/work/chat-icon-light.png";
-import menuDark from "../../assets/work/chat-menu-dark.png";
-import menuLight from "../../assets/work/chat-menu-light.png";
 import popperDark from "../../assets/work/chat-popper-dark.png";
 import popperLight from "../../assets/work/chat-popper-light.png";
+import reactionDark from "../../assets/work/chat-reaction-dark.png";
+import reactionLight from "../../assets/work/chat-reaction-light.png";
 import sentDark from "../../assets/work/chat-sent-dark.png";
 import sentLight from "../../assets/work/chat-sent-light.png";
 import waitingDark from "../../assets/work/chat-waiting-dark.png";
@@ -35,14 +37,17 @@ const clip = (name: string) => ({ light: `/work/chat-${name}-light`, dark: `/wor
   steps={[
     {
       title: "Hold a message",
-      text: "It lifts out of the chat over a blur, with a bar of emoji above it. Pick one and the copy flies back to its place. Apple's own menu can't carry that bar without private API, so the app draws its own, the way Signal and Telegram do.",
-      screens: [{ light: menuLight, dark: menuDark, video: clip("hold"), alt: "Holding Tunde's message in the Celedom Staff group lifts it over the blurred chat, with a row of emoji above it and Reply, Forward, Copy, Pin and Report below. A heart is picked, the menu closes and the heart lands under the message." }],
+      text: "It lifts out of the chat over a blur, with a bar of emoji above it. Pick one and the copy flies back to its place as the emoji lands under it. Apple's own menu can't carry that bar without private API, so the app draws its own in native code, the way Signal and Telegram do.",
+      screens: [
+        { light: holdLight, dark: holdDark, video: clip("hold"), alt: "Holding Ngozi's message, Sure, I'll share it tomorrow, in the Celedom Staff group lifts it over the blurred chat, with a row of emoji above it and Reply, Forward, Copy, Pin and Report below. A heart is picked, the menu closes and the heart lands under the message." },
+        { light: reactionLight, dark: reactionDark, video: clip("reaction"), frame: "detail", alt: "Close up: the menu closes, Ngozi's message settles back into the chat and a heart appears under it, moving the next message down." },
+      ],
     },
     {
       title: "Small celebrations",
       text: "A message that's just 🎉 becomes a party popper that lifts, turns and fires confetti from where it sits. Tap a big ❤️ and hearts float up from it.",
       screens: [
-        { light: popperLight, dark: popperDark, video: clip("popper"), alt: "Ben sends a party popper emoji; it fires and confetti falls across the chat." },
+        { light: popperLight, dark: popperDark, video: clip("popper"), alt: "Ben's party popper emoji is tapped; it turns, fires, and confetti falls across the chat." },
         { light: heartsLight, dark: heartsDark, video: clip("hearts"), frame: "detail", alt: "A big red heart is tapped and small hearts float up from it." },
       ],
     },

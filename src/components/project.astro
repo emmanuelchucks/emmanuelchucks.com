@@ -181,7 +181,7 @@ const shown = await Promise.all(
   @media (prefers-color-scheme: dark) { video.for-light { display: none; } }
   @media (prefers-color-scheme: light) { video.for-dark { display: none; } }
   @media (prefers-reduced-motion: reduce) {
-    .motion { display: none; }
+    video.motion { display: none; }
     .still { display: block; }
   }
   .note { width: min(100% - 48px, 600px); margin: 96px auto 0; padding-bottom: 120px; color: var(--muted); font-size: 13px; }
