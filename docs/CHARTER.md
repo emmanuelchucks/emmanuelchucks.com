@@ -84,7 +84,7 @@ Nothing reaches him until it has been checked the way a demanding person would u
 - 2026-09-05: Windows show a demo and nothing else; they are not a browser. Easter eggs are for the people who find them and add no features.
 - 2026-09-06: Windows are attached to the page, not the viewport. They can be dragged partly off-screen. Restoring from the dock brings a window back where it was on screen. Dragging works on mobile too.
 - 2026-09-06: Close removes the window and leaves a ghost in the article that brings it back. Windows snap back when dragged near their ghost. Dock entry and exit are animated.
-- 2026-10-28: Start fresh. Codex's prototype is archived in `~/backups/website-codex-research-2026-10-28/` as evidence, not code to reuse.
+- 2026-10-28: Start fresh. Codex's prototype was discarded.
 - 2026-10-28: Celedom work can be public, without anything confidential.
 - 2026-10-28: First release is the homepage plus one article (GroqDictate).
 - 2026-10-31: Astro replaces RedwoodSDK. Demos are written in Solid.
